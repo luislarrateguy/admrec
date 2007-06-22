@@ -1,9 +1,10 @@
 #summary Propuestas para el trabajo práctico a implementar
 
 =Características generales perseguidas=
+ * Utilizar única y exclusivamente Software Libre.
  * Utilizar la plataforma Mono.
- * Utilizar varios lenguajes y comunicarlos entre sí.
- * Utilizar [http://www.mono-project.com/Internationalization Mono.Unix] para traducir la aplicación a varios lenguajes.
+ * Utilizar varios lenguajes de programación.
+ * Utilizar [http://www.mono-project.com/Internationalization Mono.Unix] para traducir la aplicación.
 
 =Software a desarrollar=
 ¿Qué vamos a hacer?

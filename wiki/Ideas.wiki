@@ -1,0 +1,5 @@
+#summary Propuestas para el trabajo práctico a implementar
+
+=Características generales=
+ * Utilizar la plataforma Mono.
+ * Utilizar varios lenguajes y comunicarlos entre sí.

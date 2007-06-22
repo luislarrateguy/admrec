@@ -1,5 +1,19 @@
 #summary Propuestas para el trabajo práctico a implementar
 
-=Características generales=
+=Características generales perseguidas=
  * Utilizar la plataforma Mono.
  * Utilizar varios lenguajes y comunicarlos entre sí.
+ * Utilizar [http://www.mono-project.com/Internationalization Mono.Unix] para traducir la aplicación a varios lenguajes.
+
+=Software a desarrollar=
+¿Qué vamos a hacer?
+
+==Arquitectura==
+¿Algún garabato por aquí?
+
+==Lenguajes utilizados==
+===C#===
+Lo vamos a utilizar para desarrollar tal o cual parte de la aplicación...
+
+===IronPython===
+Y a este para hacer tal o cual cosa...

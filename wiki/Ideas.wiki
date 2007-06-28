@@ -8,6 +8,8 @@
 
 =Software a desarrollar=
 ¿Qué vamos a hacer?
+ * Idea 1:
+ Usar [http://gmpg.org/xfn/ XFN] o bien [http://www.foaf-project.org/ FOAF] ([http://www.gmpg.org/xfn/and/foaf XFN and FOAF]) (http://rdfweb.org/topic/FAQ) en nuestro Blogs (y de otros amigos) y sacar algún tipo de conclusiones de las relaciones establecidas. Quizá un software que te permita consultar, o buscar en los blogs, y que tire cosas ordenadas por relevancia. Algo similar a lo que contó César acerca de last.fm
 
 ==Arquitectura==
 ¿Algún garabato por aquí?
@@ -18,3 +20,14 @@ Lo vamos a utilizar para desarrollar tal o cual parte de la aplicación...
 
 ===IronPython===
 Y a este para hacer tal o cual cosa...
+
+===Java===
+A través de IKVM para ejecutar la API de Jena si es que hacemos algo con RDF y algo de inferencia.
+
+===Boo===
+Boo y GTK# en Monodevelop se pueden utilizar con Stetic.
+
+
+
+
+

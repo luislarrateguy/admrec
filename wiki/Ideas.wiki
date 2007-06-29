@@ -5,6 +5,7 @@
  * Utilizar la plataforma Mono.
  * Utilizar varios lenguajes de programación.
  * Utilizar [http://www.mono-project.com/Internationalization Mono.Unix] para traducir la aplicación.
+ * Utilizar, en algún módulo, una base de datos orientada a objetos, como [http://www.db4o.com/ db4o].
 
 =Software a desarrollar=
 ¿Qué vamos a hacer?
@@ -16,6 +17,7 @@
 
  * Idea 3:
  Usar alguna base de datos orientada a objetos, o base de datos basada en XML, y aprovechar que queremos usar varios lenguajes, para integrar mini sistemas (y schemas) diferentes a un solo programa.
+*Observación sobre la idea 3 (milton)*: Esto más que una idea de un programa a desarrollar, es una proposición para utilizar alguna tecnología. Me parece muy buena. Lo puse en "Características generales perseguidas" (arriba).
 
 ==Arquitectura==
 ¿Algún garabato por aquí?
@@ -32,6 +34,8 @@ A través de IKVM para ejecutar la API de Jena si es que hacemos algo con RDF y 
 
 ===Boo===
 Boo y GTK# en Monodevelop se pueden utilizar con Stetic.
+
+
 
 
 

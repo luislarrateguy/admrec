@@ -3,9 +3,14 @@
 =Características generales perseguidas=
  * Utilizar única y exclusivamente Software Libre.
  * Utilizar la plataforma Mono.
+   * [http://www.mono-project.com/ Página oficial]
  * Utilizar varios lenguajes de programación.
+   * [http://www.mono-project.com/Languages Lista de lenguajes según página de Mono].
+   * [http://www.dotnetpowered.com/languages.aspx Otro link que pasó nacho].
  * Utilizar [http://www.mono-project.com/Internationalization Mono.Unix] para traducir la aplicación.
  * Utilizar, en algún módulo, una base de datos orientada a objetos, como [http://www.db4o.com/ db4o].
+ * Utilizar Web Services.
+   * [http://en.wikipedia.org/wiki/Web_service Wikipedia].
 
 =Software a desarrollar=
 ¿Qué vamos a hacer?
@@ -34,6 +39,7 @@ A través de IKVM para ejecutar la API de Jena si es que hacemos algo con RDF y 
 
 ===Boo===
 Boo y GTK# en Monodevelop se pueden utilizar con Stetic.
+
 
 
 

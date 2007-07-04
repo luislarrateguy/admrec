@@ -16,6 +16,7 @@
 ¿Qué vamos a hacer?
  * Idea 1:
  Usar [http://gmpg.org/xfn/ XFN] o bien [http://www.foaf-project.org/ FOAF] ([http://www.gmpg.org/xfn/and/foaf XFN and FOAF]) (http://rdfweb.org/topic/FAQ) en nuestro Blogs (y de otros amigos) y sacar algún tipo de conclusiones de las relaciones establecidas. Quizá un software que te permita consultar, o buscar en los blogs, y que tire cosas ordenadas por relevancia. Algo similar a lo que contó César acerca de last.fm
+ [http://www.wshoy.sidar.org/index.php?2006/04/03/32-etiquetas-meta-ficheros-rdf-microformatos-3-sabores-de-la-web-semaacutentica Web Semantica Hoy: etiquetas meta, rdf y microformatos]
 
  * Idea 2:
  Usar [http://code.google.com/apis/ Las API de Google] que hay varias, para hacer una miniaplicación que permita a un webmaster hacer diversas cosas, como por ejemplo generar un [http://nacho.larrateguy.com.ar/sitemap.xml sitemap] con la [http://www.google.com/webmasters/sitemaps/docs/en/about.html api correspondiente] y editarlo a preferencia. También podría ver sus [http://gmail.google.com/support/bin/answer.py?answer=13465 últimos correos], ver los resultados de validaciones de su web ante la W3C, etc. El generador de sitemaps por ejemplo, está escrito en Python, por lo tanto tal vez se pueda usar con IronPython.
@@ -39,7 +40,6 @@ A través de IKVM para ejecutar la API de Jena si es que hacemos algo con RDF y 
 
 ===Boo===
 Boo y GTK# en Monodevelop se pueden utilizar con Stetic.
-
 
 
 

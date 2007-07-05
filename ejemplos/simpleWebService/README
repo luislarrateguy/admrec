@@ -1,0 +1,20 @@
+Se necesita el paquete mono-xsp2 y asp.net2-examples (ya que trae un archivo
+de configuración de ejemplo, y así no hay que crear uno).
+
+1. Correr el servidor web xsp (/etc/init.d/mono-xsp2 start). Seguramente
+   arranca en el puerto 8082. Verificar con un browser yendo a
+   http://localhost:8082/samples/
+   
+2. Copiar el archivo WebService.asmx al directorio de los ejemplos
+   (/usr/share/asp.net2-demos/).
+   
+3. Visualizar en el navegador la dirección http://localhost:8082/samples/WebService.asmx
+   Se puede probar desde ésta página el servicio, haciendo click en el método
+   GetSecurityInfo, y luego en TestForm. Se pone cualquier código y se clickea
+   en Invoke. Así arroja el XML de respuesta.
+
+El ejemplo lo saqué de una página por ahi. Se trata de pasarle el código de una
+supuesta empresa, y el método retorna una estructura con datos de esa empresa.
+
+Más adelante subo el código del cliente.
+

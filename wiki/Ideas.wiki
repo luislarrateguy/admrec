@@ -4,7 +4,7 @@
  * Utilizar única y exclusivamente Software Libre, y así demostrar (o no) que se pueden hacer cosas serias con Software Libre.
  * Utilizar la plataforma Mono.
    * [http://www.mono-project.com/ Página oficial]
- * Utilizar varios lenguajes de programación.
+ * Utilizar varios lenguajes de programación. Por lo tanto lo que vayamos a implementar debería ser modular... no?
    * [http://www.mono-project.com/Languages Lista de lenguajes según página de Mono].
    * [http://www.dotnetpowered.com/languages.aspx Otro link que pasó nacho].
  * Utilizar [http://www.mono-project.com/Internationalization Mono.Unix] para traducir la aplicación.
@@ -43,7 +43,6 @@ A través de IKVM para ejecutar la API de Jena si es que hacemos algo con RDF y 
 
 ===Boo===
 Boo y GTK# en Monodevelop se pueden utilizar con Stetic.
-
 
 
 

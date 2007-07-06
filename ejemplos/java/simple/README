@@ -1,0 +1,12 @@
+Hay que bajarse esta version de IKVM.NET, que es un híbrido con
+GNU Classpath y OpenJDK: http://www.frijters.net/ikvmbin-hybrid-0.35.2741.zip
+Seguramente con la versión estable funca, pero estoy probando esta, que
+es más reciente.
+Hay que setear la variable PATH con IKVM.NET.
+
+Hay que copiar los siguientes archivos:
+ * IKVM.Hybrid.GNU.Classpath.OpenJDK.dll
+ * IKVM.Runtime.dll
+en el directorio actual.
+
+Luego correr "make"

@@ -28,6 +28,13 @@
  Usar alguna base de datos orientada a objetos, o base de datos basada en XML, y aprovechar que queremos usar varios lenguajes, para integrar mini sistemas (y schemas) diferentes a un solo programa.
 *Observación sobre la idea 3 (milton)*: Esto más que una idea de un programa a desarrollar, es una proposición para utilizar alguna tecnología. Me parece muy buena. Lo puse en "Características generales perseguidas" (arriba).
 
+ * Idea 4:
+ Si acordamos en los objetivos de arriba (Características generales perseguidas), mi propuesta es desarrollar algo bien simple apuntando a probar esas cosas, y también que sea modular, para así poder implementar cada módulo con un lenguaje distinto.
+
+ Mi idea es desarrollar un cliente de mensajería instantáneo. Por supuesto que NO se conectaría a redes populares, como MSN, Jabber, etc. La idea es desarrollar algo muy simple. Constaría de un cliente (con módulos implementados en distintos lenguajes) y un servidor. Éste último sería simplemente un servicio web que almacena una lista de clientes conectados. Así cuando un cliente quiera conectarse, se registra en la base del servidor, y éste le devuelve una lista de IPs con algunos otros datos de los otros clientes conectados.
+
+ Se podrían también, si estan de acuerdo y hay tiempo, utilizar algunas cosas interesantes que anda dando vueltas por ahí, como [http://www.mono-project.com/Mono.Addins Mono.AddIns] para crear plugins fácilmente.
+
 ==Arquitectura==
 ¿Algún garabato por aquí?
 
@@ -43,6 +50,7 @@ A través de IKVM para ejecutar la API de Jena si es que hacemos algo con RDF y 
 
 ===Boo===
 Boo y GTK# en Monodevelop se pueden utilizar con Stetic.
+
 
 
 

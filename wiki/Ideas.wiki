@@ -36,7 +36,16 @@
  Se podrían también, si estan de acuerdo y hay tiempo, utilizar algunas cosas interesantes que anda dando vueltas por ahí, como [http://www.mono-project.com/Mono.Addins Mono.AddIns] para crear plugins fácilmente.
 
 ==Arquitectura==
-¿Algún garabato por aquí?
+Algunos links, donde tenemos arquitecturas similares a la que podemos llegar a implementar.
+
+ [http://www.codeproject.com/cs/webservices/remotingoverinternet.asp Using Web Services for Remoting over the Internet. - The Code Project - C# WebServices]
+
+ [http://www.codeproject.com/useritems/Remoting_Architecture.asp Remoting Architecture in .NET - The Code Project - .NET]
+
+ [http://www.codeproject.com/csharp/Net_Remoting.asp .NET Remoting with an easy example - The Code Project - C# Programming]
+
+ [http://www.codeproject.com/useritems/ChatMasala.asp Instant Messaging / Chat using Remoting for LAN]
+
 
 ==Lenguajes utilizados==
 ===C#===
@@ -50,6 +59,8 @@ A través de IKVM para ejecutar la API de Jena si es que hacemos algo con RDF y 
 
 ===Boo===
 Boo y GTK# en Monodevelop se pueden utilizar con Stetic.
+
+
 
 
 

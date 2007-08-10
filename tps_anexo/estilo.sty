@@ -1,0 +1,163 @@
+\ProvidesPackage{estilo}
+\RequirePackage{fancyheaders}
+\newcommand{\chaptermark}[1]{\markboth{#1}{}}
+%
+% Lets have some nice headings
+%
+\pagestyle{fancyplain}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection{} #1}}
+\lhead[\fancyplain{}{\bfseries\thepage}]
+    {\fancyplain{}{\bfseries\rightmark}}
+\rhead[\fancyplain{}{\bfseries\leftmark}]
+    {\fancyplain{}{\bfseries\thepage}}
+\cfoot[]{}
+\addtolength{\headheight}{1.6pt}
+
+%
+% Estilo cursiva para los nombres de archivos
+%
+\newcommand{\archivo}[1] {\mbox{\textit{#1}}}
+
+%
+% Estilo para una variable
+%
+\newcommand{\variable}[1] {\mbox{\textit{#1}}}
+
+%
+% Estilo para un método
+%
+\newcommand{\metodo}[1] {\mbox{\textsl{#1}}}
+
+%
+% Estilo para código
+%
+\newcommand{\codigo}[1] {\mbox{\texttt{#1}}}
+
+%
+% Incluir imagen
+%
+\newcommand{\incluirimagen}[2]{
+  \begin{center}
+    \makebox{\includegraphics*[#1]{#2}}
+  \end{center}
+}
+
+%
+% Comando
+%
+\newcommand{\comando}[1]{
+  \vspace{0.1ex}
+  \begin{center}
+    \makebox{\framebox{\texttt{#1}}}
+  \end{center}
+  \vspace{0.1ex}
+}
+
+%
+% Salida por consola
+%
+\newcommand{\salida}[1]{
+  \vspace{3ex}
+  \hrule
+  \begin{center}
+    \verbatiminput{#1}
+  \end{center}
+  \hrule
+  \vspace{3ex}
+}
+
+%
+% Para indicar cosas por terminar (TODO)
+%
+\newcommand{\TODO}[1]{
+  \colorbox{yellow}{TODO:} #1
+}
+
+%
+% Para indicar cosas por corregir (FIXME)
+%
+\newcommand{\FIXME}[1]{
+  \colorbox{red}{FIXME:} #1
+}
+
+%
+% Para armar un APX cualquiera (uso interno)
+%
+\newenvironment{apx}[6]
+{
+  \begin{center}
+  \begin{figure}[h]
+  \vspace{3ex}
+
+  \begin{center}
+    \Large{APX #6}
+  \end{center}
+
+  \rule{\textwidth}{1pt}
+  \begin{tabular}{llr}
+    \vspace{3ex}
+    \textbf{\underline{Área:} } #1 & \multicolumn{2}{l}{\textbf{\underline{Responsable:} } #2} \\
+    \textbf{\underline{Proceso:} } #3 & \textbf{\underline{Fecha:} } #4 & \textbf{\underline{Hoja:} } #5
+  \end{tabular}
+}
+{
+  \rule{\textwidth}{1pt}
+  \vspace{3ex}
+  \end{figure}
+  \end{center}
+}
+
+%
+% Para armar un APX 1
+%
+\newenvironment{apx1}[6]
+{
+  \begin{apx}{#1}{#2}{#3}{#4}{#5}{1}
+
+  \vspace{3ex}
+  \textbf{\underline{Descripción del proceso:} } #6
+
+  \begin{center}
+  \begin{tabular}{|p{150pt}|p{150pt}|}
+    \hline
+    \textbf{Subprocesos (Actividades)} & \textbf{Subprocesos (continuación)} \\
+    \hline
+}
+{
+  \hline
+  \end{tabular}
+  \end{center}
+  \end{apx}
+}
+
+\newcommand{\apxUnoItem}[2]{
+  #1 & #2 \\
+}
+
+%
+% Para armar un APX 2
+%
+\newenvironment{apx2}[5]
+{
+  \begin{apx}{#1}{#2}{#3}{#4}{#5}{2}
+
+  \vspace{3ex}
+  \begin{center}
+  \begin{tabular}{|l|l|l|l|}
+    \hline
+    \textbf{Información generada} & \textbf{Destino} &
+      \textbf{Frecuencia} & \textbf{Observaciones} \\
+    \hline
+}
+{
+  \hline
+  \end{tabular}
+  \end{center}
+  \end{apx}
+}
+
+\newcommand{\apxDosItem}[4]{
+  #1 & #2 & #3 & #4 \\
+}
+

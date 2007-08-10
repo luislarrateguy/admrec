@@ -1,0 +1,21 @@
+#!/bin/sh
+
+borrar()
+{
+  rm -f *.aux *.toc *.log *.out *.lof
+}
+
+rm -rf main.pdf
+
+borrar
+cd sobre_red_megatone
+borrar
+cd ../titulo
+borrar
+cd ../licencia
+borrar
+cd ../hechoconsl
+borrar
+
+rm -f ../src_tex/*.tex
+

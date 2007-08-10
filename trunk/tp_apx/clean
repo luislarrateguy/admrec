@@ -1,21 +1,10 @@
 #!/bin/sh
 
-borrar()
-{
-  rm -f *.aux *.toc *.log *.out *.lof
-}
+ARCHIVOS=$(find . -name "*.aux" -o -name "*.toc" -o -name "*.log" -o -name "*.out" -o -name "*.lof") 
+
+for file in $ARCHIVOS; do rm $file; done
 
 rm -rf main.pdf
-
-borrar
-cd sobre_red_megatone
-borrar
-cd ../titulo
-borrar
-cd ../licencia
-borrar
-cd ../hechoconsl
-borrar
 
 rm -f ../src_tex/*.tex
 

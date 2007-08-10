@@ -22,8 +22,42 @@
 {Venta}
 {07/08/2007}
 {1}
-  \apxDosItem{}{}{}{}
+  \apxDosItem{Factura}{Logística, Ventas, Cliente}{Diario}{}
+  \apxDosItem{Nota de crédito}{Logística, Ventas, Cliente}{Diario}{}
+  \apxDosItem{Nota de débito}{Logística, Ventas, Cliente}{Diario}{}
 \end{apx2}
+
+\begin{apx3}
+{Depto. de Ventas}
+{Jefe de ventas}
+{Venta}
+{07/08/2007}
+{1}
+  \apxTresItem{Nota de pedido}{Cliente}{Diario}{}
+  \apxTresItem{Estado de cuenta corriente***}{Finanzas}{Mensual}{}
+  \apxTresItem{Padrón de clientes}{Finanzas}{Mensual}{}
+  \apxTresItem{Clientes suspendidos}{Finanzas}{Semanal}{}
+  \apxTresItem{Informe de estado de stock}{Logística}{Diario}{}
+  \apxTresItem{Remito}{Logística}{Diario}{}
+  \apxTresItem{Factura}{Ventas}{Diario}{}
+  \apxTresItem{Recibo}{Ventas}{Diario}{}
+  \apxTresItem{Nota de crédito}{Ventas}{Diario}{}
+  \apxTresItem{Nota de débito}{Ventas}{Diario}{}
+\end{apx3}
+
+\begin{apx4}
+{Depto. de Ventas}
+{Jefe de ventas}
+{Venta}
+{07/08/2007}
+{1}
+  \apxCuatroItem{Estado de stock en tránsito}{Logística}{Diario}
+    {Se refiere al stock de una sucursal que todavía no está presente en ella, pero que ya se ha
+     pedido y está en camino.}
+  \apxCuatroItem{Estado de stock en tiempo real}{Logística}{Diario}
+    {La sucursar interesada en vender productos de otra, consulta el stock actual de la misma en
+     tiempo real.}
+\end{apx4}
 
 
 % Proceso 'ControlStock'
@@ -46,12 +80,42 @@
 {ControlStock}
 {07/08/2007}
 {1}
-  \apxDosItem{}{}{}{}
+  \apxDosItem{Pedido de compras}{Compras}{Semanal}
+    {Documento interno para solicitar al departamento de Compras que realice el pedido a los proveedores correspondientes.}
+  \apxDosItem{Informe de estado de stock}{Ventas}{Diario}{}
+  \apxDosItem{Remito}{Logística, Ventas, Cliente}{Diario}{}
 \end{apx2}
+
+\begin{apx3}
+{Depto. de Logística}
+{Jefe de logística}
+{ControlStock}
+{07/08/2007}
+{1}
+  \apxTresItem{Informe de compras}{Compras}{Diario}{}
+  \apxTresItem{Recibo***}{Ventas}{Diario}{}
+  \apxTresItem{Factura}{Ventas}{Diario}{}
+  \apxTresItem{Remito}{Logística}{Diario}{}
+  \apxTresItem{Nota de crédito}{Ventas}{Diario}{}
+  \apxTresItem{Nota de débito}{Ventas}{Diario}{}
+  \apxTresItem{Solicitud de estado de stock***}{Ventas}{Diario}{}
+\end{apx3}
+
+\begin{apx4}
+{Depto. de Logística}
+{Jefe de logística}
+{ControlStock}
+{07/08/2007}
+{1}
+  \apxCuatroItem{Estado de stock en tiempo real}{Logística (de otras sucursales)}{Diario}
+    {\FIXME{Ver si Ventas no puede consultar directamente el stock con la otra sucursal.
+     Por lo menos eso entiendo de esto.}}
+\end{apx4}
 
 
 % Proceso 'Compra'
 \subsubsection{Proceso \textsf{Compra}}
+
 \begin{apx1}
 {Depto. de Compras}
 {Jefe de compras}
@@ -69,6 +133,27 @@
 {Compra}
 {07/08/2007}
 {1}
-  \apxDosItem{}{}{}{}
+  \apxDosItem{Informe de compras}{Logística}{Diario}{}
+  \apxDosItem{Pedido a proveedores}{Compras, Proveedor}{Semanal}{}
 \end{apx2}
+
+\begin{apx3}
+{Depto. de Compras}
+{Jefe de compras}
+{Compra}
+{07/08/2007}
+{1}
+  \apxTresItem{Pedido de compras}{Logística}{Diario*** ¿No sería 'semanal'?}{}
+  \apxTresItem{Factura}{Proveedor}{Diario*** idem anterior}{}
+  \apxTresItem{Pedido a proveedores}{Compras}{Dario*** idem anterior}{}
+\end{apx3}
+
+\begin{apx4}
+{Depto. de Compras}
+{Jefe de compras}
+{Compra}
+{07/08/2007}
+{1}
+  \apxCuatroItem{\textit{No hay ítems en este APX para esta área}}{}{}{}
+\end{apx4}
 

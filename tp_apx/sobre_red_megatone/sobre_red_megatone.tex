@@ -1,7 +1,9 @@
 \section{Sobre Red Megatone}
 
+
 % Introducción
 \subsection{Introducción}
+
 La Red no es una empresa unitaria sino que está formada por tres empresas y una
 entidad dependiente: Electrónica Megatone (con sede en la ciudad de Santa Fe),
 Carsa (sede en Resistencia), Bazar Avenida (casa central en Rafaela) y Confina.
@@ -31,6 +33,7 @@ en ventas de artículos para el hogar.
 
 % Estructura organizacional
 \subsection{Estructura organizacional}
+
 \begin{figure}[h]
   \incluirimagen{width=\textwidth}{sobre_red_megatone/organigrama.pdf}
   \caption{Organigrama de Red Megatone}
@@ -58,5 +61,105 @@ zonas adopten un sistema federal, es decir que tienen casi total autonomía para
 tomar decisiones operativas, mientras que las decisiones estratégicas se toman
 entre los directores y el presidente.
 
-\TODO{Falta todo lo otro}
+
+% Problemática detectada
+\subsection{Problemática detectada}
+
+Al estudiar el funcionamiento del centro de cómputo detectamos un problema en
+el sistema de stock de la empresa. Para profundizar sobre el problema antes
+debemos describir el funcionamiento del sistema de stock actual, así también
+como el equipamiento con el que se cuenta.
+
+
+\subsubsection{Equipamiento}
+
+El Centro de Cómputos administra todo el Sistema de Gestión Integral cuenta con
+la siguiente infraestructura:
+
+\begin{itemize}
+
+  \item Existen un Servidor Central (Sun-multiprocesador), muy potente, que
+    nuclea toda la información que se maneja en el sistema.
+
+  \item Hay otros Servidores Locales más pequeños de marca Intel, también
+    multiprocesador, que gestionan la operatoria de, como promedio, 5 sucursales
+    ubicadas dentro de una misma zona geográfica. Suman un total de aprox. 25
+    servidores.
+
+  \item Cada sucursal cuenta con un equipo por usuario, con impresora de carro
+    ancho (matriz de puntos) para emitir los documentos corrientes en caso de ser
+    necesario. También se cuenta con impresoras láser para impresiones más
+    importantes. Hay aproximadamente 500 PC’s en toda la empresa, sin contar los
+    equipos que se utilizan como servidores.
+
+  \item La Red cuenta además con 3 depósitos de mercaderías controlados por una
+    administración central, la cual se encarga de gestionar el stock general de
+    toda la Red. Cada depósito tiene como misión abastecer a un grupo de
+    sucursales, las cuales tienen su propio stock (más reducido que el de los
+    depósitos). Cabe aclarar que los depósitos son gestionados informáticamente
+    directamente por el servidor central sin servidores intermedios lo cual
+    simplifica mucho llevar el stock de los depósitos.
+
+\end{itemize}
+
+
+\subsubsection{Funcionamiento del sistema en general}
+
+La Red cuenta además con 3 depósitos de mercaderías controlados por una
+administración central, la cual se encarga de gestionar el stock general de
+toda la Red. Cada depósito tiene como misión abastecer a un grupo de
+sucursales, las cuales tienen su propio stock (más reducido que el de los
+depósitos). Cabe aclarar que los depósitos son gestionados informáticamente
+directamente por el servidor central sin servidores intermedios lo cual
+simplifica mucho llevar el stock de los depósitos.
+
+
+\subsubsection{Funcionamiento general del sistema de stock actual. Planteo del
+problema}
+
+En general, el sistema de stock funciona de la siguiente manera: al recibir el
+remito del proveedor, se registra una entrada de mercaderías. Cuando se vende,
+la factura ocasiona una salida de stock, pero también puede ocurrir que el
+cliente devuelva las mercaderías, entonces las notas de créditos vuelven a
+ocasionar una entrada de ellas. Además se puede dar de baja mercadería porque
+se echó a perder por algún otro motivo.
+
+Para controlar este flujo de mercadería se utiliza un sistema, el cual se
+encarga de llevar el stock de las sucursales de todo el país. Su funcionamiento
+es complejo pero trataremos de simplificarlo para así poder dar a entender el
+problema. 
+
+Cuando los servidores locales se conectan con el servidor central dos veces por
+día para informar al servidor central la operatoria reciente del grupo de
+sucursales que cada uno tiene a su cargo se envían, entre otros datos, el stock
+actual de cada sucursal. Aquí el inconveniente: cada sucursal, tiene
+actualizado solamente el stock de las sucursales que comparten el mismo
+servidor local, mientras que de las otras sucursales (las que pertenecen a otro
+servidor local) se tiene información de la última actualización del servidor
+central. Y como se puede vender productos que están en el stock de otras
+sucursales se genera un conflicto al intentar vender un producto que se
+encuentra en otra sucursal lejana, ya que puede ocurrir que justamente ese
+artículo ya haya sido vendido en esa sucursal y, como todavía no se actualizó,
+figure como existencia cuando no es así.
+
+Como lo planteado anteriormente no resulta sencillo de entender (según nuestro
+criterio), proponemos un ejemplo:
+
+Supongamos que, antes del mediodía, en la sucursal Red Megatone de Reconquista
+un cliente (podría ser turista) decide comprar un televisor poco común en el
+mercado, con la condición de que ese televisor sea entregado en la ciudad de
+Mendoza. El empleado que gestiona la venta, se dirige al stock de la sucursal
+de Mendoza (actualizado la noche anterior), y ve que hay en existencia un solo
+televisor del solicitado por el cliente. Con esta información, el empleado
+realiza la venta del televisor y se compromete a entregarlo en la cuidad de
+Mendoza. Cuando este empleado informa a la sucursal de Mendoza para que estos
+realicen la entrega, ellos le comunican que el televisor que el solicita para
+la entrega, fue vendido durante la mañana, por lo cual el cliente de
+Reconquista tendrá que esperar a que llegue al stock de la sucursal de Mendoza
+el televisor en cuestión. Además se producirá un error de datos cuando el
+servidor central procese los datos ya que habrá dos ventas (una en Mendoza y
+otra Reconquista) para el mismo artículo.
+
+\TODO{En el TP de Análisis de Sistemas, tambíen proponíamos soluciones.
+¿Las ponemos o no hacen faltan?}
 

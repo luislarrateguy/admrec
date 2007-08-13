@@ -1,0 +1,8 @@
+bin\Debug\NotasDai.exe
+bin\Debug\NotasDai.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\NotasDai.exe
+obj\Debug\NotasDai.pdb
+bin\Release\NotasDai.exe
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\NotasDai.exe

@@ -260,3 +260,45 @@
   \hline
 }
 
+
+%
+% Para armar un APX 6
+%
+\newenvironment{apx6}[2]
+{
+  \begin{center}
+  \vspace{2ex}
+
+  \begin{center}
+    \Large{APX 5}
+  \end{center}
+
+  \rule{\textwidth}{1pt}
+
+  \vspace{2ex}
+
+  \begin{tabular}{llr}
+    \textbf{\underline{Fuente de información:} } #1 \\
+    \textbf{\underline{Fecha:} } #2
+  \end{tabular}
+
+  \begin{center}
+  \begin{tabular}{|p{150pt}|p{150pt}|}
+    \hline
+    \rowcolor[gray]{0.9}\textbf{Referencia} & \textbf{Área/Proceso} \\
+    \hline
+}
+{
+  \end{tabular}
+  \end{center}
+
+  \rule{\textwidth}{1pt}
+  \vspace{2ex}
+  \end{center}
+}
+
+\newcommand{\apxSeisItem}[2]{
+  #1 & #2 \\
+  \hline
+}
+

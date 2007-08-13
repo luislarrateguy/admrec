@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<UserCombinePreferences filename="/home/nacho/workspace/mono/NotasDai/NotasDai.mds">
+  <Files>
+    <File filename="Bienvenido" />
+    <File filename="./Main.cs" />
+  </Files>
+  <Views>
+    <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
+      <TreeView>
+        <Node expanded="True">
+          <Node name="NotasDai" expanded="True">
+            <Node name="Main.cs" expanded="False" selected="True" />
+          </Node>
+        </Node>
+      </TreeView>
+    </ViewMemento>
+    <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ClassPad">
+      <TreeView>
+        <Node expanded="True" />
+      </TreeView>
+    </ViewMemento>
+    <ViewMemento Id="MonoQuery.DatabasePad">
+      <TreeView>
+        <Node expanded="False" />
+      </TreeView>
+    </ViewMemento>
+    <ViewMemento Id="MonoDevelop.NUnit.TestPad">
+      <TreeView>
+        <Node expanded="False" />
+      </TreeView>
+    </ViewMemento>
+  </Views>
+  <Properties>
+    <Properties>
+      <Property key="ActiveWindow" value="/home/nacho/workspace/mono/NotasDai/Main.cs" />
+      <Property key="ActiveConfiguration" value="Debug" />
+    </Properties>
+  </Properties>
+</UserCombinePreferences>

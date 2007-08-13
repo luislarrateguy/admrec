@@ -1,12 +1,12 @@
 \subsection{Definición de los procesos y de sus necesidades de información}
 
-% Proceso 'Venta'
-\subsubsection{Proceso \textsf{Ventas}}
+% Proceso 'PVenta'
+\subsubsection{Proceso \textsf{PVentas}}
 
 \begin{apx1}
 {Depto. de Ventas}
 {Jefe de ventas}
-{Venta}
+{PVenta}
 {07/08/2007}
 {1}
 {Gestión de clientes, facturación y generación de información estadística sobre ventas.}
@@ -19,7 +19,7 @@
 \begin{apx2}
 {Depto. de Ventas}
 {Jefe de ventas}
-{Venta}
+{PVenta}
 {07/08/2007}
 {1}
   \apxDosItem{Factura}{Logística, Ventas, Cliente}{Diario}{}
@@ -30,7 +30,7 @@
 \begin{apx3}
 {Depto. de Ventas}
 {Jefe de ventas}
-{Venta}
+{PVenta}
 {07/08/2007}
 {1}
   \apxTresItem{Nota de pedido}{Cliente}{Diario}{}
@@ -48,7 +48,7 @@
 \begin{apx4}
 {Depto. de Ventas}
 {Jefe de ventas}
-{Venta}
+{PVenta}
 {07/08/2007}
 {1}
   \apxCuatroItem{Estado de stock en tránsito}{Logística}{Diario}
@@ -60,13 +60,13 @@
 \end{apx4}
 
 
-% Proceso 'ControlStock'
-\subsubsection{Proceso \textsf{ControlStock}}
+% Proceso 'PControlStock'
+\subsubsection{Proceso \textsf{PControlStock}}
 
 \begin{apx1}
 {Depto. de Logística}
 {Jefe de logística}
-{ControlStock}
+{PControlStock}
 {07/08/2007}
 {1}
 {Control, distribución y mantenimiento de stock.}
@@ -77,7 +77,7 @@
 \begin{apx2}
 {Depto. de Logística}
 {Jefe de logística}
-{ControlStock}
+{PControlStock}
 {07/08/2007}
 {1}
   \apxDosItem{Pedido de compras}{Compras}{Semanal}
@@ -89,7 +89,7 @@
 \begin{apx3}
 {Depto. de Logística}
 {Jefe de logística}
-{ControlStock}
+{PControlStock}
 {07/08/2007}
 {1}
   \apxTresItem{Informe de compras}{Compras}{Diario}{}
@@ -104,22 +104,23 @@
 \begin{apx4}
 {Depto. de Logística}
 {Jefe de logística}
-{ControlStock}
+{PControlStock}
 {07/08/2007}
 {1}
-  \apxCuatroItem{Estado de stock en tiempo real}{Logística (de otras sucursales)}{Diario}
-    {\FIXME{Ver si Ventas no puede consultar directamente el stock con la otra sucursal.
-     Por lo menos eso entiendo de esto.}}
+  \apxCuatroItem{Estado de stock en tránsito}{Logística (de las demás sucursales)}{Diario}
+    {El área de logística de cada sucursal recibe información sobre las demás sucursales.}
+  \apxCuatroItem{Estado de stock en tiempo real}{Logística (de las demás sucursales)}{Diario}
+    {El área de logística de cada sucursal recibe información sobre las demás sucursales.}
 \end{apx4}
 
 
-% Proceso 'Compra'
-\subsubsection{Proceso \textsf{Compra}}
+% Proceso 'PCompra'
+\subsubsection{Proceso \textsf{PCompra}}
 
 \begin{apx1}
 {Depto. de Compras}
 {Jefe de compras}
-{Compra}
+{PCompra}
 {07/08/2007}
 {1}
 {A partir de una orden de pedido, se solicita a proveedores el envío de mercaderías.}
@@ -130,7 +131,7 @@
 \begin{apx2}
 {Depto. de Compras}
 {Jefe de compras}
-{Compra}
+{PCompra}
 {07/08/2007}
 {1}
   \apxDosItem{Informe de compras}{Logística}{Diario}{}
@@ -140,7 +141,7 @@
 \begin{apx3}
 {Depto. de Compras}
 {Jefe de compras}
-{Compra}
+{PCompra}
 {07/08/2007}
 {1}
   \apxTresItem{Pedido de compras}{Logística}{Diario*** ¿No sería 'semanal'?}{}
@@ -151,7 +152,7 @@
 \begin{apx4}
 {Depto. de Compras}
 {Jefe de compras}
-{Compra}
+{PCompra}
 {07/08/2007}
 {1}
   \apxCuatroItem{\textit{No hay ítems en este APX para esta área}}{}{}{}

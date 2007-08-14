@@ -93,15 +93,13 @@
 %
 \newenvironment{apx}[6]
 {
-  \vspace{1ex}
+  \vspace{15pt}
+  \begin{minipage}{\textwidth}
   \begin{center}
 
-  %\begin{figure}[!h]
   \begin{Large}
     \Large{APX #6}
   \end{Large}
-
-  %\rule{\textwidth}{1pt}
 
   \begin{flushleft}
   \begin{tabular*}{345pt}{ll@{\extracolsep{\fill}}r}
@@ -111,10 +109,9 @@
   \end{flushleft}
 }
 {
-  \vspace{1ex}
-  %\rule{\textwidth}{1pt}
-  \vspace{1ex}
   \end{center}
+  \end{minipage}
+  \vspace{15pt}
 }
 
 %
@@ -228,8 +225,9 @@
 %
 \newenvironment{apx5}[5]
 {
-  \vspace{1ex}
+  \vspace{15pt}
 
+  \begin{minipage}{\textwidth}
   \begin{center}
 
   \begin{Large}
@@ -254,12 +252,9 @@
 }
 {
   \end{tabular}
-
-  \vspace{2ex}
-  %\rule{\textwidth}{1pt}
-  \vspace{1ex}
-
   \end{center}
+  \end{minipage}
+  \vspace{15pt}
 }
 
 \newcommand{\apxCincoItem}[2]{
@@ -273,7 +268,8 @@
 %
 \newenvironment{apx6}[2]
 {
-  \vspace{1ex}
+  \vspace{15pt}
+  \begin{minipage}{\textwidth}
 
   %\begin{center}
   %  \Large{APX 6}
@@ -298,10 +294,8 @@
 {
   \end{tabular}
   \end{center}
-
-  %\rule{\textwidth}{1pt}
-  \vspace{1ex}
-  %\end{figure}
+  \end{minipage}
+  \vspace{15pt}
 }
 
 \newcommand{\apxSeisItem}[2]{
@@ -315,8 +309,8 @@
 %
 \newenvironment{analisisSituacionActual}
 {
-  \begin{center}
   \vspace{2ex}
+  \begin{center}
 
   %\begin{center}
   %  \Large{APX 6}
@@ -332,7 +326,6 @@
   \end{tabular}
   \end{center}
   \end{center}
-
   \vspace{2ex}
 }
 

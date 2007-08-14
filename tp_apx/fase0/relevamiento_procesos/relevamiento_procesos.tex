@@ -1,7 +1,7 @@
 \subsection{Definición de los procesos y necesidades de información}
 
 % Proceso 'PVenta'
-\subsubsection{Proceso \textsf{PVentas}}
+\subsubsection{Proceso \textsf{PVenta}}
 
 \begin{apx1}
 {Depto. de Ventas}
@@ -40,7 +40,6 @@
   \apxTresItem{Informe de estado de stock}{Logística}{Diario}{}
   \apxTresItem{Remito}{Logística}{Diario}{}
   \apxTresItem{Factura}{Ventas}{Diario}{}
-  \apxTresItem{Recibo}{Ventas}{Diario}{}
   \apxTresItem{Nota de crédito}{Ventas}{Diario}{}
   \apxTresItem{Nota de débito}{Ventas}{Diario}{}
 \end{apx3}
@@ -55,7 +54,7 @@
     {Se refiere al stock de una sucursal que todavía no está presente en ella, pero que ya se ha
      pedido y está en camino.}
   \apxCuatroItem{Estado de stock en tiempo real}{Logística}{Diario}
-    {La sucursar interesada en vender productos de otra, consulta el stock actual de la misma en
+    {La sucursal interesada en vender productos de otra, consulta el stock actual de la misma en
      tiempo real.}
 \end{apx4}
 
@@ -70,8 +69,10 @@
 {07/08/2007}
 {1}
 {Control, distribución y mantenimiento de stock.}
-  \apxUnoItem{Recibir pedido de sucursal.}{Emitir pedido al departamento de compras.}
-  \apxUnoItem{Realizar entrega de stock a sucursal.}{Generar informe de estado de stock.}
+  \apxUnoItem{Controlar el stock actual de la sucursal local.}
+    {Emitir pedido al departamento de compras.}
+  \apxUnoItem{Realizar entrega de stock a sucursal.}
+    {Generar informe de estado de stock.}
 \end{apx1}
 
 \begin{apx2}
@@ -92,13 +93,14 @@
 {PControlStock}
 {07/08/2007}
 {1}
-  \apxTresItem{Informe de compras}{Compras}{Diario}{}
-  \apxTresItem{Recibo***}{Ventas}{Diario}{}
+  \apxTresItem{Informe de compras}{Compras}{Diario}
+    {Con esta información del Depto. de Compras, el área de logística
+     es capaz de clasificar el stock de una sucursal como ``stock en
+     tránsito''.}
   \apxTresItem{Factura}{Ventas}{Diario}{}
   \apxTresItem{Remito}{Logística}{Diario}{}
   \apxTresItem{Nota de crédito}{Ventas}{Diario}{}
   \apxTresItem{Nota de débito}{Ventas}{Diario}{}
-  \apxTresItem{Solicitud de estado de stock***}{Ventas}{Diario}{}
 \end{apx3}
 
 \begin{apx4}
@@ -108,9 +110,11 @@
 {07/08/2007}
 {1}
   \apxCuatroItem{Estado de stock en tránsito}{Logística (de las demás sucursales)}{Diario}
-    {El área de logística de cada sucursal recibe información sobre las demás sucursales.}
+    {El área de logística de cada sucursal recibe información sobre el stock
+     en tránsito de las demás sucursales.}
   \apxCuatroItem{Estado de stock en tiempo real}{Logística (de las demás sucursales)}{Diario}
-    {El área de logística de cada sucursal recibe información sobre las demás sucursales.}
+    {El área de logística de cada sucursal recibe información sobre el stock
+     las demás sucursales, en tiempo real.}
 \end{apx4}
 
 
@@ -125,7 +129,7 @@
 {1}
 {A partir de una orden de pedido, se solicita a proveedores el envío de mercaderías.}
   \apxUnoItem{Recibir pedido de compras.}{Emitir pedido de proveedores.}
-  \apxUnoItem{Recibir mercaderías.}{Almacenar mercaderías.}
+  \apxUnoItem{Recibir mercaderías.***}{Almacenar mercaderías.***}
 \end{apx1}
 
 \begin{apx2}
@@ -134,7 +138,7 @@
 {PCompra}
 {07/08/2007}
 {1}
-  \apxDosItem{Informe de compras}{Logística}{Diario}{}
+  \apxDosItem{Informe de compras}{Logística}{Semanal}{}
   \apxDosItem{Pedido a proveedores}{Compras, Proveedor}{Semanal}{}
 \end{apx2}
 
@@ -144,9 +148,9 @@
 {PCompra}
 {07/08/2007}
 {1}
-  \apxTresItem{Pedido de compras}{Logística}{Diario*** ¿No sería 'semanal'?}{}
-  \apxTresItem{Factura}{Proveedor}{Diario*** idem anterior}{}
-  \apxTresItem{Pedido a proveedores}{Compras}{Dario*** idem anterior}{}
+  \apxTresItem{Pedido de compras}{Logística}{Semanal}{}
+  \apxTresItem{Factura}{Proveedor}{Semanal}{}
+  \apxTresItem{Pedido a proveedores}{Compras}{Semanal}{}
 \end{apx3}
 
 \begin{apx4}

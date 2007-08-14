@@ -26,9 +26,9 @@ préstamos personales al público en general. Confina tiene una importante labor
 dentro de las finanzas de la empresa ya que se transformó en una importante
 financiera en la región.
 
-Así, en la actualidad, cuenta con una dotación de aprox. 1500 empleados
-distribuidos en 128 sucursales a lo largo del país, y ocupa el segundo puesto
-en ventas de artículos para el hogar.
+Así, en la actualidad, cuenta con una dotación de aproximadamente 1500
+empleados distribuidos en 128 sucursales a lo largo del país, y ocupa el
+segundo puesto en ventas de artículos para el hogar.
 
 
 % Estructura organizacional
@@ -46,18 +46,6 @@ aunque también se observa una centralización  por la existencia de la Gerencia
 General y el Comité Ejecutivo, que así reduce la función del presidente a la de
 un veedor mayor con posibilidad de toma de decisiones.
 
-En el organigrama figura el desarrollo solamente de Sistemas sobre el cuál
-desarrollaremos la problemática. Dentro del sector, se dispone de tres Centros
-de Cómputo: el primero que gestiona los datos de Bazar Avenida que se encuentra
-en Rafaela; el segundo, que atiende el sistema de Confina; y el tercero, que se
-encarga de Megatone y de Carsa (ubicado en la ciudad de Santa Fe). Sobre este
-último profundizaremos el estudio.
-
-La anterior disposición del manejo de la información hace que las tres grandes
-zonas adopten un sistema federal, es decir que tienen casi total autonomía para
-tomar decisiones operativas, mientras que las decisiones estratégicas se toman
-entre los directores y el presidente.
-
 
 % Problemática detectada
 \subsection{Problemática detectada}
@@ -70,17 +58,17 @@ como el equipamiento con el que se cuenta.
 
 \subsubsection{Equipamiento}
 
-El Centro de Cómputos administra todo el Sistema de Gestión Integral cuenta con
-la siguiente infraestructura:
+El Centro de Cómputos, que administra todo el Sistema de Gestión Integral,
+cuenta con la siguiente infraestructura:
 
 \begin{itemize}
 
-  \item Existen un Servidor Central (Sun-multiprocesador), muy potente, que
+  \item Existe un Servidor Central (Sun-multiprocesador), muy potente, que
     nuclea toda la información que se maneja en el sistema.
 
   \item Hay otros Servidores Locales más pequeños de marca Intel, también
     multiprocesador, que gestionan la operatoria de, como promedio, 5 sucursales
-    ubicadas dentro de una misma zona geográfica. Suman un total de aprox. 25
+    ubicadas dentro de una misma zona geográfica. Suman un total de aproximadamente. 25
     servidores.
 
   \item Cada sucursal cuenta con un equipo por usuario, con impresora de carro
@@ -102,13 +90,14 @@ la siguiente infraestructura:
 
 \subsubsection{Funcionamiento del sistema en general}
 
-La Red cuenta además con 3 depósitos de mercaderías controlados por una
-administración central, la cual se encarga de gestionar el stock general de
-toda la Red. Cada depósito tiene como misión abastecer a un grupo de
-sucursales, las cuales tienen su propio stock (más reducido que el de los
-depósitos). Cabe aclarar que los depósitos son gestionados informáticamente
-directamente por el servidor central sin servidores intermedios lo cual
-simplifica mucho llevar el stock de los depósitos.
+Los servidores locales se conectan con el servidor central dos veces por día,
+al mediodía luego del cierre, y a la noche después de finalizar la jornada,
+para informar al servidor central la operatoria reciente del grupo de
+sucursales que cada uno tiene a su cargo. Luego se procede a transferir a cada
+sucursal el stock existente en las sucursales restantes de todo el país y otros
+datos, y poder así empezar al día siguiente con el stock ``actualizado'', ya
+que cada sucursal puede, además de vender productos en existencia de su propio
+stock, vender los que se encuentran en stock de otras sucursales.
 
 
 \subsubsection{Funcionamiento general del sistema de stock actual. Planteo del
@@ -127,17 +116,17 @@ es complejo pero trataremos de simplificarlo para así poder dar a entender el
 problema. 
 
 Cuando los servidores locales se conectan con el servidor central dos veces por
-día para informar al servidor central la operatoria reciente del grupo de
-sucursales que cada uno tiene a su cargo se envían, entre otros datos, el stock
-actual de cada sucursal. Aquí el inconveniente: cada sucursal, tiene
-actualizado solamente el stock de las sucursales que comparten el mismo
-servidor local, mientras que de las otras sucursales (las que pertenecen a otro
-servidor local) se tiene información de la última actualización del servidor
-central. Y como se puede vender productos que están en el stock de otras
-sucursales se genera un conflicto al intentar vender un producto que se
-encuentra en otra sucursal lejana, ya que puede ocurrir que justamente ese
-artículo ya haya sido vendido en esa sucursal y, como todavía no se actualizó,
-figure como existencia cuando no es así.
+día para informar a éste la operatoria reciente del grupo de sucursales que
+cada uno tiene a su cargo se envían, entre otros datos, el stock actual de cada
+sucursal. Aquí el inconveniente: cada sucursal, tiene actualizado solamente el
+stock de las sucursales que comparten el mismo servidor local, mientras que de
+las otras sucursales (las que pertenecen a otro servidor local) se tiene
+información de la última actualización del servidor central. Y como se puede
+vender productos que están en el stock de otras sucursales se genera un
+conflicto al intentar vender un producto que se encuentra en otra sucursal
+lejana, ya que puede ocurrir que justamente ese artículo ya haya sido vendido
+en esa sucursal y, como todavía no se actualizó, figure como existencia cuando
+no es así.
 
 Como lo planteado anteriormente no resulta sencillo de entender (según nuestro
 criterio), proponemos un ejemplo:

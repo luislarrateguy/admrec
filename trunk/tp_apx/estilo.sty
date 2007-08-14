@@ -368,3 +368,50 @@
   #1 & #2 & #3 \\
   \hline
 }
+
+
+%
+% Para armar un proyecto
+%
+\newenvironment{proyecto}[3]
+{
+  \subsubsection{Proyecto Nº #1}
+
+  \begin{itemize}
+    \item \textbf{Objetivo:} #2
+    \item \textbf{Responsable:} #3
+}
+{
+  \end{itemize}
+}
+
+\newcommand{\tiempo}[1]{
+  \item \textbf{Tiempo estimado:} #1
+}
+
+\newenvironment{etapas}
+{
+  \item \textbf{Etapas:}
+  \begin{enumerate}
+}
+{
+  \end{enumerate}
+}
+
+\newcommand{\etapa}[1]{
+  \item #1
+}
+
+\newenvironment{recursos}
+{
+  \item \textbf{Recursos:}
+  \begin{enumerate}
+}
+{
+  \end{enumerate}
+}
+
+\newcommand{\recurso}[1]{
+  \item #1
+}
+

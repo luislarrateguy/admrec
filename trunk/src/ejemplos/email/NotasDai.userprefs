@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
-<UserCombinePreferences filename="/home/nacho/workspace/mono/NotasDai/NotasDai.mds">
+<UserCombinePreferences filename="/home/miltondp/facultad/adm_recursos/tps/trunk/src/ejemplos/email/NotasDai.mds">
   <Files>
-    <File filename="Bienvenido" />
     <File filename="./Main.cs" />
   </Files>
   <Views>
@@ -19,11 +18,6 @@
         <Node expanded="True" />
       </TreeView>
     </ViewMemento>
-    <ViewMemento Id="MonoQuery.DatabasePad">
-      <TreeView>
-        <Node expanded="False" />
-      </TreeView>
-    </ViewMemento>
     <ViewMemento Id="MonoDevelop.NUnit.TestPad">
       <TreeView>
         <Node expanded="False" />
@@ -32,7 +26,7 @@
   </Views>
   <Properties>
     <Properties>
-      <Property key="ActiveWindow" value="/home/nacho/workspace/mono/NotasDai/Main.cs" />
+      <Property key="ActiveWindow" value="/home/miltondp/facultad/adm_recursos/tps/trunk/src/ejemplos/email/Main.cs" />
       <Property key="ActiveConfiguration" value="Debug" />
     </Properties>
   </Properties>

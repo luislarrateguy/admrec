@@ -276,9 +276,9 @@
   \begin{center}
   \vspace{2ex}
 
-  \begin{center}
-    \Large{APX 6}
-  \end{center}
+  %\begin{center}
+  %  \Large{APX 6}
+  %\end{center}
 
   \rule{\textwidth}{1pt}
 
@@ -309,3 +309,34 @@
   \hline
 }
 
+
+%
+% Para armar una tabla de análisis de la situación actual
+%
+\newenvironment{analisisSituacionActual}
+{
+  \begin{center}
+  \vspace{2ex}
+
+  %\begin{center}
+  %  \Large{APX 6}
+  %\end{center}
+
+  \begin{center}
+  \begin{tabular}{|p{150pt}|p{150pt}|}
+    \hline
+    \rowcolor[gray]{0.9}\textbf{Cuadro A} & \textbf{Cuadro B} \\
+    \hline
+}
+{
+  \end{tabular}
+  \end{center}
+  \end{center}
+
+  \vspace{2ex}
+}
+
+\newcommand{\analisisActualItem}[2]{
+  #1 & #2 \\
+  \hline
+}

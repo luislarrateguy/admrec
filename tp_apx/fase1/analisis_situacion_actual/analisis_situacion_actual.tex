@@ -1,20 +1,17 @@
 \subsection{Análisis de la situación actual}
 
-\begin{center}
-\begin{tabular}{|c|c|}
-\hline
-Cuadro A&Cuadro B\\
-\hline
-PVenta: Está semi-automatizado, funcionando correctamente cuando se trata de
-centas locales &El proceso de venta pierde sincronización con el stock de 
-las otras sucursales.\\
-\hline
-PControlStock&Cada sucursal conoce su stock, pero no conoce el stock de las 
-demás al momento del pedido. Esto acarrea la problemática explicada
-anteriormente.\\
-\hline
-PCompra: este proceso funciona correctamente&Los datos le son útiles
-así como están.\\
-\hline
-\end{tabular}
-\end{center}
+\begin{analisisSituacionActual}
+  \analisisActualItem
+    {PVenta está semi-automatizado, funcionando correctamente cuando se trata
+     de ventas locales}
+    {El proceso de venta pierde sincronización con el stock de las otras
+     sucursales.}
+  \analisisActualItem
+    {PControlStock}
+    {Cada sucursal conoce su stock, pero no conoce el stock de las demás al
+     momento del pedido. Esto acarrea la problemática explicada anteriormente.}
+  \analisisActualItem
+    {PCompra: este proceso funciona correctamente.}
+    {Los datos le son útiles así como están.}
+\end{analisisSituacionActual}
+

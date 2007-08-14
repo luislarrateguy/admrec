@@ -340,3 +340,31 @@
   #1 & #2 \\
   \hline
 }
+
+
+%
+% Para armar una tabla de Cuadro de aplicación con archivos
+%
+\newenvironment{cuadroAplicacionArchivos}
+{
+  \begin{center}
+  \vspace{2ex}
+
+  \begin{center}
+  \begin{tabular}{|p{100pt}|p{100pt}|p{100pt}|}
+    \hline
+    \rowcolor[gray]{0.9}\textbf{Aplicación DP} & \textbf{Incluye} & \textbf{Archivo}\\
+    \hline
+}
+{
+  \end{tabular}
+  \end{center}
+  \end{center}
+
+  \vspace{2ex}
+}
+
+\newcommand{\cuadroAplicacionArchivosItem}[3]{
+  #1 & #2 & #3 \\
+  \hline
+}

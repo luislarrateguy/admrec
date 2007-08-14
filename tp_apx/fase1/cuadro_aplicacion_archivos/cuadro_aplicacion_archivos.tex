@@ -3,15 +3,43 @@
 \begin{cuadroAplicacionArchivos}
   \cuadroAplicacionArchivosItem
     {ModuloVentas}
-    {}
-	{}
+    {* Atender consultas de clientes (E) \newline
+	* Tomar pedido del cliente (E)\newline
+ 	* Hacer factura (E)\newline
+	* Procesar método de pago (E)\newline
+	* Generar reporte mensual de ventas. (E)\newline
+	* Consultar stock de unidad (E)\newline
+	* Consultar stock de unidad en otra Sucursal(P)\newline
+	* Dar de baja una unidad por venta (E)\newline
+	* Notificar a cliente la recepción de mercadería (E)\newline
+	}
+	{FacturaVenta \newline
+	 RemitoCliente (E)
+	 NotaDebito (E)
+	 NotaCredito (E)
+	 StockTiempoReal (P)
+	 StockTransito (P)
+	 }
   \cuadroAplicacionArchivosItem
     {ModuloCompras}
-    {}
-	{}
+    {* Enviar pedido a central (E)\newline
+	 * Seguimiento del pedido (P)\newline
+	 * Gestionar el pago de la unidad (E)\newline
+	 * Generar reporte de compras (E)\newline
+	 * Dar de alta una unidad por compra (E)\newline
+	 * Realizar y registrar pedidos (P)\newline
+	 * Registrar pedido en tránsito (P)\newline
+	}
+	{NotaPedido (E) \newline
+	 StockTransito (P)}
   \cuadroAplicacionArchivosItem
     {ModuloControlStock}
-    {}
-	{}
+    {* Registrar mercadería en tránsito (otras sucursales) (P)\newline
+	 * Informes de variaciones de stock (E)\newline
+	 * Consultar stock de unidad (E)\newline
+	 * Establecer niveles de stock deseados (E) \newline
+	 }
+	{StockTiempoReal (P) \newline
+	 StockTransito (P)}
 \end{cuadroAplicacionArchivos}
 

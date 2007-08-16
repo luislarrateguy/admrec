@@ -8,13 +8,13 @@ borrar()
 rm -rf main.pdf
 
 borrar
-cd sobre_red_megatone
+cd introduccion
 borrar
-cd ../titulo
+cd ../bibliografia
 borrar
-cd ../licencia
+cd ../arquitectura
 borrar
-cd ../hechoconsl
+cd ../implementacion
 borrar
 
 rm -f ../src_tex/*.tex

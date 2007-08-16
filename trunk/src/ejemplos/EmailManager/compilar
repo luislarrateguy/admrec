@@ -1,0 +1,2 @@
+#!/bin/bash
+booc EmailManager.boo -t:library

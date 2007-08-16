@@ -20,9 +20,7 @@ namespace IM.GUI
 			Glade.XML gxml = new XML("mainwindow.glade", "mainWindow", null);
 			gxml.Autoconnect(this);
 			
-			this.mainWindow.DeleteEvent += new DeleteEventHandler(this.OnDeleteMainWindow);
-			
-			
+			this.mainWindow.DeleteEvent += new DeleteEventHandler(this.OnDeleteMainWindow);	
 			
 			this.mainWindow.ShowAll();
 		}

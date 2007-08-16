@@ -3,10 +3,12 @@
 //
 //
 // project created on 15/08/2007 at 13:49
+namespace Prueba
 import System
 import System.IO
 import System.Net
 import System.Net.Mail
+
 
 class EmailManager():
 	def enviarGEmail(dest as String, asunto as String, cuerpo as String, gm_username as String, gm_password as String):

@@ -16,21 +16,43 @@ namespace MensajeroRemoting
 			Console.WriteLine(" - Objeto ControladorConexiones creado");
 		}
 		
-		private Host GetHostByConnectionString(string cadenaConexion)
+		private HostCliente GetHostByConnectionString(string cadenaConexion)
 		{
-			Host nuevoCliente = (Host)Activator.GetObject(typeof(Host),
+			HostCliente nuevoCliente = (HostCliente)Activator.GetObject(typeof(HostCliente),
 			                                              cadenaConexion);
 			
 			return nuevoCliente;
 		}
 		
+		public void Desconectar(string cadenaConexion)
+		{
+			Console.WriteLine("");
+			Console.WriteLine("Petición de conextion. Cadena: " + cadenaConexion);
+			
+			if (!this.clientesConectados.Contains(cadenaConexion)) {
+				Console.WriteLine(" - Error: cliente no conectado");
+				return;
+			}
+			
+			Console.WriteLine("Bien, el cliente estaba conectado. Lo saco de la lista...");
+			this.clientesConectados.Remove(cadenaConexion);
+			
+			foreach (string h in this.clientesConectados) {
+				HostCliente host = this.GetHostByConnectionString(h);
+				Console.WriteLine("Avisando a " + h + " que " + cadenaConexion + " se desconectó");
+				host.ContactoDesconectado(cadenaConexion);
+			}
+			
+			Console.WriteLine("Listo!");
+			return;
+		}
 		
 		public bool Conectar (string cadenaConexion)
 		{
 			Console.WriteLine("");
 			Console.WriteLine("Petición de conextion. Cadena: " + cadenaConexion);
 			Console.WriteLine("Cachando el objeto remoto...");
-			Host nuevoCliente = this.GetHostByConnectionString(cadenaConexion);
+			HostCliente nuevoCliente = this.GetHostByConnectionString(cadenaConexion);
 			Console.WriteLine("Cachado!");
 			
 			if (this.clientesConectados.Contains(cadenaConexion)) {
@@ -42,9 +64,9 @@ namespace MensajeroRemoting
 			
 			List<string> clientesAntes = new List<string>();
 			foreach (string h in this.clientesConectados) {
-				Host host = this.GetHostByConnectionString(h);
+				HostCliente host = this.GetHostByConnectionString(h);
 				Console.WriteLine("Avisando a " + h + " que " + nuevoCliente.Id + " se conectó");
-				host.NotificarNuevoContacto(cadenaConexion);
+				host.ContactoConectado(cadenaConexion);
 				clientesAntes.Add(h);
 			}
 			

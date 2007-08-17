@@ -48,7 +48,7 @@ namespace MensajeroRemoting {
 			bool ahoraConectar = true;
 			while (true) {
 				Console.WriteLine("");
-				Console.WriteLine("Indique la acción ( (c)onectar ; (d)desconectar ; " +
+				Console.WriteLine("Indique la acción: (c)onectar ; (d)desconectar ; " +
 				                  "un número de puerto para enviar mensaje");
 				string accion = Console.ReadLine();
 				
@@ -62,7 +62,7 @@ namespace MensajeroRemoting {
 				else if (accion.ToLower().Equals("d")) {
 					Console.Write("Desconectando...");
 					controladorConexiones.Desconectar("tcp://localhost:" + puerto.ToString() + "/Host");
-					Console.WriteLine(" Desconectado!");
+					Console.WriteLine(" Desconectado");
 				}
 				else {
 					int puertoDestino = -1;

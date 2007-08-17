@@ -3,22 +3,23 @@ using System.Collections.Generic;
 
 namespace MensajeroRemoting
 {
-	public class Host : MarshalByRefObject
+	public class HostCliente : MarshalByRefObject
 	{
 		private string id;
 		private List<string> contactos;
 		
-		public Host()
+		public HostCliente()
 		{
 			this.id = "no tiene id";
 			this.contactos = new List<string>();
 		}
 		
-		public void NotificarNuevoContacto(string cadenaNuevoContacto)
+		public void ContactoConectado(string cadenaNuevoContacto)
 		{
+			Console.WriteLine("");
 			Console.WriteLine("Me están notificando que alguien se conectó: " + cadenaNuevoContacto);
 			Console.WriteLine("Cachando objeto remoto del mismo...");
-			Host nuevoContacto = (Host)Activator.GetObject(typeof(Host),
+			HostCliente nuevoContacto = (HostCliente)Activator.GetObject(typeof(HostCliente),
 			                                               cadenaNuevoContacto);
 			
 			Console.WriteLine("Veo si no lo tengo ya en mi lista, no debería...");			
@@ -33,6 +34,32 @@ namespace MensajeroRemoting
 			Console.WriteLine("Contactos conectados:");
 			foreach (string h in this.contactos)
 				Console.WriteLine(h);
+		}
+		
+		public void ContactoDesconectado(string cadenaContactoDesconectado)
+		{
+			Console.WriteLine("");
+			Console.WriteLine("Me están notificando que alguien se desconectó: " + cadenaContactoDesconectado);
+			
+			Console.WriteLine("Veo si no lo tengo ya en mi lista, debería...");
+			
+			if (this.contactos.Contains(cadenaContactoDesconectado)) {
+				this.contactos.Remove(cadenaContactoDesconectado);
+				Console.WriteLine(" - Cliente quitado: " + cadenaContactoDesconectado);
+			}
+			else {
+				Console.WriteLine("Error: no tenía ese contacto como conectado...");
+			}
+			
+			Console.WriteLine("Contactos conectados:");
+			foreach (string h in this.contactos)
+				Console.WriteLine(h);
+		}
+		
+		public void EnviarMensaje(string origen, string mensaje)
+		{
+			Console.WriteLine("");
+			Console.WriteLine(" - ¡Mensaje desde " + origen + "! : " + mensaje);
 		}
 		
 		public string[] Contactos {
@@ -57,10 +84,10 @@ namespace MensajeroRemoting
 
 		public override bool Equals (object o)
 		{
-			if (!(o is Host))
+			if (!(o is HostCliente))
 				return false;
 			
-			if (this.id != ((Host)o).id)
+			if (this.id != ((HostCliente)o).id)
 				return false;
 			
 			return true;

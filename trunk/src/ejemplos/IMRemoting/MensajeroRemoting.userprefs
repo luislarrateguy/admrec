@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<UserCombinePreferences filename="/home/nacho/documentos/UTN-2007/AdmRec/tps/src/ejemplos/IMRemoting/MensajeroRemoting.mds">
+  <Files />
+  <Views>
+    <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
+      <TreeView>
+        <Node expanded="True">
+          <Node name="Cliente" expanded="True" />
+          <Node name="ControladorConexiones" expanded="True">
+            <Node name="References" expanded="True" />
+          </Node>
+          <Node name="Servidor" expanded="True">
+            <Node name="Servidor.cs" expanded="False" selected="True" />
+          </Node>
+          <Node name="utilidades" expanded="True" />
+        </Node>
+      </TreeView>
+    </ViewMemento>
+    <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ClassPad">
+      <TreeView>
+        <Node expanded="True" />
+      </TreeView>
+    </ViewMemento>
+    <ViewMemento Id="MonoQuery.DatabasePad">
+      <TreeView>
+        <Node expanded="False" />
+      </TreeView>
+    </ViewMemento>
+    <ViewMemento Id="MonoDevelop.NUnit.TestPad">
+      <TreeView>
+        <Node expanded="False" />
+      </TreeView>
+    </ViewMemento>
+  </Views>
+  <Properties>
+    <Properties>
+      <Property key="ActiveWindow" value="" />
+      <Property key="ActiveConfiguration" value="Debug" />
+    </Properties>
+  </Properties>
+</UserCombinePreferences>

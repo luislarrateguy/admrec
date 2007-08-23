@@ -1,8 +1,0 @@
-1- ¿Se pueden crear clases en Python y consumirlas desde C# por ejemplo?
-
-* Respuesta 1 de un tal Martin:
-
-This is currently not supported. The compilation of Python into classes/types
-readily usable by C# or VB is very difficult problem given the dynamic nature
-of Python and it is one of our open questions to investigate.
-

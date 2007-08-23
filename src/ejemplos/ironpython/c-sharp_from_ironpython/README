@@ -1,8 +1,0 @@
-Primero hay que compilar la clase Persona:
-
-	$ mcs -t:library -out:Persona.dll Persona.cs
-
-Luego se ejecuta el programa Python así:
-
-	$ ipy.exe Mujer.py
-

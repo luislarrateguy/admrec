@@ -4,21 +4,25 @@
       <Entry build="True" name="Cliente" configuration="Debug" />
       <Entry build="True" name="Servidor" configuration="Debug" />
       <Entry build="True" name="ControladorConexiones" configuration="Debug" />
+      <Entry build="True" name="GUI" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Cliente" configuration="Release" />
       <Entry build="True" name="Servidor" configuration="Release" />
       <Entry build="True" name="ControladorConexiones" configuration="Release" />
+      <Entry build="True" name="GUI" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Cliente" single="True">
     <Execute type="None" entry="Cliente" />
     <Execute type="None" entry="Servidor" />
     <Execute type="None" entry="ControladorConexiones" />
+    <Execute type="None" entry="GUI" />
   </StartMode>
   <Entries>
     <Entry filename="./Cliente/Cliente.mdp" />
     <Entry filename="./Servidor/Servidor.mdp" />
     <Entry filename="./ControladorConexiones/ControladorConexiones.mdp" />
+    <Entry filename="./GUI/GUI.mdp" />
   </Entries>
 </Combine>

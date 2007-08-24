@@ -3,8 +3,6 @@ using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 
-using Prueba;
-
 namespace MensajeroRemoting {
 	public class Servidor
 	{

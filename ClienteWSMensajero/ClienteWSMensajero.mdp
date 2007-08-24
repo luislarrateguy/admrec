@@ -1,5 +1,5 @@
 <Project name="ClienteWSMensajero" fileversion="2.0" language="Java" clr-version="Net_1_1" ctype="DotNetProject">
-  <Configurations active="Debug">
+  <Configurations active="Release">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="./bin/Debug" assemblyKeyFile="./" assembly="ClienteWSMensajero" />
       <Build debugmode="True" target="Exe" />
@@ -7,13 +7,19 @@
       <CodeGeneration deprecation="True" optimize="True" mainclass="application" definesymbols="" classpath="classpath/mscorlib.jar:" compiler="Gcj" compilerpath="gcj" genwarnings="False" ctype="JavaCompilerParameters" />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
-      <Output directory="./bin/Release" assembly="ClienteWSMensajero" />
+      <Output directory="./bin/Release" assemblyKeyFile="./" assembly="ClienteWSMensajero" />
       <Build debugmode="False" target="Exe" />
       <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_1_1" />
-      <CodeGeneration deprecation="True" optimize="True" mainclass="application" definesymbols="" classpath="classpath/mscorlib.jar:" compiler="Javac" compilerpath="" genwarnings="False" ctype="JavaCompilerParameters" />
+      <CodeGeneration deprecation="False" optimize="True" mainclass="Application" definesymbols="" classpath="classpath/mscorlib.jar:" compiler="Javac" compilerpath="javac" genwarnings="True" ctype="JavaCompilerParameters" />
+    </Configuration>
+    <Configuration name="Ikmvc" ctype="DotNetProjectConfiguration">
+      <Output directory="./bin/Debug" assemblyKeyFile="./" assembly="ClienteWSMensajero" />
+      <Build debugmode="True" target="Exe" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_1_1" />
+      <CodeGeneration deprecation="True" optimize="True" mainclass="application" definesymbols="" classpath="classpath/mscorlib.jar:" compiler="Gcj" compilerpath="gcj" genwarnings="False" ctype="JavaCompilerParameters" />
     </Configuration>
   </Configurations>
   <Contents>
-    <File name="./application.java" subtype="Code" buildaction="Compile" />
+    <File name="./" subtype="Directory" buildaction="Compile" />
   </Contents>
 </Project>

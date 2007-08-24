@@ -12,19 +12,35 @@ import System
 import System.Web
 import System.Web.Services
 
-[WebService (Description:"Some descriptive text could go here.")]
+[WebService (Description:"Impossible is nothing", Namespace:"http://localhost/webservices/examples/representante")]
 class IMManager():
 	
-	public virtual def __constructor():
-		pass
-
-	private def assignValues(Code as string):
-		r = System.Random()
-
-	[WebMethod (Description:"Este método te autentica y crea un objeto remoto que te represente")]
+	[WebMethod (Description:"Autentica y crea un objeto remoto que te represente")]
 	public def Conectar(nick as string) as string:
-		return "conectado carajo!"
+		return "0123456789"
+		
+	[WebMethod (Description:"Desconecta del respresentante")]
+	public def Desconectar(key as string) as bool:
+		return true
+		
+	[WebMethod (Description:"Renueva la sesion por 5 minutos mas. La idea seria siempre desconectarse bien. Quiza lo saque a este metodo.")]
+	public def Renovar(key as string) as bool:
+		return true
 	
-	[WebMethod (Description:"Este método te autentica y crea un objeto remoto que te represente")]
-	public def SayHello() as string:
-		return "Hello World"
+	[WebMethod (Description:"Devuelve la lista de contactos")]
+	public def getListaContactos() as List:
+		lista = ["nacho","cesar","milton"]
+		return lista
+		
+	[WebMethod (Description:"Devuelve la lista de contactos")]
+	public def enviarMensajeA(key as string, mensaje as string, nick as string) as bool:
+		return true
+		
+	[WebMethod (Description:"Devuelve true si hubo cambios: en la lista de contactos, o un mensaje recibido")]
+	public def hayCambios(key as string) as int:
+		return 1
+		
+	[WebMethod (Description:"Devuelve el mensaje entrante de nick (FIFO)")]
+	public def recibirMensaje(key as string, nick as string) as string:
+		return "hola nacho"
+		

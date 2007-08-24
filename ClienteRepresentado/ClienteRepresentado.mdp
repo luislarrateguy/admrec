@@ -1,0 +1,23 @@
+<Project name="ClienteRepresentado" fileversion="2.0" language="Boo" clr-version="Net_1_1" ctype="DotNetProject">
+  <Configurations active="Release">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="./bin/Debug" assembly="ClienteRepresentado" />
+      <Build debugmode="True" target="Exe" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_1_1" />
+      <CodeGeneration genwarnings="False" ducky="False" culture="" ctype="BooCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="./bin/Release" assemblyKeyFile="./" assembly="ClienteRepresentado" />
+      <Build debugmode="False" target="Library" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_1_1" />
+      <CodeGeneration genwarnings="False" ducky="False" culture="" ctype="BooCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="./ClienteRepresentado.boo" subtype="Code" buildaction="Compile" />
+    <File name="./ClienteRepresentadoManager.boo" subtype="Code" buildaction="Compile" />
+  </Contents>
+  <References>
+    <ProjectReference type="Project" localcopy="True" refto="Cliente" />
+  </References>
+</Project>

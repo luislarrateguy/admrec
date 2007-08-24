@@ -16,11 +16,11 @@ import MensajeroRemoting
 
 class ClienteRepresentado(Cliente):
 	
-	public def constructor(puerto as int):
-		super(puerto)
+	public def constructor():
+		super()
 		
 	public def CrearObjetoCliente(nick as string) as string:
 		key = "0123456789"
-		cliente = ClienteRepresentado(5005);
+		cliente = ClienteRepresentado();
 		return key
 	

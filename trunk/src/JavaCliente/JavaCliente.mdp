@@ -1,5 +1,5 @@
 <Project name="JavaCliente" fileversion="2.0" language="Java" clr-version="Net_1_1" ctype="DotNetProject">
-  <Configurations active="Release">
+  <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="./bin/Debug" assembly="JavaCliente" />
       <Build debugmode="True" target="-1" />

@@ -1,8 +1,8 @@
 <Project name="ClienteRepresentado" fileversion="2.0" language="Boo" clr-version="Net_1_1" ctype="DotNetProject">
-  <Configurations active="Release">
+  <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
-      <Output directory="./bin/Debug" assembly="ClienteRepresentado" />
-      <Build debugmode="True" target="Exe" />
+      <Output directory="./bin/Debug" assemblyKeyFile="./" assembly="ClienteRepresentado" />
+      <Build debugmode="True" target="Library" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_1_1" />
       <CodeGeneration genwarnings="False" ducky="False" culture="" ctype="BooCompilerParameters" />
     </Configuration>

@@ -11,10 +11,8 @@ namespace MensajeroRemoting {
 		
 		private int puerto;
 		
-		public Cliente() {
-			
-		}
-		public Cliente(int puerto)
+
+		public Cliente()
 		{
 			this.puerto = puerto;
 			
@@ -33,8 +31,16 @@ namespace MensajeroRemoting {
 			Console.WriteLine("Servidor cachado!");
 			
 			ChannelServices.UnregisterChannel(chanConnect);
-			TcpChannel chanServe = new TcpChannel(puerto);
-			ChannelServices.RegisterChannel(chanServe);
+			
+			/* Esto hace que busque un puerto disponible
+			 * Cambio el canal bidireccional por uno Servidor únicamente
+			 * Solo se registra debajo (con RegisterWellKnownServiceType)
+			 */
+            TcpServerChannel miCanalEscucha = new TcpServerChannel(0);
+			Console.WriteLine("Mi canal escucha: "+miCanalEscucha.GetChannelUri());
+			
+			//TcpChannel chanServe = new TcpChannel(puerto);
+			//ChannelServices.RegisterChannel(chanServe);
 			
 			Console.WriteLine("Registrando mi objeto remoto...");
 			RemotingConfiguration.RegisterWellKnownServiceType(typeof(HostCliente),
@@ -44,9 +50,9 @@ namespace MensajeroRemoting {
 			
 			Console.WriteLine("Cachando mi propio objeto para modificarlo...");
 			HostCliente yo = (HostCliente)Activator.GetObject(typeof(HostCliente),
-			                                              "tcp://localhost:" + puerto.ToString() + "/Host");
+			                                              miCanalEscucha.GetChannelUri()+ "/Host");
 			Console.WriteLine("Modificando mi objeto...");
-			yo.Id = puerto.ToString();
+			yo.Id = miCanalEscucha.GetChannelUri();
 			
 			bool ahoraConectar = true;
 			while (true) {
@@ -57,14 +63,14 @@ namespace MensajeroRemoting {
 				
 				if (accion.ToLower().Equals("c")) {
 					Console.Write("Conectando...");
-					if (controladorConexiones.Conectar("tcp://localhost:" + puerto.ToString() + "/Host"))
+					if (controladorConexiones.Conectar(miCanalEscucha.GetChannelUri() + "/Host"))
 						Console.WriteLine("¡Conectado!");
 					else
 						Console.WriteLine("No anduvo la conexion");
 				}
 				else if (accion.ToLower().Equals("d")) {
 					Console.Write("Desconectando...");
-					controladorConexiones.Desconectar("tcp://localhost:" + puerto.ToString() + "/Host");
+					controladorConexiones.Desconectar(miCanalEscucha.GetChannelUri() + "/Host");
 					Console.WriteLine(" Desconectado");
 				}
 				else {
@@ -88,7 +94,7 @@ namespace MensajeroRemoting {
 					string mensaje = Console.ReadLine();
 					
 					Console.Write("Enviando mensaje...");
-					hostDestino.EnviarMensaje(puerto.ToString(), mensaje);
+					hostDestino.EnviarMensaje(yo.Id, mensaje);
 					Console.WriteLine("Enviado!");
 				}
 			}
@@ -104,7 +110,7 @@ namespace MensajeroRemoting {
 		
 		public static void Main(string[] args)
 		{
-			cliente = new Cliente(Convert.ToInt32(args[0]));
+			cliente = new Cliente();
 		}
 	}
 }

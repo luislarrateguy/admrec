@@ -11,6 +11,9 @@ namespace MensajeroRemoting {
 		
 		private int puerto;
 		
+		public Cliente() {
+			
+		}
 		public Cliente(int puerto)
 		{
 			this.puerto = puerto;

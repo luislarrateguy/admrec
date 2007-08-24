@@ -14,14 +14,13 @@ namespace ClienteRepresentado
 import System
 import MensajeroRemoting
 
-class ClienteRepresentado():
+class ClienteRepresentado(Cliente):
 	
-	public def constructor():
-		pass
+	public def constructor(puerto as int):
+		super(puerto)
 		
 	public def CrearObjetoCliente(nick as string) as string:
 		key = "0123456789"
-		cliente = ClienteRepresentado();
-		ClienteRepresentado.Conectar();
+		cliente = ClienteRepresentado(5005);
 		return key
 	

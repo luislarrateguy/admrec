@@ -1,18 +1,21 @@
 using System;
+using System.Threading;
+
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 
+using Gtk;
+
 namespace MensajeroRemoting {
 	public class ClienteManager
 	{
-		private ControladorConexiones controladorConexiones;
-		private TcpServerChannel miCanalEscucha;
-		private int puerto;
-		private HostCliente hc;
-		
+		private static ControladorConexiones controladorConexiones;
+		private static TcpServerChannel miCanalEscucha;
+		private static int puerto;
+		private static MainWindow hostCliente;
 
-		public ClienteManager()
+		public static void Inicializar()
 		{
 			TcpChannel chanConnect  = new TcpChannel();
 			ChannelServices.RegisterChannel(chanConnect);
@@ -34,68 +37,82 @@ namespace MensajeroRemoting {
 			 * Cambio el canal bidireccional por uno Servidor únicamente
 			 * Solo se registra debajo (con RegisterWellKnownServiceType)
 			 */
-            this.miCanalEscucha = new TcpServerChannel(0);
+            miCanalEscucha = new TcpServerChannel(0);
 			Console.WriteLine("Mi canal escucha: "+miCanalEscucha.GetChannelUri());
 			
-			//TcpChannel chanServe = new TcpChannel(puerto);
-			//ChannelServices.RegisterChannel(chanServe);
+			TcpChannel chanServe = new TcpChannel(puerto);
+			ChannelServices.RegisterChannel(chanServe);
 			
 			Console.WriteLine("Registrando mi objeto remoto...");
-			RemotingConfiguration.RegisterWellKnownServiceType(typeof(HostCliente),
+			RemotingConfiguration.RegisterWellKnownServiceType(typeof(MainWindow),
 			                                                          "Host",
 			                                                          WellKnownObjectMode.Singleton);
 			
+			hostCliente = GetHostByConnectionString(miCanalEscucha.GetChannelUri() + "/Host");
+			hostCliente.Run();
 			
-			Console.WriteLine("Cachando mi propio objeto para modificarlo...");
-			this.hc = (HostCliente)Activator.GetObject(typeof(HostCliente),
-			                                              miCanalEscucha.GetChannelUri()+ "/Host");
-			Console.WriteLine("Modificando mi objeto...");
-			this.hc.Id = miCanalEscucha.GetChannelUri();
-			
-			bool ahoraConectar = true;
-			
+//			TcpChannel tcp_chan = new TcpChannel();
+//			ChannelServices.RegisterChannel(tcp_chan);
+//			
+//			Console.WriteLine("Creando objeto...");
+//			MainWindow mw = new MainWindow();
+//			Console.WriteLine("Objeto creado...");
+//			RemotingServices.Marshal(mw, "Host");
+//			Console.WriteLine("Corriendo el MainWindow...");
+//			mw.Run();
+//			hostCliente = GetHostByConnectionString(miCanalEscucha.GetChannelUri() + "/Host");
 		}
 		
-		private HostCliente GetHostByConnectionString(string cadenaConexion)
+		public static ControladorConexiones ControladorConexiones
 		{
-			HostCliente nuevoCliente = (HostCliente)Activator.GetObject(typeof(HostCliente),
-			                                              cadenaConexion);
+			get { return controladorConexiones; }
+		}
+		
+		private static MainWindow GetHostByConnectionString(string cadena)
+		{
+			MainWindow hostCliente = (MainWindow)Activator.GetObject(typeof(MainWindow),
+			                                              cadena);
 			
-			return nuevoCliente;
+			return hostCliente;
 		}
 		
-		public bool conectar() {
+		public static string[] Conectar() {
 			Console.Write("Conectando...");
-			if (controladorConexiones.Conectar(this.miCanalEscucha.GetChannelUri() + "/Host")) {
+			string[] contactos = controladorConexiones.Conectar(miCanalEscucha.GetChannelUri() + "/Host");
+			
+			if (contactos != null)
 				Console.WriteLine("¡Conectado!");
-				return true;
-			} else {
+			else
 				Console.WriteLine("No anduvo la conexion");
-				return false;
-			}
+			
+			return contactos;
 		}
 		
-		public bool desconectar() {
+		public static bool Desconectar() {
 			Console.Write("Desconectando...");
 			controladorConexiones.Desconectar(miCanalEscucha.GetChannelUri() + "/Host");
 			Console.WriteLine(" Desconectado");
 			return true;
 		}
 		
-		public HostCliente obtenerDestino(int puertoDestino) {
+		public static MainWindow ObtenerDestino(int puertoDestino) {
 			Console.WriteLine("Cachando el destino...");
-			HostCliente hostDestino = this.GetHostByConnectionString("tcp://localhost:" +
+			MainWindow hostDestino = GetHostByConnectionString("tcp://localhost:" +
 				puertoDestino + "/Host");
 			Console.WriteLine("Cachado!");
 			return hostDestino;
 		}
 		
-		public bool enviarMensaje(HostCliente h, string m) {
+		public static bool EnviarMensaje(MainWindow h, string m) {
 			Console.Write("Enviando mensaje...");
-			h.EnviarMensaje(this.hc.Id, m);
+			h.EnviarMensaje(hostCliente.Id, m);
 			Console.WriteLine("Enviado!");
 			return true;
-		}	
-
+		}
+		
+		public static void Main(string[] args)
+		{
+			ClienteManager.Inicializar();
+		}
 	}
 }

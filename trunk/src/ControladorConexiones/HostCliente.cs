@@ -14,7 +14,7 @@ namespace MensajeroRemoting
 			this.contactos = new List<string>();
 		}
 		
-		public void ContactoConectado(string cadenaNuevoContacto)
+		public void AgregarCliente(string cadenaNuevoContacto)
 		{
 			Console.WriteLine("");
 			Console.WriteLine("Me están notificando que alguien se conectó: " + cadenaNuevoContacto);
@@ -31,12 +31,14 @@ namespace MensajeroRemoting
 				Console.WriteLine(" - Nuevo cliente agregado: " + nuevoContacto.id);
 			}
 			
+			this.ContactoConectado(cadenaNuevoContacto);
+			
 			Console.WriteLine("Contactos conectados:");
 			foreach (string h in this.contactos)
 				Console.WriteLine(h);
 		}
 		
-		public void ContactoDesconectado(string cadenaContactoDesconectado)
+		public void QuitarCliente(string cadenaContactoDesconectado)
 		{
 			Console.WriteLine("");
 			Console.WriteLine("Me están notificando que alguien se desconectó: " + cadenaContactoDesconectado);
@@ -50,6 +52,8 @@ namespace MensajeroRemoting
 			else {
 				Console.WriteLine("Error: no tenía ese contacto como conectado...");
 			}
+			
+			this.ContactoDesconectado(cadenaContactoDesconectado);
 			
 			Console.WriteLine("Contactos conectados:");
 			foreach (string h in this.contactos)
@@ -67,14 +71,14 @@ namespace MensajeroRemoting
 				return this.contactos.ToArray();
 			}
 			
-			set {
-				this.contactos.Clear();
-				this.contactos.AddRange(value);
-				
-				Console.WriteLine("Contactos conectados:");
-				foreach (string h in this.contactos)
-					Console.WriteLine(h);
-			}
+//			set {
+//				this.contactos.Clear();
+//				this.contactos.AddRange(value);
+//				
+//				Console.WriteLine("Contactos conectados:");
+//				foreach (string h in this.contactos)
+//					Console.WriteLine(h);
+//			}
 		}
 		
 		public string Id {
@@ -91,6 +95,11 @@ namespace MensajeroRemoting
 				return false;
 			
 			return true;
+		}
+		
+		public override object InitializeLifetimeService ()
+		{
+			return null;
 		}
 
 	}

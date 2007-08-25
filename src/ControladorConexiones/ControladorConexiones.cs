@@ -1,84 +1,113 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.Remoting;
-using System.Runtime.Remoting.Channels;
-using System.Runtime.Remoting.Channels.Tcp;
 
 namespace MensajeroRemoting
 {
 	public class ControladorConexiones : MarshalByRefObject
 	{
+		public delegate void ListaContactosHandler(string cadena);
+		
+		public event ListaContactosHandler ContactoConectado;
+		public event ListaContactosHandler ContactoDesconectado;
+		
 		private List<string> clientesConectados;
+		//private List<IListaContactos> clientes;
 		
 		public ControladorConexiones()
 		{
 			this.clientesConectados = new List<string>();
+			//this.clientes = new List<MensajeroRemoting.IListaContactos>();
 			Console.WriteLine(" - Objeto ControladorConexiones creado");
 		}
 		
-		private HostCliente GetHostByConnectionString(string cadenaConexion)
-		{
-			HostCliente nuevoCliente = (HostCliente)Activator.GetObject(typeof(HostCliente),
-			                                              cadenaConexion);
-			
-			return nuevoCliente;
-		}
+//		private HostCliente GetHostByConnectionString(string cadenaConexion)
+//		{
+//			HostCliente nuevoCliente = (HostCliente)Activator.GetObject(typeof(HostCliente),
+//			                                              cadenaConexion);
+//			
+//			return nuevoCliente;
+//		}
 		
-		public void Desconectar(string cadenaConexion)
+//		public void Suscribir(IListaContactos lc)
+//		{
+//			this.clientes.Add(lc);
+//			
+////			this.ContactoConectado += lc.OnContactoAgregado;
+////			this.ContactoDesconectado += lc.OnContactoQuitado;
+//		}
+		
+		public void Desconectar(string cadena)
 		{
 			Console.WriteLine("");
-			Console.WriteLine("Petición de conextion. Cadena: " + cadenaConexion);
+			Console.WriteLine("Petición de desconextion. Cadena: " + cadena);
 			
-			if (!this.clientesConectados.Contains(cadenaConexion)) {
+			if (!this.clientesConectados.Contains(cadena)) {
 				Console.WriteLine(" - Error: cliente no conectado");
 				return;
 			}
 			
 			Console.WriteLine("Bien, el cliente estaba conectado. Lo saco de la lista...");
-			this.clientesConectados.Remove(cadenaConexion);
+			this.clientesConectados.Remove(cadena);
 			
-			foreach (string h in this.clientesConectados) {
-				HostCliente host = this.GetHostByConnectionString(h);
-				Console.WriteLine("Avisando a " + h + " que " + cadenaConexion + " se desconectó");
-				host.ContactoDesconectado(cadenaConexion);
-			}
+//			foreach (string h in this.clientesConectados) {
+//				HostCliente host = this.GetHostByConnectionString(h);
+//				Console.WriteLine("Avisando a " + h + " que " + cadenaConexion + " se desconectó");
+//				host.QuitarCliente(cadenaConexion);
+//			}
+			
+			Console.WriteLine("Avisando a los otros que se desconecto");
+			if (this.ContactoDesconectado != null)
+				this.ContactoDesconectado(cadena);
+//			foreach (IListaContactos lc in this.clientes)
+//				lc.OnContactoQuitado(cadena);
 			
 			Console.WriteLine("Listo!");
 			return;
 		}
 		
-		public bool Conectar (string cadenaConexion)
+		public string[] Conectar (string cadena)
 		{
 			Console.WriteLine("");
-			Console.WriteLine("Petición de conextion. Cadena: " + cadenaConexion);
+			Console.WriteLine("Petición de conextion. Cadena: " + cadena);
 			Console.WriteLine("Cachando el objeto remoto...");
-			HostCliente nuevoCliente = this.GetHostByConnectionString(cadenaConexion);
+			//HostCliente nuevoCliente = this.GetHostByConnectionString(cadenaConexion);
 			Console.WriteLine("Cachado!");
 			
-			if (this.clientesConectados.Contains(cadenaConexion)) {
+			if (this.clientesConectados.Contains(cadena)) {
 				Console.WriteLine(" - Error: cliente ya conectado");
-				return false;
+				return null;
 			}
 			
 			Console.WriteLine("El cliente es nuevo...");
 			
-			List<string> clientesAntes = new List<string>();
-			foreach (string h in this.clientesConectados) {
-				HostCliente host = this.GetHostByConnectionString(h);
-				Console.WriteLine("Avisando a " + h + " que " + nuevoCliente.Id + " se conectó");
-				host.ContactoConectado(cadenaConexion);
-				clientesAntes.Add(h);
-			}
+			//List<string> clientesAntes = new List<string>();
+//			foreach (string h in this.clientesConectados) {
+//				HostCliente host = this.GetHostByConnectionString(h);
+//				Console.WriteLine("Avisando a " + h + " que " + nuevoCliente.Id + " se conectó");
+//				host.AgregarCliente(cadenaConexion);
+//				
+//				nuevoCliente.AgregarCliente(h);
+//			}
 			
-			Console.WriteLine("Ahora le meto los contactos existentes al nuevo cliente...");
+			Console.WriteLine("Avisando a los otros que se conecto uno nuevo");
+			if (this.ContactoConectado != null)
+				this.ContactoConectado(cadena);
+//			foreach (IListaContactos lc in this.clientes)
+//				lc.OnContactoAgregado(cadena);
 			
-			nuevoCliente.Contactos = clientesAntes.ToArray();
+			string[] clientesSinElNuevo = this.clientesConectados.ToArray();
 			
 			Console.WriteLine("Agrego el cliente a mi lista de clientes conectados");
-			this.clientesConectados.Add(cadenaConexion);
+			this.clientesConectados.Add(cadena);
 			
 			Console.WriteLine("Listo!");
-			return true;
+			
+			return clientesSinElNuevo;
+		}
+		
+		public override object InitializeLifetimeService()
+		{
+			return null;
 		}
 	}
 	

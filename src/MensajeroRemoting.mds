@@ -1,14 +1,14 @@
-<Combine name="MensajeroRemoting" fileversion="2.0">
+<Combine name="MensajeroRemoting" fileversion="2.0" outputpath="./build/bin/">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="Cliente" configuration="Debug" />
       <Entry build="True" name="Servidor" configuration="Debug" />
       <Entry build="True" name="ControladorConexiones" configuration="Debug" />
-      <Entry build="True" name="GUI" configuration="Debug" />
-      <Entry build="True" name="JavaCliente" configuration="Debug" />
-      <Entry build="True" name="TestingThings" configuration="Debug" />
-      <Entry build="True" name="WSMensajeroFacade" configuration="Debug" />
-      <Entry build="True" name="ClienteRepresentado" configuration="Debug" />
+      <Entry build="False" name="GUI" configuration="Debug" />
+      <Entry build="False" name="JavaCliente" configuration="Debug" />
+      <Entry build="False" name="TestingThings" configuration="Debug" />
+      <Entry build="False" name="WSMensajeroFacade" configuration="Debug" />
+      <Entry build="False" name="ClienteRepresentado" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Cliente" configuration="Release" />
@@ -22,8 +22,8 @@
     </Configuration>
   </Configurations>
   <StartMode startupentry="Cliente" single="True">
-    <Execute type="None" entry="Cliente" />
-    <Execute type="None" entry="Servidor" />
+    <Execute type="Execute" entry="Servidor" />
+    <Execute type="Execute" entry="Cliente" />
     <Execute type="None" entry="ControladorConexiones" />
     <Execute type="None" entry="GUI" />
     <Execute type="None" entry="JavaCliente" />

@@ -32,10 +32,15 @@ namespace MensajeroRemoting
 		public ListaContactosEventHelper(ControladorConexiones controladorConexiones)
 		{
 			this.controladorConexiones = controladorConexiones;
-			
-			if (this.controladorConexiones == null)
-				Console.WriteLine("aah, es null");
-			
+		}
+		
+		~ListaContactosEventHelper()
+		{
+			//this.DesregistrarHandlers();
+		}
+		
+		public void RegistrarHandlers()
+		{
 			Console.WriteLine(" ---- Registrando metodo agregarContacto");
 			this.controladorConexiones.ContactoConectado +=
 				new ControladorConexiones.ListaContactosHandler(this.OnContactoAgregado);
@@ -43,19 +48,31 @@ namespace MensajeroRemoting
 			Console.WriteLine(" ---- Registrando metodo quitarContacto");
 			this.controladorConexiones.ContactoDesconectado +=
 				new ControladorConexiones.ListaContactosHandler(this.OnContactoQuitado);
+		}
+		
+		public void DesregistrarHandlers()
+		{
+			Console.Write(" ---- Desregistrando metodo agregarContacto");
+			this.controladorConexiones.ContactoConectado -=
+				new ControladorConexiones.ListaContactosHandler(this.OnContactoAgregado);
+			Console.WriteLine("... Listo!");
 			
-			Console.WriteLine("Suscribiendo...");
-//			this.controladorConexiones.Suscribir(this);
+			Console.Write(" ---- Desregistrando metodo quitarContacto");
+			this.controladorConexiones.ContactoDesconectado -=
+				new ControladorConexiones.ListaContactosHandler(this.OnContactoQuitado);
+			Console.WriteLine("... Listo!");
 		}
 		
 		public void OnContactoAgregado(string cadena)
 		{
-			this.ContactoConectado(cadena);
+			if (this.ContactoConectado != null)
+				this.ContactoConectado(cadena);
 		}
 		
 		public void OnContactoQuitado(string cadena)
 		{
-			this.ContactoDesconectado(cadena);
+			if (this.ContactoDesconectado != null)
+				this.ContactoDesconectado(cadena);
 		}
 		
 		public override object InitializeLifetimeService()

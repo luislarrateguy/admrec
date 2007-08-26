@@ -30,12 +30,10 @@ namespace MensajeroRemoting
 		public event ListaContactosHandler ContactoDesconectado;
 		
 		private List<string> clientesConectados;
-		//private List<IListaContactos> clientes;
 		
 		public ControladorConexiones()
 		{
 			this.clientesConectados = new List<string>();
-			//this.clientes = new List<MensajeroRemoting.IListaContactos>();
 			Console.WriteLine(" - Objeto ControladorConexiones creado");
 		}
 		
@@ -111,9 +109,8 @@ namespace MensajeroRemoting
 			Console.WriteLine("Avisando a los otros que se conecto uno nuevo");
 			if (this.ContactoConectado != null)
 				this.ContactoConectado(cadena);
-//			foreach (IListaContactos lc in this.clientes)
-//				lc.OnContactoAgregado(cadena);
 			
+			Console.WriteLine("Pasando clientesConectados a array");
 			string[] clientesSinElNuevo = this.clientesConectados.ToArray();
 			
 			Console.WriteLine("Agrego el cliente a mi lista de clientes conectados");

@@ -95,9 +95,10 @@ namespace MensajeroRemoting {
 			return hostCliente;
 		}
 		
-		public static string[] Conectar() {
+		public static string[] Conectar(out string cadena) {
 			Console.Write("Conectando...");
-			string[] contactos = controladorConexiones.Conectar(miCanalEscucha.GetChannelUri() + "/Host");
+			cadena = miCanalEscucha.GetChannelUri() + "/Host";
+			string[] contactos = controladorConexiones.Conectar(cadena);
 			
 			if (contactos != null)
 				Console.WriteLine("¡Conectado!");

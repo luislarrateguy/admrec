@@ -29,35 +29,31 @@ namespace MensajeroRemoting
 	public class MainWindow : MarshalByRefObject
 	{
 		private string id;
+		private bool conectado = false;
 		
 		[Widget]
-		Gtk.Window mainWindow;
+		private Gtk.Window mainWindow;
 		
 		[Widget]
-		Gtk.ComboBox cmbEstado;
+		private Gtk.ComboBox cmbEstado;
 		
 		[Widget]
-		Gtk.VBox vbox1;
+		private Gtk.VBox vbox1;
 		
-		Gtk.TreeView tvContactos;
-		Gtk.ListStore contactos;
-		Dictionary<string, TreeIter> treeItersContactos;
+		private Gtk.TreeView tvContactos;
+		private Gtk.ListStore contactos;
+		private Dictionary<string, TreeIter> treeItersContactos;
+		private ListaContactosEventHelper helper;
 		
 		public MainWindow()
 		{
 			Application.Init();
 			
 			ControladorConexiones cc = ClienteManager.ControladorConexiones;
+			this.helper = new ListaContactosEventHelper(cc);
 			
-			Console.WriteLine("Creando objeto ListContactosHelperEvent...");
-			ListaContactosEventHelper helper = new ListaContactosEventHelper(cc);
-
-			Console.WriteLine("Registrando handlers...");
-			helper.ContactoConectado += new ControladorConexiones.ListaContactosHandler(this.ContactoConectado);
-			helper.ContactoDesconectado += new ControladorConexiones.ListaContactosHandler(this.ContactoDesconectado);
-			
-//			cc.ContactoConectado += new ControladorConexiones.ListaContactosHandler(this.ContactoConectado);
-//			cc.ContactoDesconectado += new ControladorConexiones.ListaContactosHandler(this.ContactoDesconectado);
+			this.helper.ContactoConectado += new ControladorConexiones.ListaContactosHandler(this.ContactoConectado);
+			this.helper.ContactoDesconectado += new ControladorConexiones.ListaContactosHandler(this.ContactoDesconectado);
 			
 			this.treeItersContactos = new Dictionary<string,Gtk.TreeIter>();
 			
@@ -87,8 +83,6 @@ namespace MensajeroRemoting
 			this.vbox1.ReorderChild(this.tvContactos, 1);
 			
 			this.mainWindow.ShowAll();
-			
-//			Application.Run();
 		}
 		
 		public string Id 
@@ -96,56 +90,104 @@ namespace MensajeroRemoting
 			get { return this.id; }
 			set { this.id = value; }
 		}
-//		
-//		public ClienteManager ClienteManager
-//		{
-//			set {
-//				Console.WriteLine("Seteando handlers para los eventos...");
-//				this.clienteManager = value;
-//				
-//				Console.WriteLine("Seteando handlers para los eventos...");
-//				ControladorConexiones cc = this.clienteManager.ControladorConexiones;
-//				cc.ContactoConectado += new ControladorConexiones.ListaContactosHandler(this.ContactoConectado);
-//				cc.ContactoDesconectado += new ControladorConexiones.ListaContactosHandler(this.ContactoDesconectado);
-//			}
-//		}
 		
 		public void OnCmbEstadoChanged(object o, EventArgs args)
 		{
 			if (this.cmbEstado.ActiveText.Equals("Conectado")) {
-				string[] clientesConectados = ClienteManager.Conectar();
-				
-				if (clientesConectados == null)
-					return;
-				
-				foreach (string cadena in clientesConectados) {
-					TreeIter iter = this.contactos.AppendValues(cadena);
-					this.treeItersContactos.Add(cadena, iter);
-				}
+				this.Conectar();
 			}
-			else if (this.cmbEstado.ActiveText.Equals("Desconectado"))
-				ClienteManager.Desconectar();
+			else if (this.cmbEstado.ActiveText.Equals("Desconectado")) {
+				this.Desconectar();
+			}
+		}
+		
+		private void Conectar()
+		{
+			Console.WriteLine("Registrando handlers...");
+			this.helper.RegistrarHandlers();
+			
+			string[] clientesConectados = ClienteManager.Conectar(out this.id);
+			
+			if (clientesConectados == null)
+				return;
+			
+			this.conectado = true;
+
+			// Limpio, por las dudas, el ListStore y el Dictionary
+			this.contactos.Clear();
+			this.treeItersContactos.Clear();
+			
+			// Agrego los contactos al TreeView y al Dictionary
+			foreach (string cadena in clientesConectados) {
+				TreeIter iter = this.contactos.AppendValues(cadena);
+				this.treeItersContactos.Add(cadena, iter);
+			}
+		}
+		
+		private void Desconectar()
+		{
+			if (!this.conectado) return;
+			
+			// Primero me desconecto del servidor
+			ClienteManager.Desconectar();
+			
+			/* Le digo al objeto ListaContactosEventHelper que desregistre sus
+			 * métodos en ControladorConexiones */
+			this.helper.DesregistrarHandlers();
+			
+			this.conectado = false;
+			
+			/* Luego limpio la lista de contactos (GUI - TreeView) y luego
+			 * limpio el diccionario <cadenaConexion,TreeIter> */
+			TreeIter iter;
+			foreach (string cadenaConexion in this.treeItersContactos.Keys) {
+				iter = this.treeItersContactos[cadenaConexion];
+				this.contactos.Remove(ref iter);
+			}
+			
+			this.treeItersContactos.Clear();
 		}
 		
 		public void OnDeleteMainWindow(object o, DeleteEventArgs args)
 		{
-			ClienteManager.Desconectar();
+			this.Desconectar();
+			
 			Application.Quit();
 		}
 		
-		public void ContactoConectado(string cliente)
+		public void ContactoConectado(string cadena)
 		{
 			Console.WriteLine("Notificación de contacto conectado!");
-			TreeIter iter = this.contactos.AppendValues(cliente);
-			this.treeItersContactos.Add(cliente, iter);
+
+			if (this.id.Equals(cadena)) {
+				Console.WriteLine("  Pero soy yo mismo. No me agrego");
+				return;
+			}
+			
+			TreeIter iter = this.contactos.AppendValues(cadena);
+			this.treeItersContactos.Add(cadena, iter);
+			Console.WriteLine("  Listo, agregado");
 		}
 		
-		public void ContactoDesconectado(string cliente)
+		public void ContactoDesconectado(string cadena)
 		{
 			Console.WriteLine("Notificación de contacto desconectado!");
-			TreeIter iter = this.treeItersContactos[cliente];
+			
+			if (this.id.Equals(cadena)) {
+				Console.WriteLine("  Pero soy yo mismo. Paro aca nomas.");
+				return;
+			}
+			
+//			try {
+			TreeIter iter = this.treeItersContactos[cadena];
 			this.contactos.Remove(ref iter);
-			this.treeItersContactos.Remove(cliente);
+			this.treeItersContactos.Remove(cadena);
+			
+			Console.WriteLine("  Listo, quitado");
+//			}
+//			catch (KeyNotFoundException) {
+//				Console.WriteLine("  ERROR: Contacto no presente en mi lista de contactos");
+//			}
 		}
 		
 		public void EnviarMensaje(string origen, string mensaje)

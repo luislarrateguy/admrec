@@ -4,28 +4,25 @@
       <Entry build="True" name="Cliente" configuration="Debug" />
       <Entry build="True" name="Servidor" configuration="Debug" />
       <Entry build="True" name="ControladorConexiones" configuration="Debug" />
-      <Entry build="False" name="GUI" configuration="Debug" />
       <Entry build="False" name="JavaCliente" configuration="Debug" />
-      <Entry build="False" name="TestingThings" configuration="Debug" />
+      <Entry build="True" name="TestingThings" configuration="Debug" />
       <Entry build="False" name="WSMensajeroFacade" configuration="Debug" />
-      <Entry build="False" name="ClienteRepresentado" configuration="Debug" />
+      <Entry build="True" name="ClienteRepresentado" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Cliente" configuration="Release" />
       <Entry build="True" name="Servidor" configuration="Release" />
       <Entry build="True" name="ControladorConexiones" configuration="Release" />
-      <Entry build="True" name="GUI" configuration="Release" />
-      <Entry build="True" name="JavaCliente" configuration="Release" />
+      <Entry build="False" name="JavaCliente" configuration="Release" />
       <Entry build="True" name="TestingThings" configuration="Release" />
-      <Entry build="True" name="WSMensajeroFacade" configuration="Release" />
+      <Entry build="False" name="WSMensajeroFacade" configuration="Release" />
       <Entry build="True" name="ClienteRepresentado" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Cliente" single="True">
-    <Execute type="Execute" entry="Servidor" />
-    <Execute type="Execute" entry="Cliente" />
+    <Execute type="None" entry="Cliente" />
+    <Execute type="None" entry="Servidor" />
     <Execute type="None" entry="ControladorConexiones" />
-    <Execute type="None" entry="GUI" />
     <Execute type="None" entry="JavaCliente" />
     <Execute type="None" entry="TestingThings" />
     <Execute type="None" entry="WSMensajeroFacade" />
@@ -35,7 +32,6 @@
     <Entry filename="./Cliente/Cliente.mdp" />
     <Entry filename="./Servidor/Servidor.mdp" />
     <Entry filename="./ControladorConexiones/ControladorConexiones.mdp" />
-    <Entry filename="./GUI/GUI.mdp" />
     <Entry filename="./JavaCliente/JavaCliente.mdp" />
     <Entry filename="./TestingThings/TestingThings.mdp" />
     <Entry filename="./WSMensajeroFacade/WSMensajeroFacade.mdp" />

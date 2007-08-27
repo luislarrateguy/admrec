@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.2.0 on Fri Aug 24 21:07:38 2007 by miltondp@wasabi-->
+<!--Generated with glade3 3.2.0 on Sun Aug 26 16:09:03 2007 by miltondp@wasabi-->
 <glade-interface>
   <widget class="GtkWindow" id="mainWindow">
     <property name="width_request">300</property>
@@ -170,12 +170,20 @@
           <placeholder/>
         </child>
         <child>
-          <widget class="GtkComboBox" id="cmbEstado">
+          <widget class="GtkComboBoxEntry" id="cmbEstado">
             <property name="visible">True</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+            <property name="active">1</property>
             <property name="items" translatable="yes">Conectado
 Desconectado</property>
             <signal name="changed" handler="OnCmbEstadoChanged"/>
+            <child internal-child="entry">
+              <widget class="GtkEntry" id="comboboxentry-entry1">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+              </widget>
+            </child>
           </widget>
           <packing>
             <property name="expand">False</property>

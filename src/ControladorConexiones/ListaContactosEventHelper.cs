@@ -63,16 +63,16 @@ namespace MensajeroRemoting
 			Console.WriteLine("... Listo!");
 		}
 		
-		public void OnContactoAgregado(string cadena)
+		public void OnContactoAgregado(ClienteInfo unCliente)
 		{
 			if (this.ContactoConectado != null)
-				this.ContactoConectado(cadena);
+				this.ContactoConectado(unCliente);
 		}
 		
-		public void OnContactoQuitado(string cadena)
+		public void OnContactoQuitado(ClienteInfo unCliente)
 		{
 			if (this.ContactoDesconectado != null)
-				this.ContactoDesconectado(cadena);
+				this.ContactoDesconectado(unCliente);
 		}
 		
 		public override object InitializeLifetimeService()

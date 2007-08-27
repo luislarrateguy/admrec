@@ -18,7 +18,7 @@
 */
 
 using System;
-using System.Threading;
+using System.Collections.Generic;
 
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
@@ -95,22 +95,40 @@ namespace MensajeroRemoting {
 			return hostCliente;
 		}
 		
-		public static string[] Conectar(out string cadena) {
+		public static ClienteInfo[] Conectar(out string cadena) {
 			Console.Write("Conectando...");
 			cadena = miCanalEscucha.GetChannelUri() + "/Host";
-			string[] contactos = controladorConexiones.Conectar(cadena);
+			
+			ClienteInfo yo = new ClienteInfo();
+			yo.cadenaConexion = cadena;
+			yo.nick = hostCliente.Nick;
+			
+			List<ClienteInfo> contactos = new List<ClienteInfo>();
+			ClienteInfo[] contactosRecibidos = controladorConexiones.Conectar(yo);
+			foreach (ClienteInfo ci in contactosRecibidos) {
+				ClienteInfo clienteInfo = new ClienteInfo();
+				clienteInfo.cadenaConexion = ci.cadenaConexion;
+				clienteInfo.nick = ci.nick;
+				
+				contactos.Add(clienteInfo);
+			}
 			
 			if (contactos != null)
 				Console.WriteLine("¡Conectado!");
 			else
 				Console.WriteLine("No anduvo la conexion");
 			
-			return contactos;
+			return contactos.ToArray();
 		}
 		
 		public static bool Desconectar() {
 			Console.Write("Desconectando...");
-			controladorConexiones.Desconectar(miCanalEscucha.GetChannelUri() + "/Host");
+
+			ClienteInfo yo = new ClienteInfo();
+			yo.cadenaConexion = miCanalEscucha.GetChannelUri() + "/Host";
+			yo.nick = hostCliente.Nick;
+			
+			controladorConexiones.Desconectar(yo);
 			Console.WriteLine(" Desconectado");
 			return true;
 		}
@@ -125,9 +143,21 @@ namespace MensajeroRemoting {
 		
 		public static bool EnviarMensaje(MainWindow h, string m) {
 			Console.Write("Enviando mensaje...");
-			h.EnviarMensaje(hostCliente.Id, m);
+			h.EnviarMensaje(hostCliente.CadenaConexion, m);
 			Console.WriteLine("Enviado!");
 			return true;
+		}
+		
+		public static bool NickDisponible(string nick)
+		{
+			Console.WriteLine("Preguntando si el nick esta disponible...");
+			return controladorConexiones.NickDisponible(nick);
+		}
+		
+		public static bool NickOcupado(string nick)
+		{
+			Console.WriteLine("Preguntando si el nick esta ocupado...");
+			return controladorConexiones.NickOcupado(nick);
 		}
 		
 		public static void Main(string[] args)

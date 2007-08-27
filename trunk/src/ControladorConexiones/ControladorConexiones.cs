@@ -24,16 +24,21 @@ namespace MensajeroRemoting
 {
 	public class ControladorConexiones : MarshalByRefObject
 	{
-		public delegate void ListaContactosHandler(string cadena);
+		public delegate void ListaContactosHandler(ClienteInfo unCliente);
 		
 		public event ListaContactosHandler ContactoConectado;
 		public event ListaContactosHandler ContactoDesconectado;
 		
-		private List<string> clientesConectados;
+		// Lista de las cadenas de conexion
+		private List<ClienteInfo> clientesConectados;
+//		
+//		// Lista de los nicks ocupados
+//		private List<string> nicksOcupados;
 		
 		public ControladorConexiones()
 		{
-			this.clientesConectados = new List<string>();
+			this.clientesConectados = new List<ClienteInfo>();
+			//this.nicksOcupados = new List<string>();
 			Console.WriteLine(" - Objeto ControladorConexiones creado");
 		}
 		
@@ -53,18 +58,23 @@ namespace MensajeroRemoting
 ////			this.ContactoDesconectado += lc.OnContactoQuitado;
 //		}
 		
-		public void Desconectar(string cadena)
+		/* El parámetro "nick" no sería necesario para desconectar, pero así es más facil,
+		 * ya que no hay que relacionar los nicks con las cadenas de conexion. */
+		public void Desconectar(ClienteInfo unCliente)
 		{
 			Console.WriteLine("");
-			Console.WriteLine("Petición de desconextion. Cadena: " + cadena);
+			Console.WriteLine("Petición de desconextion. Cadena: " + unCliente.cadenaConexion);
 			
-			if (!this.clientesConectados.Contains(cadena)) {
+			if (!this.clientesConectados.Contains(unCliente)) {
 				Console.WriteLine(" - Error: cliente no conectado");
 				return;
 			}
 			
 			Console.WriteLine("Bien, el cliente estaba conectado. Lo saco de la lista...");
-			this.clientesConectados.Remove(cadena);
+			this.clientesConectados.Remove(unCliente);
+			
+//			Console.WriteLine("Saco también su nick...");
+//			this.nicksOcupados.Remove(nick);
 			
 //			foreach (string h in this.clientesConectados) {
 //				HostCliente host = this.GetHostByConnectionString(h);
@@ -74,51 +84,61 @@ namespace MensajeroRemoting
 			
 			Console.WriteLine("Avisando a los otros que se desconecto");
 			if (this.ContactoDesconectado != null)
-				this.ContactoDesconectado(cadena);
-//			foreach (IListaContactos lc in this.clientes)
-//				lc.OnContactoQuitado(cadena);
+				this.ContactoDesconectado(unCliente);
 			
 			Console.WriteLine("Listo!");
 			return;
 		}
 		
-		public string[] Conectar (string cadena)
+		public ClienteInfo[] Conectar (ClienteInfo unCliente)
 		{
 			Console.WriteLine("");
-			Console.WriteLine("Petición de conextion. Cadena: " + cadena);
-			Console.WriteLine("Cachando el objeto remoto...");
-			//HostCliente nuevoCliente = this.GetHostByConnectionString(cadenaConexion);
-			Console.WriteLine("Cachado!");
+			Console.WriteLine("Petición de conextion. Cadena: " + unCliente.cadenaConexion);
 			
-			if (this.clientesConectados.Contains(cadena)) {
+			if (this.clientesConectados.Contains(unCliente)) {
 				Console.WriteLine(" - Error: cliente ya conectado");
+				return null;
+			}
+			
+			// Verifico que el nick no esté ocupado
+			if (this.NickOcupado(unCliente.nick)) {
+				Console.WriteLine(" ¡El nick ya está ocupado!");
 				return null;
 			}
 			
 			Console.WriteLine("El cliente es nuevo...");
 			
-			//List<string> clientesAntes = new List<string>();
-//			foreach (string h in this.clientesConectados) {
-//				HostCliente host = this.GetHostByConnectionString(h);
-//				Console.WriteLine("Avisando a " + h + " que " + nuevoCliente.Id + " se conectó");
-//				host.AgregarCliente(cadenaConexion);
-//				
-//				nuevoCliente.AgregarCliente(h);
-//			}
-			
 			Console.WriteLine("Avisando a los otros que se conecto uno nuevo");
 			if (this.ContactoConectado != null)
-				this.ContactoConectado(cadena);
+				this.ContactoConectado(unCliente);
 			
 			Console.WriteLine("Pasando clientesConectados a array");
-			string[] clientesSinElNuevo = this.clientesConectados.ToArray();
+			ClienteInfo[] clientesSinElNuevo = this.clientesConectados.ToArray();
 			
 			Console.WriteLine("Agrego el cliente a mi lista de clientes conectados");
-			this.clientesConectados.Add(cadena);
+			this.clientesConectados.Add(unCliente);
+			
+//			Console.WriteLine("Agrego el nick del cliente nuevo...");
+//			this.nicksOcupados.Add(nick);
 			
 			Console.WriteLine("Listo!");
 			
 			return clientesSinElNuevo;
+		}
+		
+		public bool NickOcupado(string nick)
+		{
+			foreach (ClienteInfo ci in this.clientesConectados) {
+				if (nick.Equals(ci.nick))
+					return true;
+			}
+			
+			return false;
+		}
+		
+		public bool NickDisponible(string nick)
+		{
+			return (!this.NickOcupado(nick));
 		}
 		
 		public override object InitializeLifetimeService()

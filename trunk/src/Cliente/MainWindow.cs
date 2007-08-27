@@ -28,21 +28,21 @@ namespace MensajeroRemoting
 {
 	public class MainWindow : MarshalByRefObject
 	{
-		private string id;
+		private ClienteInfo yo;
 		private bool conectado = false;
 		
 		[Widget]
 		private Gtk.Window mainWindow;
 		
 		[Widget]
-		private Gtk.ComboBox cmbEstado;
+		private Gtk.ComboBoxEntry cmbEstado;
 		
 		[Widget]
 		private Gtk.VBox vbox1;
 		
 		private Gtk.TreeView tvContactos;
 		private Gtk.ListStore contactos;
-		private Dictionary<string, TreeIter> treeItersContactos;
+		private Dictionary<ClienteInfo, TreeIter> treeItersContactos;
 		private ListaContactosEventHelper helper;
 		
 		public MainWindow()
@@ -55,13 +55,15 @@ namespace MensajeroRemoting
 			this.helper.ContactoConectado += new ControladorConexiones.ListaContactosHandler(this.ContactoConectado);
 			this.helper.ContactoDesconectado += new ControladorConexiones.ListaContactosHandler(this.ContactoDesconectado);
 			
-			this.treeItersContactos = new Dictionary<string,Gtk.TreeIter>();
+			this.treeItersContactos = new Dictionary<ClienteInfo, Gtk.TreeIter>();
 			
 			Console.WriteLine("Creando interfaz glade...");
 			Glade.XML gxml = new XML("mainwindow.glade", "mainWindow", null);
 			gxml.Autoconnect(this);
 			
 			this.mainWindow.DeleteEvent += new DeleteEventHandler(this.OnDeleteMainWindow);	
+			
+			this.cmbEstado.Entry.IsEditable = false;
 			
 			// tvContactos
 			this.tvContactos = new TreeView();
@@ -76,7 +78,7 @@ namespace MensajeroRemoting
 			
 			nick.AddAttribute(nickText, "text", 0);
 			
-			this.contactos = new ListStore(typeof(string));
+			this.contactos = new ListStore(typeof(string), typeof(string));
 			this.tvContactos.Model = this.contactos;
 			
 			this.vbox1.PackStart(this.tvContactos);
@@ -85,14 +87,23 @@ namespace MensajeroRemoting
 			this.mainWindow.ShowAll();
 		}
 		
-		public string Id 
+		public string CadenaConexion 
 		{
-			get { return this.id; }
-			set { this.id = value; }
+			get { return this.yo.cadenaConexion; }
+		}
+		
+		public string Nick
+		{
+			get { return this.yo.nick; }
 		}
 		
 		public void OnCmbEstadoChanged(object o, EventArgs args)
 		{
+			Console.WriteLine("Ejecutando OnCmbEstadoChanged...");
+			
+			if (this.cmbEstado.Active < 0)
+				return;
+			
 			if (this.cmbEstado.ActiveText.Equals("Conectado")) {
 				this.Conectar();
 			}
@@ -103,10 +114,30 @@ namespace MensajeroRemoting
 		
 		private void Conectar()
 		{
+			Console.WriteLine("Ejecutando Conectar (MainWindow)");
+			// Pido el nick
+			
+			// Deshabilito temporalmente el manejador de eventos del combobox
+			this.cmbEstado.Changed -= new EventHandler(this.OnCmbEstadoChanged);
+			this.cmbEstado.Entry.Text = "Conectando...";
+			
+			NickInput ni = new NickInput(this.mainWindow);
+			ResponseType respuesta = (ResponseType)ni.Run();
+			if (respuesta == ResponseType.Cancel) {
+				this.cmbEstado.Entry.Text = "Desconectado";
+				this.cmbEstado.Changed += new EventHandler(this.OnCmbEstadoChanged);
+				return;
+			}
+			
+			this.yo.nick = ni.NickEscogido;
+			ni.Destroy();
+			
 			Console.WriteLine("Registrando handlers...");
 			this.helper.RegistrarHandlers();
 			
-			string[] clientesConectados = ClienteManager.Conectar(out this.id);
+			ClienteInfo[] clientesConectados = ClienteManager.Conectar(out this.yo.cadenaConexion);
+			this.cmbEstado.Entry.Text = "Conectado";
+			this.cmbEstado.Changed += new EventHandler(this.OnCmbEstadoChanged);
 			
 			if (clientesConectados == null)
 				return;
@@ -118,14 +149,19 @@ namespace MensajeroRemoting
 			this.treeItersContactos.Clear();
 			
 			// Agrego los contactos al TreeView y al Dictionary
-			foreach (string cadena in clientesConectados) {
-				TreeIter iter = this.contactos.AppendValues(cadena);
-				this.treeItersContactos.Add(cadena, iter);
+			TreeIter iter;
+			foreach (ClienteInfo ci in clientesConectados) {
+				iter = this.contactos.AppendValues(ci.nick);
+				this.treeItersContactos.Add(ci, iter);
 			}
+			
+			Console.WriteLine("Fin de Conectar (MainWindow)");
 		}
 		
 		private void Desconectar()
 		{
+			Console.WriteLine("Ejecutando Desconectar (MainWindow)");
+			
 			if (!this.conectado) return;
 			
 			// Primero me desconecto del servidor
@@ -140,48 +176,66 @@ namespace MensajeroRemoting
 			/* Luego limpio la lista de contactos (GUI - TreeView) y luego
 			 * limpio el diccionario <cadenaConexion,TreeIter> */
 			TreeIter iter;
-			foreach (string cadenaConexion in this.treeItersContactos.Keys) {
-				iter = this.treeItersContactos[cadenaConexion];
+			foreach (ClienteInfo ci in this.treeItersContactos.Keys) {
+				iter = this.treeItersContactos[ci];
 				this.contactos.Remove(ref iter);
 			}
 			
 			this.treeItersContactos.Clear();
+			
+			Console.WriteLine("Fin de Desconectar (MainWindow)");
 		}
 		
 		public void OnDeleteMainWindow(object o, DeleteEventArgs args)
 		{
+			Console.WriteLine("Ejecutando OnDeleteMainWindow...");
+			
 			this.Desconectar();
 			
 			Application.Quit();
 		}
 		
-		public void ContactoConectado(string cadena)
+		public void ContactoConectado(ClienteInfo unCliente2)
 		{
+			ClienteInfo unCliente = new ClienteInfo();
+			unCliente.cadenaConexion = unCliente2.cadenaConexion;
+			unCliente.nick = unCliente2.nick;
+			
 			Console.WriteLine("Notificación de contacto conectado!");
 
-			if (this.id.Equals(cadena)) {
+			if (this.yo.Equals(unCliente)) {
 				Console.WriteLine("  Pero soy yo mismo. No me agrego");
 				return;
 			}
 			
-			TreeIter iter = this.contactos.AppendValues(cadena);
-			this.treeItersContactos.Add(cadena, iter);
+			TreeIter iter = this.contactos.AppendValues(unCliente.nick, unCliente.cadenaConexion);
+			this.treeItersContactos.Add(unCliente, iter);
+			
 			Console.WriteLine("  Listo, agregado");
 		}
 		
-		public void ContactoDesconectado(string cadena)
+		public void ContactoDesconectado(ClienteInfo unCliente2)
 		{
+			ClienteInfo unCliente = new ClienteInfo();
+			unCliente.cadenaConexion = unCliente2.cadenaConexion;
+			unCliente.nick = unCliente2.nick;
+			
 			Console.WriteLine("Notificación de contacto desconectado!");
 			
-			if (this.id.Equals(cadena)) {
+			Console.WriteLine("Mi cadena es '" + yo.cadenaConexion + "', y mi nick es '" +
+			                  yo.nick);
+			Console.WriteLine("La cadena del otro es '" + unCliente.cadenaConexion + "', y su nick es '" +
+			                  unCliente.nick);
+			
+			if (this.yo.Equals(unCliente)) {
 				Console.WriteLine("  Pero soy yo mismo. Paro aca nomas.");
 				return;
 			}
 			
 //			try {
-			TreeIter iter = this.treeItersContactos[cadena];
+			TreeIter iter = this.treeItersContactos[unCliente];
 			this.contactos.Remove(ref iter);
-			this.treeItersContactos.Remove(cadena);
+			this.treeItersContactos.Remove(unCliente);
 			
 			Console.WriteLine("  Listo, quitado");
 //			}

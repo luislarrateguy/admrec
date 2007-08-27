@@ -8,7 +8,7 @@
       <Entry build="True" name="TestingThings" configuration="Debug" />
       <Entry build="False" name="WSMensajeroFacade" configuration="Debug" />
       <Entry build="True" name="ClienteRepresentado" configuration="Debug" />
-      <Entry build="True" name="NickInput" configuration="Debug" />
+      <Entry build="True" name="NickInputEnBoo" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Cliente" configuration="Release" />
@@ -18,7 +18,7 @@
       <Entry build="True" name="TestingThings" configuration="Release" />
       <Entry build="False" name="WSMensajeroFacade" configuration="Release" />
       <Entry build="True" name="ClienteRepresentado" configuration="Release" />
-      <Entry build="True" name="NickInput" configuration="Release" />
+      <Entry build="True" name="NickInputEnBoo" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Cliente" single="True">
@@ -29,7 +29,7 @@
     <Execute type="None" entry="TestingThings" />
     <Execute type="None" entry="WSMensajeroFacade" />
     <Execute type="None" entry="ClienteRepresentado" />
-    <Execute type="None" entry="NickInput" />
+    <Execute type="None" entry="NickInputEnBoo" />
   </StartMode>
   <Entries>
     <Entry filename="./Cliente/Cliente.mdp" />
@@ -39,6 +39,6 @@
     <Entry filename="./TestingThings/TestingThings.mdp" />
     <Entry filename="./WSMensajeroFacade/WSMensajeroFacade.mdp" />
     <Entry filename="./ClienteRepresentado/ClienteRepresentado.mdp" />
-    <Entry filename="./NickInput/NickInput.mdp" />
+    <Entry filename="./NickInputEnBoo/NickInputEnBoo.mdp" />
   </Entries>
 </Combine>

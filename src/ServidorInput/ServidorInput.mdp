@@ -1,0 +1,27 @@
+<Project name="ServidorInput" fileversion="2.0" language="Java" clr-version="Net_1_1" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="./bin/Debug" assemblyKeyFile="./" assembly="ServidorInput" />
+      <Build debugmode="True" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_1_1" />
+      <CodeGeneration deprecation="True" optimize="True" mainclass="" definesymbols="" classpath="" compiler="Javac" compilerpath="javac" genwarnings="False" ctype="JavaCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="./bin/Release" assembly="ServidorInput" />
+      <Build debugmode="False" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_1_1" />
+      <CodeGeneration deprecation="True" optimize="True" mainclass="" definesymbols="" classpath="" compiler="Javac" compilerpath="javac" genwarnings="False" ctype="JavaCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="./ServidorInput.java" subtype="Code" buildaction="Compile" />
+  </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="gdk-sharp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="glib-sharp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="atk-sharp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Project" localcopy="True" refto="NickInputEnBoo" />
+    <ProjectReference type="Gac" localcopy="True" refto="mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  </References>
+</Project>

@@ -29,6 +29,7 @@ namespace MensajeroRemoting
 	public class MainWindow : MarshalByRefObject
 	{
 		private ClienteInfo yo;
+		private string servidor;
 		private bool conectado = false;
 		
 		[Widget]
@@ -48,12 +49,6 @@ namespace MensajeroRemoting
 		public MainWindow()
 		{
 			Application.Init();
-			
-			ControladorConexiones cc = ClienteManager.ControladorConexiones;
-			this.helper = new ListaContactosEventHelper(cc);
-			
-			this.helper.ContactoConectado += new ControladorConexiones.ListaContactosHandler(this.ContactoConectado);
-			this.helper.ContactoDesconectado += new ControladorConexiones.ListaContactosHandler(this.ContactoDesconectado);
 			
 			this.treeItersContactos = new Dictionary<ClienteInfo, Gtk.TreeIter>();
 			
@@ -97,6 +92,11 @@ namespace MensajeroRemoting
 			get { return this.yo.nick; }
 		}
 		
+		public string Servidor
+		{
+			get { return this.servidor; }
+		}
+		
 		public void OnCmbEstadoChanged(object o, EventArgs args)
 		{
 			Console.WriteLine("Ejecutando OnCmbEstadoChanged...");
@@ -121,23 +121,35 @@ namespace MensajeroRemoting
 			this.cmbEstado.Changed -= new EventHandler(this.OnCmbEstadoChanged);
 			this.cmbEstado.Entry.Text = "Conectando...";
 			
-			NickInput ni = new NickInput(this.mainWindow);
-			ResponseType respuesta = (ResponseType)ni.Run();
+			DataInput servidorInput = new DataInput(this.mainWindow);
+			ResponseType respuesta = (ResponseType)servidorInput.Run();
 			if (respuesta == ResponseType.Cancel) {
 				this.cmbEstado.Entry.Text = "Desconectado";
 				this.cmbEstado.Changed += new EventHandler(this.OnCmbEstadoChanged);
 				return;
 			}
 			
-			this.yo.nick = ni.NickEscogido;
-			ni.Destroy();
+			this.yo.nick = servidorInput.NickEscogido;
+			this.servidor = servidorInput.getServidorEscogido();
+			Console.WriteLine("En MainWindow el servidor resultó ser: " + this.servidor);
 			
-			Console.WriteLine("Registrando handlers...");
-			this.helper.RegistrarHandlers();
+			servidorInput.Destroy();
 			
 			ClienteInfo[] clientesConectados = ClienteManager.Conectar(out this.yo.cadenaConexion);
 			this.cmbEstado.Entry.Text = "Conectado";
 			this.cmbEstado.Changed += new EventHandler(this.OnCmbEstadoChanged);
+			
+			// Me registro a los eventos que me interesan en el servidor
+			if (this.helper == null) {
+				ControladorConexiones cc = ClienteManager.ControladorConexiones;
+				this.helper = new ListaContactosEventHelper(cc);
+				
+				this.helper.ContactoConectado += new ControladorConexiones.ListaContactosHandler(this.ContactoConectado);
+				this.helper.ContactoDesconectado += new ControladorConexiones.ListaContactosHandler(this.ContactoDesconectado);
+				
+				Console.WriteLine("Registrando handlers...");
+				this.helper.RegistrarHandlers();
+			}
 			
 			if (clientesConectados == null)
 				return;

@@ -97,13 +97,12 @@ namespace MensajeroRemoting
 			
 			if (this.clientesConectados.Contains(unCliente)) {
 				Console.WriteLine(" - Error: cliente ya conectado");
-				return null;
 			}
 			
 			// Verifico que el nick no esté ocupado
 			if (this.NickOcupado(unCliente.nick)) {
 				Console.WriteLine(" ¡El nick ya está ocupado!");
-				return null;
+				throw new Exception("El nick ya está ocupado");
 			}
 			
 			Console.WriteLine("El cliente es nuevo...");

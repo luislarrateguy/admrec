@@ -24,8 +24,6 @@ using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 
-using Gtk;
-
 namespace MensajeroRemoting {
 	public class ClienteManager
 	{
@@ -36,22 +34,6 @@ namespace MensajeroRemoting {
 
 		public static void Inicializar()
 		{
-			TcpChannel chanConnect  = new TcpChannel();
-			ChannelServices.RegisterChannel(chanConnect);
-			
-			Console.WriteLine("Cachando servidor...");
-			controladorConexiones = (ControladorConexiones)Activator.GetObject(typeof(ControladorConexiones),
-			                                                                   "tcp://localhost:8085/CC");
-			
-			if (controladorConexiones == null) {
-				Console.WriteLine("No se pudo cachar el controlador...");
-				return;
-			}
-			
-			Console.WriteLine("Servidor cachado!");
-			
-			ChannelServices.UnregisterChannel(chanConnect);
-			
 			/* Esto hace que busque un puerto disponible
 			 * Cambio el canal bidireccional por uno Servidor únicamente
 			 * Solo se registra debajo (con RegisterWellKnownServiceType)
@@ -82,6 +64,28 @@ namespace MensajeroRemoting {
 //			hostCliente = GetHostByConnectionString(miCanalEscucha.GetChannelUri() + "/Host");
 		}
 		
+		private static void CargarControladorConexiones(string direccionServidor)
+		{
+			if (controladorConexiones != null)
+				return;
+//			TcpChannel chanConnect  = new TcpChannel();
+//			ChannelServices.RegisterChannel(chanConnect);
+			
+			Console.WriteLine("Dirección pasada: " + direccionServidor);
+			Console.WriteLine("Cachando servidor...");
+			controladorConexiones = (ControladorConexiones)Activator.GetObject(typeof(ControladorConexiones),
+			                                                                   "tcp://" + direccionServidor + ":8085/CC");
+			
+			if (controladorConexiones == null) {
+				Console.WriteLine("No se pudo cachar el controlador...");
+				return;
+			}
+			
+			Console.WriteLine("Servidor cachado!");
+			
+//			ChannelServices.UnregisterChannel(chanConnect);
+		}
+		
 		public static ControladorConexiones ControladorConexiones
 		{
 			get { return controladorConexiones; }
@@ -96,6 +100,8 @@ namespace MensajeroRemoting {
 		}
 		
 		public static ClienteInfo[] Conectar(out string cadena) {
+			ClienteManager.CargarControladorConexiones(hostCliente.Servidor);
+			
 			Console.Write("Conectando...");
 			cadena = miCanalEscucha.GetChannelUri() + "/Host";
 			
@@ -103,7 +109,10 @@ namespace MensajeroRemoting {
 			yo.cadenaConexion = cadena;
 			yo.nick = hostCliente.Nick;
 			
+			/* Me conecto y copio los elementos del array devuelto, ya que
+			 * sino hay problemas */
 			List<ClienteInfo> contactos = new List<ClienteInfo>();
+			
 			ClienteInfo[] contactosRecibidos = controladorConexiones.Conectar(yo);
 			foreach (ClienteInfo ci in contactosRecibidos) {
 				ClienteInfo clienteInfo = new ClienteInfo();
@@ -122,6 +131,8 @@ namespace MensajeroRemoting {
 		}
 		
 		public static bool Desconectar() {
+			ClienteManager.CargarControladorConexiones(hostCliente.Servidor);
+			
 			Console.Write("Desconectando...");
 
 			ClienteInfo yo = new ClienteInfo();
@@ -150,12 +161,16 @@ namespace MensajeroRemoting {
 		
 		public static bool NickDisponible(string nick)
 		{
+			ClienteManager.CargarControladorConexiones(hostCliente.Servidor);
+			
 			Console.WriteLine("Preguntando si el nick esta disponible...");
 			return controladorConexiones.NickDisponible(nick);
 		}
 		
 		public static bool NickOcupado(string nick)
 		{
+			ClienteManager.CargarControladorConexiones(hostCliente.Servidor);
+			
 			Console.WriteLine("Preguntando si el nick esta ocupado...");
 			return controladorConexiones.NickOcupado(nick);
 		}

@@ -73,6 +73,7 @@ namespace MensajeroRemoting
 			
 			this.textviewChat.Buffer.InsertAtCursor(this.nickPropio + ": " + mensaje + "\n");
 			this.textviewMensaje.Buffer.Clear();
+			this.textviewMensaje.HasFocus = true;
 		}
 		
 		public void OnVentanaChatDelete(object o, DeleteEventArgs args)

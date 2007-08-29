@@ -295,17 +295,19 @@ namespace MensajeroRemoting
 //			}
 		}
 		
-		public void EnviarMensaje(string origen, string mensaje)
+		public void EnviarMensaje(ClienteInfo origen, string mensaje)
 		{
 			Console.WriteLine("Mostrando mensaje recibido...");
 			
-			MessageDialog md = new MessageDialog(this.mainWindow, DialogFlags.Modal,
-			                                     MessageType.Info, ButtonsType.Close,
-			                                     mensaje);
-			md.Title = "¡Nuevo mensaje de " + origen + "!";
-			
-			md.Run();
-			md.Destroy();
+			if (this.ventanasChat.ContainsKey(origen.cadenaConexion)) {
+				VentanaChat vc = this.ventanasChat[origen.cadenaConexion];
+				vc.MensajeRecibido(origen, mensaje);
+			}
+			else {
+				VentanaChat ventanaChat = new VentanaChat(this, origen.cadenaConexion, this.yo.nick);
+				ventanaChat.MensajeRecibido(origen, mensaje);
+				this.ventanasChat.Add(origen.cadenaConexion, ventanaChat);
+			}
 		}
 		
 		public void Run()

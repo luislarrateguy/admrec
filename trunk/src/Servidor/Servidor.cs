@@ -32,7 +32,7 @@ namespace MensajeroRemoting {
 			provider.TypeFilterLevel = System.Runtime.Serialization.Formatters.TypeFilterLevel.Full;
 			IDictionary props = new Hashtable();
 			props["port"] = 8085;
-			props["name"] = "tcp://localhost";
+			props["name"] = "tcp";
 			
 //			TcpChannel chanConnect = new TcpChannel(8085);
 //			ChannelServices.RegisterChannel(chanConnect);

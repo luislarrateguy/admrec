@@ -44,6 +44,7 @@ namespace MensajeroRemoting
 		private Gtk.TreeView tvContactos;
 		private Gtk.ListStore contactos;
 		private Dictionary<ClienteInfo, TreeIter> treeItersContactos;
+		private Dictionary<string, VentanaChat> ventanasChat;
 		private ListaContactosEventHelper helper;
 		
 		public MainWindow()
@@ -51,6 +52,7 @@ namespace MensajeroRemoting
 			Application.Init();
 			
 			this.treeItersContactos = new Dictionary<ClienteInfo, Gtk.TreeIter>();
+			this.ventanasChat = new Dictionary<string, VentanaChat>();
 			
 			Console.WriteLine("Creando interfaz glade...");
 			Glade.XML gxml = new XML("mainwindow.glade", "mainWindow", null);
@@ -73,13 +75,22 @@ namespace MensajeroRemoting
 			
 			nick.AddAttribute(nickText, "text", 0);
 			
+			// La posición 0 es el nick y la 1 la cadena de conexión
 			this.contactos = new ListStore(typeof(string), typeof(string));
 			this.tvContactos.Model = this.contactos;
+			
+			// Handler para cuando se hace doble click
+			this.tvContactos.RowActivated += new RowActivatedHandler(this.OnContactosRowActivated);
 			
 			this.vbox1.PackStart(this.tvContactos);
 			this.vbox1.ReorderChild(this.tvContactos, 1);
 			
 			this.mainWindow.ShowAll();
+		}
+		
+		public ClienteInfo ClienteInfo
+		{
+			get { return this.yo; }
 		}
 		
 		public string CadenaConexion 
@@ -95,6 +106,34 @@ namespace MensajeroRemoting
 		public string Servidor
 		{
 			get { return this.servidor; }
+		}
+		
+		public void OnContactosRowActivated(object o, EventArgs args)
+		{
+			TreeIter filaSeleccionada;
+			this.tvContactos.Selection.GetSelected(out filaSeleccionada);
+			
+			/* Obtengo la cadena de conexion que se almacena en la posición
+			 * 1 del modelo del treeview */
+			string cadenaConexionDestino = (string)this.contactos.GetValue(filaSeleccionada, 1);
+			
+			Console.WriteLine("Cadena seleccionada: " + cadenaConexionDestino);
+			// Si ya hay una ventana para chatear con el contacto, la activo
+			if (this.ventanasChat.ContainsKey(cadenaConexionDestino)) {
+				VentanaChat vc = this.ventanasChat[cadenaConexionDestino];
+				vc.Activar();
+				return;
+			}
+			
+			// En cambio si no hay una, la creo...
+			VentanaChat ventanaChat = new VentanaChat(this, cadenaConexionDestino, this.yo.nick);
+			this.ventanasChat.Add(cadenaConexionDestino, ventanaChat);
+		}
+		
+		public void VentanaChatCerrada(string cadenaConexionDestino)
+		{
+			// La cadena de conexion identifica a la ventana cerrada
+			this.ventanasChat.Remove(cadenaConexionDestino);
 		}
 		
 		public void OnCmbEstadoChanged(object o, EventArgs args)
@@ -163,7 +202,7 @@ namespace MensajeroRemoting
 			// Agrego los contactos al TreeView y al Dictionary
 			TreeIter iter;
 			foreach (ClienteInfo ci in clientesConectados) {
-				iter = this.contactos.AppendValues(ci.nick);
+				iter = this.contactos.AppendValues(ci.nick, ci.cadenaConexion);
 				this.treeItersContactos.Add(ci, iter);
 			}
 			
@@ -258,6 +297,8 @@ namespace MensajeroRemoting
 		
 		public void EnviarMensaje(string origen, string mensaje)
 		{
+			Console.WriteLine("Mostrando mensaje recibido...");
+			
 			MessageDialog md = new MessageDialog(this.mainWindow, DialogFlags.Modal,
 			                                     MessageType.Info, ButtonsType.Close,
 			                                     mensaje);

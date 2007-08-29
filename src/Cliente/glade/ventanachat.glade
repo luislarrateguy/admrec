@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.2.0 on Wed Aug 29 02:33:55 2007 by miltondp@miltondp-laptop-->
+<!--Generated with glade3 3.2.0 on Wed Aug 29 02:49:25 2007 by miltondp@miltondp-laptop-->
 <glade-interface>
   <widget class="GtkWindow" id="ventanaChat">
     <property name="width_request">400</property>

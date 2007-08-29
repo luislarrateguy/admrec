@@ -31,7 +31,6 @@ namespace MensajeroRemoting {
 	{
 		private static ControladorConexiones controladorConexiones;
 		private static TcpServerChannel miCanalEscucha;
-		private static int puerto;
 		private static MainWindow hostCliente;
 
 		public static void Inicializar()

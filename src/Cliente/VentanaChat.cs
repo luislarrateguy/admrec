@@ -50,6 +50,7 @@ namespace MensajeroRemoting
 			gxml.Autoconnect(this);
 			
 			this.ventanaChat.Title = ClienteManager.ObtenerClienteInfo(cadenaConexionDestino).nick;
+			this.textviewMensaje.HasFocus = true;
 			
 			this.ventanaChat.DeleteEvent += new DeleteEventHandler(this.OnVentanaChatDelete);
 			
@@ -64,12 +65,20 @@ namespace MensajeroRemoting
 				return;
 			
 			ClienteManager.EnviarMensaje(this.cadenaConexionDestino, mensaje);
+			
+			this.textviewChat.Buffer.InsertAtCursor(this.nickPropio + ": " + mensaje + "\n");
+			this.textviewMensaje.Buffer.Clear();
 		}
 		
 		public void OnVentanaChatDelete(object o, DeleteEventArgs args)
 		{
 			Console.WriteLine("VentanaChat " + this.cadenaConexionDestino + " - DeleteEvent");
 			this.mainWindow.VentanaChatCerrada(this.cadenaConexionDestino);
+		}
+		
+		public void MensajeRecibido(ClienteInfo origen, string mensaje)
+		{
+			this.textviewChat.Buffer.InsertAtCursor(origen.nick + ": " + mensaje + "\n");
 		}
 		
 		public bool Activar()

@@ -180,7 +180,7 @@ namespace MensajeroRemoting {
 		
 		public static bool EnviarMensaje(MainWindow h, string m) {
 			Console.Write("Enviando mensaje...");
-			h.EnviarMensaje(hostCliente.CadenaConexion, m);
+			h.EnviarMensaje(hostCliente.ClienteInfo, m);
 			Console.WriteLine("Enviado!");
 			return true;
 		}

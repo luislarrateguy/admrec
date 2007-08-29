@@ -49,11 +49,16 @@ namespace MensajeroRemoting
 			Glade.XML gxml = new XML("ventanachat.glade", "ventanaChat", null);
 			gxml.Autoconnect(this);
 			
+			Console.WriteLine("Seteando título...");
 			this.ventanaChat.Title = ClienteManager.ObtenerClienteInfo(cadenaConexionDestino).nick;
+			
+			Console.WriteLine("Seteando foco a textviewMensaje...");
 			this.textviewMensaje.HasFocus = true;
 			
+			Console.WriteLine("Agregando evento DeleteEvent...");
 			this.ventanaChat.DeleteEvent += new DeleteEventHandler(this.OnVentanaChatDelete);
 			
+			Console.WriteLine("Ejecutando ShowAll...");
 			this.ventanaChat.ShowAll();
 		}
 		

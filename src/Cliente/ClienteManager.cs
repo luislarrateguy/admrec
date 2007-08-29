@@ -18,6 +18,8 @@
 */
 
 using System;
+using System.Net;
+using System.Collections;
 using System.Collections.Generic;
 
 using System.Runtime.Remoting;
@@ -38,10 +40,16 @@ namespace MensajeroRemoting {
 			 * Cambio el canal bidireccional por uno Servidor únicamente
 			 * Solo se registra debajo (con RegisterWellKnownServiceType)
 			 */
-            miCanalEscucha = new TcpServerChannel(0);
+			IServerChannelSinkProvider provider = new BinaryServerFormatterSinkProvider();
+			IDictionary props = new Hashtable();
+			props["port"] = 0;
+			props["name"] = "tcp";
+			props["bindTo"] = "192.168.1.101";
+			
+            miCanalEscucha = new TcpServerChannel(props, provider);
 			Console.WriteLine("Mi canal escucha: "+miCanalEscucha.GetChannelUri());
 			
-			TcpChannel chanServe = new TcpChannel(puerto);
+			TcpChannel chanServe = new TcpChannel(0);
 			ChannelServices.RegisterChannel(chanServe);
 			
 			Console.WriteLine("Registrando mi objeto remoto...");
@@ -144,12 +152,30 @@ namespace MensajeroRemoting {
 			return true;
 		}
 		
+		[Obsolete]
 		public static MainWindow ObtenerDestino(int puertoDestino) {
 			Console.WriteLine("Cachando el destino...");
 			MainWindow hostDestino = GetHostByConnectionString("tcp://localhost:" +
 				puertoDestino + "/Host");
 			Console.WriteLine("Cachado!");
 			return hostDestino;
+		}
+		
+		public static ClienteInfo ObtenerClienteInfo (string cadenaConexion)
+		{
+			MainWindow destino = (MainWindow)Activator.GetObject(typeof(MainWindow), cadenaConexion);
+			
+			return destino.ClienteInfo;
+		}
+		
+		public static bool EnviarMensaje(string cadenaConexion, string mensaje)
+		{
+			MainWindow destino = (MainWindow)Activator.GetObject(typeof(MainWindow), cadenaConexion);
+			
+			if (destino == null)
+				throw new Exception("No se pudo obtener el destino para enviar un mensaje");
+			
+			return ClienteManager.EnviarMensaje(destino, mensaje);
 		}
 		
 		public static bool EnviarMensaje(MainWindow h, string m) {

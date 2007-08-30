@@ -1,42 +1,66 @@
-/*
-    MensajeroRemoting - Mensajero instantáneo hecho con .NET Remoting
-    y otras tecnologías de .NET.
-    Copyright (C) 2007  Luis Ignacio Larrateguy, Milton Pividori y César Sandrigo
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+// ClienteRemoto.cs creado conh MonoDevelop
+// User: nacho - 22:53 29/08/2007
+//
+//
 
 using System;
 
-namespace MensajeroRemoting
+namespace ControladorConexiones
 {
-	public class ClienteRemoto : MarshalByRefObject
+	
+	[Serializable()]
+	public class ClienteRemoto: MarshalByRefObject
 	{
-		public delegate void RecepcionMensaje(string nick, string mensaje);
-		public event RecepcionMensaje MensajeRecibido;
-		
-		public delegate void ConexionCliente(string nick);
-		public event ConexionCliente ClienteConectado;
-		public event ConexionCliente ClienteDesconectado;
+		public event ListaContactosHandler ContactoConectado;
+		public event ListaContactosHandler ContactoDesconectado;
+		public event MensajeRecibidoHandler MensajeRecibido;
 		
 		public ClienteRemoto()
 		{
 		}
-		
-		public void RecibirMensaje(string nickOrigen, string mensaje)
+		~ClienteRemoto()
 		{
-			
+
+		}		
+		public void recibirMensaje(string nick, string mensaje)
+		{
+				this.MensajeRecibido(nick,mensaje);
 		}
+		public void clienteConectado(string nick)
+		{
+			if (this.ContactoConectado != null)
+				this.ContactoConectado(nick);
+		}
+		public void clienteDesconectado(string nick)
+		{
+			if (this.ContactoDesconectado != null)
+				this.ContactoDesconectado(nick);
+		}
+		
+		/* No estoy seguro de la utilidad de esto, pero no se borra
+		public void registrarHandler()
+		{
+			Console.WriteLine(" ---- Registrando metodo agregarContacto");
+			this.controladorConexiones.ContactoConectado +=
+				new ControladorConexiones.ListaContactosHandler(this.OnContactoAgregado);
+			
+			Console.WriteLine(" ---- Registrando metodo quitarContacto");
+			this.controladorConexiones.ContactoDesconectado +=
+				new ControladorConexiones.ListaContactosHandler(this.OnContactoQuitado);
+		}
+		
+		public void desregistrarHandlers()
+		{
+			Console.Write(" ---- Desregistrando metodo agregarContacto");
+			this.controladorConexiones.ContactoConectado -=
+				new ControladorConexiones.ListaContactosHandler(this.OnContactoAgregado);
+			Console.WriteLine("... Listo!");
+			
+			Console.Write(" ---- Desregistrando metodo quitarContacto");
+			this.controladorConexiones.ContactoDesconectado -=
+				new ControladorConexiones.ListaContactosHandler(this.OnContactoQuitado);
+			Console.WriteLine("... Listo!");
+		}
+		*/
 	}
 }

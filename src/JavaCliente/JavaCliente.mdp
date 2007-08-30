@@ -1,10 +1,10 @@
 <Project name="JavaCliente" fileversion="2.0" language="Java" clr-version="Net_1_1" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
-      <Output directory="./bin/Debug" assembly="JavaCliente" />
+      <Output directory="./bin/Debug" assemblyKeyFile="./" assembly="JavaCliente" />
       <Build debugmode="True" target="-1" />
       <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_1_1" />
-      <CodeGeneration deprecation="True" optimize="True" mainclass="application" definesymbols="" classpath="/usr/lib/ikvm/classpath/mscorlib.jar" compiler="Javac" compilerpath="javac" genwarnings="False" ctype="JavaCompilerParameters" />
+      <CodeGeneration deprecation="True" optimize="True" mainclass="Test" definesymbols="-target 1.4" classpath="/usr/lib/ikvm/classpath/mscorlib.jar" compiler="Javac" compilerpath="javac" genwarnings="False" ctype="JavaCompilerParameters" />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
       <Output directory="./bin/Release" assemblyKeyFile="./" assembly="JavaCliente" />

@@ -35,8 +35,9 @@ namespace MensajeroRemoting
 		private ControladorConexiones controladorConexiones;
 		private string cadenaConexion;
 		private string nick;
+		private static ControladorCliente instancia = null;
 
-		public ControladorCliente(string ipPropia, string direccionServidor, string nick)
+		private ControladorCliente(string ipPropia, string direccionServidor, string nick)
 		{
 			/* Esto hace que busque un puerto disponible
 			 * Cambio el canal bidireccional por uno Servidor únicamente
@@ -70,6 +71,12 @@ namespace MensajeroRemoting
 			                                                                   "tcp://" + direccionServidor + ":8085/CC");
 			
 			this.nick = nick;
+		}
+		
+		public static ControladorCliente GetInstancia() {
+			if (instancia == null)
+				instancia = new ControladorCliente();
+			return instancia;				
 		}
 			
 		// Devolvería los nicks de los contactos
@@ -108,7 +115,7 @@ namespace MensajeroRemoting
 			this.controladorConexiones.EnviarMensaje(this.nick, nickDestino, mensaje);
 		}
 		
-		public void miClienteRemoto {
+		public ClienteRemoto miClienteRemoto {
 			get {
 				return this.ObtenerClienteRemoto(miCanalEscucha.GetChannelUri() + "/Cliente");
 			}

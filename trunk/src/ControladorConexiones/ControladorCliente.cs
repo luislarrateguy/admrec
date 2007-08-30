@@ -50,7 +50,7 @@ namespace MensajeroRemoting
 			props["bindTo"] = ipPropia;
 			
 			// Este canal es para servir a mi ClienteRemoto
-            TcpChannelServer canalEscucha = new TcpServerChannel(props, provider);
+            TcpServerChannel canalEscucha = new TcpServerChannel(props, provider);
 			Console.WriteLine("Mi canal escucha: " + canalEscucha.GetChannelUri());
 			
 			this.cadenaConexion = canalEscucha.GetChannelUri() + "/" + NOMBRE_SERVICIO;
@@ -65,7 +65,7 @@ namespace MensajeroRemoting
 			                                                          WellKnownObjectMode.Singleton);
 			
 			// Obtengo mi propio objeto ClienteRemoto (TODO: ¿Para qué?)
-			this.ObtenerClienteRemoto(miCanalEscucha.GetChannelUri() + "/Cliente");
+			//this.ObtenerClienteRemoto(miCanalEscucha.GetChannelUri() + "/Cliente");
 			
 			this.controladorConexiones = (ControladorConexiones)Activator.GetObject(typeof(ControladorConexiones),
 			                                                                   "tcp://" + direccionServidor + ":8085/CC");
@@ -86,28 +86,24 @@ namespace MensajeroRemoting
 			// Copio los nicks a otro array, porque hay problemas sino
 			string[] nicksContactosConectados = controladorConexiones.Conectar(this.cadenaConexion, this.nick);
 			
+			if (nicksContactosConectados == null)
+				throw new Exception("No fue posible la conexión");
+			
 			string[] nicksCopiados = new string[nicksContactosConectados.Length];
 			for (int i=0; i<nicksContactosConectados.Length; i++)
 				nicksCopiados[i] = nicksContactosConectados[i];
-			
-			if (contactos == null)
-				throw new Exception("No fue posible la conexión");
 			
 			Console.WriteLine("Conectado");
 			
 			return nicksCopiados;
 		}
 		
-		public static bool Desconectar() {
+		public void Desconectar() {
 			Console.Write("Desconectando...");
-
-			ClienteInfo yo = new ClienteInfo();
-			yo.cadenaConexion = miCanalEscucha.GetChannelUri() + "/Host";
-			yo.nick = hostCliente.Nick;
 			
-			controladorConexiones.Desconectar(this.cadenaConexion);
+			controladorConexiones.Desconectar(this.nick);
+			
 			Console.WriteLine(" Desconectado");
-			return true;
 		}
 		
 		public void EnviarMensaje(string nickDestino, string mensaje)
@@ -117,7 +113,8 @@ namespace MensajeroRemoting
 		
 		public ClienteRemoto miClienteRemoto {
 			get {
-				return this.ObtenerClienteRemoto(miCanalEscucha.GetChannelUri() + "/Cliente");
+				ClienteRemoto miClienteRemoto = (ClienteRemoto)Activator.GetObject(typeof(ClienteRemoto), this.cadenaConexion);
+				return miClienteRemoto;
 			}
 		}
 	}

@@ -8,13 +8,13 @@ using System;
 namespace MensajeroRemoting
 {
 	public delegate  void MensajeRecibidoHandler(string nick, string mensaje);
-	public delegate  void ListaContactosHandler(string nick);
+	public delegate  void ConexionClienteHandler(string nick);
 	
 	[Serializable()]
 	public class ClienteRemoto: MarshalByRefObject
 	{
-		public event ListaContactosHandler ContactoConectado;
-		public event ListaContactosHandler ContactoDesconectado;
+		public event ConexionClienteHandler ContactoConectado;
+		public event ConexionClienteHandler ContactoDesconectado;
 		public event MensajeRecibidoHandler MensajeRecibido;
 		
 		public ClienteRemoto()

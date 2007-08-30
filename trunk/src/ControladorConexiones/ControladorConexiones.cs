@@ -54,10 +54,12 @@ namespace MensajeroRemoting
 			if (this.ClienteConectado != null)
 				this.ClienteConectado(nick);
 			
-			Console.WriteLine("Pasando clientesConectados a array");
+			Console.WriteLine("Pasando clientesConectados a array...");
 			List<string> clientesSinElNuevo = new List<string>();
-			foreach(string unNick in this.clientesConectados.Keys)
+			foreach(string unNick in this.clientesConectados.Keys) {
+				Console.WriteLine("  procesando " + unNick);
 				clientesSinElNuevo.Add(unNick);
+			}
 			
 			Console.WriteLine("Agrego el cliente a mi lista de clientes conectados");
 			this.clientesConectados.Add(nick, cadenaConexion);
@@ -94,9 +96,11 @@ namespace MensajeroRemoting
 			if (!this.clientesConectados.ContainsKey(nickDestino))
 				throw new Exception("El cliente destino no esta conectado. No se puede enviar el mensaje");
 			
+			Console.WriteLine("Cachando objeto ClienteRemoto desde ControladorConexiones...");
 			ClienteRemoto clienteRemoto = (ClienteRemoto)Activator.GetObject(typeof(ClienteRemoto),
 			                                                                 this.clientesConectados[nickDestino]);
 			
+			Console.WriteLine("Ejecutando método recibirMensaje del clienteRemoto...");
 			clienteRemoto.recibirMensaje(nickOrigen, mensaje);
 		}
 		

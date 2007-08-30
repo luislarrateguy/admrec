@@ -55,7 +55,6 @@ namespace MensajeroRemoting
 		private EventsHelper eventHelper;
 		private ControladorCliente controladorCliente;
 		
-		
 		public MainWindow()
 		{
 			Application.Init();
@@ -85,7 +84,7 @@ namespace MensajeroRemoting
 			nick.AddAttribute(nickText, "text", 0);
 			
 			// La posición 0 es el nick y la 1 la cadena de conexión
-			this.contactos = new ListStore(typeof(string), typeof(string));
+			this.contactos = new ListStore(typeof(string));
 			this.tvContactos.Model = this.contactos;
 			
 			// Handler para cuando se hace doble click
@@ -99,9 +98,9 @@ namespace MensajeroRemoting
 			Application.Run();
 		}
 		
-		public string ClienteInfo
+		public ControladorCliente ControladorCliente
 		{
-			get { return this.nick; }
+			get { return this.controladorCliente; }
 		}
 		
 		public string CadenaConexion 
@@ -126,25 +125,25 @@ namespace MensajeroRemoting
 			
 			/* Obtengo la cadena de conexion que se almacena en la posición
 			 * 1 del modelo del treeview */
-			string cadenaConexionDestino = (string)this.contactos.GetValue(filaSeleccionada, 1);
+			string nickSeleccionado = (string)this.contactos.GetValue(filaSeleccionada, 0);
 			
-			Console.WriteLine("Cadena seleccionada: " + cadenaConexionDestino);
+			Console.WriteLine("Cadena seleccionada: " + nickSeleccionado);
 			// Si ya hay una ventana para chatear con el contacto, la activo
-			if (this.ventanasChat.ContainsKey(cadenaConexionDestino)) {
-				VentanaChat vc = this.ventanasChat[cadenaConexionDestino];
+			if (this.ventanasChat.ContainsKey(nickSeleccionado)) {
+				VentanaChat vc = this.ventanasChat[nickSeleccionado];
 				vc.Activar();
-				return;
 			}
-			
-			// En cambio si no hay una, la creo...
-			VentanaChat ventanaChat = new VentanaChat(this, cadenaConexionDestino, this.nick, this.controladorCliente, cadenaConexionDestino);
-			this.ventanasChat.Add(cadenaConexionDestino, ventanaChat);
+			else {
+				// En cambio si no hay una, la creo...
+				VentanaChat ventanaChat = new VentanaChat(this, nickSeleccionado);
+				this.ventanasChat.Add(nickSeleccionado, ventanaChat);
+			}
 		}
 		
-		public void VentanaChatCerrada(string cadenaConexionDestino)
+		public void VentanaChatCerrada(string nick)
 		{
 			// La cadena de conexion identifica a la ventana cerrada
-			this.ventanasChat.Remove(cadenaConexionDestino);
+			this.ventanasChat.Remove(nick);
 		}
 		
 		public void OnCmbEstadoChanged(object o, EventArgs args)
@@ -191,8 +190,13 @@ namespace MensajeroRemoting
 			// Creo la instancia
 			this.controladorCliente = new ControladorCliente(this.ip,this.servidor,this.Nick);
 			string[] clientesConectados = controladorCliente.Conectar(this.nick);
+			
 			this.cmbEstado.Entry.Text = "Conectado";
 			this.cmbEstado.Changed += new EventHandler(this.OnCmbEstadoChanged);
+			
+			// Me fijo si la conexión fue exitosa
+			if (clientesConectados == null)
+				return;
 			
 			// Me registro a los eventos que me interesan en el servidor
 			if (this.eventHelper == null) {
@@ -203,9 +207,6 @@ namespace MensajeroRemoting
 				this.eventHelper.MensajeRecibido += new MensajeRecibidoHandler(this.RecibirMensaje);
 			}
 			
-			if (clientesConectados == null)
-				return;
-			
 			this.conectado = true;
 
 			// Limpio, por las dudas, el ListStore y el Dictionary
@@ -215,7 +216,7 @@ namespace MensajeroRemoting
 			// Agrego los contactos al TreeView y al Dictionary
 			TreeIter iter;
 			foreach (string ci in clientesConectados) {
-				iter = this.contactos.AppendValues(this.nick, this.nick);
+				iter = this.contactos.AppendValues(ci);
 				this.treeItersContactos.Add(ci, iter);
 			}
 			
@@ -259,22 +260,21 @@ namespace MensajeroRemoting
 			Application.Quit();
 		}
 		
-		public void ContactoConectado(string unCliente2)
+		public void ContactoConectado(string nickCliente)
 		{
-			string unCliente = unCliente2;
 			//ClienteInfo unCliente = new ClienteInfo();
 			//unCliente.cadenaConexion = unCliente2.cadenaConexion;
 			//unCliente.nick = unCliente2.nick;
 			
 			Console.WriteLine("Notificación de contacto conectado!");
 
-			if (this.nick.Equals(unCliente)) {
+			if (this.nick.Equals(nickCliente)) {
 				Console.WriteLine("  Pero soy yo mismo. No me agrego, porque no me gusta chatear conmigo, salvo cuando estoy solo, y no tengo ganas de estudiar o programar");
 				return;
 			}
 			
-			TreeIter iter = this.contactos.AppendValues(unCliente, unCliente);
-			this.treeItersContactos.Add(unCliente, iter);
+			TreeIter iter = this.contactos.AppendValues(nickCliente);
+			this.treeItersContactos.Add(nickCliente, iter);
 			
 			Console.WriteLine("  Listo, agregado");
 		}
@@ -310,18 +310,18 @@ namespace MensajeroRemoting
 //			}
 		}
 		
-		public void RecibirMensaje(string origen, string mensaje)
+		public void RecibirMensaje(string nickOrigen, string mensaje)
 		{
 			Console.WriteLine("Mostrando mensaje recibido...");
 			
-			if (this.ventanasChat.ContainsKey(origen)) {
-				VentanaChat vc = this.ventanasChat[origen];
-				vc.MensajeRecibido(origen, mensaje);
+			if (this.ventanasChat.ContainsKey(nickOrigen)) {
+				VentanaChat vc = this.ventanasChat[nickOrigen];
+				vc.MensajeRecibido(nickOrigen, mensaje);
 			}
 			else {
-				VentanaChat ventanaChat = new VentanaChat(this, origen, this.nick,this.controladorCliente, origen);
-				ventanaChat.MensajeRecibido(origen, mensaje);
-				this.ventanasChat.Add(origen, ventanaChat);
+				VentanaChat ventanaChat = new VentanaChat(this, nickOrigen);
+				ventanaChat.MensajeRecibido(nickOrigen, mensaje);
+				this.ventanasChat.Add(nickOrigen, ventanaChat);
 			}
 		}
 		

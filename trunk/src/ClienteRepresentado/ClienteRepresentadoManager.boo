@@ -21,9 +21,11 @@ namespace ClienteRepresentado
 
 import System
 
-
-
 class ClienteRepresentadoManager():
 	
-	public def constructor():
+	public def ClienteRepresentadoManager():
 		pass
+		
+	public def conectar(nick as string):
+	
+		

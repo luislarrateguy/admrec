@@ -51,9 +51,9 @@ namespace MensajeroRemoting
 		private Dictionary<string, VentanaChat> ventanasChat;
 		
 		// para el cliente remoto y eventos
-		private ClienteRemoto miCliente;
-		private EventsHelper eh;
-		private ControladorCliente ClienteManager;
+		//private ClienteRemoto miCliente;
+		private EventsHelper eventHelper;
+		private ControladorCliente controladorCliente;
 		
 		
 		public MainWindow()
@@ -137,7 +137,7 @@ namespace MensajeroRemoting
 			}
 			
 			// En cambio si no hay una, la creo...
-			VentanaChat ventanaChat = new VentanaChat(this, cadenaConexionDestino, this.nick, this.ClienteManager, cadenaConexionDestino);
+			VentanaChat ventanaChat = new VentanaChat(this, cadenaConexionDestino, this.nick, this.controladorCliente, cadenaConexionDestino);
 			this.ventanasChat.Add(cadenaConexionDestino, ventanaChat);
 		}
 		
@@ -189,23 +189,18 @@ namespace MensajeroRemoting
 			this.ip  = "127.0.0.1";
 			
 			// Creo la instancia
-			this.ClienteManager = new ControladorCliente(ip,this.servidor,this.Nick);
-			string[] clientesConectados = ClienteManager.Conectar("");
+			this.controladorCliente = new ControladorCliente(this.ip,this.servidor,this.Nick);
+			string[] clientesConectados = controladorCliente.Conectar(this.nick);
 			this.cmbEstado.Entry.Text = "Conectado";
 			this.cmbEstado.Changed += new EventHandler(this.OnCmbEstadoChanged);
 			
 			// Me registro a los eventos que me interesan en el servidor
-			
-			if (this.miCliente == null) {
-				this.miCliente = ClienteManager.miClienteRemoto;
-				this.eh = new EventsHelper(this.miCliente);
+			if (this.eventHelper == null) {
+				this.eventHelper = new EventsHelper(this.controladorCliente.miClienteRemoto);
 				
-				this.eh.ContactoConectado += new ConexionClienteHandler(this.ContactoConectado);
-				this.eh.ContactoDesconectado += new ConexionClienteHandler(this.ContactoDesconectado);
-				this.eh.MensajeRecibido += new MensajeRecibidoHandler(this.RecibirMensaje);
-				
-				Console.WriteLine("Registrando handlers...");
-				//this.helper.RegistrarHandlers();
+				this.eventHelper.ContactoConectado += new ConexionClienteHandler(this.ContactoConectado);
+				this.eventHelper.ContactoDesconectado += new ConexionClienteHandler(this.ContactoDesconectado);
+				this.eventHelper.MensajeRecibido += new MensajeRecibidoHandler(this.RecibirMensaje);
 			}
 			
 			if (clientesConectados == null)
@@ -234,7 +229,7 @@ namespace MensajeroRemoting
 			if (!this.conectado) return;
 			
 			// Primero me desconecto del servidor
-			ClienteManager.Desconectar();
+			controladorCliente.Desconectar();
 			
 			/* Le digo al objeto ListaContactosEventHelper que desregistre sus
 			 * métodos en ControladorConexiones */
@@ -324,7 +319,7 @@ namespace MensajeroRemoting
 				vc.MensajeRecibido(origen, mensaje);
 			}
 			else {
-				VentanaChat ventanaChat = new VentanaChat(this, origen, this.nick,this.ClienteManager, origen);
+				VentanaChat ventanaChat = new VentanaChat(this, origen, this.nick,this.controladorCliente, origen);
 				ventanaChat.MensajeRecibido(origen, mensaje);
 				this.ventanasChat.Add(origen, ventanaChat);
 			}

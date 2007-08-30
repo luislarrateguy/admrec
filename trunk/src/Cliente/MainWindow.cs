@@ -26,7 +26,7 @@ using Glade;
 
 namespace MensajeroRemoting
 {
-	public class MainWindow : MarshalByRefObject
+	public class MainWindow
 	{
 		private ClienteInfo yo;
 		private string servidor;
@@ -86,6 +86,8 @@ namespace MensajeroRemoting
 			this.vbox1.ReorderChild(this.tvContactos, 1);
 			
 			this.mainWindow.ShowAll();
+			
+			Application.Run();
 		}
 		
 		public ClienteInfo ClienteInfo
@@ -310,9 +312,9 @@ namespace MensajeroRemoting
 			}
 		}
 		
-		public void Run()
+		public static void Main(string[] args)
 		{
-			Application.Run();
+			new MainWindow();
 		}
 		
 		public override object InitializeLifetimeService()

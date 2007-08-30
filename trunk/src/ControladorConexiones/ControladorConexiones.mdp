@@ -16,10 +16,11 @@
   <Contents>
     <File name="./ControladorConexiones.cs" subtype="Code" buildaction="Compile" />
     <File name="./AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
-    <File name="./ListaContactosEventHelper.cs" subtype="Code" buildaction="Compile" />
-    <File name="./ClienteInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="./ControladorCliente.cs" subtype="Code" buildaction="Compile" />
+    <File name="./ClienteRemoto.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Runtime.Remoting, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   </References>
 </Project>

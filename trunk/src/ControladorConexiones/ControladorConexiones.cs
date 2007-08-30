@@ -24,10 +24,10 @@ namespace MensajeroRemoting
 {
 	public class ControladorConexiones : MarshalByRefObject
 	{
-		public delegate void ListaContactosHandler(ClienteInfo unCliente);
+		public delegate void ConexionCliente(ClienteInfo unCliente);
 		
-		public event ListaContactosHandler ContactoConectado;
-		public event ListaContactosHandler ContactoDesconectado;
+		public event ListaContactosHandler ClienteConectado;
+		public event ListaContactosHandler ClienteDesconectado;
 		
 		// Lista de las cadenas de conexion
 		private List<ClienteInfo> clientesConectados;
@@ -83,8 +83,8 @@ namespace MensajeroRemoting
 //			}
 			
 			Console.WriteLine("Avisando a los otros que se desconecto");
-			if (this.ContactoDesconectado != null)
-				this.ContactoDesconectado(unCliente);
+			if (this.ClienteDesconectado != null)
+				this.ClienteDesconectado(unCliente);
 			
 			Console.WriteLine("Listo!");
 			return;
@@ -108,8 +108,8 @@ namespace MensajeroRemoting
 			Console.WriteLine("El cliente es nuevo...");
 			
 			Console.WriteLine("Avisando a los otros que se conecto uno nuevo");
-			if (this.ContactoConectado != null)
-				this.ContactoConectado(unCliente);
+			if (this.ClienteConectado != null)
+				this.ClienteConectado(unCliente);
 			
 			Console.WriteLine("Pasando clientesConectados a array");
 			ClienteInfo[] clientesSinElNuevo = this.clientesConectados.ToArray();

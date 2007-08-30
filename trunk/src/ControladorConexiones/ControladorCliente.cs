@@ -64,12 +64,12 @@ namespace MensajeroRemoting
 			                                                          NOMBRE_SERVICIO,
 			                                                          WellKnownObjectMode.Singleton);
 			
-			// Obtengo mi propio objeto ClienteRemoto (TODO: ¿Para qué?)
-			//this.ObtenerClienteRemoto(miCanalEscucha.GetChannelUri() + "/Cliente");
-			
 			this.controladorConexiones = (ControladorConexiones)Activator.GetObject(typeof(ControladorConexiones),
 			                                                                   "tcp://" + direccionServidor + ":8085/CC");
 			
+			//Registro handlers para los eventos de conex/desconex
+			this.miClienteRemoto.RegistrarHandlers(this.controladorConexiones);
+			this.miClienteRemoto.DesregistrarHandlers(this.controladorConexiones);
 			this.nick = nick;
 		}
 		
@@ -121,5 +121,6 @@ namespace MensajeroRemoting
 				return miClienteRemoto;
 			}
 		}
+		
 	}
 }

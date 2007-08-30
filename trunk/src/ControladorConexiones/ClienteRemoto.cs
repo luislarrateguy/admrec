@@ -41,30 +41,27 @@ namespace MensajeroRemoting
 				this.ContactoDesconectado(nick);
 		}
 		
-		/* No estoy seguro de la utilidad de esto, pero no se borra
-		public void registrarHandler()
+		public void RegistrarHandlers(ControladorConexiones cc)
 		{
 			Console.WriteLine(" ---- Registrando metodo agregarContacto");
-			this.controladorConexiones.ContactoConectado +=
-				new ControladorConexiones.ListaContactosHandler(this.OnContactoAgregado);
+			cc.ClienteConectado +=	new ConexionCliente(this.clienteConectado);
 			
 			Console.WriteLine(" ---- Registrando metodo quitarContacto");
-			this.controladorConexiones.ContactoDesconectado +=
-				new ControladorConexiones.ListaContactosHandler(this.OnContactoQuitado);
+			cc.ClienteDesconectado += new ConexionCliente(this.clienteDesconectado);
 		}
 		
-		public void desregistrarHandlers()
+		public void DesregistrarHandlers(ControladorConexiones cc)
 		{
 			Console.Write(" ---- Desregistrando metodo agregarContacto");
-			this.controladorConexiones.ContactoConectado -=
-				new ControladorConexiones.ListaContactosHandler(this.OnContactoAgregado);
+			cc.ClienteConectado -=
+				new ConexionCliente(this.clienteConectado);
 			Console.WriteLine("... Listo!");
 			
 			Console.Write(" ---- Desregistrando metodo quitarContacto");
-			this.controladorConexiones.ContactoDesconectado -=
-				new ControladorConexiones.ListaContactosHandler(this.OnContactoQuitado);
+			cc.ClienteDesconectado -=
+				new ConexionCliente(this.clienteDesconectado);
 			Console.WriteLine("... Listo!");
 		}
-		*/
+
 	}
 }

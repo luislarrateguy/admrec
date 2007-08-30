@@ -49,7 +49,10 @@ namespace MensajeroRemoting
 		private Gtk.ListStore contactos;
 		private Dictionary<string, TreeIter> treeItersContactos;
 		private Dictionary<string, VentanaChat> ventanasChat;
+		
+		// para el cliente remoto y eventos
 		private ClienteRemoto miCliente;
+		private EventsHelper eh;
 		private ControladorCliente ClienteManager;
 		
 		
@@ -195,10 +198,11 @@ namespace MensajeroRemoting
 			
 			if (this.miCliente == null) {
 				this.miCliente = ClienteManager.miClienteRemoto;
+				this.eh = new EventsHelper(this.miCliente);
 				
-				this.miCliente.ContactoConectado += new ConexionClienteHandler(this.ContactoConectado);
-				this.miCliente.ContactoDesconectado += new ConexionClienteHandler(this.ContactoDesconectado);
-				this.miCliente.MensajeRecibido += new MensajeRecibidoHandler(this.RecibirMensaje);
+				this.eh.ContactoConectado += new CxnClienteHandler(this.ContactoConectado);
+				this.eh.ContactoDesconectado += new CxnClienteHandler(this.ContactoDesconectado);
+				this.eh.MensajeRecibido += new MjeRecibidoHandler(this.RecibirMensaje);
 				
 				Console.WriteLine("Registrando handlers...");
 				//this.helper.RegistrarHandlers();

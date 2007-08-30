@@ -64,40 +64,14 @@ namespace MensajeroRemoting
 			                                                          WellKnownObjectMode.Singleton);
 			
 			// Obtengo mi propio objeto ClienteRemoto (TODO: ¿Para qué?)
-			//this.clienteRemoto = this.ObtenerClienteRemoto(miCanalEscucha.GetChannelUri() + "/Cliente");
+			this.ObtenerClienteRemoto(miCanalEscucha.GetChannelUri() + "/Cliente");
 			
 			this.controladorConexiones = (ControladorConexiones)Activator.GetObject(typeof(ControladorConexiones),
 			                                                                   "tcp://" + direccionServidor + ":8085/CC");
 			
 			this.nick = nick;
 		}
-		
-//		private static void CargarControladorConexiones(string direccionServidor)
-//		{
-//			Console.WriteLine("Dirección pasada: " + direccionServidor);
-//			Console.WriteLine("Cachando servidor...");
-//			
-//			
-//			if (controladorConexiones == null) {
-//				Console.WriteLine("No se pudo cachar el controlador...");
-//				return;
-//			}
-//			
-//			Console.WriteLine("Servidor cachado!");
-//		}
-		
-//		public ControladorConexiones ControladorConexiones
-//		{
-//			get { return controladorConexiones; }
-//		}
-		
-//		private ClienteRemoto ObtenerClienteRemoto(string cadena)
-//		{
-//			ClienteRemoto clienteRemoto = (MainWindow)Activator.GetObject(typeof(ClienteRemoto), cadena);
-//			
-//			return clienteRemoto;
-//		}
-		
+			
 		// Devolvería los nicks de los contactos
 		public string[] Conectar() {
 			Console.Write("Conectando...");
@@ -128,45 +102,16 @@ namespace MensajeroRemoting
 			Console.WriteLine(" Desconectado");
 			return true;
 		}
-			
-//		public static ClienteInfo ObtenerClienteInfo (string cadenaConexion)
-//		{
-//			MainWindow destino = (MainWindow)Activator.GetObject(typeof(MainWindow), cadenaConexion);
-//			
-//			return destino.ClienteInfo;
-//		}
 		
 		public void EnviarMensaje(string nickDestino, string mensaje)
 		{
 			this.controladorConexiones.EnviarMensaje(this.nick, nickDestino, mensaje);
 		}
 		
-//		public static bool EnviarMensaje(MainWindow h, string m) {
-//			Console.Write("Enviando mensaje...");
-//			h.EnviarMensaje(hostCliente.ClienteInfo, m);
-//			Console.WriteLine("Enviado!");
-//			return true;
-//		}
-		
-//		public static bool NickDisponible(string nick)
-//		{
-//			ClienteManager.CargarControladorConexiones(hostCliente.Servidor);
-//			
-//			Console.WriteLine("Preguntando si el nick esta disponible...");
-//			return controladorConexiones.NickDisponible(nick);
-//		}
-//		
-//		public static bool NickOcupado(string nick)
-//		{
-//			ClienteManager.CargarControladorConexiones(hostCliente.Servidor);
-//			
-//			Console.WriteLine("Preguntando si el nick esta ocupado...");
-//			return controladorConexiones.NickOcupado(nick);
-//		}
-		
-//		static ClienteManager()
-//		{
-//			ClienteManager.Inicializar();
-//		}
+		public void miClienteRemoto {
+			get {
+				return this.ObtenerClienteRemoto(miCanalEscucha.GetChannelUri() + "/Cliente");
+			}
+		}
 	}
 }

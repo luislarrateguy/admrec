@@ -18,7 +18,6 @@
 */
 
 using System;
-using System.Net;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -32,16 +31,13 @@ namespace MensajeroRemoting
 	{
 		private const string NOMBRE_SERVICIO = "Cliente";
 		
-		private ControladorConexiones controladorConexiones;
+		public static ControladorConexiones controladorConexiones;
+		
 		private string cadenaConexion;
 		private string nick;
 		
 		public ControladorCliente(string ipPropia, string direccionServidor, string nick)
 		{
-			/* Esto hace que busque un puerto disponible
-			 * Cambio el canal bidireccional por uno Servidor únicamente
-			 * Solo se registra debajo (con RegisterWellKnownServiceType)
-			 */
 			IServerChannelSinkProvider provider = new BinaryServerFormatterSinkProvider();
 			IDictionary props = new Hashtable();
 			props["port"] = 0;
@@ -50,29 +46,35 @@ namespace MensajeroRemoting
 			
 			// Este canal es para servir a mi ClienteRemoto
             TcpServerChannel canalEscucha = new TcpServerChannel(props, provider);
+//			ChannelServices.RegisterChannel(canalEscucha);
+//			
+//			ChannelDataStore cds = (ChannelDataStore)canalEscucha.ChannelData;
+			
 			Console.WriteLine("Mi canal escucha: " + canalEscucha.GetChannelUri());
 			
-			this.cadenaConexion = canalEscucha.GetChannelUri() + "/" + NOMBRE_SERVICIO;
+			TcpChannel canalBidireccional = new TcpChannel(0);
+			ChannelServices.RegisterChannel(canalBidireccional);
+			
+			this.nick = nick;
+			
+			this.cadenaConexion = canalEscucha.GetChannelUri()  + "/" + NOMBRE_SERVICIO;
 			
 			// Este canal es para la comunicación bidireccional con el server
-			TcpChannel chanServe = new TcpChannel(0);
-			ChannelServices.RegisterChannel(chanServe);
-
-			ChannelDataStore data = (ChannelDataStore) chanServe.ChannelData;
-	        foreach (string uri in data.ChannelUris)
-	        {
-	            Console.WriteLine("La URI de la comunicacion Bidireccional es {0}.", uri);
-	        }
+//			TcpChannel chanServe = new TcpChannel();
+//			ChannelServices.RegisterChannel(chanServe);
 
 			Console.WriteLine("Registrando mi objeto remoto...");
 			RemotingConfiguration.RegisterWellKnownServiceType(typeof(ClienteRemoto),
 			                                                          NOMBRE_SERVICIO,
 			                                                          WellKnownObjectMode.Singleton);
 			
-			this.controladorConexiones = (ControladorConexiones)Activator.GetObject(typeof(ControladorConexiones),
-			                                                                   "tcp://" + direccionServidor + ":8085/CC");
-			
-			this.nick = nick;
+			// Cacho el ControladorConexiones solo si es necesario
+			if (controladorConexiones == null) {
+				Console.Write("Cachando el ControladorConexiones...");
+				controladorConexiones = (ControladorConexiones)Activator.GetObject(typeof(ControladorConexiones),
+				                                                                   "tcp://" + direccionServidor + ":8085/CC");
+				Console.WriteLine("Cachado!");
+			}
 		}
 		
 		/* Chau Singleton!
@@ -95,14 +97,20 @@ namespace MensajeroRemoting
 			if (nicksContactosConectados == null)
 				throw new Exception("No fue posible la conexión");
 			
-			string[] nicksCopiados = new string[nicksContactosConectados.Length];
-			for (int i=0; i<nicksContactosConectados.Length; i++)
-				nicksCopiados[i] = nicksContactosConectados[i];
-			
 			Console.WriteLine("Conectado!");
+			
+			Console.WriteLine("Procesando contactos conectados recibidos...");
+			string[] nicksCopiados = new string[nicksContactosConectados.Length];
+			for (int i=0; i<nicksContactosConectados.Length; i++) {
+				Console.WriteLine("Contacto recibido: " + nicksContactosConectados[i]);
+				nicksCopiados[i] = nicksContactosConectados[i];
+			}
+			
+			Console.WriteLine("Listo. Retorno la lista de contactos");
 
-			//Registro handlers para los eventos de conex/desconex
-			this.miClienteRemoto.RegistrarHandlers(this.controladorConexiones);			
+			//Registro handlers para los eventos de conexión
+			this.miClienteRemoto.RegistrarHandlers();
+			
 			return nicksCopiados;
 		}
 		
@@ -112,19 +120,22 @@ namespace MensajeroRemoting
 			controladorConexiones.Desconectar(this.nick);
 			
 			Console.WriteLine(" Desconectado");
-			this.miClienteRemoto.DesregistrarHandlers(this.controladorConexiones);
+			this.miClienteRemoto.DesregistrarHandlers();
 		}
 		
 		public void EnviarMensaje(string nickDestino, string mensaje)
 		{
-			this.controladorConexiones.EnviarMensaje(this.nick, nickDestino, mensaje);
+			controladorConexiones.EnviarMensaje(this.nick, nickDestino, mensaje);
 		}
 		
 		public ClienteRemoto miClienteRemoto {
 			get {
-				return (ClienteRemoto)Activator.GetObject(typeof(ClienteRemoto), this.cadenaConexion);
+				Console.Write("Tomando mi objeto propio...");
+				ClienteRemoto miClienteRemoto = (ClienteRemoto)Activator.GetObject(typeof(ClienteRemoto), this.cadenaConexion);
+				Console.WriteLine("Tomado!");
+				
+				return miClienteRemoto;
 			}
 		}
-		
 	}
 }

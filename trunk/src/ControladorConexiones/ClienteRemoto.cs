@@ -44,17 +44,21 @@ namespace MensajeroRemoting
 				this.ContactoDesconectado(nick);
 		}
 		
-		public void RegistrarHandlers(ControladorConexiones cc)
+		public void RegistrarHandlers()
 		{
+			ControladorConexiones cc = ControladorCliente.controladorConexiones;
+			
 			Console.WriteLine(" ---- Registrando metodo agregarContacto");
-			cc.ClienteConectado +=	new ConexionCliente(this.clienteConectado);
+			cc.ClienteConectado += new ConexionCliente(this.clienteConectado);
 			
 			Console.WriteLine(" ---- Registrando metodo quitarContacto");
 			cc.ClienteDesconectado += new ConexionCliente(this.clienteDesconectado);
 		}
 		
-		public void DesregistrarHandlers(ControladorConexiones cc)
+		public void DesregistrarHandlers()
 		{
+			ControladorConexiones cc = ControladorCliente.controladorConexiones;
+			
 			Console.Write(" ---- Desregistrando metodo agregarContacto");
 			cc.ClienteConectado -=
 				new ConexionCliente(this.clienteConectado);

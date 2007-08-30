@@ -13,29 +13,33 @@ namespace MensajeroRemoting
 		public event ConexionClienteHandler ContactoConectado;
 		public event ConexionClienteHandler ContactoDesconectado;
 		public event MensajeRecibidoHandler MensajeRecibido;
-		private ClienteRemoto cliRem;
 		
 		public EventsHelper(ClienteRemoto cr)
 		{
-			this.cliRem = cr;
-			this.cliRem.ContactoConectado += new ConexionClienteHandler(this.clienteConectado);
-			this.cliRem.ContactoDesconectado += new ConexionClienteHandler(this.clienteDesconectado);
-			this.cliRem.MensajeRecibido += new MensajeRecibidoHandler(this.recibirMensaje);
+			Console.Write("Creando objeto EventHelper...");
+			cr.ContactoConectado += new ConexionClienteHandler(this.clienteConectado);
+			cr.ContactoDesconectado += new ConexionClienteHandler(this.clienteDesconectado);
+			cr.MensajeRecibido += new MensajeRecibidoHandler(this.recibirMensaje);
+			Console.WriteLine("Creado EventHelper!");
 		}
+		
 		~EventsHelper()
 		{
 
-		}		
+		}
+		
 		public void recibirMensaje(string nick, string mensaje)
 		{
 			if (this.MensajeRecibido != null)
 				this.MensajeRecibido(nick,mensaje);
 		}
+		
 		public void clienteConectado(string nick)
 		{
 			if (this.ContactoConectado != null)
 				this.ContactoConectado(nick);
 		}
+		
 		public void clienteDesconectado(string nick)
 		{
 			if (this.ContactoDesconectado != null)

@@ -57,7 +57,13 @@ namespace MensajeroRemoting
 			// Este canal es para la comunicación bidireccional con el server
 			TcpChannel chanServe = new TcpChannel(0);
 			ChannelServices.RegisterChannel(chanServe);
-			
+
+			ChannelDataStore data = (ChannelDataStore) chanServe.ChannelData;
+	        foreach (string uri in data.ChannelUris)
+	        {
+	            Console.WriteLine("La URI de la comunicacion Bidireccional es {0}.", uri);
+	        }
+
 			Console.WriteLine("Registrando mi objeto remoto...");
 			RemotingConfiguration.RegisterWellKnownServiceType(typeof(ClienteRemoto),
 			                                                          NOMBRE_SERVICIO,

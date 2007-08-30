@@ -35,7 +35,7 @@
     <Execute type="None" entry="ServidorInput" />
   </StartMode>
   <Entries>
-    <Entry filename="./Cliente/Cliente.mdp" />
+    <Entry filename="./GtkGUI/GtkGUI.mdp" />
     <Entry filename="./Servidor/Servidor.mdp" />
     <Entry filename="./ControladorConexiones/ControladorConexiones.mdp" />
     <Entry filename="./JavaCliente/JavaCliente.mdp" />

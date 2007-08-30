@@ -35,17 +35,13 @@ namespace MensajeroRemoting
 		[Widget]
 		Gtk.TextView textviewChat;
 		
-		private string cadenaConexionDestino;
-		private string nickPropio;
+		private string nickDestino;
 		private MainWindow mainWindow;
-		private ControladorCliente ClienteManager;
 		
-		public VentanaChat(MainWindow mainWindow, string cadenaConexionDestino, string nickPropio, ControladorCliente cl, string nickDestino)
+		public VentanaChat(MainWindow mainWindow, string nickDestino)
 		{
-			this.ClienteManager = cl;
 			this.mainWindow = mainWindow;
-			this.cadenaConexionDestino = cadenaConexionDestino;
-			this.nickPropio = nickPropio;
+			this.nickDestino = nickDestino;
 			
 			Console.WriteLine("Creando interfaz glade de ventanaChat...");
 			Glade.XML gxml = new XML("ventanachat.glade", "ventanaChat", null);
@@ -71,17 +67,17 @@ namespace MensajeroRemoting
 			if (mensaje.Equals(String.Empty))
 				return;
 			
-			ClienteManager.EnviarMensaje(this.cadenaConexionDestino, mensaje);
+			this.mainWindow.ControladorCliente.EnviarMensaje(this.nickDestino, mensaje);
 			
-			this.textviewChat.Buffer.InsertAtCursor(this.nickPropio + ": " + mensaje + "\n");
+			this.textviewChat.Buffer.InsertAtCursor(this.mainWindow.Nick + ": " + mensaje + "\n");
 			this.textviewMensaje.Buffer.Clear();
 			this.textviewMensaje.HasFocus = true;
 		}
 		
 		public void OnVentanaChatDelete(object o, DeleteEventArgs args)
 		{
-			Console.WriteLine("VentanaChat " + this.cadenaConexionDestino + " - DeleteEvent");
-			this.mainWindow.VentanaChatCerrada(this.cadenaConexionDestino);
+			Console.WriteLine("VentanaChat " + this.nickDestino + " - DeleteEvent");
+			this.mainWindow.VentanaChatCerrada(this.nickDestino);
 		}
 		
 		public void MensajeRecibido(string origen, string mensaje)

@@ -104,6 +104,8 @@ namespace MensajeroRemoting
 			for (int i=0; i<nicksContactosConectados.Length; i++) {
 				Console.WriteLine("Contacto recibido: " + nicksContactosConectados[i]);
 				nicksCopiados[i] = nicksContactosConectados[i];
+				
+				Console.WriteLine("   Nick recibido: " + nicksCopiados[i]);
 			}
 			
 			Console.WriteLine("Listo. Retorno la lista de contactos");
@@ -125,14 +127,14 @@ namespace MensajeroRemoting
 		
 		public void EnviarMensaje(string nickDestino, string mensaje)
 		{
+			Console.WriteLine("Enviando mensaje (ControladorCliente)...");
 			controladorConexiones.EnviarMensaje(this.nick, nickDestino, mensaje);
+			Console.WriteLine("Enviado! (ControladorCliente)...");
 		}
 		
 		public ClienteRemoto miClienteRemoto {
 			get {
-				Console.Write("Tomando mi objeto propio...");
 				ClienteRemoto miClienteRemoto = (ClienteRemoto)Activator.GetObject(typeof(ClienteRemoto), this.cadenaConexion);
-				Console.WriteLine("Tomado!");
 				
 				return miClienteRemoto;
 			}

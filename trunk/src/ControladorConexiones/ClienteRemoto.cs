@@ -21,20 +21,23 @@ namespace MensajeroRemoting
 		public ClienteRemoto()
 		{
 		}
+		
 		~ClienteRemoto()
 		{
-
-		}		
+		}
+		
 		public void recibirMensaje(string nick, string mensaje)
 		{
 			if (this.MensajeRecibido != null)
 				this.MensajeRecibido(nick,mensaje);
 		}
+		
 		public void clienteConectado(string nick)
 		{
 			if (this.ContactoConectado != null)
 				this.ContactoConectado(nick);
 		}
+		
 		public void clienteDesconectado(string nick)
 		{
 			if (this.ContactoDesconectado != null)

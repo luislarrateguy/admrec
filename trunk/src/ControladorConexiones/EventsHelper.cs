@@ -7,16 +7,12 @@ using System;
 
 namespace MensajeroRemoting
 {
-
-	public delegate void MjeRecibidoHandler(string nick, string mensaje);
-	public delegate void CxnClienteHandler(string nick);
-	
 	[Serializable()]
 	public class EventsHelper: MarshalByRefObject
 	{
-		public event CxnClienteHandler ContactoConectado;
-		public event CxnClienteHandler ContactoDesconectado;
-		public event MjeRecibidoHandler MensajeRecibido;
+		public event ConexionClienteHandler ContactoConectado;
+		public event ConexionClienteHandler ContactoDesconectado;
+		public event MensajeRecibidoHandler MensajeRecibido;
 		private ClienteRemoto cliRem;
 		
 		public EventsHelper(ClienteRemoto cr)

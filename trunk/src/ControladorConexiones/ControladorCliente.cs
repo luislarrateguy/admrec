@@ -35,8 +35,7 @@ namespace MensajeroRemoting
 		private ControladorConexiones controladorConexiones;
 		private string cadenaConexion;
 		private string nick;
-
-
+		
 		public ControladorCliente(string ipPropia, string direccionServidor, string nick)
 		{
 			/* Esto hace que busque un puerto disponible

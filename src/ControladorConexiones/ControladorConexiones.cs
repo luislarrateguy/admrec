@@ -64,6 +64,7 @@ namespace MensajeroRemoting
 			
 			Console.WriteLine("Listo!");
 			
+			
 			return clientesSinElNuevo.ToArray();
 		}
 		

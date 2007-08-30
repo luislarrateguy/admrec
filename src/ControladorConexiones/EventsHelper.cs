@@ -8,20 +8,25 @@ using System;
 namespace MensajeroRemoting
 {
 
-	public delegate void MensajeRecibidoHandler(string nick, string mensaje);
-	public delegate void ConexionClienteHandler(string nick);
+	public delegate void MjeRecibidoHandler(string nick, string mensaje);
+	public delegate void CxnClienteHandler(string nick);
 	
 	[Serializable()]
-	public class ClienteRemoto: MarshalByRefObject
+	public class EventsHelper: MarshalByRefObject
 	{
-		public event ConexionClienteHandler ContactoConectado;
-		public event ConexionClienteHandler ContactoDesconectado;
-		public event MensajeRecibidoHandler MensajeRecibido;
+		public event CxnClienteHandler ContactoConectado;
+		public event CxnClienteHandler ContactoDesconectado;
+		public event MjeRecibidoHandler MensajeRecibido;
+		private ClienteRemoto cliRem;
 		
-		public ClienteRemoto()
+		public EventsHelper(ClienteRemoto cr)
 		{
+			this.cliRem = cr;
+			this.cliRem.ContactoConectado += new ConexionClienteHandler(this.clienteConectado);
+			this.cliRem.ContactoDesconectado += new ConexionClienteHandler(this.clienteDesconectado);
+			this.cliRem.MensajeRecibido += new MensajeRecibidoHandler(this.recibirMensaje);
 		}
-		~ClienteRemoto()
+		~EventsHelper()
 		{
 
 		}		

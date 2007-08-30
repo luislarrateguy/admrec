@@ -26,11 +26,15 @@ using Glade;
 
 namespace MensajeroRemoting
 {
+	
 	public class MainWindow
 	{
-		private ClienteInfo yo;
+
 		private string servidor;
+		private string nick;
 		private bool conectado = false;
+		private string cadenaConexion;
+		private string ip;
 		
 		[Widget]
 		private Gtk.Window mainWindow;
@@ -43,15 +47,17 @@ namespace MensajeroRemoting
 		
 		private Gtk.TreeView tvContactos;
 		private Gtk.ListStore contactos;
-		private Dictionary<ClienteInfo, TreeIter> treeItersContactos;
+		private Dictionary<string, TreeIter> treeItersContactos;
 		private Dictionary<string, VentanaChat> ventanasChat;
-		private ListaContactosEventHelper helper;
+		private ClienteRemoto miCliente;
+		private ControladorCliente ClienteManager;
+		
 		
 		public MainWindow()
 		{
 			Application.Init();
 			
-			this.treeItersContactos = new Dictionary<ClienteInfo, Gtk.TreeIter>();
+			this.treeItersContactos = new Dictionary<string, Gtk.TreeIter>();
 			this.ventanasChat = new Dictionary<string, VentanaChat>();
 			
 			Console.WriteLine("Creando interfaz glade...");
@@ -90,19 +96,19 @@ namespace MensajeroRemoting
 			Application.Run();
 		}
 		
-		public ClienteInfo ClienteInfo
+		public string ClienteInfo
 		{
-			get { return this.yo; }
+			get { return this.nick; }
 		}
 		
 		public string CadenaConexion 
 		{
-			get { return this.yo.cadenaConexion; }
+			get { return this.cadenaConexion; }
 		}
 		
 		public string Nick
 		{
-			get { return this.yo.nick; }
+			get { return this.nick; }
 		}
 		
 		public string Servidor
@@ -128,7 +134,7 @@ namespace MensajeroRemoting
 			}
 			
 			// En cambio si no hay una, la creo...
-			VentanaChat ventanaChat = new VentanaChat(this, cadenaConexionDestino, this.yo.nick);
+			VentanaChat ventanaChat = new VentanaChat(this, cadenaConexionDestino, this.nick, this.ClienteManager, cadenaConexionDestino);
 			this.ventanasChat.Add(cadenaConexionDestino, ventanaChat);
 		}
 		
@@ -170,26 +176,32 @@ namespace MensajeroRemoting
 				return;
 			}
 			
-			this.yo.nick = servidorInput.NickEscogido;
+			this.nick = servidorInput.NickEscogido;
 			this.servidor = servidorInput.getServidorEscogido();
 			Console.WriteLine("En MainWindow el servidor resultó ser: " + this.servidor);
 			
 			servidorInput.Destroy();
 			
-			ClienteInfo[] clientesConectados = ClienteManager.Conectar(out this.yo.cadenaConexion);
+			//Deberia hacer lo mismo con la IP
+			this.ip  = "127.0.0.1";
+			
+			// Creo la instancia
+			this.ClienteManager = new ControladorCliente(ip,this.servidor,this.Nick);
+			string[] clientesConectados = ClienteManager.Conectar("");
 			this.cmbEstado.Entry.Text = "Conectado";
 			this.cmbEstado.Changed += new EventHandler(this.OnCmbEstadoChanged);
 			
 			// Me registro a los eventos que me interesan en el servidor
-			if (this.helper == null) {
-				ControladorConexiones cc = ClienteManager.ControladorConexiones;
-				this.helper = new ListaContactosEventHelper(cc);
+			
+			if (this.miCliente == null) {
+				this.miCliente = ClienteManager.miClienteRemoto;
 				
-				this.helper.ContactoConectado += new ControladorConexiones.ListaContactosHandler(this.ContactoConectado);
-				this.helper.ContactoDesconectado += new ControladorConexiones.ListaContactosHandler(this.ContactoDesconectado);
+				this.miCliente.ContactoConectado += new ConexionClienteHandler(this.ContactoConectado);
+				this.miCliente.ContactoDesconectado += new ConexionClienteHandler(this.ContactoDesconectado);
+				this.miCliente.MensajeRecibido += new MensajeRecibidoHandler(this.RecibirMensaje);
 				
 				Console.WriteLine("Registrando handlers...");
-				this.helper.RegistrarHandlers();
+				//this.helper.RegistrarHandlers();
 			}
 			
 			if (clientesConectados == null)
@@ -203,8 +215,8 @@ namespace MensajeroRemoting
 			
 			// Agrego los contactos al TreeView y al Dictionary
 			TreeIter iter;
-			foreach (ClienteInfo ci in clientesConectados) {
-				iter = this.contactos.AppendValues(ci.nick, ci.cadenaConexion);
+			foreach (string ci in clientesConectados) {
+				iter = this.contactos.AppendValues(this.nick, this.nick);
 				this.treeItersContactos.Add(ci, iter);
 			}
 			
@@ -222,14 +234,14 @@ namespace MensajeroRemoting
 			
 			/* Le digo al objeto ListaContactosEventHelper que desregistre sus
 			 * métodos en ControladorConexiones */
-			this.helper.DesregistrarHandlers();
+			//this.helper.DesregistrarHandlers();
 			
 			this.conectado = false;
 			
 			/* Luego limpio la lista de contactos (GUI - TreeView) y luego
 			 * limpio el diccionario <cadenaConexion,TreeIter> */
 			TreeIter iter;
-			foreach (ClienteInfo ci in this.treeItersContactos.Keys) {
+			foreach (string ci in this.treeItersContactos.Keys) {
 				iter = this.treeItersContactos[ci];
 				this.contactos.Remove(ref iter);
 			}
@@ -248,39 +260,41 @@ namespace MensajeroRemoting
 			Application.Quit();
 		}
 		
-		public void ContactoConectado(ClienteInfo unCliente2)
+		public void ContactoConectado(string unCliente2)
 		{
-			ClienteInfo unCliente = new ClienteInfo();
-			unCliente.cadenaConexion = unCliente2.cadenaConexion;
-			unCliente.nick = unCliente2.nick;
+			string unCliente = unCliente2;
+			//ClienteInfo unCliente = new ClienteInfo();
+			//unCliente.cadenaConexion = unCliente2.cadenaConexion;
+			//unCliente.nick = unCliente2.nick;
 			
 			Console.WriteLine("Notificación de contacto conectado!");
 
-			if (this.yo.Equals(unCliente)) {
-				Console.WriteLine("  Pero soy yo mismo. No me agrego");
+			if (this.nick.Equals(unCliente)) {
+				Console.WriteLine("  Pero soy yo mismo. No me agrego, porque no me gusta chatear conmigo, salvo cuando estoy solo, y no tengo ganas de estudiar o programar");
 				return;
 			}
 			
-			TreeIter iter = this.contactos.AppendValues(unCliente.nick, unCliente.cadenaConexion);
+			TreeIter iter = this.contactos.AppendValues(unCliente, unCliente);
 			this.treeItersContactos.Add(unCliente, iter);
 			
 			Console.WriteLine("  Listo, agregado");
 		}
 		
-		public void ContactoDesconectado(ClienteInfo unCliente2)
+		public void ContactoDesconectado(string unCliente2)
 		{
-			ClienteInfo unCliente = new ClienteInfo();
-			unCliente.cadenaConexion = unCliente2.cadenaConexion;
-			unCliente.nick = unCliente2.nick;
+			string unCliente = unCliente2;
+			//ClienteInfo unCliente = new ClienteInfo();
+			//unCliente.cadenaConexion = unCliente2.cadenaConexion;
+			//unCliente.nick = unCliente2.nick;
 			
 			Console.WriteLine("Notificación de contacto desconectado!");
 			
-			Console.WriteLine("Mi cadena es '" + yo.cadenaConexion + "', y mi nick es '" +
-			                  yo.nick);
-			Console.WriteLine("La cadena del otro es '" + unCliente.cadenaConexion + "', y su nick es '" +
-			                  unCliente.nick);
+			Console.WriteLine("Mi cadena es '" + this.cadenaConexion + "', y mi nick es '" +
+			                  this.nick);
+			Console.WriteLine("La cadena del otro es '" + unCliente + "', y su nick es '" +
+			                  unCliente);
 			
-			if (this.yo.Equals(unCliente)) {
+			if (this.nick.Equals(unCliente)) {
 				Console.WriteLine("  Pero soy yo mismo. Paro aca nomas.");
 				return;
 			}
@@ -297,18 +311,18 @@ namespace MensajeroRemoting
 //			}
 		}
 		
-		public void EnviarMensaje(ClienteInfo origen, string mensaje)
+		public void RecibirMensaje(string origen, string mensaje)
 		{
 			Console.WriteLine("Mostrando mensaje recibido...");
 			
-			if (this.ventanasChat.ContainsKey(origen.cadenaConexion)) {
-				VentanaChat vc = this.ventanasChat[origen.cadenaConexion];
+			if (this.ventanasChat.ContainsKey(origen)) {
+				VentanaChat vc = this.ventanasChat[origen];
 				vc.MensajeRecibido(origen, mensaje);
 			}
 			else {
-				VentanaChat ventanaChat = new VentanaChat(this, origen.cadenaConexion, this.yo.nick);
+				VentanaChat ventanaChat = new VentanaChat(this, origen, this.nick,this.ClienteManager, origen);
 				ventanaChat.MensajeRecibido(origen, mensaje);
-				this.ventanasChat.Add(origen.cadenaConexion, ventanaChat);
+				this.ventanasChat.Add(origen, ventanaChat);
 			}
 		}
 		
@@ -317,9 +331,6 @@ namespace MensajeroRemoting
 			new MainWindow();
 		}
 		
-		public override object InitializeLifetimeService()
-		{
-			return null;
-		}
+
 	}
 }

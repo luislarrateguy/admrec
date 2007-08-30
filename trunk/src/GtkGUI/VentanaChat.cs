@@ -38,9 +38,11 @@ namespace MensajeroRemoting
 		private string cadenaConexionDestino;
 		private string nickPropio;
 		private MainWindow mainWindow;
+		private ControladorCliente ClienteManager;
 		
-		public VentanaChat(MainWindow mainWindow, string cadenaConexionDestino, string nickPropio)
+		public VentanaChat(MainWindow mainWindow, string cadenaConexionDestino, string nickPropio, ControladorCliente cl, string nickDestino)
 		{
+			this.ClienteManager = cl;
 			this.mainWindow = mainWindow;
 			this.cadenaConexionDestino = cadenaConexionDestino;
 			this.nickPropio = nickPropio;
@@ -50,7 +52,7 @@ namespace MensajeroRemoting
 			gxml.Autoconnect(this);
 			
 			Console.WriteLine("Seteando título...");
-			this.ventanaChat.Title = ClienteManager.ObtenerClienteInfo(cadenaConexionDestino).nick;
+			this.ventanaChat.Title = nickDestino;
 			
 			Console.WriteLine("Seteando foco a textviewMensaje...");
 			this.textviewMensaje.HasFocus = true;
@@ -82,9 +84,9 @@ namespace MensajeroRemoting
 			this.mainWindow.VentanaChatCerrada(this.cadenaConexionDestino);
 		}
 		
-		public void MensajeRecibido(ClienteInfo origen, string mensaje)
+		public void MensajeRecibido(string origen, string mensaje)
 		{
-			this.textviewChat.Buffer.InsertAtCursor(origen.nick + ": " + mensaje + "\n");
+			this.textviewChat.Buffer.InsertAtCursor(origen + ": " + mensaje + "\n");
 		}
 		
 		public bool Activar()

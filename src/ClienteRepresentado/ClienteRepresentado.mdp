@@ -18,6 +18,6 @@
     <File name="./ClienteRepresentadoManager.boo" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
-    <ProjectReference type="Project" localcopy="True" refto="Cliente" />
+    <ProjectReference type="Project" localcopy="True" refto="GtkGUI" />
   </References>
 </Project>

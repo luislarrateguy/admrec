@@ -26,14 +26,15 @@ using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 
-namespace MensajeroRemoting {
+namespace MensajeroRemoting
+{
 	public class ClienteManager
 	{
-		private static ControladorConexiones controladorConexiones;
-		private static TcpServerChannel miCanalEscucha;
-		private static MainWindow hostCliente;
+		private  ControladorConexiones controladorConexiones;
+		private TcpServerChannel canalEscucha;
+		private ClienteRemoto clienteRemoto;
 
-		public static void Inicializar()
+		public ClienteManager(string ip)
 		{
 			/* Esto hace que busque un puerto disponible
 			 * Cambio el canal bidireccional por uno Servidor únicamente
@@ -43,32 +44,22 @@ namespace MensajeroRemoting {
 			IDictionary props = new Hashtable();
 			props["port"] = 0;
 			props["name"] = "tcp";
-			props["bindTo"] = "192.168.1.101";
+			props["bindTo"] = ip;
 			
+			// Este canal es para servir a mi ClienteRemoto
             miCanalEscucha = new TcpServerChannel(props, provider);
 			Console.WriteLine("Mi canal escucha: "+miCanalEscucha.GetChannelUri());
 			
+			// Este canal es para la comunicación bidireccional con el server
 			TcpChannel chanServe = new TcpChannel(0);
 			ChannelServices.RegisterChannel(chanServe);
 			
 			Console.WriteLine("Registrando mi objeto remoto...");
-			RemotingConfiguration.RegisterWellKnownServiceType(typeof(MainWindow),
-			                                                          "Host",
+			RemotingConfiguration.RegisterWellKnownServiceType(typeof(ClienteRemoto),
+			                                                          "Cliente",
 			                                                          WellKnownObjectMode.Singleton);
 			
-			hostCliente = GetHostByConnectionString(miCanalEscucha.GetChannelUri() + "/Host");
-			hostCliente.Run();
-			
-//			TcpChannel tcp_chan = new TcpChannel();
-//			ChannelServices.RegisterChannel(tcp_chan);
-//			
-//			Console.WriteLine("Creando objeto...");
-//			MainWindow mw = new MainWindow();
-//			Console.WriteLine("Objeto creado...");
-//			RemotingServices.Marshal(mw, "Host");
-//			Console.WriteLine("Corriendo el MainWindow...");
-//			mw.Run();
-//			hostCliente = GetHostByConnectionString(miCanalEscucha.GetChannelUri() + "/Host");
+			this.clienteRemoto = GetHostByConnectionString(miCanalEscucha.GetChannelUri() + "/Host");
 		}
 		
 		private static void CargarControladorConexiones(string direccionServidor)
@@ -200,7 +191,7 @@ namespace MensajeroRemoting {
 			return controladorConexiones.NickOcupado(nick);
 		}
 		
-		public static void Main(string[] args)
+		static ClienteManager()
 		{
 			ClienteManager.Inicializar();
 		}

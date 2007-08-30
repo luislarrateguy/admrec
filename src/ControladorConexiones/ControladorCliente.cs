@@ -35,9 +35,9 @@ namespace MensajeroRemoting
 		private ControladorConexiones controladorConexiones;
 		private string cadenaConexion;
 		private string nick;
-		private static ControladorCliente instancia = null;
 
-		private ControladorCliente(string ipPropia, string direccionServidor, string nick)
+
+		public ControladorCliente(string ipPropia, string direccionServidor, string nick)
 		{
 			/* Esto hace que busque un puerto disponible
 			 * Cambio el canal bidireccional por uno Servidor únicamente
@@ -73,14 +73,18 @@ namespace MensajeroRemoting
 			this.nick = nick;
 		}
 		
+		/* Chau Singleton!
 		public static ControladorCliente GetInstancia() {
 			if (instancia == null)
 				instancia = new ControladorCliente();
 			return instancia;				
 		}
-			
+		*/
 		// Devolvería los nicks de los contactos
-		public string[] Conectar() {
+		public string[] Conectar(string nuevoNick) {
+			if (!nuevoNick.Equals(""))
+				this.nick = nuevoNick;
+			
 			Console.Write("Conectando...");
 			
 			// Copio los nicks a otro array, porque hay problemas sino
@@ -93,7 +97,7 @@ namespace MensajeroRemoting
 			for (int i=0; i<nicksContactosConectados.Length; i++)
 				nicksCopiados[i] = nicksContactosConectados[i];
 			
-			Console.WriteLine("Conectado");
+			Console.WriteLine("Conectado!");
 			
 			return nicksCopiados;
 		}

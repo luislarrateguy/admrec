@@ -39,7 +39,7 @@ namespace MensajeroRemoting
 		public string[] Conectar (string cadenaConexion, string nick)
 		{
 			Console.WriteLine("");
-			Console.WriteLine("Petición de conextion. Cadena: " + cadenaConexion);
+			Console.WriteLine("Petición de conexion. Cadena: " + cadenaConexion);
 			
 			if (this.clientesConectados.ContainsKey(nick))
 				throw new Exception("El cliente ya esta conectado. Imposible continuar");

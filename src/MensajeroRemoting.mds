@@ -33,6 +33,7 @@
     <Execute type="None" entry="ClienteRepresentado" />
     <Execute type="None" entry="NickInputEnBoo" />
     <Execute type="None" entry="ServidorInput" />
+    <Execute type="None" entry="ClienteConsola" />
   </StartMode>
   <Entries>
     <Entry filename="./GtkGUI/GtkGUI.mdp" />

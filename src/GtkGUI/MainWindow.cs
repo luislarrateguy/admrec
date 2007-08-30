@@ -200,9 +200,9 @@ namespace MensajeroRemoting
 				this.miCliente = ClienteManager.miClienteRemoto;
 				this.eh = new EventsHelper(this.miCliente);
 				
-				this.eh.ContactoConectado += new CxnClienteHandler(this.ContactoConectado);
-				this.eh.ContactoDesconectado += new CxnClienteHandler(this.ContactoDesconectado);
-				this.eh.MensajeRecibido += new MjeRecibidoHandler(this.RecibirMensaje);
+				this.eh.ContactoConectado += new ConexionClienteHandler(this.ContactoConectado);
+				this.eh.ContactoDesconectado += new ConexionClienteHandler(this.ContactoDesconectado);
+				this.eh.MensajeRecibido += new MensajeRecibidoHandler(this.RecibirMensaje);
 				
 				Console.WriteLine("Registrando handlers...");
 				//this.helper.RegistrarHandlers();

@@ -66,15 +66,12 @@ namespace MensajeroRemoting
 			this.controladorConexiones = (ControladorConexiones)Activator.GetObject(typeof(ControladorConexiones),
 			                                                                   "tcp://" + direccionServidor + ":8085/CC");
 			
-			//Registro handlers para los eventos de conex/desconex
-			this.miClienteRemoto.RegistrarHandlers(this.controladorConexiones);
-			this.miClienteRemoto.DesregistrarHandlers(this.controladorConexiones);
 			this.nick = nick;
 		}
 		
 		/* Chau Singleton!
 		public static ControladorCliente GetInstancia() {
-			if (instancia == null)
+			deif (instancia == null)
 				instancia = new ControladorCliente();
 			return instancia;				
 		}
@@ -97,7 +94,9 @@ namespace MensajeroRemoting
 				nicksCopiados[i] = nicksContactosConectados[i];
 			
 			Console.WriteLine("Conectado!");
-			
+
+			//Registro handlers para los eventos de conex/desconex
+			this.miClienteRemoto.RegistrarHandlers(this.controladorConexiones);			
 			return nicksCopiados;
 		}
 		
@@ -107,6 +106,7 @@ namespace MensajeroRemoting
 			controladorConexiones.Desconectar(this.nick);
 			
 			Console.WriteLine(" Desconectado");
+			this.miClienteRemoto.DesregistrarHandlers(this.controladorConexiones);
 		}
 		
 		public void EnviarMensaje(string nickDestino, string mensaje)
@@ -116,8 +116,7 @@ namespace MensajeroRemoting
 		
 		public ClienteRemoto miClienteRemoto {
 			get {
-				ClienteRemoto miClienteRemoto = (ClienteRemoto)Activator.GetObject(typeof(ClienteRemoto), this.cadenaConexion);
-				return miClienteRemoto;
+				return (ClienteRemoto)Activator.GetObject(typeof(ClienteRemoto), this.cadenaConexion);
 			}
 		}
 		

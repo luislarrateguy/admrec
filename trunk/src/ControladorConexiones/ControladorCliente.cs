@@ -28,13 +28,15 @@ using System.Runtime.Remoting.Channels.Tcp;
 
 namespace MensajeroRemoting
 {
-	public class ClienteManager
+	public class ControladorCliente
 	{
-		private  ControladorConexiones controladorConexiones;
-		private TcpServerChannel canalEscucha;
-		private ClienteRemoto clienteRemoto;
+		private const string NOMBRE_SERVICIO = "Cliente";
+		
+		private ControladorConexiones controladorConexiones;
+		private string cadenaConexion;
+		private string nick;
 
-		public ClienteManager(string ip)
+		public ControladorCliente(string ipPropia, string direccionServidor, string nick)
 		{
 			/* Esto hace que busque un puerto disponible
 			 * Cambio el canal bidireccional por uno Servidor únicamente
@@ -44,11 +46,13 @@ namespace MensajeroRemoting
 			IDictionary props = new Hashtable();
 			props["port"] = 0;
 			props["name"] = "tcp";
-			props["bindTo"] = ip;
+			props["bindTo"] = ipPropia;
 			
 			// Este canal es para servir a mi ClienteRemoto
-            miCanalEscucha = new TcpServerChannel(props, provider);
-			Console.WriteLine("Mi canal escucha: "+miCanalEscucha.GetChannelUri());
+            TcpChannelServer canalEscucha = new TcpServerChannel(props, provider);
+			Console.WriteLine("Mi canal escucha: " + canalEscucha.GetChannelUri());
+			
+			this.cadenaConexion = canalEscucha.GetChannelUri() + "/" + NOMBRE_SERVICIO;
 			
 			// Este canal es para la comunicación bidireccional con el server
 			TcpChannel chanServe = new TcpChannel(0);
@@ -56,135 +60,113 @@ namespace MensajeroRemoting
 			
 			Console.WriteLine("Registrando mi objeto remoto...");
 			RemotingConfiguration.RegisterWellKnownServiceType(typeof(ClienteRemoto),
-			                                                          "Cliente",
+			                                                          NOMBRE_SERVICIO,
 			                                                          WellKnownObjectMode.Singleton);
 			
-			this.clienteRemoto = GetHostByConnectionString(miCanalEscucha.GetChannelUri() + "/Host");
-		}
-		
-		private static void CargarControladorConexiones(string direccionServidor)
-		{
-			if (controladorConexiones != null)
-				return;
-//			TcpChannel chanConnect  = new TcpChannel();
-//			ChannelServices.RegisterChannel(chanConnect);
+			// Obtengo mi propio objeto ClienteRemoto (TODO: ¿Para qué?)
+			//this.clienteRemoto = this.ObtenerClienteRemoto(miCanalEscucha.GetChannelUri() + "/Cliente");
 			
-			Console.WriteLine("Dirección pasada: " + direccionServidor);
-			Console.WriteLine("Cachando servidor...");
-			controladorConexiones = (ControladorConexiones)Activator.GetObject(typeof(ControladorConexiones),
+			this.controladorConexiones = (ControladorConexiones)Activator.GetObject(typeof(ControladorConexiones),
 			                                                                   "tcp://" + direccionServidor + ":8085/CC");
 			
-			if (controladorConexiones == null) {
-				Console.WriteLine("No se pudo cachar el controlador...");
-				return;
-			}
-			
-			Console.WriteLine("Servidor cachado!");
-			
-//			ChannelServices.UnregisterChannel(chanConnect);
+			this.nick = nick;
 		}
 		
-		public static ControladorConexiones ControladorConexiones
-		{
-			get { return controladorConexiones; }
-		}
+//		private static void CargarControladorConexiones(string direccionServidor)
+//		{
+//			Console.WriteLine("Dirección pasada: " + direccionServidor);
+//			Console.WriteLine("Cachando servidor...");
+//			
+//			
+//			if (controladorConexiones == null) {
+//				Console.WriteLine("No se pudo cachar el controlador...");
+//				return;
+//			}
+//			
+//			Console.WriteLine("Servidor cachado!");
+//		}
 		
-		private static MainWindow GetHostByConnectionString(string cadena)
-		{
-			MainWindow hostCliente = (MainWindow)Activator.GetObject(typeof(MainWindow),
-			                                              cadena);
-			
-			return hostCliente;
-		}
+//		public ControladorConexiones ControladorConexiones
+//		{
+//			get { return controladorConexiones; }
+//		}
 		
-		public static ClienteInfo[] Conectar(out string cadena) {
-			ClienteManager.CargarControladorConexiones(hostCliente.Servidor);
-			
+//		private ClienteRemoto ObtenerClienteRemoto(string cadena)
+//		{
+//			ClienteRemoto clienteRemoto = (MainWindow)Activator.GetObject(typeof(ClienteRemoto), cadena);
+//			
+//			return clienteRemoto;
+//		}
+		
+		// Devolvería los nicks de los contactos
+		public string[] Conectar() {
 			Console.Write("Conectando...");
-			cadena = miCanalEscucha.GetChannelUri() + "/Host";
 			
-			ClienteInfo yo = new ClienteInfo();
-			yo.cadenaConexion = cadena;
-			yo.nick = hostCliente.Nick;
+			// Copio los nicks a otro array, porque hay problemas sino
+			string[] nicksContactosConectados = controladorConexiones.Conectar(this.cadenaConexion, this.nick);
 			
-			/* Me conecto y copio los elementos del array devuelto, ya que
-			 * sino hay problemas */
-			List<ClienteInfo> contactos = new List<ClienteInfo>();
+			string[] nicksCopiados = new string[nicksContactosConectados.Length];
+			for (int i=0; i<nicksContactosConectados.Length; i++)
+				nicksCopiados[i] = nicksContactosConectados[i];
 			
-			ClienteInfo[] contactosRecibidos = controladorConexiones.Conectar(yo);
-			foreach (ClienteInfo ci in contactosRecibidos) {
-				ClienteInfo clienteInfo = new ClienteInfo();
-				clienteInfo.cadenaConexion = ci.cadenaConexion;
-				clienteInfo.nick = ci.nick;
-				
-				contactos.Add(clienteInfo);
-			}
+			if (contactos == null)
+				throw new Exception("No fue posible la conexión");
 			
-			if (contactos != null)
-				Console.WriteLine("¡Conectado!");
-			else
-				Console.WriteLine("No anduvo la conexion");
+			Console.WriteLine("Conectado");
 			
-			return contactos.ToArray();
+			return nicksCopiados;
 		}
 		
 		public static bool Desconectar() {
-			ClienteManager.CargarControladorConexiones(hostCliente.Servidor);
-			
 			Console.Write("Desconectando...");
 
 			ClienteInfo yo = new ClienteInfo();
 			yo.cadenaConexion = miCanalEscucha.GetChannelUri() + "/Host";
 			yo.nick = hostCliente.Nick;
 			
-			controladorConexiones.Desconectar(yo);
+			controladorConexiones.Desconectar(this.cadenaConexion);
 			Console.WriteLine(" Desconectado");
 			return true;
 		}
 			
-		public static ClienteInfo ObtenerClienteInfo (string cadenaConexion)
+//		public static ClienteInfo ObtenerClienteInfo (string cadenaConexion)
+//		{
+//			MainWindow destino = (MainWindow)Activator.GetObject(typeof(MainWindow), cadenaConexion);
+//			
+//			return destino.ClienteInfo;
+//		}
+		
+		public void EnviarMensaje(string nickDestino, string mensaje)
 		{
-			MainWindow destino = (MainWindow)Activator.GetObject(typeof(MainWindow), cadenaConexion);
-			
-			return destino.ClienteInfo;
+			this.controladorConexiones.EnviarMensaje(this.nick, nickDestino, mensaje);
 		}
 		
-		public static bool EnviarMensaje(string cadenaConexion, string mensaje)
-		{
-			MainWindow destino = (MainWindow)Activator.GetObject(typeof(MainWindow), cadenaConexion);
-			
-			if (destino == null)
-				throw new Exception("No se pudo obtener el destino para enviar un mensaje");
-			
-			return ClienteManager.EnviarMensaje(destino, mensaje);
-		}
+//		public static bool EnviarMensaje(MainWindow h, string m) {
+//			Console.Write("Enviando mensaje...");
+//			h.EnviarMensaje(hostCliente.ClienteInfo, m);
+//			Console.WriteLine("Enviado!");
+//			return true;
+//		}
 		
-		public static bool EnviarMensaje(MainWindow h, string m) {
-			Console.Write("Enviando mensaje...");
-			h.EnviarMensaje(hostCliente.ClienteInfo, m);
-			Console.WriteLine("Enviado!");
-			return true;
-		}
+//		public static bool NickDisponible(string nick)
+//		{
+//			ClienteManager.CargarControladorConexiones(hostCliente.Servidor);
+//			
+//			Console.WriteLine("Preguntando si el nick esta disponible...");
+//			return controladorConexiones.NickDisponible(nick);
+//		}
+//		
+//		public static bool NickOcupado(string nick)
+//		{
+//			ClienteManager.CargarControladorConexiones(hostCliente.Servidor);
+//			
+//			Console.WriteLine("Preguntando si el nick esta ocupado...");
+//			return controladorConexiones.NickOcupado(nick);
+//		}
 		
-		public static bool NickDisponible(string nick)
-		{
-			ClienteManager.CargarControladorConexiones(hostCliente.Servidor);
-			
-			Console.WriteLine("Preguntando si el nick esta disponible...");
-			return controladorConexiones.NickDisponible(nick);
-		}
-		
-		public static bool NickOcupado(string nick)
-		{
-			ClienteManager.CargarControladorConexiones(hostCliente.Servidor);
-			
-			Console.WriteLine("Preguntando si el nick esta ocupado...");
-			return controladorConexiones.NickOcupado(nick);
-		}
-		
-		static ClienteManager()
-		{
-			ClienteManager.Inicializar();
-		}
+//		static ClienteManager()
+//		{
+//			ClienteManager.Inicializar();
+//		}
 	}
 }

@@ -5,8 +5,10 @@
 
 using System;
 
-namespace ControladorConexiones
+namespace MensajeroRemoting
 {
+	public delegate  void MensajeRecibidoHandler(string nick, string mensaje);
+	public delegate  void ListaContactosHandler(string nick);
 	
 	[Serializable()]
 	public class ClienteRemoto: MarshalByRefObject

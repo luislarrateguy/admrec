@@ -141,16 +141,7 @@ namespace MensajeroRemoting
 			Console.WriteLine(" Desconectado");
 			return true;
 		}
-		
-		[Obsolete]
-		public static MainWindow ObtenerDestino(int puertoDestino) {
-			Console.WriteLine("Cachando el destino...");
-			MainWindow hostDestino = GetHostByConnectionString("tcp://localhost:" +
-				puertoDestino + "/Host");
-			Console.WriteLine("Cachado!");
-			return hostDestino;
-		}
-		
+			
 		public static ClienteInfo ObtenerClienteInfo (string cadenaConexion)
 		{
 			MainWindow destino = (MainWindow)Activator.GetObject(typeof(MainWindow), cadenaConexion);

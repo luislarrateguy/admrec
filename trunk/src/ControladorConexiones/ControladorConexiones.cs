@@ -22,12 +22,12 @@ using System.Collections.Generic;
 
 namespace MensajeroRemoting
 {
-	public delegate void ConexionCliente(string nick);
+	public delegate void ConexionClienteHandler(string nick);
 	
 	public class ControladorConexiones : MarshalByRefObject
 	{
-		public event ConexionCliente ClienteConectado;
-		public event ConexionCliente ClienteDesconectado;
+		public event ConexionClienteHandler ClienteConectado;
+		public event ConexionClienteHandler ClienteDesconectado;
 		
 		private Dictionary<string, string> clientesConectados;
 		
@@ -46,19 +46,18 @@ namespace MensajeroRemoting
 			Console.WriteLine("");
 			Console.WriteLine("Petición de conexion. Cadena: " + cadenaConexion);
 			
+			///BEGIN Estas 2 hacen lo mismo
 			if (this.clientesConectados.ContainsKey(nick))
 				throw new Exception("El cliente ya esta conectado. Imposible continuar");
 			
 			// Verifico que el nick no esté ocupado
 			if (this.NickOcupado(nick))
 				throw new Exception("El nick ya está ocupado");
+			///END Estas 2 hacen lo mismo
+			
 			
 			Console.WriteLine("El cliente es nuevo...");
-			
-			Console.WriteLine("Avisando a los otros que se conecto uno nuevo");
-			if (this.ClienteConectado != null)
-				this.ClienteConectado(nick);
-			
+					
 			Console.WriteLine("Pasando clientesConectados a array...");
 			List<string> clientesSinElNuevo = new List<string>();
 			foreach(string unNick in this.clientesConectados.Keys) {
@@ -71,6 +70,10 @@ namespace MensajeroRemoting
 			
 			Console.WriteLine("Listo!");
 			
+			Console.WriteLine("Avisando a los otros que se conecto uno nuevo, pero despues de haberlo agregado");
+			if (this.ClienteConectado != null)
+				this.ClienteConectado(nick);
+			
 			return clientesSinElNuevo.ToArray();
 		}
 		
@@ -82,14 +85,12 @@ namespace MensajeroRemoting
 			if (!this.clientesConectados.ContainsKey(nick))
 				throw new Exception("El cliente no esta conectado. Imposible descontarlo");
 			
-			Console.WriteLine("Avisando a los otros que se desconecto");
-			
-			if (this.ClienteDesconectado != null)
-				this.ClienteDesconectado(nick);
-			
 			Console.WriteLine("Bien, el cliente estaba conectado. Lo saco de la lista...");
 			this.clientesConectados.Remove(nick);
 			
+			Console.WriteLine("Avisando a los otros que se desconecto");
+			if (this.ClienteDesconectado != null)
+				this.ClienteDesconectado(nick);
 			Console.WriteLine("Listo!");
 		}
 		
@@ -121,11 +122,6 @@ namespace MensajeroRemoting
 			
 			return false;
 		}
-		
-//		public bool NickDisponible(string nick)
-//		{
-//			return (!this.NickOcupado(nick));
-//		}
 		
 		public override object InitializeLifetimeService()
 		{

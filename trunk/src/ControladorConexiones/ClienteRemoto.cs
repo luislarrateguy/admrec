@@ -10,7 +10,6 @@ namespace MensajeroRemoting
 {
 
 	public delegate void MensajeRecibidoHandler(string nick, string mensaje);
-	public delegate void ConexionClienteHandler(string nick);
 	
 	[Serializable()]
 	public class ClienteRemoto: MarshalByRefObject
@@ -55,26 +54,24 @@ namespace MensajeroRemoting
 		
 		public void RegistrarHandlers()
 		{
-			ControladorConexiones cc = ControladorCliente.controladorConexiones;
+			ControladorConexiones cc = ControladorCliente.ObtenerControladorConexiones();
 			
 			Console.WriteLine(" ---- (ClienteRemoto) Registrando metodo clienteConectado");
-			cc.ClienteConectado += new ConexionCliente(this.clienteConectado);
+			cc.ClienteConectado += new ConexionClienteHandler(this.clienteConectado);
 			
 			Console.WriteLine(" ---- (ClienteRemoto) Registrando metodo clienteDesconectado");
-			cc.ClienteDesconectado += new ConexionCliente(this.clienteDesconectado);
+			cc.ClienteDesconectado += new ConexionClienteHandler(this.clienteDesconectado);
 		}
 		
 		public void DesregistrarHandlers()
 		{
-			ControladorConexiones cc = ControladorCliente.controladorConexiones;
+			ControladorConexiones cc = ControladorCliente.ObtenerControladorConexiones();
 			
 			Console.WriteLine(" ---- (ClienteRemoto) Desregistrando metodo clienteConectado");
-			cc.ClienteConectado -=
-				new ConexionCliente(this.clienteConectado);
+			cc.ClienteConectado -= new ConexionClienteHandler(this.clienteConectado);
 			
 			Console.WriteLine(" ---- (ClienteRemoto) Desregistrando metodo clienteDesconectado");
-			cc.ClienteDesconectado -=
-				new ConexionCliente(this.clienteDesconectado);
+			cc.ClienteDesconectado -= new ConexionClienteHandler(this.clienteDesconectado);
 		}
 		
 		public override object InitializeLifetimeService()

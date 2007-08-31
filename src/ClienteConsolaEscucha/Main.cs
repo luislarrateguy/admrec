@@ -18,9 +18,22 @@ namespace ClienteConsolaEscucha
 		public static void Main(string[] args)
 		{
 			string ip,nick,servidor;
-			ip = args[0];
-			servidor = args[1];
-			nick = args[2];
+			
+			if (args.Length == 3) {
+				ip = args[0];
+				servidor = args[1];
+				nick = args[2];
+			}
+			else if (args.Length == 1) {
+				ip = "127.0.0.1";
+				servidor = "127.0.0.1";
+				nick = args[0];
+			}
+			else {
+				Console.WriteLine("Cantidad de parámetros incorrectos");
+				return;
+			}
+				
 			
 			Console.WriteLine("Ejecutando Conectar");
 			Console.WriteLine("Nick: "+nick);

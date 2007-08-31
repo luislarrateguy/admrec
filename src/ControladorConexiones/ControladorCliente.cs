@@ -31,7 +31,7 @@ namespace MensajeroRemoting
 	{
 		private const string NOMBRE_SERVICIO = "Cliente";
 		
-		public static ControladorConexiones controladorConexiones;
+		private ControladorConexiones controladorConexiones;
 		
 		private ClienteRemoto clienteRemoto;
 		private TcpChannel canalBidireccional;
@@ -81,19 +81,11 @@ namespace MensajeroRemoting
 			// Cacho el ControladorConexiones solo si es necesario
 //			if (controladorConexiones == null) {
 				Console.Write("Cachando el ControladorConexiones...");
-				controladorConexiones = (ControladorConexiones)Activator.GetObject(typeof(ControladorConexiones),
-				                                                                   "tcp://" + direccionServidor + ":8085/CC");
+				controladorConexiones = ObtenerControladorConexiones();
 				Console.WriteLine("Cachado!");
 //			}
 		}
 		
-		/* Chau Singleton!
-		public static ControladorCliente GetInstancia() {
-			deif (instancia == null)
-				instancia = new ControladorCliente();
-			return instancia;				
-		}
-		*/
 		// Devolvería los nicks de los contactos
 		public string[] Conectar(string nuevoNick) {
 			if (!nuevoNick.Equals(""))
@@ -101,8 +93,11 @@ namespace MensajeroRemoting
 			
 			Console.Write("Conectando...");
 			
-			// Copio los nicks a otro array, porque hay problemas sino
-			string[] nicksContactosConectados = controladorConexiones.Conectar(this.cadenaConexion, this.nick);
+			
+			string[] nicksContactosConectados;
+			nicksContactosConectados = controladorConexiones.Conectar(this.cadenaConexion, this.nick);
+			// andaría esto en vez de copiarlos 1 por 1.?
+			//List<string> s = new List<string>(controladorConexiones.Conectar(this.cadenaConexion, this.nick));
 			
 			if (nicksContactosConectados == null)
 				throw new Exception("No fue posible la conexión");
@@ -110,6 +105,7 @@ namespace MensajeroRemoting
 			this.conectado = true;
 			Console.WriteLine("Conectado!");
 			
+			// Copio los nicks a otro array, porque hay problemas sino
 			Console.WriteLine("Procesando contactos conectados recibidos...");
 			string[] nicksCopiados = new string[nicksContactosConectados.Length];
 			for (int i=0; i<nicksContactosConectados.Length; i++) {
@@ -152,10 +148,15 @@ namespace MensajeroRemoting
 		
 		public ClienteRemoto miClienteRemoto {
 			get {
-				ClienteRemoto miClienteRemoto = (ClienteRemoto)Activator.GetObject(typeof(ClienteRemoto), this.cadenaConexion);
-				
-				return miClienteRemoto;
+				return clienteRemoto;
 			}
+		}
+		public static ControladorConexiones ObtenerControladorConexiones()
+		{
+			// Direccion servidor deberia ser seteable de otro lado
+			ControladorConexiones cc = (ControladorConexiones)Activator.GetObject(typeof(ControladorConexiones),
+					"tcp://" + "localhost" + ":8085/CC");
+			return cc;
 		}
 	}
 }

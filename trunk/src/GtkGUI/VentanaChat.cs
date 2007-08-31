@@ -48,7 +48,7 @@ namespace MensajeroRemoting
 			gxml.Autoconnect(this);
 			
 			Console.WriteLine("Seteando título...");
-			this.ventanaChat.Title = nickDestino;
+			this.ventanaChat.Title = this.mainWindow.Nick + " (yo) hablando con: "+nickDestino;
 			
 			Console.WriteLine("Seteando foco a textviewMensaje...");
 			this.textviewMensaje.HasFocus = true;
@@ -87,7 +87,7 @@ namespace MensajeroRemoting
 		
 		public bool Activar()
 		{
-			//return this.ventanaChat.Activate();
+			this.ventanaChat.Activate();
 			return true;
 		}
 	}

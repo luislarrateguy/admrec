@@ -87,7 +87,8 @@ namespace MensajeroRemoting
 		
 		public bool Activar()
 		{
-			return this.ventanaChat.Activate();
+			//return this.ventanaChat.Activate();
+			return true;
 		}
 	}
 }

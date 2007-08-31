@@ -195,17 +195,17 @@ namespace MensajeroRemoting
 			this.cmbEstado.Changed += new EventHandler(this.OnCmbEstadoChanged);
 			
 			// Me fijo si la conexión fue exitosa
-			if (clientesConectados == null)
-				return;
+//			if (clientesConectados == null)
+//				return;
 			
 			// Me registro a los eventos que me interesan en el servidor
-			if (this.eventHelper == null) {
+//			if (this.eventHelper == null) {
 				this.eventHelper = new EventsHelper(this.controladorCliente.miClienteRemoto);
 				
 				this.eventHelper.ContactoConectado += new ConexionClienteHandler(this.ContactoConectado);
 				this.eventHelper.ContactoDesconectado += new ConexionClienteHandler(this.ContactoDesconectado);
 				this.eventHelper.MensajeRecibido += new MensajeRecibidoHandler(this.RecibirMensaje);
-			}
+//			}
 			
 			this.conectado = true;
 
@@ -228,6 +228,12 @@ namespace MensajeroRemoting
 			Console.WriteLine("Ejecutando Desconectar (MainWindow)");
 			
 			if (!this.conectado) return;
+			
+			this.eventHelper.ContactoConectado -= new ConexionClienteHandler(this.ContactoConectado);
+			this.eventHelper.ContactoDesconectado -= new ConexionClienteHandler(this.ContactoDesconectado);
+			this.eventHelper.MensajeRecibido -= new MensajeRecibidoHandler(this.RecibirMensaje);
+			
+			this.eventHelper.DesregistrarHandlers();
 			
 			// Primero me desconecto del servidor
 			controladorCliente.Desconectar();
@@ -273,35 +279,40 @@ namespace MensajeroRemoting
 				return;
 			}
 			
+			if (this.treeItersContactos.ContainsKey(nickCliente)) {
+				Console.WriteLine("Ops, el cliente que se conecto no soy yo, pero ya lo tengo agregado :S");
+				return;
+			}
+			
 			TreeIter iter = this.contactos.AppendValues(nickCliente);
 			this.treeItersContactos.Add(nickCliente, iter);
 			
 			Console.WriteLine("  Listo, agregado");
 		}
 		
-		public void ContactoDesconectado(string unCliente2)
+		public void ContactoDesconectado(string nickClienteDesconectado)
 		{
-			string unCliente = unCliente2;
-			//ClienteInfo unCliente = new ClienteInfo();
-			//unCliente.cadenaConexion = unCliente2.cadenaConexion;
-			//unCliente.nick = unCliente2.nick;
-			
 			Console.WriteLine("Notificación de contacto desconectado!");
 			
-			Console.WriteLine("Mi cadena es '" + this.cadenaConexion + "', y mi nick es '" +
-			                  this.nick);
-			Console.WriteLine("La cadena del otro es '" + unCliente + "', y su nick es '" +
-			                  unCliente);
+//			Console.WriteLine("Mi cadena es '" + this.cadenaConexion + "', y mi nick es '" +
+//			                  this.nick);
+//			Console.WriteLine("La cadena del otro es '" + unCliente + "', y su nick es '" +
+//			                  unCliente);
 			
-			if (this.nick.Equals(unCliente)) {
+			if (this.nick.Equals(nickClienteDesconectado)) {
 				Console.WriteLine("  Pero soy yo mismo. Paro aca nomas.");
 				return;
 			}
 			
+			if (!this.treeItersContactos.ContainsKey(nickClienteDesconectado)) {
+				Console.WriteLine("Se desconectó un cliente pero no lo tengo!");
+				return;
+			}
+			
 //			try {
-			TreeIter iter = this.treeItersContactos[unCliente];
+			TreeIter iter = this.treeItersContactos[nickClienteDesconectado];
 			this.contactos.Remove(ref iter);
-			this.treeItersContactos.Remove(unCliente);
+			this.treeItersContactos.Remove(nickClienteDesconectado);
 			
 			Console.WriteLine("  Listo, quitado");
 //			}
@@ -329,7 +340,5 @@ namespace MensajeroRemoting
 		{
 			new MainWindow();
 		}
-		
-
 	}
 }

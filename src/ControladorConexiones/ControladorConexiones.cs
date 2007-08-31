@@ -36,6 +36,11 @@ namespace MensajeroRemoting
 			this.clientesConectados = new Dictionary<string, string>();
 		}
 		
+		~ControladorConexiones()
+		{
+			Console.WriteLine("Se está destruyendo el ControladorConexiones!");
+		}
+		
 		public string[] Conectar (string cadenaConexion, string nick)
 		{
 			Console.WriteLine("");
@@ -66,7 +71,6 @@ namespace MensajeroRemoting
 			
 			Console.WriteLine("Listo!");
 			
-			
 			return clientesSinElNuevo.ToArray();
 		}
 		
@@ -79,6 +83,7 @@ namespace MensajeroRemoting
 				throw new Exception("El cliente no esta conectado. Imposible descontarlo");
 			
 			Console.WriteLine("Avisando a los otros que se desconecto");
+			
 			if (this.ClienteDesconectado != null)
 				this.ClienteDesconectado(nick);
 			
@@ -90,6 +95,9 @@ namespace MensajeroRemoting
 		
 		public void EnviarMensaje(string nickOrigen, string nickDestino, string mensaje)
 		{
+			Console.WriteLine();
+			Console.WriteLine("ControladorConexiones.EnviarMensaje ejecutado...");
+			
 			if (!this.clientesConectados.ContainsKey(nickOrigen))
 				throw new Exception("No se puede enviar un mensaje desde un cliente no conectado");
 			

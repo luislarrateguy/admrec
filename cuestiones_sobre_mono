@@ -4,6 +4,8 @@ Cuestiones sobre Mono/.NET:
 
 - MonoDevelop es inestable.
 
+- No hay un debugger estable.
+
 - El IDE, MonoDevelop, esta mas orientado a los lenguajes que oficialmente soportan .NET (Java
 no esta muy bien soportado por ejemplo).
 

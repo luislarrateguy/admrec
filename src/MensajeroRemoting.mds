@@ -6,10 +6,10 @@
       <Entry build="True" name="ControladorConexiones" configuration="Debug" />
       <Entry build="False" name="JavaCliente" configuration="Debug" />
       <Entry build="False" name="TestingThings" configuration="Debug" />
-      <Entry build="False" name="WSMensajeroFacade" configuration="Debug" />
       <Entry build="False" name="ClienteRepresentado" configuration="Debug" />
       <Entry build="True" name="NickInputEnBoo" configuration="Debug" />
       <Entry build="True" name="ServidorInput" configuration="Debug" />
+      <Entry build="True" name="WSMensajeroFacade" configuration="Unknown Configuration" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="GtkGUI" configuration="Release" />
@@ -17,10 +17,10 @@
       <Entry build="True" name="ControladorConexiones" configuration="Release" />
       <Entry build="False" name="JavaCliente" configuration="Release" />
       <Entry build="True" name="TestingThings" configuration="Release" />
-      <Entry build="False" name="WSMensajeroFacade" configuration="Release" />
       <Entry build="True" name="ClienteRepresentado" configuration="Release" />
       <Entry build="True" name="NickInputEnBoo" configuration="Release" />
       <Entry build="True" name="ServidorInput" configuration="Release" />
+      <Entry build="True" name="WSMensajeroFacade" configuration="Unknown Configuration" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="GtkGUI" single="True">
@@ -34,6 +34,7 @@
     <Execute type="None" entry="NickInputEnBoo" />
     <Execute type="None" entry="ServidorInput" />
     <Execute type="None" entry="ClienteConsola" />
+    <Execute type="None" entry="WSMensajeroFacade" />
   </StartMode>
   <Entries>
     <Entry filename="./GtkGUI/GtkGUI.mdp" />
@@ -41,9 +42,9 @@
     <Entry filename="./ControladorConexiones/ControladorConexiones.mdp" />
     <Entry filename="./JavaCliente/JavaCliente.mdp" />
     <Entry filename="./TestingThings/TestingThings.mdp" />
-    <Entry filename="./WSMensajeroFacade/WSMensajeroFacade.mdp" />
     <Entry filename="./ClienteRepresentado/ClienteRepresentado.mdp" />
     <Entry filename="./NickInputEnBoo/NickInputEnBoo.mdp" />
     <Entry filename="./ServidorInput/ServidorInput.mdp" />
+    <Entry filename="./WSMensajeroFacade/WSMensajeroFacade.mdp" />
   </Entries>
 </Combine>

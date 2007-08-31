@@ -33,8 +33,12 @@ namespace MensajeroRemoting
 		
 		public static ControladorConexiones controladorConexiones;
 		
+		private ClienteRemoto clienteRemoto;
+		private TcpChannel canalBidireccional;
+		//private TcpServerChannel canalEscucha;
 		private string cadenaConexion;
 		private string nick;
+		private bool conectado = false;
 		
 		public ControladorCliente(string ipPropia, string direccionServidor, string nick)
 		{
@@ -45,36 +49,42 @@ namespace MensajeroRemoting
 			props["bindTo"] = ipPropia;
 			
 			// Este canal es para servir a mi ClienteRemoto
-            TcpServerChannel canalEscucha = new TcpServerChannel(props, provider);
+//            this.canalEscucha = new TcpServerChannel(props, provider);
 //			ChannelServices.RegisterChannel(canalEscucha);
 //			
 //			ChannelDataStore cds = (ChannelDataStore)canalEscucha.ChannelData;
 			
-			Console.WriteLine("Mi canal escucha: " + canalEscucha.GetChannelUri());
+			this.canalBidireccional = new TcpChannel(props, null, provider);
+			ChannelServices.RegisterChannel(this.canalBidireccional);
 			
-			TcpChannel canalBidireccional = new TcpChannel(0);
-			ChannelServices.RegisterChannel(canalBidireccional);
+			ChannelDataStore cds = (ChannelDataStore)this.canalBidireccional.ChannelData;	
 			
 			this.nick = nick;
 			
-			this.cadenaConexion = canalEscucha.GetChannelUri()  + "/" + NOMBRE_SERVICIO;
+			this.cadenaConexion = cds.ChannelUris[0]  + "/" + NOMBRE_SERVICIO;
+			Console.WriteLine("Mi canal escucha: " + this.cadenaConexion);
 			
 			// Este canal es para la comunicación bidireccional con el server
 //			TcpChannel chanServe = new TcpChannel();
 //			ChannelServices.RegisterChannel(chanServe);
 
 			Console.WriteLine("Registrando mi objeto remoto...");
-			RemotingConfiguration.RegisterWellKnownServiceType(typeof(ClienteRemoto),
-			                                                          NOMBRE_SERVICIO,
-			                                                          WellKnownObjectMode.Singleton);
+//			RemotingConfiguration.RegisterWellKnownServiceType(typeof(ClienteRemoto),
+//			                                                          NOMBRE_SERVICIO,
+//			                                                          WellKnownObjectMode.Singleton);
+
+			Console.WriteLine("Creando un nuevo ClienteRemoto!!!");
+			this.clienteRemoto = new ClienteRemoto();
+			
+			RemotingServices.Marshal(clienteRemoto, NOMBRE_SERVICIO);
 			
 			// Cacho el ControladorConexiones solo si es necesario
-			if (controladorConexiones == null) {
+//			if (controladorConexiones == null) {
 				Console.Write("Cachando el ControladorConexiones...");
 				controladorConexiones = (ControladorConexiones)Activator.GetObject(typeof(ControladorConexiones),
 				                                                                   "tcp://" + direccionServidor + ":8085/CC");
 				Console.WriteLine("Cachado!");
-			}
+//			}
 		}
 		
 		/* Chau Singleton!
@@ -97,19 +107,18 @@ namespace MensajeroRemoting
 			if (nicksContactosConectados == null)
 				throw new Exception("No fue posible la conexión");
 			
+			this.conectado = true;
 			Console.WriteLine("Conectado!");
 			
 			Console.WriteLine("Procesando contactos conectados recibidos...");
 			string[] nicksCopiados = new string[nicksContactosConectados.Length];
 			for (int i=0; i<nicksContactosConectados.Length; i++) {
-				Console.WriteLine("Contacto recibido: " + nicksContactosConectados[i]);
 				nicksCopiados[i] = nicksContactosConectados[i];
-				
 				Console.WriteLine("   Nick recibido: " + nicksCopiados[i]);
 			}
 			
 			Console.WriteLine("Listo. Retorno la lista de contactos");
-
+			
 			//Registro handlers para los eventos de conexión
 			this.miClienteRemoto.RegistrarHandlers();
 			
@@ -117,12 +126,21 @@ namespace MensajeroRemoting
 		}
 		
 		public void Desconectar() {
+			if (!this.conectado)
+				return;
+			
+			this.miClienteRemoto.DesregistrarHandlers();			
+			
 			Console.Write("Desconectando...");
-			
 			controladorConexiones.Desconectar(this.nick);
-			
 			Console.WriteLine(" Desconectado");
-			this.miClienteRemoto.DesregistrarHandlers();
+			
+			this.conectado = false;
+			
+			Console.Write("Desregistrando el canal bidireccional... ");
+			ChannelServices.UnregisterChannel(this.canalBidireccional);
+			RemotingServices.Disconnect(this.clienteRemoto);
+			Console.WriteLine("Listo");
 		}
 		
 		public void EnviarMensaje(string nickDestino, string mensaje)

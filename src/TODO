@@ -1,1 +1,16 @@
 Archivo para escribir comentarios y cosas por TO-DO
+
+ * TODO 1: 
+ * TODO 2: 
+
+
+Lista de errores reproducibles
+
+ * Error 1:  Cuando se abren mas de 3 instancias de GTKGUI (o sea que en cada 
+             lista de contactos se ve a 2 personas, yo soy la 3era), si quiero
+             chatear con alguna se cierra la ventana con una excepción, y 
+             queda todo inconsistente -servidor y clientes.
+             Si en cambio lo hago con 2 instancias, se puede chatear bien y
+             todo anda de diez.
+
+             

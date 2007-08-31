@@ -9,7 +9,8 @@
       <Entry build="False" name="ClienteRepresentado" configuration="Debug" />
       <Entry build="True" name="NickInputEnBoo" configuration="Debug" />
       <Entry build="True" name="ServidorInput" configuration="Debug" />
-      <Entry build="True" name="WSMensajeroFacade" configuration="Unknown Configuration" />
+      <Entry build="True" name="WSMensajeroFacade" configuration="Debug" />
+      <Entry build="True" name="BigBrother" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="GtkGUI" configuration="Release" />
@@ -20,7 +21,8 @@
       <Entry build="True" name="ClienteRepresentado" configuration="Release" />
       <Entry build="True" name="NickInputEnBoo" configuration="Release" />
       <Entry build="True" name="ServidorInput" configuration="Release" />
-      <Entry build="True" name="WSMensajeroFacade" configuration="Unknown Configuration" />
+      <Entry build="True" name="WSMensajeroFacade" configuration="Release" />
+      <Entry build="True" name="BigBrother" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="GtkGUI" single="True">
@@ -29,12 +31,12 @@
     <Execute type="None" entry="ControladorConexiones" />
     <Execute type="None" entry="JavaCliente" />
     <Execute type="None" entry="TestingThings" />
-    <Execute type="None" entry="WSMensajeroFacade" />
     <Execute type="None" entry="ClienteRepresentado" />
     <Execute type="None" entry="NickInputEnBoo" />
     <Execute type="None" entry="ServidorInput" />
-    <Execute type="None" entry="ClienteConsola" />
     <Execute type="None" entry="WSMensajeroFacade" />
+    <Execute type="None" entry="BigBrother" />
+    <Execute type="None" entry="ClienteConsola" />
   </StartMode>
   <Entries>
     <Entry filename="./GtkGUI/GtkGUI.mdp" />
@@ -46,5 +48,6 @@
     <Entry filename="./NickInputEnBoo/NickInputEnBoo.mdp" />
     <Entry filename="./ServidorInput/ServidorInput.mdp" />
     <Entry filename="./WSMensajeroFacade/WSMensajeroFacade.mdp" />
+    <Entry filename="./BigBrother/BigBrother.mdp" />
   </Entries>
 </Combine>

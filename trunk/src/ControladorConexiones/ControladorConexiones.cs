@@ -70,9 +70,7 @@ namespace MensajeroRemoting
 			
 			Console.WriteLine("Listo!");
 			
-			Console.WriteLine("Avisando a los otros que se conecto uno nuevo, pero despues de haberlo agregado");
-			if (this.ClienteConectado != null)
-				this.ClienteConectado(nick);
+			this.NotifContactoConectado(nick);
 			
 			return clientesSinElNuevo.ToArray();
 		}
@@ -88,9 +86,7 @@ namespace MensajeroRemoting
 			Console.WriteLine("Bien, el cliente estaba conectado. Lo saco de la lista...");
 			this.clientesConectados.Remove(nick);
 			
-			Console.WriteLine("Avisando a los otros que se desconecto");
-			if (this.ClienteDesconectado != null)
-				this.ClienteDesconectado(nick);
+			this.NotifContactoDesconectado(nick);
 			Console.WriteLine("Listo!");
 		}
 		
@@ -126,6 +122,19 @@ namespace MensajeroRemoting
 		public override object InitializeLifetimeService()
 		{
 			return null;
+		}
+		
+		private void NotifContactoConectado(string nick)
+		{
+			Console.WriteLine("Avisando a los otros que se conecto uno nuevo, pero despues de haberlo agregado");
+			if (this.ClienteConectado != null)
+				this.ClienteConectado(nick);
+		}
+		private void NotifContactoDesconectado(string nick) 
+		{
+			Console.WriteLine("Avisando a los otros que se desconecto");
+			if (this.ClienteDesconectado != null)
+				this.ClienteDesconectado(nick);
 		}
 	}
 	

@@ -170,7 +170,7 @@ namespace MensajeroRemoting
 			this.cmbEstado.Changed -= new EventHandler(this.OnCmbEstadoChanged);
 			this.cmbEstado.Entry.Text = "Conectando...";
 			
-			DataInput servidorInput = new DataInput(this.mainWindow);
+			DataInput servidorInput = new DataInput(this.mainWindow,nick);
 			ResponseType respuesta = (ResponseType)servidorInput.Run();
 			if (respuesta == ResponseType.Cancel) {
 				this.cmbEstado.Entry.Text = "Desconectado";
@@ -286,7 +286,7 @@ namespace MensajeroRemoting
 			
 			TreeIter iter = this.contactos.AppendValues(nickCliente);
 			this.treeItersContactos.Add(nickCliente, iter);
-			
+
 			Console.WriteLine("  Listo, agregado");
 		}
 		

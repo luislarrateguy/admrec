@@ -87,7 +87,6 @@ namespace MensajeroRemoting
 			this.clientesConectados.Remove(nick);
 			
 			this.NotifContactoDesconectado(nick);
-
 			Console.WriteLine("Listo!");
 		}
 		
@@ -124,23 +123,18 @@ namespace MensajeroRemoting
 		{
 			return null;
 		}
-		public void NotifContactoConectado(string nick) 
+		
+		private void NotifContactoConectado(string nick)
 		{
-			ClienteRemoto clienteRemoto; 
 			Console.WriteLine("Avisando a los otros que se conecto uno nuevo, pero despues de haberlo agregado");
-			foreach (string cadenaConex in this.clientesConectados.Values) {
-				clienteRemoto = (ClienteRemoto)Activator.GetObject(typeof(ClienteRemoto),cadenaConex);
-				clienteRemoto.clienteConectado(nick);
-			}
+			if (this.ClienteConectado != null)
+				this.ClienteConectado(nick);
 		}
-		public void NotifContactoDesconectado(string nick) 
+		private void NotifContactoDesconectado(string nick) 
 		{
-			ClienteRemoto clienteRemoto;
 			Console.WriteLine("Avisando a los otros que se desconecto");
-			foreach (string cadenaConex in this.clientesConectados.Values) {
-				clienteRemoto = (ClienteRemoto)Activator.GetObject(typeof(ClienteRemoto),cadenaConex);
-				clienteRemoto.clienteDesconectado(nick);
-			}
+			if (this.ClienteDesconectado != null)
+				this.ClienteDesconectado(nick);
 		}
 	}
 	

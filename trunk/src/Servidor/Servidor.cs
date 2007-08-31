@@ -26,10 +26,13 @@ using System.Runtime.Remoting.Channels.Tcp;
 namespace MensajeroRemoting {
 	public class Servidor
 	{
+		private static ControladorConexiones controladorConexiones;
+		
 		public static void Main(string[] args)
 		{
 			BinaryServerFormatterSinkProvider provider = new BinaryServerFormatterSinkProvider();
 			provider.TypeFilterLevel = System.Runtime.Serialization.Formatters.TypeFilterLevel.Full;
+			
 			IDictionary props = new Hashtable();
 			props["port"] = 8085;
 			props["name"] = "tcp";
@@ -40,10 +43,13 @@ namespace MensajeroRemoting {
 //			RemotingConfiguration.RegisterWellKnownServiceType(typeof(ControladorConexiones),
 //			                                                          "CC",
 //			                                                          WellKnownObjectMode.Singleton);
+//			
+//			controladorConexiones = (ControladorConexiones)Activator.GetObject(typeof(ControladorConexiones),
+//			                                                                   "tcp://localhost:8085/CC");
 			
-			ControladorConexiones cc = new ControladorConexiones();
+			controladorConexiones = new ControladorConexiones();
 			ChannelServices.RegisterChannel(new TcpChannel(props, null, provider));
-			RemotingServices.Marshal(cc, "CC");
+			RemotingServices.Marshal(controladorConexiones, "CC");
 			
 			Console.WriteLine("Listo... presiona una tecla y vuelo de aca");
 			Console.ReadLine();

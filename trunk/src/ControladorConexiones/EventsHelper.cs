@@ -10,66 +10,77 @@ namespace MensajeroRemoting
 	[Serializable()]
 	public class EventsHelper: MarshalByRefObject
 	{
+		private ClienteRemoto clienteRemoto;
+		
 		public event ConexionClienteHandler ContactoConectado;
 		public event ConexionClienteHandler ContactoDesconectado;
 		public event MensajeRecibidoHandler MensajeRecibido;
 		
 		public EventsHelper(ClienteRemoto cr)
 		{
-			Console.Write("Creando objeto EventHelper...");
-			cr.ContactoConectado += new ConexionClienteHandler(this.clienteConectado);
-			cr.ContactoDesconectado += new ConexionClienteHandler(this.clienteDesconectado);
-			cr.MensajeRecibido += new MensajeRecibidoHandler(this.recibirMensaje);
+			this.clienteRemoto = cr;
+			
+			Console.WriteLine("Creando objeto EventHelper y registrando a los eventos de ControladorConexiones...");
+			this.RegistrarHandler();
 			Console.WriteLine("Creado EventHelper!");
 		}
 		
 		~EventsHelper()
 		{
-
+			Console.WriteLine("Se está destruyendo el EventHelper!");
 		}
 		
 		public void recibirMensaje(string nick, string mensaje)
 		{
+			Console.Write("(EventHelper) Evento RecibirMensaje recibido. Disparando el propio...");
 			if (this.MensajeRecibido != null)
 				this.MensajeRecibido(nick,mensaje);
+			Console.WriteLine("listo");
 		}
 		
 		public void clienteConectado(string nick)
 		{
+			Console.Write("(EventHelper) Evento ContactoConectado recibido. Disparando el propio...");
 			if (this.ContactoConectado != null)
 				this.ContactoConectado(nick);
+			Console.WriteLine("listo");
 		}
 		
 		public void clienteDesconectado(string nick)
 		{
+			Console.Write("(EventHelper) Evento ContactoDesconectado recibido. Disparando el propio...");
 			if (this.ContactoDesconectado != null)
 				this.ContactoDesconectado(nick);
+			Console.WriteLine("listo");
 		}
 		
-		/* No estoy seguro de la utilidad de esto, pero no se borra
-		public void registrarHandler()
+		public void RegistrarHandler()
 		{
-			Console.WriteLine(" ---- Registrando metodo agregarContacto");
-			this.controladorConexiones.ContactoConectado +=
-				new ControladorConexiones.ListaContactosHandler(this.OnContactoAgregado);
+			Console.WriteLine(" ---- (EventHelper) Registrando metodo clienteConectado");
+			this.clienteRemoto.ContactoConectado += new ConexionClienteHandler(this.clienteConectado);
 			
-			Console.WriteLine(" ---- Registrando metodo quitarContacto");
-			this.controladorConexiones.ContactoDesconectado +=
-				new ControladorConexiones.ListaContactosHandler(this.OnContactoQuitado);
+			Console.WriteLine(" ---- (EventHelper) Registrando metodo clienteDesconectado");
+			this.clienteRemoto.ContactoDesconectado += new ConexionClienteHandler(this.clienteDesconectado);
+			
+			Console.WriteLine(" ---- (EventHelper) Registrando metodo recibirMensaje");
+			this.clienteRemoto.MensajeRecibido += new MensajeRecibidoHandler(this.recibirMensaje);
 		}
 		
-		public void desregistrarHandlers()
+		public void DesregistrarHandlers()
 		{
-			Console.Write(" ---- Desregistrando metodo agregarContacto");
-			this.controladorConexiones.ContactoConectado -=
-				new ControladorConexiones.ListaContactosHandler(this.OnContactoAgregado);
-			Console.WriteLine("... Listo!");
+			Console.WriteLine(" ---- (EventHelper) Desregistrando metodo clienteConectado");
+			this.clienteRemoto.ContactoConectado -= new ConexionClienteHandler(this.clienteConectado);
 			
-			Console.Write(" ---- Desregistrando metodo quitarContacto");
-			this.controladorConexiones.ContactoDesconectado -=
-				new ControladorConexiones.ListaContactosHandler(this.OnContactoQuitado);
-			Console.WriteLine("... Listo!");
+			Console.WriteLine(" ---- (EventHelper) Desregistrando metodo clienteDesconectado");
+			this.clienteRemoto.ContactoDesconectado -= new ConexionClienteHandler(this.clienteDesconectado);
+			
+			Console.WriteLine(" ---- (EventHelper) Desregistrando metodo recibirMensaje");
+			this.clienteRemoto.MensajeRecibido -= new MensajeRecibidoHandler(this.recibirMensaje);
 		}
-		*/
+		
+		public override object InitializeLifetimeService()
+		{
+			return null;
+		}
 	}
 }

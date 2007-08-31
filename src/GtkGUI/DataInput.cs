@@ -11,8 +11,11 @@ namespace MensajeroRemoting
 {
 	public class DataInput : ServidorInput
 	{
-		public DataInput(Window w) : base(w)
+		private string nickAnterior;
+		
+		public DataInput(Window w, string nick) : base(w)
 		{
+			this.entryNick.Text = nick;
 		}
 		
 		public override void OnBtnAceptarClicked(object o, EventArgs args)

@@ -129,13 +129,15 @@ namespace MensajeroRemoting
 			
 			Console.WriteLine("Cadena seleccionada: " + nickSeleccionado);
 			// Si ya hay una ventana para chatear con el contacto, la activo
+			VentanaChat ventanaChat;
+			
 			if (this.ventanasChat.ContainsKey(nickSeleccionado)) {
-				VentanaChat vc = this.ventanasChat[nickSeleccionado];
-				vc.Activar();
+				ventanaChat = this.ventanasChat[nickSeleccionado];
+				ventanaChat.Activar();
 			}
 			else {
 				// En cambio si no hay una, la creo...
-				VentanaChat ventanaChat = new VentanaChat(this, nickSeleccionado);
+				ventanaChat = new VentanaChat(this, nickSeleccionado);
 				this.ventanasChat.Add(nickSeleccionado, ventanaChat);
 			}
 		}
@@ -199,6 +201,7 @@ namespace MensajeroRemoting
 					this.eventHelper.MensajeRecibido += new MensajeRecibidoHandler(this.RecibirMensaje);
 					
 					this.conectado = true;
+					this.mainWindow.Title = "IM - Nick: " + this.Nick;
 
 					// Limpio, por las dudas, el ListStore y el Dictionary
 					this.contactos.Clear();
@@ -231,7 +234,11 @@ namespace MensajeroRemoting
 		{
 			Console.WriteLine("Ejecutando Desconectar (MainWindow)");
 			
-			if (!this.conectado) return;
+			/* 	Me gustaría evitar estos return, que cortan el flujo.
+				Por ahi no se ven y no se sabe por que se sale del programa.
+			*/
+			if (!this.conectado) 
+				return;
 			
 			this.eventHelper.ContactoConectado -= new ConexionClienteHandler(this.ContactoConectado);
 			this.eventHelper.ContactoDesconectado -= new ConexionClienteHandler(this.ContactoDesconectado);
@@ -247,7 +254,7 @@ namespace MensajeroRemoting
 			//this.helper.DesregistrarHandlers();
 			
 			this.conectado = false;
-			
+			this.mainWindow.Title = "IM - Instant Messenger ";
 			/* Luego limpio la lista de contactos (GUI - TreeView) y luego
 			 * limpio el diccionario <cadenaConexion,TreeIter> */
 			TreeIter iter;
@@ -328,13 +335,13 @@ namespace MensajeroRemoting
 		public void RecibirMensaje(string nickOrigen, string mensaje)
 		{
 			Console.WriteLine("Mostrando mensaje recibido...");
+			VentanaChat ventanaChat;
 			
 			if (this.ventanasChat.ContainsKey(nickOrigen)) {
-				VentanaChat vc = this.ventanasChat[nickOrigen];
-				vc.MensajeRecibido(nickOrigen, mensaje);
-			}
-			else {
-				VentanaChat ventanaChat = new VentanaChat(this, nickOrigen);
+				ventanaChat = this.ventanasChat[nickOrigen];
+				ventanaChat.MensajeRecibido(nickOrigen, mensaje);
+			} else {
+				ventanaChat = new VentanaChat(this, nickOrigen);
 				ventanaChat.MensajeRecibido(nickOrigen, mensaje);
 				this.ventanasChat.Add(nickOrigen, ventanaChat);
 			}

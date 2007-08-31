@@ -12,5 +12,6 @@ Lista de errores reproducibles
              queda todo inconsistente -servidor y clientes.
              Si en cambio lo hago con 2 instancias, se puede chatear bien y
              todo anda de diez.
-
+             UPDATE: Ahora esta andando todo. No estoy seguro sin embargo
+ * Error 2: Al hablarle a un contacto que se desconecto, pero del cual no cerre su ventana (supongamos que se conecta milton, hablamos, y el se desconecta, pero no cierro su ventana. Entonces le mando un mensaje y salta un excepcion). Se debería contemplar ese caso y avisar "se desconecto el contacto" y cerrar gentilmente la ventana.
              

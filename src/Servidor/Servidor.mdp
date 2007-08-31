@@ -1,7 +1,10 @@
 <Project name="Servidor" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
-      <Output directory="./bin/Debug" assembly="Servidor" />
+      <CustomCommands>
+        <Command type="AfterBuild" command="cp ../log4net.config.xml ./bin/Debug/" />
+      </CustomCommands>
+      <Output directory="./bin/Debug" assemblyKeyFile="./" assembly="Servidor" />
       <Build debugmode="True" target="Exe" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />

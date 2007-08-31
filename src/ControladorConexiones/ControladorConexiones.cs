@@ -19,10 +19,26 @@
 
 using System;
 using System.Collections.Generic;
+using log4net;
+using log4net.Config;
+using log4net.Appender;
 
 namespace MensajeroRemoting
 {
+	// Delegate. Quiza haya que sacar las instancias
 	public delegate void ConexionClienteHandler(string nick);
+
+	[Serializable()]
+	public class NickOcupadoException : System.ApplicationException
+	{
+	    public NickOcupadoException() {}
+	    public NickOcupadoException(string message) {}
+	    public NickOcupadoException(string message, System.Exception inner) {}
+	 
+	    // Constructor necesario para la serializacion (remoting) 
+	    protected NickOcupadoException(System.Runtime.Serialization.SerializationInfo info,
+	        System.Runtime.Serialization.StreamingContext context) {}
+	}
 	
 	public class ControladorConexiones : MarshalByRefObject
 	{
@@ -33,42 +49,46 @@ namespace MensajeroRemoting
 		
 		public ControladorConexiones()
 		{
+			System.IO.FileInfo fi = new System.IO.FileInfo("log4net.config.xml");
+			Console.WriteLine(fi.Exists);
+			XmlConfigurator.Configure(fi);
+
 			this.clientesConectados = new Dictionary<string, string>();
 		}
 		
 		~ControladorConexiones()
 		{
-			Console.WriteLine("Se está destruyendo el ControladorConexiones!");
+			log4net.LogManager.GetLogger(this.GetType()).Debug("Se está destruyendo el ControladorConexiones!");
 		}
 		
 		public string[] Conectar (string cadenaConexion, string nick)
 		{
-			Console.WriteLine("");
-			Console.WriteLine("Petición de conexion. Cadena: " + cadenaConexion);
+			log4net.LogManager.GetLogger(this.GetType()).Debug("");
+			log4net.LogManager.GetLogger(this.GetType()).Debug("Petición de conexion. Cadena: " + cadenaConexion);
 			
 			///BEGIN Estas 2 hacen lo mismo
 			if (this.clientesConectados.ContainsKey(nick))
-				throw new Exception("El cliente ya esta conectado. Imposible continuar");
+				throw new NickOcupadoException("El cliente ya esta conectado. Imposible continuar");
 			
 			// Verifico que el nick no esté ocupado
 			if (this.NickOcupado(nick))
-				throw new Exception("El nick ya está ocupado");
+				throw new NickOcupadoException("El nick ya está ocupado");
 			///END Estas 2 hacen lo mismo
 			
 			
-			Console.WriteLine("El cliente es nuevo...");
+			log4net.LogManager.GetLogger(this.GetType()).Debug("El cliente es nuevo...");
 					
-			Console.WriteLine("Pasando clientesConectados a array...");
+			log4net.LogManager.GetLogger(this.GetType()).Debug("Pasando clientesConectados a array...");
 			List<string> clientesSinElNuevo = new List<string>();
 			foreach(string unNick in this.clientesConectados.Keys) {
-				Console.WriteLine("  procesando " + unNick);
+				log4net.LogManager.GetLogger(this.GetType()).Debug("  procesando " + unNick);
 				clientesSinElNuevo.Add(unNick);
 			}
 			
-			Console.WriteLine("Agrego el cliente a mi lista de clientes conectados");
+			log4net.LogManager.GetLogger(this.GetType()).Debug("Agrego el cliente a mi lista de clientes conectados");
 			this.clientesConectados.Add(nick, cadenaConexion);
 			
-			Console.WriteLine("Listo!");
+			log4net.LogManager.GetLogger(this.GetType()).Debug("Listo!");
 			
 			this.NotifContactoConectado(nick);
 			
@@ -77,24 +97,24 @@ namespace MensajeroRemoting
 		
 		public void Desconectar(string nick)
 		{
-			Console.WriteLine("");
-			Console.WriteLine("Petición de desconextion de " + nick);
+			log4net.LogManager.GetLogger(this.GetType()).Debug("");
+			log4net.LogManager.GetLogger(this.GetType()).Debug("Petición de desconextion de " + nick);
 			
 			if (!this.clientesConectados.ContainsKey(nick))
 				throw new Exception("El cliente no esta conectado. Imposible descontarlo");
 			
-			Console.WriteLine("Bien, el cliente estaba conectado. Lo saco de la lista...");
+			log4net.LogManager.GetLogger(this.GetType()).Debug("Bien, el cliente estaba conectado. Lo saco de la lista...");
 			this.clientesConectados.Remove(nick);
 			
 			this.NotifContactoDesconectado(nick);
 
-			Console.WriteLine("Listo!");
+			log4net.LogManager.GetLogger(this.GetType()).Debug("Listo!");
 		}
 		
 		public void EnviarMensaje(string nickOrigen, string nickDestino, string mensaje)
 		{
-			Console.WriteLine();
-			Console.WriteLine("ControladorConexiones.EnviarMensaje ejecutado...");
+
+			log4net.LogManager.GetLogger(this.GetType()).Debug("ControladorConexiones.EnviarMensaje ejecutado...");
 			
 			if (!this.clientesConectados.ContainsKey(nickOrigen))
 				throw new Exception("No se puede enviar un mensaje desde un cliente no conectado");
@@ -102,11 +122,11 @@ namespace MensajeroRemoting
 			if (!this.clientesConectados.ContainsKey(nickDestino))
 				throw new Exception("El cliente destino no esta conectado. No se puede enviar el mensaje");
 			
-			Console.WriteLine("Cachando objeto ClienteRemoto desde ControladorConexiones...");
+			log4net.LogManager.GetLogger(this.GetType()).Debug("Cachando objeto ClienteRemoto desde ControladorConexiones...");
 			ClienteRemoto clienteRemoto = (ClienteRemoto)Activator.GetObject(typeof(ClienteRemoto),
 			                                                                 this.clientesConectados[nickDestino]);
 			
-			Console.WriteLine("Ejecutando método recibirMensaje del clienteRemoto...");
+			log4net.LogManager.GetLogger(this.GetType()).Debug("Ejecutando método recibirMensaje del clienteRemoto...");
 			clienteRemoto.recibirMensaje(nickOrigen, mensaje);
 		}
 		
@@ -127,7 +147,7 @@ namespace MensajeroRemoting
 		public void NotifContactoConectado(string nick) 
 		{
 			ClienteRemoto clienteRemoto; 
-			Console.WriteLine("Avisando a los otros que se conecto uno nuevo, pero despues de haberlo agregado");
+			log4net.LogManager.GetLogger(this.GetType()).Debug("Avisando a los otros que se conecto uno nuevo, pero despues de haberlo agregado");
 			foreach (string cadenaConex in this.clientesConectados.Values) {
 				clienteRemoto = (ClienteRemoto)Activator.GetObject(typeof(ClienteRemoto),cadenaConex);
 				clienteRemoto.clienteConectado(nick);
@@ -136,7 +156,7 @@ namespace MensajeroRemoting
 		public void NotifContactoDesconectado(string nick) 
 		{
 			ClienteRemoto clienteRemoto;
-			Console.WriteLine("Avisando a los otros que se desconecto");
+			log4net.LogManager.GetLogger(this.GetType()).Debug("Avisando a los otros que se desconecto");
 			foreach (string cadenaConex in this.clientesConectados.Values) {
 				clienteRemoto = (ClienteRemoto)Activator.GetObject(typeof(ClienteRemoto),cadenaConex);
 				clienteRemoto.clienteDesconectado(nick);

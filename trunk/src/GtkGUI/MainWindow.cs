@@ -175,52 +175,56 @@ namespace MensajeroRemoting
 			if (respuesta == ResponseType.Cancel) {
 				this.cmbEstado.Entry.Text = "Desconectado";
 				this.cmbEstado.Changed += new EventHandler(this.OnCmbEstadoChanged);
-				return;
-			}
-			
-			this.nick = servidorInput.NickEscogido;
-			this.servidor = servidorInput.getServidorEscogido();
-			Console.WriteLine("En MainWindow el servidor resultó ser: " + this.servidor);
-			
-			servidorInput.Destroy();
-			
-			//Deberia hacer lo mismo con la IP
-			this.ip  = "127.0.0.1";
-			
-			// Creo la instancia
-			this.controladorCliente = new ControladorCliente(this.ip,this.servidor,this.Nick);
-			string[] clientesConectados = controladorCliente.Conectar(this.nick);
-			
-			this.cmbEstado.Entry.Text = "Conectado";
-			this.cmbEstado.Changed += new EventHandler(this.OnCmbEstadoChanged);
-			
-			// Me fijo si la conexión fue exitosa
-//			if (clientesConectados == null)
-//				return;
-			
-			// Me registro a los eventos que me interesan en el servidor
-//			if (this.eventHelper == null) {
-				this.eventHelper = new EventsHelper(this.controladorCliente.miClienteRemoto);
+			} else {
+				this.nick = servidorInput.NickEscogido;
+				this.servidor = servidorInput.getServidorEscogido();
+				Console.WriteLine("En MainWindow el servidor resultó ser: " + this.servidor);
 				
-				this.eventHelper.ContactoConectado += new ConexionClienteHandler(this.ContactoConectado);
-				this.eventHelper.ContactoDesconectado += new ConexionClienteHandler(this.ContactoDesconectado);
-				this.eventHelper.MensajeRecibido += new MensajeRecibidoHandler(this.RecibirMensaje);
-//			}
-			
-			this.conectado = true;
+				servidorInput.Destroy();
+				
+				//Deberia hacer lo mismo con la IP
+				this.ip  = "127.0.0.1";
+				
+				// Creo la instancia
+				this.controladorCliente = new ControladorCliente(this.ip,this.servidor,this.Nick);
+				try {
+				
+					string[] clientesConectados = controladorCliente.Conectar(this.nick);
+					
+					this.cmbEstado.Entry.Text = "Conectado";
+					this.eventHelper = new EventsHelper(this.controladorCliente.miClienteRemoto);
+					
+					this.eventHelper.ContactoConectado += new ConexionClienteHandler(this.ContactoConectado);
+					this.eventHelper.ContactoDesconectado += new ConexionClienteHandler(this.ContactoDesconectado);
+					this.eventHelper.MensajeRecibido += new MensajeRecibidoHandler(this.RecibirMensaje);
+					
+					this.conectado = true;
 
-			// Limpio, por las dudas, el ListStore y el Dictionary
-			this.contactos.Clear();
-			this.treeItersContactos.Clear();
-			
-			// Agrego los contactos al TreeView y al Dictionary
-			TreeIter iter;
-			foreach (string ci in clientesConectados) {
-				iter = this.contactos.AppendValues(ci);
-				this.treeItersContactos.Add(ci, iter);
+					// Limpio, por las dudas, el ListStore y el Dictionary
+					this.contactos.Clear();
+					this.treeItersContactos.Clear();
+					
+					// Agrego los contactos al TreeView y al Dictionary
+					TreeIter iter;
+					foreach (string ci in clientesConectados) {
+						iter = this.contactos.AppendValues(ci);
+						this.treeItersContactos.Add(ci, iter);
+					}
+				}
+				catch (NickOcupadoException e) {
+					this.conectado = false;
+					Gtk.MessageDialog md = new Gtk.MessageDialog(this.mainWindow, DialogFlags.Modal,
+	                           MessageType.Error, ButtonsType.Ok,
+	                           "El nick elegido ya está siendo usado por otro usuario");
+					md.Run();
+					md.Destroy();
+					this.cmbEstado.Entry.Text = "Desconectado";
+				}
+				finally {
+					this.cmbEstado.Changed += new EventHandler(this.OnCmbEstadoChanged);
+				}
+				Console.WriteLine("Fin de Conectar (MainWindow)");
 			}
-			
-			Console.WriteLine("Fin de Conectar (MainWindow)");
 		}
 		
 		private void Desconectar()

@@ -32,7 +32,7 @@ namespace MensajeroRemoting
 		private const string NOMBRE_SERVICIO = "Cliente";
 		
 		private ControladorConexiones controladorConexiones;
-		
+		private static string direccionServidor;
 		private ClienteRemoto clienteRemoto;
 		private TcpChannel canalBidireccional;
 		//private TcpServerChannel canalEscucha;
@@ -78,12 +78,11 @@ namespace MensajeroRemoting
 			
 			RemotingServices.Marshal(clienteRemoto, NOMBRE_SERVICIO);
 			
-			// Cacho el ControladorConexiones solo si es necesario
-//			if (controladorConexiones == null) {
-				Console.Write("Cachando el ControladorConexiones...");
-				controladorConexiones = ObtenerControladorConexiones();
-				Console.WriteLine("Cachado!");
-//			}
+			Console.Write("Cachando el ControladorConexiones...");
+			ControladorCliente.direccionServidor = direccionServidor;
+			controladorConexiones = ObtenerControladorConexiones();
+			Console.WriteLine("Cachado!");
+
 		}
 		
 		// Devolvería los nicks de los contactos
@@ -155,7 +154,7 @@ namespace MensajeroRemoting
 		{
 			// Direccion servidor deberia ser seteable de otro lado
 			ControladorConexiones cc = (ControladorConexiones)Activator.GetObject(typeof(ControladorConexiones),
-					"tcp://" + "localhost" + ":8085/CC");
+					"tcp://" + ControladorCliente.direccionServidor + ":8085/CC");
 			return cc;
 		}
 	}

@@ -4,7 +4,6 @@
       <Entry build="True" name="GtkGUI" configuration="Debug" />
       <Entry build="True" name="Servidor" configuration="Debug" />
       <Entry build="True" name="ControladorConexiones" configuration="Debug" />
-      <Entry build="False" name="JavaCliente" configuration="Debug" />
       <Entry build="False" name="TestingThings" configuration="Debug" />
       <Entry build="False" name="ClienteRepresentado" configuration="Debug" />
       <Entry build="True" name="NickInputEnBoo" configuration="Debug" />
@@ -17,7 +16,6 @@
       <Entry build="True" name="GtkGUI" configuration="Release" />
       <Entry build="True" name="Servidor" configuration="Release" />
       <Entry build="True" name="ControladorConexiones" configuration="Release" />
-      <Entry build="False" name="JavaCliente" configuration="Release" />
       <Entry build="True" name="TestingThings" configuration="Release" />
       <Entry build="True" name="ClienteRepresentado" configuration="Release" />
       <Entry build="True" name="NickInputEnBoo" configuration="Release" />
@@ -45,7 +43,6 @@
     <Entry filename="./GtkGUI/GtkGUI.mdp" />
     <Entry filename="./Servidor/Servidor.mdp" />
     <Entry filename="./ControladorConexiones/ControladorConexiones.mdp" />
-    <Entry filename="./JavaCliente/JavaCliente.mdp" />
     <Entry filename="./TestingThings/TestingThings.mdp" />
     <Entry filename="./ClienteRepresentado/ClienteRepresentado.mdp" />
     <Entry filename="./NickInputEnBoo/NickInputEnBoo.mdp" />

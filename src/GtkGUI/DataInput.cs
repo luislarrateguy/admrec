@@ -34,22 +34,6 @@ namespace MensajeroRemoting
 				return;
 			}
 			
-			// Verifico que el nick no esté ocupado
-//			Console.WriteLine("Viendo si el nick esta ocupado...");
-//			if (ClienteManager.NickOcupado(this.entryNick.Text)) {
-//				MessageDialog md = new MessageDialog(this, DialogFlags.Modal,
-//				                                     MessageType.Error, ButtonsType.Ok,
-//				                                     "El nick está ocupado. Escoja otro.");
-//				
-//				md.Run();
-//				md.Destroy();
-//				
-//				this.nickEscogido = null;
-//				this.entryNick.Text = "";
-//				
-//				return;
-//			}
-			
 			Console.WriteLine("Listo, nick escogido...");
 			this.nickEscogido = this.entryNick.Text;
 			this.servidorEscogido = this.entryServidor.Text;

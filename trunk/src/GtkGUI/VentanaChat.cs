@@ -57,7 +57,12 @@ namespace MensajeroRemoting
 			this.ventanaChat.DeleteEvent += new DeleteEventHandler(this.OnVentanaChatDelete);
 			
 			Console.WriteLine("Ejecutando ShowAll...");
-			this.ventanaChat.ShowAll();
+			this.ventanaChat.Show();
+		}
+		
+		public VentanaChat(MainWindow mainWindow, string nickDestino, string mensajeInicial) : this(mainWindow, nickDestino)
+		{
+			this.MensajeRecibido(mensajeInicial);
 		}
 		
 		public void OnBtnEnviarClicked(object o, EventArgs args)
@@ -80,9 +85,9 @@ namespace MensajeroRemoting
 			this.mainWindow.VentanaChatCerrada(this.nickDestino);
 		}
 		
-		public void MensajeRecibido(string origen, string mensaje)
+		public void MensajeRecibido(string mensaje)
 		{
-			this.textviewChat.Buffer.InsertAtCursor(origen + ": " + mensaje + "\n");
+			this.textviewChat.Buffer.InsertAtCursor(this.nickDestino + ": " + mensaje + "\n");
 		}
 		
 		public bool Activar()

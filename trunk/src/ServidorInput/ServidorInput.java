@@ -34,7 +34,7 @@ public abstract class ServidorInput extends NickInputEnBoo
 		this.entryServidor = new Entry();
 		this.get_VBox().Add(this.entryServidor);
 		this.entryServidor.set_Text("localhost");
-		this.entryServidor.ShowAll();
+		this.entryServidor.Show();
 		
 		this.entryNick.set_Text("Su nick");
 	}

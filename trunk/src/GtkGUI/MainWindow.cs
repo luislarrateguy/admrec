@@ -297,6 +297,8 @@ namespace MensajeroRemoting
 			
 			TreeIter iter = this.contactos.AppendValues(nickCliente);
 			this.treeItersContactos.Add(nickCliente, iter);
+			
+			//this.mainWindow.GdkWindow.ProcessUpdates(true);
 
 			Console.WriteLine("  Listo, agregado");
 		}
@@ -325,6 +327,8 @@ namespace MensajeroRemoting
 			this.contactos.Remove(ref iter);
 			this.treeItersContactos.Remove(nickClienteDesconectado);
 			
+			//this.mainWindow.GdkWindow.ProcessUpdates(true);
+			
 			Console.WriteLine("  Listo, quitado");
 //			}
 //			catch (KeyNotFoundException) {
@@ -339,10 +343,9 @@ namespace MensajeroRemoting
 			
 			if (this.ventanasChat.ContainsKey(nickOrigen)) {
 				ventanaChat = this.ventanasChat[nickOrigen];
-				ventanaChat.MensajeRecibido(nickOrigen, mensaje);
+				ventanaChat.MensajeRecibido(mensaje);
 			} else {
-				ventanaChat = new VentanaChat(this, nickOrigen);
-				ventanaChat.MensajeRecibido(nickOrigen, mensaje);
+				ventanaChat = new VentanaChat(this, nickOrigen, mensaje);
 				this.ventanasChat.Add(nickOrigen, ventanaChat);
 			}
 		}

@@ -22,6 +22,7 @@ namespace WSMensajeroFacade
 import System
 import System.Web
 import System.Web.Services
+import MensajeroRemoting
 
 [WebService (Description:"Impossible is nothing", Namespace:"http://localhost/webservices/examples/representante")]
 class IMManager():
@@ -40,10 +41,13 @@ class IMManager():
 	
 	[WebMethod (Description:"Devuelve la lista de contactos")]
 	public def getListaContactos() as List:
-		lista = ["nacho","cesar","milton"]
-		return lista
+		ip1 = "127.0.0.1"
+		ip2 = "127.0.0.1"
+		cc = ControladorCliente(ip1,ip2,"BigBrother")
+		contactos = cc.ContactosConectados
+		return List(contactos)
 		
-	[WebMethod (Description:"Devuelve la lista de contactos")]
+	[WebMethod (Description:"Envia un mensaje a fulano")]
 	public def enviarMensajeA(key as string, mensaje as string, nick as string) as bool:
 		return true
 		

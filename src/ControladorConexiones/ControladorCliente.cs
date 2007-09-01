@@ -157,5 +157,20 @@ namespace MensajeroRemoting
 					"tcp://" + ControladorCliente.direccionServidor + ":8085/CC");
 			return cc;
 		}
+		
+		public string[] ContactosConectados
+		{
+			get
+			{
+				string[] nicksContactosConectados;
+				nicksContactosConectados = controladorConexiones.ContactosConectados;
+
+				string[] nicksCopiados = new string[nicksContactosConectados.Length];
+				for (int i=0; i<nicksContactosConectados.Length; i++) {
+					nicksCopiados[i] = nicksContactosConectados[i];
+				}
+				return nicksCopiados;
+			}
+		}
 	}
 }

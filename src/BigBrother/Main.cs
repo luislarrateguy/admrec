@@ -13,8 +13,15 @@ namespace ClienteConsola
 	{
 		public static void Main(string[] args)
 		{
-			ControladorCliente cc = new ControladorCliente(args[0],args[1],args[2]);
-			string[] contactos = cc.Conectar("");
+			string ip1 = "127.0.0.1";
+			string ip2 = "127.0.0.1";
+			if (args.Length == 2) {
+				ip1 = args[0];
+				ip2 = args[1];
+			}
+			ControladorCliente cc = new ControladorCliente(ip1,ip2,"BigBrother");
+			//string[] contactos = cc.Conectar("");
+			string[] contactos = cc.ContactosConectados;
 			
 			Console.WriteLine("Contactos conectados:");
 			Console.WriteLine("---------------------");
@@ -22,7 +29,7 @@ namespace ClienteConsola
 			foreach (string cont in contactos)
 				Console.WriteLine("Nick: " + cont);
 				
-			cc.Desconectar();
+			//cc.Desconectar();
 		}
 	}
 }

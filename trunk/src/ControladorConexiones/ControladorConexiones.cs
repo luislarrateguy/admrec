@@ -95,6 +95,14 @@ namespace MensajeroRemoting
 			return clientesSinElNuevo.ToArray();
 		}
 		
+		public string[] ContactosConectados
+		{
+			get
+			{
+				return (new List<string>(this.clientesConectados.Keys)).ToArray();
+			}
+		}
+		
 		public void Desconectar(string nick)
 		{
 			log4net.LogManager.GetLogger(this.GetType()).Debug("");

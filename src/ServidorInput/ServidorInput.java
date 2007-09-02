@@ -17,12 +17,16 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import cli.System.Net.*;
 import cli.Gtk.*;
+
 import cli.Controles.NickInputEnBoo;
 
 public abstract class ServidorInput extends NickInputEnBoo
 {
 	protected Entry entryServidor;
+	protected ComboBox cmbIps;
+	
 	protected String servidorEscogido;
 	
 	public ServidorInput(cli.Gtk.Window w)
@@ -36,12 +40,30 @@ public abstract class ServidorInput extends NickInputEnBoo
 		this.entryServidor.set_Text("localhost");
 		this.entryServidor.Show();
 		
+		this.cmbIps = ComboBox.NewText();
+		this.cmbIps.AppendText("127.0.0.1");
+		
+		IPHostEntry ipEntry = Dns.GetHostByName(Dns.GetHostName());
+		IPAddress [] ipAddr = ipEntry.get_AddressList();
+		
+		for (IPAddress ipa : ipAddr)
+			this.cmbIps.AppendText(ipa.ToString());
+			
+		this.get_VBox().Add(this.cmbIps);
+		this.cmbIps.set_Active(0);
+		this.cmbIps.Show();
+		
 		this.entryNick.set_Text("Su nick");
 	}
 	
 	public String getServidorEscogido()
 	{
 		return this.entryServidor.get_Text();
+	}
+	
+	public String getIpEscogida()
+	{
+		return this.cmbIps.get_ActiveText();
 	}
 	
 	public abstract void OnBtnAceptarClicked(java.lang.Object o, cli.System.EventArgs args);

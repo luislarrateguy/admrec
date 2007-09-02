@@ -142,18 +142,8 @@ namespace MensajeroRemoting
 			string nickSeleccionado = (string)this.contactos.GetValue(filaSeleccionada, 0);
 			
 			this.logger.Debug("Cadena seleccionada: " + nickSeleccionado);
-			// Si ya hay una ventana para chatear con el contacto, la activo
-			VentanaChat ventanaChat;
 			
-			if (this.ventanasChat.ContainsKey(nickSeleccionado)) {
-				ventanaChat = this.ventanasChat[nickSeleccionado];
-				ventanaChat.Activar();
-			}
-			else {
-				// En cambio si no hay una, la creo...
-				ventanaChat = new VentanaChat(this, nickSeleccionado);
-				this.ventanasChat.Add(nickSeleccionado, ventanaChat);
-			}
+			this.MostrarVentanaChat(nickSeleccionado);
 		}
 		
 		public void VentanaChatCerrada(string nick)
@@ -196,10 +186,10 @@ namespace MensajeroRemoting
 				this.servidor = servidorInput.getServidorEscogido();
 				this.logger.Debug("En MainWindow el servidor resultó ser: " + this.servidor);
 				
-				servidorInput.Destroy();
-				
 				//Deberia hacer lo mismo con la IP
-				this.ip  = "127.0.0.1";
+				this.ip  = servidorInput.getIpEscogida();
+				
+				servidorInput.Destroy();
 				
 				// Creo la instancia
 				this.controladorCliente = new ControladorCliente(this, this.ip, this.servidor, this.Nick);
@@ -333,17 +323,49 @@ namespace MensajeroRemoting
 		public void RecibirMensaje(string nickOrigen, string mensaje)
 		{
 			this.logger.Debug("Mostrando mensaje recibido...");
+			
+			if (this.ventanasChat.ContainsKey(nickOrigen))
+				this.ventanasChat[nickOrigen].MensajeRecibido(mensaje);
+			else
+				this.MostrarVentanaChat(nickOrigen, mensaje);
+//			
+//			ventanaChat.MensajeRecibido(mensaje);
+		}
+		
+		public Gtk.Window GtkWindow
+		{
+			get { return this.mainWindow; }
+		}
+		
+		private VentanaChat MostrarVentanaChat(string nickRemoto, string mensaje)
+		{
+			this.logger.Debug("Metodo MostrarVentanaChat");
 			VentanaChat ventanaChat;
 			
-			if (this.ventanasChat.ContainsKey(nickOrigen)) {
-				this.logger.Debug("Ya tengo la ventana abierta");
-				ventanaChat = this.ventanasChat[nickOrigen];
-				ventanaChat.MensajeRecibido(mensaje);
-			} else {
-				this.logger.Debug("Tengo que crear una nueva ventana");
-				ventanaChat = new VentanaChat(this, nickOrigen, mensaje);
-				this.ventanasChat.Add(nickOrigen, ventanaChat);
+			if (this.ventanasChat.ContainsKey(nickRemoto)) {
+				this.logger.Debug("La ventana ya esta creada");
+				ventanaChat = this.ventanasChat[nickRemoto];
 			}
+			else {
+				this.logger.Debug("Creando la ventana, porque no esta");
+				if (mensaje == null)
+					ventanaChat = new VentanaChat(this, nickRemoto);
+				else
+					ventanaChat = new VentanaChat(this, nickRemoto, mensaje);
+				this.logger.Debug("Agregandola al diccionario");
+				this.ventanasChat.Add(nickRemoto, ventanaChat);
+			}
+			
+//			this.logger.Debug("Activandola");
+//			ventanaChat.Activar();
+			
+			this.logger.Debug("Listo, retornando");
+			return ventanaChat;
+		}
+		
+		private VentanaChat MostrarVentanaChat(string nickRemoto)
+		{
+			return this.MostrarVentanaChat(nickRemoto, null);
 		}
 		
 		public static void Main(string[] args)

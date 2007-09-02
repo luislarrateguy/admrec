@@ -33,7 +33,7 @@ public class NickInputEnBoo(Dialog):
 	public def constructor(w as Gtk.Window):
 		super('Escoja un nick', w, DialogFlags.Modal)
 
-		self.Deletable = false
+		self.Resizable = false
 		self.entryNick = Entry(15)
 		self.VBox.Add(self.entryNick)
 		self.entryNick.Show()

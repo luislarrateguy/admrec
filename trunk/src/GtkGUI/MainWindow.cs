@@ -24,16 +24,16 @@ using System.Collections.Generic;
 using Gtk;
 using Glade;
 
+using log4net.Appender;
+using log4net.Config;
+
 namespace MensajeroRemoting
 {
-	
-	public class MainWindow
+	public class MainWindow : ICliente
 	{
 
 		private string servidor;
 		private string nick;
-		private bool conectado = false;
-		private string cadenaConexion;
 		private string ip;
 		
 		[Widget]
@@ -50,19 +50,23 @@ namespace MensajeroRemoting
 		private Dictionary<string, TreeIter> treeItersContactos;
 		private Dictionary<string, VentanaChat> ventanasChat;
 		
-		// para el cliente remoto y eventos
-		//private ClienteRemoto miCliente;
-		private EventsHelper eventHelper;
 		private ControladorCliente controladorCliente;
+		
+		private log4net.ILog logger;
 		
 		public MainWindow()
 		{
+			this.logger = log4net.LogManager.GetLogger(this.GetType());
+			System.IO.FileInfo fi = new System.IO.FileInfo("log4net.config.xml");
+			this.logger.Debug(fi.Exists);
+			XmlConfigurator.Configure(fi);
+			
 			Application.Init();
 			
 			this.treeItersContactos = new Dictionary<string, Gtk.TreeIter>();
 			this.ventanasChat = new Dictionary<string, VentanaChat>();
 			
-			Console.WriteLine("Creando interfaz glade...");
+			this.logger.Debug("Creando interfaz glade...");
 			Glade.XML gxml = new XML("mainwindow.glade", "mainWindow", null);
 			gxml.Autoconnect(this);
 			
@@ -98,14 +102,24 @@ namespace MensajeroRemoting
 			Application.Run();
 		}
 		
+		public ConexionClienteHandler MetodoContactoConectado
+		{
+			get { return (new ConexionClienteHandler(this.ContactoConectado)); }
+		}
+		
+		public ConexionClienteHandler MetodoContactoDesconectado
+		{
+			get { return (new ConexionClienteHandler(this.ContactoDesconectado)); }
+		}
+		
+		public MensajeRecibidoHandler MetodoMensajeRecibido
+		{
+			get { return (new MensajeRecibidoHandler(this.RecibirMensaje)); }
+		}
+		
 		public ControladorCliente ControladorCliente
 		{
 			get { return this.controladorCliente; }
-		}
-		
-		public string CadenaConexion 
-		{
-			get { return this.cadenaConexion; }
 		}
 		
 		public string Nick
@@ -127,7 +141,7 @@ namespace MensajeroRemoting
 			 * 1 del modelo del treeview */
 			string nickSeleccionado = (string)this.contactos.GetValue(filaSeleccionada, 0);
 			
-			Console.WriteLine("Cadena seleccionada: " + nickSeleccionado);
+			this.logger.Debug("Cadena seleccionada: " + nickSeleccionado);
 			// Si ya hay una ventana para chatear con el contacto, la activo
 			VentanaChat ventanaChat;
 			
@@ -150,7 +164,7 @@ namespace MensajeroRemoting
 		
 		public void OnCmbEstadoChanged(object o, EventArgs args)
 		{
-			Console.WriteLine("Ejecutando OnCmbEstadoChanged...");
+			this.logger.Debug("Ejecutando OnCmbEstadoChanged...");
 			
 			if (this.cmbEstado.Active < 0)
 				return;
@@ -165,7 +179,7 @@ namespace MensajeroRemoting
 		
 		private void Conectar()
 		{
-			Console.WriteLine("Ejecutando Conectar (MainWindow)");
+			this.logger.Debug("Ejecutando Conectar (MainWindow)");
 			// Pido el nick
 			
 			// Deshabilito temporalmente el manejador de eventos del combobox
@@ -180,7 +194,7 @@ namespace MensajeroRemoting
 			} else {
 				this.nick = servidorInput.NickEscogido;
 				this.servidor = servidorInput.getServidorEscogido();
-				Console.WriteLine("En MainWindow el servidor resultó ser: " + this.servidor);
+				this.logger.Debug("En MainWindow el servidor resultó ser: " + this.servidor);
 				
 				servidorInput.Destroy();
 				
@@ -188,19 +202,13 @@ namespace MensajeroRemoting
 				this.ip  = "127.0.0.1";
 				
 				// Creo la instancia
-				this.controladorCliente = new ControladorCliente(this.ip,this.servidor,this.Nick);
+				this.controladorCliente = new ControladorCliente(this, this.ip, this.servidor, this.Nick);
 				try {
 				
 					string[] clientesConectados = controladorCliente.Conectar(this.nick);
 					
 					this.cmbEstado.Entry.Text = "Conectado";
-					this.eventHelper = new EventsHelper(this.controladorCliente.miClienteRemoto);
 					
-					this.eventHelper.ContactoConectado += new ConexionClienteHandler(this.ContactoConectado);
-					this.eventHelper.ContactoDesconectado += new ConexionClienteHandler(this.ContactoDesconectado);
-					this.eventHelper.MensajeRecibido += new MensajeRecibidoHandler(this.RecibirMensaje);
-					
-					this.conectado = true;
 					this.mainWindow.Title = "IM - Nick: " + this.Nick;
 
 					// Limpio, por las dudas, el ListStore y el Dictionary
@@ -214,8 +222,7 @@ namespace MensajeroRemoting
 						this.treeItersContactos.Add(ci, iter);
 					}
 				}
-				catch (NickOcupadoException e) {
-					this.conectado = false;
+				catch (NickOcupadoException) {
 					Gtk.MessageDialog md = new Gtk.MessageDialog(this.mainWindow, DialogFlags.Modal,
 	                           MessageType.Error, ButtonsType.Ok,
 	                           "El nick elegido ya está siendo usado por otro usuario");
@@ -226,25 +233,13 @@ namespace MensajeroRemoting
 				finally {
 					this.cmbEstado.Changed += new EventHandler(this.OnCmbEstadoChanged);
 				}
-				Console.WriteLine("Fin de Conectar (MainWindow)");
+				this.logger.Debug("Fin de Conectar (MainWindow)");
 			}
 		}
 		
 		private void Desconectar()
 		{
-			Console.WriteLine("Ejecutando Desconectar (MainWindow)");
-			
-			/* 	Me gustaría evitar estos return, que cortan el flujo.
-				Por ahi no se ven y no se sabe por que se sale del programa.
-			*/
-			if (!this.conectado) 
-				return;
-			
-			this.eventHelper.ContactoConectado -= new ConexionClienteHandler(this.ContactoConectado);
-			this.eventHelper.ContactoDesconectado -= new ConexionClienteHandler(this.ContactoDesconectado);
-			this.eventHelper.MensajeRecibido -= new MensajeRecibidoHandler(this.RecibirMensaje);
-			
-			this.eventHelper.DesregistrarHandlers();
+			this.logger.Debug("Ejecutando Desconectar (MainWindow)");
 			
 			// Primero me desconecto del servidor
 			controladorCliente.Desconectar();
@@ -253,7 +248,6 @@ namespace MensajeroRemoting
 			 * métodos en ControladorConexiones */
 			//this.helper.DesregistrarHandlers();
 			
-			this.conectado = false;
 			this.mainWindow.Title = "IM - Instant Messenger ";
 			/* Luego limpio la lista de contactos (GUI - TreeView) y luego
 			 * limpio el diccionario <cadenaConexion,TreeIter> */
@@ -265,12 +259,12 @@ namespace MensajeroRemoting
 			
 			this.treeItersContactos.Clear();
 			
-			Console.WriteLine("Fin de Desconectar (MainWindow)");
+			this.logger.Debug("Fin de Desconectar (MainWindow)");
 		}
 		
 		public void OnDeleteMainWindow(object o, DeleteEventArgs args)
 		{
-			Console.WriteLine("Ejecutando OnDeleteMainWindow...");
+			this.logger.Debug("Ejecutando OnDeleteMainWindow...");
 			
 			this.Desconectar();
 			
@@ -283,15 +277,15 @@ namespace MensajeroRemoting
 			//unCliente.cadenaConexion = unCliente2.cadenaConexion;
 			//unCliente.nick = unCliente2.nick;
 			
-			Console.WriteLine("Notificación de contacto conectado!");
+			this.logger.Debug("Notificación de contacto conectado!");
 
 			if (this.nick.Equals(nickCliente)) {
-				Console.WriteLine("  Pero soy yo mismo. No me agrego, porque no me gusta chatear conmigo, salvo cuando estoy solo, y no tengo ganas de estudiar o programar");
+				this.logger.Debug("  Pero soy yo mismo. No me agrego, porque no me gusta chatear conmigo, salvo cuando estoy solo, y no tengo ganas de estudiar o programar");
 				return;
 			}
 			
 			if (this.treeItersContactos.ContainsKey(nickCliente)) {
-				Console.WriteLine("Ops, el cliente que se conecto no soy yo, pero ya lo tengo agregado :S");
+				this.logger.Debug("Ops, el cliente que se conecto no soy yo, pero ya lo tengo agregado :S");
 				return;
 			}
 			
@@ -300,12 +294,12 @@ namespace MensajeroRemoting
 			
 			//this.mainWindow.GdkWindow.ProcessUpdates(true);
 
-			Console.WriteLine("  Listo, agregado");
+			this.logger.Debug("  Listo, agregado");
 		}
 		
 		public void ContactoDesconectado(string nickClienteDesconectado)
 		{
-			Console.WriteLine("Notificación de contacto desconectado!");
+			this.logger.Debug("Notificación de contacto desconectado!");
 			
 //			Console.WriteLine("Mi cadena es '" + this.cadenaConexion + "', y mi nick es '" +
 //			                  this.nick);
@@ -313,12 +307,12 @@ namespace MensajeroRemoting
 //			                  unCliente);
 			
 			if (this.nick.Equals(nickClienteDesconectado)) {
-				Console.WriteLine("  Pero soy yo mismo. Paro aca nomas.");
+				this.logger.Debug("  Pero soy yo mismo. Paro aca nomas.");
 				return;
 			}
 			
 			if (!this.treeItersContactos.ContainsKey(nickClienteDesconectado)) {
-				Console.WriteLine("Se desconectó un cliente pero no lo tengo!");
+				this.logger.Debug("Se desconectó un cliente pero no lo tengo!");
 				return;
 			}
 			
@@ -329,7 +323,7 @@ namespace MensajeroRemoting
 			
 			//this.mainWindow.GdkWindow.ProcessUpdates(true);
 			
-			Console.WriteLine("  Listo, quitado");
+			this.logger.Debug("  Listo, quitado");
 //			}
 //			catch (KeyNotFoundException) {
 //				Console.WriteLine("  ERROR: Contacto no presente en mi lista de contactos");
@@ -338,13 +332,15 @@ namespace MensajeroRemoting
 		
 		public void RecibirMensaje(string nickOrigen, string mensaje)
 		{
-			Console.WriteLine("Mostrando mensaje recibido...");
+			this.logger.Debug("Mostrando mensaje recibido...");
 			VentanaChat ventanaChat;
 			
 			if (this.ventanasChat.ContainsKey(nickOrigen)) {
+				this.logger.Debug("Ya tengo la ventana abierta");
 				ventanaChat = this.ventanasChat[nickOrigen];
 				ventanaChat.MensajeRecibido(mensaje);
 			} else {
+				this.logger.Debug("Tengo que crear una nueva ventana");
 				ventanaChat = new VentanaChat(this, nickOrigen, mensaje);
 				this.ventanasChat.Add(nickOrigen, ventanaChat);
 			}

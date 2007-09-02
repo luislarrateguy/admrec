@@ -14,8 +14,9 @@
     </Configuration>
   </Configurations>
   <Contents>
-    <File name="./Main.cs" subtype="Code" buildaction="Compile" />
+    <File name="./ClienteConsolaEscucha.cs" subtype="Code" buildaction="Compile" />
     <File name="./AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="../log4net.config.xml" subtype="Code" buildaction="FileCopy" />
   </Contents>
   <References>
     <ProjectReference type="Project" localcopy="True" refto="ControladorConexiones" />

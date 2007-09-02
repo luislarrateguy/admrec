@@ -8,8 +8,8 @@
       <Entry build="False" name="ClienteRepresentado" configuration="Debug" />
       <Entry build="True" name="NickInputEnBoo" configuration="Debug" />
       <Entry build="True" name="ServidorInput" configuration="Debug" />
-      <Entry build="True" name="WSMensajeroFacade" configuration="Debug" />
-      <Entry build="True" name="BigBrother" configuration="Debug" />
+      <Entry build="False" name="WSMensajeroFacade" configuration="Debug" />
+      <Entry build="False" name="BigBrother" configuration="Debug" />
       <Entry build="True" name="ClienteConsolaEscucha" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
@@ -29,14 +29,12 @@
     <Execute type="None" entry="GtkGUI" />
     <Execute type="None" entry="Servidor" />
     <Execute type="None" entry="ControladorConexiones" />
-    <Execute type="None" entry="JavaCliente" />
     <Execute type="None" entry="TestingThings" />
     <Execute type="None" entry="ClienteRepresentado" />
     <Execute type="None" entry="NickInputEnBoo" />
     <Execute type="None" entry="ServidorInput" />
     <Execute type="None" entry="WSMensajeroFacade" />
     <Execute type="None" entry="BigBrother" />
-    <Execute type="None" entry="ClienteConsola" />
     <Execute type="None" entry="ClienteConsolaEscucha" />
   </StartMode>
   <Entries>

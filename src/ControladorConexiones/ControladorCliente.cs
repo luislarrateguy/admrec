@@ -20,10 +20,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
+
+using log4net.Config;
+using log4net.Appender;
 
 namespace MensajeroRemoting
 {
@@ -31,58 +33,62 @@ namespace MensajeroRemoting
 	{
 		private const string NOMBRE_SERVICIO = "Cliente";
 		
-		private ControladorConexiones controladorConexiones;
-		private static string direccionServidor;
+		private ICliente objetoCliente;
+		private EventsHelper eventsHelper;
 		private ClienteRemoto clienteRemoto;
+		private ControladorConexiones controladorConexiones;
 		private TcpChannel canalBidireccional;
-		//private TcpServerChannel canalEscucha;
+		
+		private static string direccionServidor;
 		private string cadenaConexion;
 		private string nick;
 		private bool conectado = false;
 		
-		public ControladorCliente(string ipPropia, string direccionServidor, string nick)
+		private log4net.ILog logger;
+		
+		public ControladorCliente(ICliente objetoCliente, string ipPropia, string direccionServidor, string nick)
 		{
+			this.logger = log4net.LogManager.GetLogger(this.GetType());
+			
+			this.objetoCliente = objetoCliente;
+			this.nick = nick;
+			
 			IServerChannelSinkProvider provider = new BinaryServerFormatterSinkProvider();
 			IDictionary props = new Hashtable();
 			props["port"] = 0;
 			props["name"] = "tcp";
 			props["bindTo"] = ipPropia;
 			
-			// Este canal es para servir a mi ClienteRemoto
-//            this.canalEscucha = new TcpServerChannel(props, provider);
-//			ChannelServices.RegisterChannel(canalEscucha);
-//			
-//			ChannelDataStore cds = (ChannelDataStore)canalEscucha.ChannelData;
-			
 			this.canalBidireccional = new TcpChannel(props, null, provider);
 			ChannelServices.RegisterChannel(this.canalBidireccional);
 			
 			ChannelDataStore cds = (ChannelDataStore)this.canalBidireccional.ChannelData;	
 			
-			this.nick = nick;
-			
 			this.cadenaConexion = cds.ChannelUris[0]  + "/" + NOMBRE_SERVICIO;
-			Console.WriteLine("Mi canal escucha: " + this.cadenaConexion);
-			
-			// Este canal es para la comunicación bidireccional con el server
-//			TcpChannel chanServe = new TcpChannel();
-//			ChannelServices.RegisterChannel(chanServe);
+			this.logger.Debug("Mi canal escucha: " + this.cadenaConexion);
 
-			Console.WriteLine("Registrando mi objeto remoto...");
-//			RemotingConfiguration.RegisterWellKnownServiceType(typeof(ClienteRemoto),
-//			                                                          NOMBRE_SERVICIO,
-//			                                                          WellKnownObjectMode.Singleton);
-
-			Console.WriteLine("Creando un nuevo ClienteRemoto!!!");
+			this.logger.Debug("Creando un nuevo ClienteRemoto");
 			this.clienteRemoto = new ClienteRemoto();
 			
 			RemotingServices.Marshal(clienteRemoto, NOMBRE_SERVICIO);
 			
-			Console.Write("Cachando el ControladorConexiones...");
+			this.logger.Debug("Cachando el ControladorConexiones...");
 			ControladorCliente.direccionServidor = direccionServidor;
 			controladorConexiones = ObtenerControladorConexiones();
-			Console.WriteLine("Cachado!");
 
+			this.logger.Debug("Registrando métodos handlers del cliente en el EventHandler");
+			this.eventsHelper = new EventsHelper(this.clienteRemoto);
+			this.eventsHelper.ContactoConectado += this.objetoCliente.MetodoContactoConectado;
+			this.eventsHelper.ContactoDesconectado += this.objetoCliente.MetodoContactoDesconectado;
+			this.eventsHelper.MensajeRecibido += this.objetoCliente.MetodoMensajeRecibido;
+		}
+		
+		~ControladorCliente()
+		{
+			this.logger.Debug("Destruyendo objeto ControladorCliente");
+			
+			if (this.conectado)
+				this.logger.Error("Se esta destruyendo el objeto ControladorCliente, pero todavia estoy conectado");
 		}
 		
 		// Devolvería los nicks de los contactos
@@ -90,59 +96,71 @@ namespace MensajeroRemoting
 			if (!nuevoNick.Equals(""))
 				this.nick = nuevoNick;
 			
-			Console.Write("Conectando...");
+			if (this.conectado) {
+				this.logger.Error("Ya estoy conectado, pero se esta intentando conectar otra vez");
+				return null;
+			}
 			
+			this.logger.Debug("Conectando...");
 			
 			string[] nicksContactosConectados;
 			nicksContactosConectados = controladorConexiones.Conectar(this.cadenaConexion, this.nick);
-			// andaría esto en vez de copiarlos 1 por 1.?
-			//List<string> s = new List<string>(controladorConexiones.Conectar(this.cadenaConexion, this.nick));
 			
 			if (nicksContactosConectados == null)
 				throw new Exception("No fue posible la conexión");
 			
 			this.conectado = true;
-			Console.WriteLine("Conectado!");
+			this.logger.Debug("Conectado!");
 			
 			// Copio los nicks a otro array, porque hay problemas sino
-			Console.WriteLine("Procesando contactos conectados recibidos...");
-			string[] nicksCopiados = new string[nicksContactosConectados.Length];
-			for (int i=0; i<nicksContactosConectados.Length; i++) {
-				nicksCopiados[i] = nicksContactosConectados[i];
-				Console.WriteLine("   Nick recibido: " + nicksCopiados[i]);
-			}
-			
-			Console.WriteLine("Listo. Retorno la lista de contactos");
+//			this.logger.Debug("Procesando contactos conectados recibidos...");
+//			string[] nicksCopiados = new string[nicksContactosConectados.Length];
+//			for (int i=0; i<nicksContactosConectados.Length; i++) {
+//				nicksCopiados[i] = nicksContactosConectados[i];
+//				this.logger.Debug("   Nick recibido: " + nicksCopiados[i]);
+//			}
 			
 			//Registro handlers para los eventos de conexión
+			this.logger.Debug("Registrando handlers de mi objeto ClienteRemoto");
 			this.miClienteRemoto.RegistrarHandlers();
 			
-			return nicksCopiados;
+			this.logger.Debug("Listo. Retornando lista de contactos conectados");
+			return nicksContactosConectados;
 		}
 		
 		public void Desconectar() {
-			if (!this.conectado)
+			if (!this.conectado) {
+				this.logger.Error("Estoy desconectado, y se esta intentando desconectar");
 				return;
+			}
+			
+			this.logger.Debug("Desregistrando metodos de objetoCliente del EventsHelper");
+			this.eventsHelper.ContactoConectado -= this.objetoCliente.MetodoContactoConectado;
+			this.eventsHelper.ContactoDesconectado -= this.objetoCliente.MetodoContactoDesconectado;
+			this.eventsHelper.MensajeRecibido -= this.objetoCliente.MetodoMensajeRecibido;
+			
+			this.logger.Debug("Desregistrando metodos del EventsHelper del ClienteRemoto");
+			this.eventsHelper.DesregistrarHandlers();
 			
 			this.miClienteRemoto.DesregistrarHandlers();			
 			
-			Console.Write("Desconectando...");
+			this.logger.Debug("Desconectando...");
 			controladorConexiones.Desconectar(this.nick);
-			Console.WriteLine(" Desconectado");
+			this.logger.Debug(" Desconectado");
 			
 			this.conectado = false;
 			
-			Console.Write("Desregistrando el canal bidireccional... ");
+			this.logger.Debug("Desregistrando el canal bidireccional... ");
 			ChannelServices.UnregisterChannel(this.canalBidireccional);
 			RemotingServices.Disconnect(this.clienteRemoto);
-			Console.WriteLine("Listo");
+			this.logger.Debug("Listo");
 		}
 		
 		public void EnviarMensaje(string nickDestino, string mensaje)
 		{
-			Console.WriteLine("Enviando mensaje (ControladorCliente)...");
+			this.logger.Debug("Enviando mensaje (ControladorCliente)...");
 			controladorConexiones.EnviarMensaje(this.nick, nickDestino, mensaje);
-			Console.WriteLine("Enviado! (ControladorCliente)...");
+			this.logger.Debug("Enviado! (ControladorCliente)...");
 		}
 		
 		public ClienteRemoto miClienteRemoto {

@@ -11,10 +11,12 @@ namespace MensajeroRemoting
 {
 	public class DataInput : ServidorInput
 	{
-		private string nickAnterior;
+		private log4net.ILog logger;
 		
 		public DataInput(Window w, string nick) : base(w)
 		{
+			this.logger = log4net.LogManager.GetLogger(this.GetType());
+			
 			this.entryNick.Text = nick;
 		}
 		
@@ -34,7 +36,7 @@ namespace MensajeroRemoting
 				return;
 			}
 			
-			Console.WriteLine("Listo, nick escogido...");
+			this.logger.Debug("Listo, nick escogido...");
 			this.nickEscogido = this.entryNick.Text;
 			this.servidorEscogido = this.entryServidor.Text;
 			this.Respond(ResponseType.Ok);

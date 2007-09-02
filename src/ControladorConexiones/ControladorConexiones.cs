@@ -47,10 +47,13 @@ namespace MensajeroRemoting
 		
 		private Dictionary<string, string> clientesConectados;
 		
+		private log4net.ILog logger;
+		
 		public ControladorConexiones()
 		{
+			this.logger = log4net.LogManager.GetLogger(this.GetType());
 			System.IO.FileInfo fi = new System.IO.FileInfo("log4net.config.xml");
-			Console.WriteLine(fi.Exists);
+			this.logger.Debug(fi.Exists);
 			XmlConfigurator.Configure(fi);
 
 			this.clientesConectados = new Dictionary<string, string>();
@@ -58,13 +61,13 @@ namespace MensajeroRemoting
 		
 		~ControladorConexiones()
 		{
-			log4net.LogManager.GetLogger(this.GetType()).Debug("Se está destruyendo el ControladorConexiones!");
+			this.logger.Debug("Se está destruyendo el ControladorConexiones!");
 		}
 		
 		public string[] Conectar (string cadenaConexion, string nick)
 		{
-			log4net.LogManager.GetLogger(this.GetType()).Debug("");
-			log4net.LogManager.GetLogger(this.GetType()).Debug("Petición de conexion. Cadena: " + cadenaConexion);
+			this.logger.Debug("");
+			this.logger.Debug("Petición de conexion. Cadena: " + cadenaConexion);
 			
 			///BEGIN Estas 2 hacen lo mismo
 			if (this.clientesConectados.ContainsKey(nick))
@@ -76,19 +79,19 @@ namespace MensajeroRemoting
 			///END Estas 2 hacen lo mismo
 			
 			
-			log4net.LogManager.GetLogger(this.GetType()).Debug("El cliente es nuevo...");
+			this.logger.Debug("El cliente es nuevo...");
 					
-			log4net.LogManager.GetLogger(this.GetType()).Debug("Pasando clientesConectados a array...");
+			this.logger.Debug("Pasando clientesConectados a array...");
 			List<string> clientesSinElNuevo = new List<string>();
 			foreach(string unNick in this.clientesConectados.Keys) {
-				log4net.LogManager.GetLogger(this.GetType()).Debug("  procesando " + unNick);
+				this.logger.Debug("  procesando " + unNick);
 				clientesSinElNuevo.Add(unNick);
 			}
 			
-			log4net.LogManager.GetLogger(this.GetType()).Debug("Agrego el cliente a mi lista de clientes conectados");
+			this.logger.Debug("Agrego el cliente a mi lista de clientes conectados");
 			this.clientesConectados.Add(nick, cadenaConexion);
 			
-			log4net.LogManager.GetLogger(this.GetType()).Debug("Listo!");
+			this.logger.Debug("Listo!");
 			
 			this.NotifContactoConectado(nick);
 			
@@ -105,24 +108,26 @@ namespace MensajeroRemoting
 		
 		public void Desconectar(string nick)
 		{
-			log4net.LogManager.GetLogger(this.GetType()).Debug("");
-			log4net.LogManager.GetLogger(this.GetType()).Debug("Petición de desconextion de " + nick);
+			this.logger.Debug("");
+			this.logger.Debug("Petición de desconextion de " + nick);
 			
 			if (!this.clientesConectados.ContainsKey(nick))
 				throw new Exception("El cliente no esta conectado. Imposible descontarlo");
 			
-			log4net.LogManager.GetLogger(this.GetType()).Debug("Bien, el cliente estaba conectado. Lo saco de la lista...");
+			this.logger.Debug("Bien, el cliente estaba conectado. Lo saco de la lista...");
 			this.clientesConectados.Remove(nick);
 			
 			this.NotifContactoDesconectado(nick);
 
-			log4net.LogManager.GetLogger(this.GetType()).Debug("Listo!");
+			this.logger.Debug("Listo!");
 		}
 		
 		public void EnviarMensaje(string nickOrigen, string nickDestino, string mensaje)
 		{
 
-			log4net.LogManager.GetLogger(this.GetType()).Debug("ControladorConexiones.EnviarMensaje ejecutado...");
+			this.logger.Debug("ControladorConexiones.EnviarMensaje ejecutado...");
+			this.logger.Debug("Nick origen: " + nickOrigen);
+			this.logger.Debug("Nick destino: " + nickDestino);
 			
 			if (!this.clientesConectados.ContainsKey(nickOrigen))
 				throw new Exception("No se puede enviar un mensaje desde un cliente no conectado");
@@ -130,11 +135,11 @@ namespace MensajeroRemoting
 			if (!this.clientesConectados.ContainsKey(nickDestino))
 				throw new Exception("El cliente destino no esta conectado. No se puede enviar el mensaje");
 			
-			log4net.LogManager.GetLogger(this.GetType()).Debug("Cachando objeto ClienteRemoto desde ControladorConexiones...");
+			this.logger.Debug("Cachando objeto ClienteRemoto desde ControladorConexiones...");
 			ClienteRemoto clienteRemoto = (ClienteRemoto)Activator.GetObject(typeof(ClienteRemoto),
 			                                                                 this.clientesConectados[nickDestino]);
 			
-			log4net.LogManager.GetLogger(this.GetType()).Debug("Ejecutando método recibirMensaje del clienteRemoto...");
+			this.logger.Debug("Ejecutando método recibirMensaje del clienteRemoto...");
 			clienteRemoto.recibirMensaje(nickOrigen, mensaje);
 		}
 		
@@ -155,16 +160,20 @@ namespace MensajeroRemoting
 		public void NotifContactoConectado(string nick) 
 		{
 			ClienteRemoto clienteRemoto; 
-			log4net.LogManager.GetLogger(this.GetType()).Debug("Avisando a los otros que se conecto uno nuevo, pero despues de haberlo agregado");
+			this.logger.Debug("Avisando a los otros que se conecto uno nuevo, pero despues de haberlo agregado");
 			foreach (string cadenaConex in this.clientesConectados.Values) {
+				this.logger.Debug("Cachando objeto remoto (" + cadenaConex + ")");
 				clienteRemoto = (ClienteRemoto)Activator.GetObject(typeof(ClienteRemoto),cadenaConex);
+				this.logger.Debug("Notificando...");
 				clienteRemoto.clienteConectado(nick);
 			}
+			
+			this.logger.Debug("Notificación hecha");
 		}
 		public void NotifContactoDesconectado(string nick) 
 		{
 			ClienteRemoto clienteRemoto;
-			log4net.LogManager.GetLogger(this.GetType()).Debug("Avisando a los otros que se desconecto");
+			this.logger.Debug("Avisando a los otros que se desconecto");
 			foreach (string cadenaConex in this.clientesConectados.Values) {
 				clienteRemoto = (ClienteRemoto)Activator.GetObject(typeof(ClienteRemoto),cadenaConex);
 				clienteRemoto.clienteDesconectado(nick);

@@ -22,6 +22,9 @@ using System;
 using Gtk;
 using Glade;
 
+using log4net.Appender;
+using log4net.Config;
+
 namespace MensajeroRemoting
 {
 	public class VentanaChat
@@ -38,26 +41,33 @@ namespace MensajeroRemoting
 		private string nickDestino;
 		private MainWindow mainWindow;
 		
+		private log4net.ILog logger;
+		
 		public VentanaChat(MainWindow mainWindow, string nickDestino)
 		{
+			this.logger = log4net.LogManager.GetLogger(this.GetType());
+			System.IO.FileInfo fi = new System.IO.FileInfo("log4net.config.xml");
+			this.logger.Debug(fi.Exists);
+			XmlConfigurator.Configure(fi);
+			
 			this.mainWindow = mainWindow;
 			this.nickDestino = nickDestino;
 			
-			Console.WriteLine("Creando interfaz glade de ventanaChat...");
+			this.logger.Debug("Creando interfaz glade de ventanaChat...");
 			Glade.XML gxml = new XML("ventanachat.glade", "ventanaChat", null);
 			gxml.Autoconnect(this);
 			
-			Console.WriteLine("Seteando título...");
+			this.logger.Debug("Seteando título...");
 			this.ventanaChat.Title = this.mainWindow.Nick + " (yo) hablando con: "+nickDestino;
 			
-			Console.WriteLine("Seteando foco a textviewMensaje...");
+			this.logger.Debug("Seteando foco a textviewMensaje...");
 			this.textviewMensaje.HasFocus = true;
 			
-			Console.WriteLine("Agregando evento DeleteEvent...");
+			this.logger.Debug("Agregando evento DeleteEvent...");
 			this.ventanaChat.DeleteEvent += new DeleteEventHandler(this.OnVentanaChatDelete);
 			
-			Console.WriteLine("Ejecutando ShowAll...");
-			this.ventanaChat.Show();
+			this.logger.Debug("Ejecutando ShowAll...");
+			this.ventanaChat.ShowAll();
 		}
 		
 		public VentanaChat(MainWindow mainWindow, string nickDestino, string mensajeInicial) : this(mainWindow, nickDestino)
@@ -67,6 +77,7 @@ namespace MensajeroRemoting
 		
 		public void OnBtnEnviarClicked(object o, EventArgs args)
 		{
+			this.logger.Debug("OnBtnEnviarClicked");
 			string mensaje = this.textviewMensaje.Buffer.Text;
 			
 			if (mensaje.Equals(String.Empty))
@@ -74,25 +85,30 @@ namespace MensajeroRemoting
 			
 			this.mainWindow.ControladorCliente.EnviarMensaje(this.nickDestino, mensaje);
 			
+			this.logger.Debug("Agregando mensaje enviado a mi ventana");
 			this.textviewChat.Buffer.InsertAtCursor(this.mainWindow.Nick + ": " + mensaje + "\n");
+			this.logger.Debug("Limpiando mi textview de mensaje");
 			this.textviewMensaje.Buffer.Clear();
+			this.logger.Error("Seteando foco a textview de mensaje");
 			this.textviewMensaje.HasFocus = true;
 		}
 		
 		public void OnVentanaChatDelete(object o, DeleteEventArgs args)
 		{
-			Console.WriteLine("VentanaChat " + this.nickDestino + " - DeleteEvent");
+			this.logger.Debug("VentanaChat " + this.nickDestino + " - DeleteEvent");
 			this.mainWindow.VentanaChatCerrada(this.nickDestino);
 		}
 		
 		public void MensajeRecibido(string mensaje)
 		{
+			this.logger.Debug("Ejecutando MensajeRecibido");
 			this.textviewChat.Buffer.InsertAtCursor(this.nickDestino + ": " + mensaje + "\n");
 		}
 		
 		public bool Activar()
 		{
-			this.ventanaChat.Activate();
+//			this.logger.Debug("Ejecutando método Activar");
+//			this.ventanaChat.Activate();
 			return true;
 		}
 	}

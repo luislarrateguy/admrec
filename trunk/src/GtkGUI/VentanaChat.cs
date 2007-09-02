@@ -30,13 +30,13 @@ namespace MensajeroRemoting
 	public class VentanaChat
 	{
 		[Widget]
-		Gtk.Window ventanaChat;
+		private Gtk.Window ventanaChat;
 		
 		[Widget]
-		Gtk.TextView textviewMensaje;
+		private Gtk.TextView textviewMensaje;
 		
 		[Widget]
-		Gtk.TextView textviewChat;
+		private Gtk.TextView textviewChat;
 		
 		private string nickDestino;
 		private MainWindow mainWindow;
@@ -59,6 +59,7 @@ namespace MensajeroRemoting
 			
 			this.logger.Debug("Seteando título...");
 			this.ventanaChat.Title = this.mainWindow.Nick + " (yo) hablando con: "+nickDestino;
+			//this.ventanaChat.TransientFor = mainWindow.GtkWindow;
 			
 			this.logger.Debug("Seteando foco a textviewMensaje...");
 			this.textviewMensaje.HasFocus = true;
@@ -86,7 +87,12 @@ namespace MensajeroRemoting
 			this.mainWindow.ControladorCliente.EnviarMensaje(this.nickDestino, mensaje);
 			
 			this.logger.Debug("Agregando mensaje enviado a mi ventana");
+//			TextIter endIter = this.textviewChat.Buffer.StartIter;
+//			this.textviewChat.Buffer.Insert(ref endIter, this.mainWindow.Nick + ": " + mensaje + "\n");
+			
 			this.textviewChat.Buffer.InsertAtCursor(this.mainWindow.Nick + ": " + mensaje + "\n");
+			this.textviewChat.Buffer.PlaceCursor(this.textviewChat.Buffer.EndIter);
+			
 			this.logger.Debug("Limpiando mi textview de mensaje");
 			this.textviewMensaje.Buffer.Clear();
 			this.logger.Error("Seteando foco a textview de mensaje");
@@ -103,13 +109,15 @@ namespace MensajeroRemoting
 		{
 			this.logger.Debug("Ejecutando MensajeRecibido");
 			this.textviewChat.Buffer.InsertAtCursor(this.nickDestino + ": " + mensaje + "\n");
+//			TextIter endIter = this.textviewChat.Buffer.StartIter;
+//			this.textviewChat.Buffer.Insert(ref endIter, this.mainWindow.Nick + ": " + mensaje + "\n");
+			this.textviewChat.Buffer.PlaceCursor(this.textviewChat.Buffer.EndIter);
 		}
 		
-		public bool Activar()
-		{
+//		public void Activar()
+//		{
 //			this.logger.Debug("Ejecutando método Activar");
-//			this.ventanaChat.Activate();
-			return true;
-		}
+//			this.ventanaChat.HasFocus = true;
+//		}
 	}
 }

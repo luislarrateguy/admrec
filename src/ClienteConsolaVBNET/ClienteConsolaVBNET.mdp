@@ -14,7 +14,7 @@
     </Configuration>
   </Configurations>
   <Contents>
-    <File name="./application.vb" subtype="Code" buildaction="Compile" />
+    <File name="./ClienteConsolaVBNET.vb" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Project" localcopy="True" refto="ControladorConexiones" />

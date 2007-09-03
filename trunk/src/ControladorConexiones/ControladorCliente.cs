@@ -108,7 +108,7 @@ namespace MensajeroRemoting
 			nicksContactosConectados = controladorConexiones.Conectar(this.cadenaConexion, this.nick);
 			
 			if (nicksContactosConectados == null)
-				throw new Exception("No fue posible la conexión");
+				throw new ApplicationException("No fue posible la conexión");
 			
 			this.conectado = true;
 			this.logger.Debug("Conectado!");

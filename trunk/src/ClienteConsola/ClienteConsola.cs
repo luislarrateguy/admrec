@@ -51,7 +51,7 @@ namespace MensajeroRemoting
 				this.nick = args[0];
 			}
 			else {
-				throw new Exception("Cantidad de argumentos incorrectos");
+				throw new ApplicationException("Cantidad de argumentos incorrectos");
 			}
 			
 			this.listaClientesConectados = new List<string>();

@@ -112,7 +112,7 @@ namespace MensajeroRemoting
 			this.logger.Debug("Petición de desconextion de " + nick);
 			
 			if (!this.clientesConectados.ContainsKey(nick))
-				throw new Exception("El cliente no esta conectado. Imposible descontarlo");
+				throw new ApplicationException("El cliente no esta conectado. Imposible descontarlo");
 			
 			this.logger.Debug("Bien, el cliente estaba conectado. Lo saco de la lista...");
 			this.clientesConectados.Remove(nick);
@@ -130,10 +130,10 @@ namespace MensajeroRemoting
 			this.logger.Debug("Nick destino: " + nickDestino);
 			
 			if (!this.clientesConectados.ContainsKey(nickOrigen))
-				throw new Exception("No se puede enviar un mensaje desde un cliente no conectado");
+				throw new ApplicationException("No se puede enviar un mensaje desde un cliente no conectado");
 			
 			if (!this.clientesConectados.ContainsKey(nickDestino))
-				throw new Exception("El cliente destino no esta conectado. No se puede enviar el mensaje");
+				throw new ApplicationException("El cliente destino no esta conectado. No se puede enviar el mensaje");
 			
 			this.logger.Debug("Cachando objeto ClienteRemoto desde ControladorConexiones...");
 			ClienteRemoto clienteRemoto = (ClienteRemoto)Activator.GetObject(typeof(ClienteRemoto),

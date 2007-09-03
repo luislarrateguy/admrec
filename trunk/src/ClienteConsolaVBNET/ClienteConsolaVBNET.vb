@@ -146,19 +146,19 @@ ElseIf comando.Equals("l") Then
 			Console.WriteLine("El contacto " + nickCliente + " dice: " + mensaje)
 		End Sub
 
-		Public ReadOnly Property MetodoContactoConectado() As ConexionClienteHandler
+		Public ReadOnly Property MetodoContactoConectado() As ConexionClienteHandler Implements ICliente.MetodoContactoConectado
 			Get
 				Return (New ConexionClienteHandler(AddressOf Me.ContactoConectado))
 			End Get
 		End Property
 
-		Public ReadOnly Property MetodoContactoDesconectado() As ConexionClienteHandler
+		Public ReadOnly Property MetodoContactoDesconectado() As ConexionClienteHandler Implements ICliente.MetodoContactoDesconectado
 			Get
 				Return (New ConexionClienteHandler(AddressOf Me.ContactoDesconectado))
 			End Get
 		End Property
 
-		Public ReadOnly Property MetodoMensajeRecibido() As MensajeRecibidoHandler
+		Public ReadOnly Property MetodoMensajeRecibido() As MensajeRecibidoHandler Implements ICliente.MetodoMensajeRecibido
 			Get
 				Return (New MensajeRecibidoHandler(AddressOf Me.RecibirMensaje))
 			End Get

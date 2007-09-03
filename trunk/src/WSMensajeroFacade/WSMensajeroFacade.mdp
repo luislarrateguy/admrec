@@ -1,5 +1,5 @@
 <Project name="WSMensajeroFacade" fileversion="2.0" language="Boo" clr-version="Net_2_0" VerifyCodeBehindFields="True" VerifyCodeBehindEvents="True" ctype="AspNetAppProject">
-  <Configurations active="Debug">
+  <Configurations>
     <Configuration name="Debug" ctype="AspNetAppProjectConfiguration">
       <Output directory="./" assembly="WSMensajeroFacade" />
       <Build debugmode="True" target="Exe" />

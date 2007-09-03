@@ -232,20 +232,18 @@ namespace MensajeroRemoting
 			this.logger.Debug("Ejecutando Desconectar (MainWindow)");
 			
 			// Primero me desconecto del servidor
-			controladorCliente.Desconectar();
-			
-			/* Le digo al objeto ListaContactosEventHelper que desregistre sus
-			 * métodos en ControladorConexiones */
-			//this.helper.DesregistrarHandlers();
+			if (controladorCliente != null)
+				controladorCliente.Desconectar();
 			
 			this.mainWindow.Title = "IM - Instant Messenger ";
 			/* Luego limpio la lista de contactos (GUI - TreeView) y luego
 			 * limpio el diccionario <cadenaConexion,TreeIter> */
-			TreeIter iter;
-			foreach (string ci in this.treeItersContactos.Keys) {
-				iter = this.treeItersContactos[ci];
-				this.contactos.Remove(ref iter);
-			}
+			this.contactos.Clear();
+//			TreeIter iter;
+//			foreach (string ci in this.treeItersContactos.Keys) {
+//				iter = this.treeItersContactos[ci];
+//				this.contactos.Remove(ref iter);
+//			}
 			
 			this.treeItersContactos.Clear();
 			

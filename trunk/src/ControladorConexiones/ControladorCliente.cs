@@ -47,6 +47,11 @@ namespace MensajeroRemoting
 		
 		private log4net.ILog logger;
 		
+		public ControladorCliente(string ipPropia, string direccionServidor, string nick)
+			: this(new DummyClient(), ipPropia, direccionServidor, nick)
+		{
+		}
+		
 		public ControladorCliente(ICliente objetoCliente, string ipPropia, string direccionServidor, string nick)
 		{
 			this.logger = log4net.LogManager.GetLogger(this.GetType());

@@ -1,23 +1,25 @@
-<Project name="ClienteRepresentado" fileversion="2.0" language="Boo" clr-version="Net_1_1" ctype="DotNetProject">
+<Project name="ClienteRepresentado" fileversion="2.0" language="Boo" clr-version="Net_2_0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
-      <Output directory="./bin/Debug" assemblyKeyFile="./" assembly="ClienteRepresentado" />
-      <Build debugmode="True" target="Library" />
-      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_1_1" />
+      <Output directory="./bin/Debug" assemblyKeyFile="./" assembly="ServidorIntermediario" />
+      <Build debugmode="True" target="Exe" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
       <CodeGeneration genwarnings="False" ducky="False" culture="" ctype="BooCompilerParameters" />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
       <Output directory="./bin/Release" assemblyKeyFile="./" assembly="ClienteRepresentado" />
       <Build debugmode="False" target="Library" />
-      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_1_1" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
       <CodeGeneration genwarnings="False" ducky="False" culture="" ctype="BooCompilerParameters" />
     </Configuration>
   </Configurations>
   <Contents>
     <File name="./ClienteRepresentado.boo" subtype="Code" buildaction="Compile" />
+    <File name="./ClientesCreator.boo" subtype="Code" buildaction="Compile" />
+    <File name="./ServidorIntermediario.boo" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
-    <ProjectReference type="Project" localcopy="True" refto="GtkGUI" />
     <ProjectReference type="Project" localcopy="True" refto="ControladorConexiones" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Runtime.Remoting, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   </References>
 </Project>

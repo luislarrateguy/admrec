@@ -29,6 +29,7 @@ using log4net.Appender;
 
 namespace MensajeroRemoting
 {
+
 	public class ControladorCliente
 	{
 		private const string NOMBRE_SERVICIO = "Cliente";

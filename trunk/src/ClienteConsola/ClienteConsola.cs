@@ -23,7 +23,7 @@ using System.Collections.Generic;
 
 namespace MensajeroRemoting
 {
-	public class ClienteConsolaEscucha : ICliente
+	public class ClienteConsola : ICliente
 	{
 		private List<string> listaClientesConectados;
 		private ControladorCliente controladorCliente;
@@ -34,11 +34,11 @@ namespace MensajeroRemoting
 		
 		public static void Main(string[] args)
 		{
-			ClienteConsolaEscucha cce = new ClienteConsolaEscucha(args);
+			ClienteConsola cce = new ClienteConsola(args);
 			cce.Iniciar();
 		}
 		
-		public ClienteConsolaEscucha(string[] args)
+		public ClienteConsola(string[] args)
 		{
 			if (args.Length == 3) {
 				this.ip = args[0];

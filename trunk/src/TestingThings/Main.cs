@@ -18,6 +18,12 @@
 */
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.Remoting;
+using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting.Channels.Tcp;
+using ProyectoServidorIntermediario;
 
 namespace TestingThings
 {
@@ -25,7 +31,25 @@ namespace TestingThings
 	{
 		public static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+//			IDictionary props = new Hashtable();
+//			props["port"] = 0;
+//			props["name"] = "tcp";
+//			props["bindTo"] = "127.0.0.1";
+//
+//			IServerChannelSinkProvider provider = new BinaryServerFormatterSinkProvider();		
+//			TcpChannel canalBidireccional = new TcpChannel(props, null, provider);
+//			ChannelServices.RegisterChannel(canalBidireccional);
+//			
+//			ChannelDataStore cds = (ChannelDataStore)canalBidireccional.ChannelData;	
+//			
+//			ClientesCreator c =  (ClientesCreator) Activator.GetObject(typeof(ClientesCreator),
+//										"tcp://127.0.0.1:8099/CC");
+//										
+//			ClienteRepresentado cr = c.getClienteRepresentado("nacho");
+			ClienteRepresentado cr = new ClienteRepresentado();
+			cr.conectar("nacho");
+			cr.enviarMensaje("milton","holaaaaa milton");
+			cr.desconectar();
 		}
 	}
 }

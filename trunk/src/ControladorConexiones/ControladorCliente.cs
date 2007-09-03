@@ -93,8 +93,10 @@ namespace MensajeroRemoting
 		{
 			this.logger.Debug("Destruyendo objeto ControladorCliente");
 			
-			if (this.conectado)
+			if (this.conectado) {
 				this.logger.Error("Se esta destruyendo el objeto ControladorCliente, pero todavia estoy conectado");
+				this.Desconectar();
+			}
 		}
 		
 		// Devolvería los nicks de los contactos

@@ -20,18 +20,26 @@
 namespace WSMensajeroFacade
 
 import System
+import System.Collections
 import System.Web
 import System.Web.Services
 import MensajeroRemoting
+import System.Runtime.Remoting
+import System.Runtime.Remoting.Channels
+import ProyectServidorIntermediario
 
 [WebService (Description:"Impossible is nothing", Namespace:"http://localhost/webservices/examples/representante")]
 class IMManager():
 	
 	[WebMethod(Description:"Autentica y crea un objeto remoto que te represente")]
 	public def Conectar(nick as string) as string:
-		//cc = ControladorCliente("127.0.0.1","127.0.0.1","BigBrother")
-		//HttpContext.Current.Session["cc"] = cc
-		//cc.Conectar("")
+//		cc = ClienteClaseProbando.getCC()
+//		cr as ClienteRepresentado = cc.getClienteRepresentado("nacho")
+//		cr.conectar("nacho")
+		cc as ClientesCreator = Activator.GetObject(typeof(ClientesCreator),
+				"tcp://127.0.0.1:8099/CC")
+		cr = cc.getClienteRepresentado("nacho")
+//		cr.conectar("nacho2")
 		return "true"
 		
 	[WebMethod(Description:"Desconecta del respresentante")]
@@ -44,13 +52,11 @@ class IMManager():
 	
 	[WebMethod(Description:"Devuelve la lista de contactos")]
 	public def getListaContactos() as List:
-		contactos = cc.ContactosConectados
-		return List(contactos)
+		return List(["nacho","milton"])
 		
 	[WebMethod (Description:"Envia un mensaje a fulano")]
 	public def enviarMensajeA(key as string, mensaje as string, nick as string) as bool:
-		//cc as ControladorCliente = HttpContext.Current.Session["cc"]
-		cc.EnviarMensaje(nick,mensaje)
+		
 		return true
 		
 	[WebMethod (Description:"Devuelve true si hubo cambios: en la lista de contactos, o un mensaje recibido")]

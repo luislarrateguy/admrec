@@ -1,10 +1,10 @@
 <Project name="WSMensajeroFacade" fileversion="2.0" language="Boo" clr-version="Net_2_0" VerifyCodeBehindFields="True" VerifyCodeBehindEvents="True" ctype="AspNetAppProject">
-  <Configurations>
+  <Configurations active="Debug">
     <Configuration name="Debug" ctype="AspNetAppProjectConfiguration">
       <Output directory="./" assembly="WSMensajeroFacade" />
       <Build debugmode="True" target="Exe" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
-      <CodeGeneration genwarnings="False" ducky="False" culture="" ctype="BooCompilerParameters" />
+      <CodeGeneration genwarnings="False" ducky="True" culture="" ctype="BooCompilerParameters" />
       <AspNet GenerateNonPartialCodeBehindMembers="False" />
     </Configuration>
     <Configuration name="Release" ctype="AspNetAppProjectConfiguration">
@@ -18,11 +18,13 @@
   <Contents>
     <File name="./Default.asmx" subtype="Code" buildaction="FileCopy" />
     <File name="./IMManager.boo" subtype="Code" buildaction="Compile" />
+    <File name="./ClienteClaseProbando.boo" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
-    <ProjectReference type="Project" localcopy="True" refto="ControladorConexiones" />
     <ProjectReference type="Gac" localcopy="True" refto="System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <ProjectReference type="Gac" localcopy="True" refto="System.Web.Services, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <ProjectReference type="Project" localcopy="True" refto="ClienteRepresentado" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Runtime.Remoting, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   </References>
-  <XspParameters Port="8099" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+  <XspParameters Port="8098" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" PasswordOptions="None" Password="" Verbose="True" />
 </Project>

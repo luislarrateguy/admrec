@@ -19,138 +19,55 @@
 
 
 
-namespace MensajeroRemoting
+namespace ProyectoServidorIntermediario
 
 import System
 import System.Collections
-import System.Collections.Generic
+import MensajeroRemoting
 
-public class ClienteConsola(ICliente):
+public class ClienteRepresentado(ICliente):
 
-	private listaClientesConectados as List[of string]
-
+	private listaClientesConectados as List
 	private controladorCliente as ControladorCliente
-
-	
 	private ip as string
-
 	private nick as string
-
 	private servidor as string
 
 	
-	public static def Main(args as (string)):
-		cce = ClienteConsola(args)
-		cce.Iniciar()
+	public def constructor():
+		self.listaClientesConectados = List()
+		self.controladorCliente = ControladorCliente(self, "127.0.0.1", "127.0.0.1", "")
 
 	
-	public def constructor(args as (string)):
-		if args.Length == 3:
-			self.ip = args[0]
-			self.servidor = args[1]
-			self.nick = args[2]
-		else:
-			if args.Length == 1:
-				self.ip = '127.0.0.1'
-				self.servidor = '127.0.0.1'
-				self.nick = args[0]
-			else:
-				raise ApplicationException('Cantidad de argumentos incorrectos')
-		
-		self.listaClientesConectados = List[of string]()
-		self.controladorCliente = ControladorCliente(self, self.ip, self.servidor, self.nick)
-
+	public def conectar(nick as string):
+		self.controladorCliente.Conectar(nick)
 	
-	public def Iniciar():
-		while true:
-			Console.WriteLine()
-			Console.WriteLine('Esperando eventos. Comandos:')
-			Console.WriteLine('   \'q\': Salir')
-			Console.WriteLine('   \'c\': Conectar')
-			Console.WriteLine('   \'d\': Desconectar')
-			Console.WriteLine('   \'m\': Enviar mensaje')
-			Console.WriteLine('   \'l\': Lista clientes conectados')
-			Console.WriteLine()
-			
-			Console.Write('Escriba su comando: ')
-			
-			comando as string = Console.ReadLine()
-			
-			if comando.Equals('q'):
-				break 
-			else:
-				if comando.Equals('c'):
-					Console.WriteLine('Conectando...')
-					Console.WriteLine(('Nick: ' + self.nick))
-					Console.WriteLine(('Servidor: ' + self.servidor))
-					Console.WriteLine(('IP: ' + self.ip))
-					
-					// Creo la instancia
-					self.listaClientesConectados.AddRange(controladorCliente.Conectar(nick))
-					
-					Console.WriteLine('Conectado!')
-				else:
-					if comando.Equals('d'):
-						self.listaClientesConectados.Clear()
-						self.controladorCliente.Desconectar()
-						Console.WriteLine('Desconectado')
-					else:
-						if comando.Equals('m'):
-							Console.Write('Escriba el nick destino:')
-							nickDestino as string = Console.ReadLine()
-							
-							Console.Write('Escriba el mensaje:')
-							mensaje as string = Console.ReadLine()
-							
-							Console.Write('Enviando mensaje...')
-							self.controladorCliente.EnviarMensaje(nickDestino, mensaje)
-							Console.WriteLine('Enviado')
-						else:
-							if comando.Equals('l'):
-								self.MostrarClientesConectados()
-							else:
-								Console.WriteLine('Comando incorrecto')
-
 	
-	public def MostrarClientesConectados():
-		Console.WriteLine('')
+	public def desconectar():
+		self.listaClientesConectados.Clear()
+		self.controladorCliente.Desconectar()
 		
-		if self.listaClientesConectados.Count == 0:
-			Console.WriteLine('No hay contactos conectados')
-			return 
-		
-		Console.WriteLine('Estos son los clientes conectados en este momento:')
-		for ci as string in self.listaClientesConectados:
-			Console.WriteLine(('Nick: ' + ci))
+	public def enviarMensaje(nick as string, mensaje as string):
+		self.controladorCliente.EnviarMensaje(nick, mensaje)
+	
+	public def getContactosConectados() as List:
+		return listaClientesConectados
 
 	
 	public def ContactoConectado(nickCliente as string):
 		if nickCliente.Equals(self.nick):
 			return 
-		
 		self.listaClientesConectados.Add(nickCliente)
 		
-		Console.WriteLine('')
-		Console.WriteLine(('Se conectó un contacto. Nick: ' + nickCliente))
-		//this.MostrarClientesConectados();
-
-	
 	public def ContactoDesconectado(nickCliente as string):
 		if nickCliente.Equals(self.nick):
-			return 
-		
+			return 	
 		self.listaClientesConectados.Remove(nickCliente)
 		
-		Console.WriteLine('')
-		Console.WriteLine(('Se desconectó un contacto. Nick: ' + nickCliente))
-		//this.MostrarClientesConectados();
-
-	
 	public def RecibirMensaje(nickCliente as string, mensaje as string):
 		Console.WriteLine('')
 		Console.WriteLine(((('El contacto ' + nickCliente) + ' dice: ') + mensaje))
 
-	
 	public MetodoContactoConectado as ConexionClienteHandler:
 		get:
 			return ConexionClienteHandler(self.ContactoConectado)
@@ -165,4 +82,3 @@ public class ClienteConsola(ICliente):
 		get:
 			return MensajeRecibidoHandler(self.RecibirMensaje)
 
-ClienteConsola.Main(argv)

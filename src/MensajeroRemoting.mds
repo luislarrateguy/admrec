@@ -12,6 +12,7 @@
       <Entry build="True" name="BigBrother" configuration="Debug" />
       <Entry build="True" name="ClienteConsola" configuration="Debug" />
       <Entry build="False" name="ProyectServidorIntermediario" configuration="Debug" />
+      <Entry build="True" name="ClienteConsolaVBNET" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="GtkGUI" configuration="Release" />
@@ -25,6 +26,7 @@
       <Entry build="True" name="BigBrother" configuration="Release" />
       <Entry build="True" name="ClienteConsola" configuration="Release" />
       <Entry build="True" name="ProyectServidorIntermediario" configuration="Release" />
+      <Entry build="True" name="ClienteConsolaVBNET" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="GtkGUI" single="True">
@@ -39,6 +41,7 @@
     <Execute type="None" entry="BigBrother" />
     <Execute type="None" entry="ClienteConsola" />
     <Execute type="None" entry="ProyectServidorIntermediario" />
+    <Execute type="None" entry="ClienteConsolaVBNET" />
   </StartMode>
   <Entries>
     <Entry filename="./GtkGUI/GtkGUI.mdp" />
@@ -52,5 +55,6 @@
     <Entry filename="./BigBrother/BigBrother.mdp" />
     <Entry filename="./ClienteConsola/ClienteConsola.mdp" />
     <Entry filename="./ProyectServidorIntermediario/ProyectServidorIntermediario.mdp" />
+    <Entry filename="./ClienteConsolaVBNET/ClienteConsolaVBNET.mdp" />
   </Entries>
 </Combine>

@@ -1,0 +1,22 @@
+<Project name="ClienteConsolaVBNET" fileversion="2.0" language="VBNet" clr-version="Net_1_1" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="./bin/Debug" assembly="ClienteConsolaVBNET" />
+      <Build debugmode="True" target="Exe" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_1_1" />
+      <CodeGeneration compilerversion="" compiler="Mbas" warninglevel="4" nowarn="" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" rootnamespace="" definesymbols="" generatexmldocumentation="False" optionexplicit="True" optionstrict="False" imports="" VBDOC-filestoparse="" VBDOC-commentprefix="'" ctype="VBCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="./bin/Release" assembly="ClienteConsolaVBNET" />
+      <Build debugmode="False" target="Exe" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_1_1" />
+      <CodeGeneration compilerversion="" compiler="Mbas" warninglevel="4" nowarn="" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" rootnamespace="" definesymbols="" generatexmldocumentation="False" optionexplicit="True" optionstrict="False" imports="" VBDOC-filestoparse="" VBDOC-commentprefix="'" ctype="VBCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="./application.vb" subtype="Code" buildaction="Compile" />
+  </Contents>
+  <References>
+    <ProjectReference type="Project" localcopy="True" refto="ControladorConexiones" />
+  </References>
+</Project>

@@ -60,7 +60,6 @@ namespace MensajeroRemoting
 			
 			this.logger.Debug("Seteando título...");
 			this.ventanaChat.Title = this.mainWindow.Nick + " (yo) hablando con: "+nickDestino;
-			//this.ventanaChat.TransientFor = mainWindow.GtkWindow;
 			
 			this.logger.Debug("Seteando foco a textviewMensaje...");
 			this.textviewMensaje.HasFocus = true;
@@ -70,11 +69,6 @@ namespace MensajeroRemoting
 			
 			this.logger.Debug("Ejecutando ShowAll...");
 			this.ventanaChat.ShowAll();
-		}
-		
-		public VentanaChat(MainWindow mainWindow, string nickDestino, string mensajeInicial) : this(mainWindow, nickDestino)
-		{
-			this.MensajeRecibido(mensajeInicial);
 		}
 		
 		public void OnBtnEnviarClicked(object o, EventArgs args)

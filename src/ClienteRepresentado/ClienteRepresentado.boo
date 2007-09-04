@@ -36,7 +36,13 @@ public class ClienteRepresentado(ICliente):
 	
 	public def constructor():
 		self.listaClientesConectados = List()
-		self.controladorCliente = ControladorCliente(self, "127.0.0.1", "127.0.0.1", "")
+		try:
+			self.controladorCliente = ControladorCliente(self, "127.0.0.1", "localhost", "nacho")
+		except e as System.Runtime.Remoting.RemotingException:
+			Console.WriteLine("Salto en ClienteRepresentado!")
+			Console.WriteLine(e.Message)
+			Console.WriteLine(e.StackTrace)
+			
 
 	
 	public def conectar(nick as string):

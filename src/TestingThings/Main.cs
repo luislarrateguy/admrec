@@ -39,17 +39,22 @@ namespace TestingThings
 //			IServerChannelSinkProvider provider = new BinaryServerFormatterSinkProvider();		
 //			TcpChannel canalBidireccional = new TcpChannel(props, null, provider);
 //			ChannelServices.RegisterChannel(canalBidireccional);
-//			
-//			ChannelDataStore cds = (ChannelDataStore)canalBidireccional.ChannelData;	
-//			
-//			ClientesCreator c =  (ClientesCreator) Activator.GetObject(typeof(ClientesCreator),
-//										"tcp://127.0.0.1:8099/CC");
-//										
-//			ClienteRepresentado cr = c.getClienteRepresentado("nacho");
-			ClienteRepresentado cr = new ClienteRepresentado();
-			cr.conectar("nacho");
-			cr.enviarMensaje("milton","holaaaaa milton");
-			cr.desconectar();
+			
+//			try  {
+				ClienteRepresentadoFacade c =  (ClienteRepresentadoFacade) 
+											Activator.GetObject(typeof(ClienteRepresentadoFacade),
+											"tcp://127.0.0.1:8086/ClienteCreator");
+				
+				c.createClienteRepresentado("nacho");
+//				ClienteRepresentado cr = new ClienteRepresentado();
+				c.conectar("nacho");
+				c.enviarMensaje("nacho","milton","holaaaaa milton");
+				c.desconectar("nacho");
+//			}
+//			catch (System.Runtime.Remoting.RemotingException e) {
+//				Console.WriteLine(e.StackTrace);
+//				
+//			}
 		}
 	}
 }

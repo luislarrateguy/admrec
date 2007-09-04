@@ -15,7 +15,7 @@
   </Configurations>
   <Contents>
     <File name="./ClienteRepresentado.boo" subtype="Code" buildaction="Compile" />
-    <File name="./ClientesCreator.boo" subtype="Code" buildaction="Compile" />
+    <File name="./ClienteRepresentadoFacade.boo" subtype="Code" buildaction="Compile" />
     <File name="./ServidorIntermediario.boo" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>

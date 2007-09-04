@@ -66,7 +66,12 @@ namespace MensajeroRemoting
 			props["bindTo"] = ipPropia;
 			
 			this.canalBidireccional = new TcpChannel(props, null, provider);
-			ChannelServices.RegisterChannel(this.canalBidireccional);
+			try {
+				ChannelServices.RegisterChannel(this.canalBidireccional);
+			}
+			catch (Exception e)
+			{
+			}
 			
 			ChannelDataStore cds = (ChannelDataStore)this.canalBidireccional.ChannelData;	
 			
@@ -159,7 +164,12 @@ namespace MensajeroRemoting
 			this.conectado = false;
 			
 			this.logger.Debug("Desregistrando el canal bidireccional... ");
-			ChannelServices.UnregisterChannel(this.canalBidireccional);
+			try {
+				ChannelServices.UnregisterChannel(this.canalBidireccional);
+			}
+			catch (Exception e)
+			{
+			}
 			RemotingServices.Disconnect(this.clienteRemoto);
 			this.logger.Debug("Listo");
 		}

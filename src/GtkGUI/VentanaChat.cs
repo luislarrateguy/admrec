@@ -18,6 +18,7 @@
 */
 
 using System;
+using System.Threading;
 
 using Gtk;
 using Glade;
@@ -108,6 +109,7 @@ namespace MensajeroRemoting
 		public void MensajeRecibido(string mensaje)
 		{
 			this.logger.Debug("Ejecutando MensajeRecibido");
+			
 			this.textviewChat.Buffer.InsertAtCursor(this.nickDestino + ": " + mensaje + "\n");
 //			TextIter endIter = this.textviewChat.Buffer.StartIter;
 //			this.textviewChat.Buffer.Insert(ref endIter, this.mainWindow.Nick + ": " + mensaje + "\n");

@@ -265,53 +265,57 @@ namespace MensajeroRemoting
 			//unCliente.cadenaConexion = unCliente2.cadenaConexion;
 			//unCliente.nick = unCliente2.nick;
 			
-			this.logger.Debug("Notificación de contacto conectado!");
+			Application.Invoke(delegate {
+				this.logger.Debug("Notificación de contacto conectado!");
 
-			if (this.nick.Equals(nickCliente)) {
-				this.logger.Debug("  Pero soy yo mismo. No me agrego, porque no me gusta chatear conmigo, salvo cuando estoy solo, y no tengo ganas de estudiar o programar");
-				return;
-			}
-			
-			if (this.treeItersContactos.ContainsKey(nickCliente)) {
-				this.logger.Debug("Ops, el cliente que se conecto no soy yo, pero ya lo tengo agregado :S");
-				return;
-			}
-			
-			TreeIter iter = this.contactos.AppendValues(nickCliente);
-			this.treeItersContactos.Add(nickCliente, iter);
-			
-			//this.mainWindow.GdkWindow.ProcessUpdates(true);
+				if (this.nick.Equals(nickCliente)) {
+					this.logger.Debug("  Pero soy yo mismo. No me agrego, porque no me gusta chatear conmigo, salvo cuando estoy solo, y no tengo ganas de estudiar o programar");
+					return;
+				}
+				
+				if (this.treeItersContactos.ContainsKey(nickCliente)) {
+					this.logger.Debug("Ops, el cliente que se conecto no soy yo, pero ya lo tengo agregado :S");
+					return;
+				}
+				
+				TreeIter iter = this.contactos.AppendValues(nickCliente);
+				this.treeItersContactos.Add(nickCliente, iter);
+				
+				//this.mainWindow.GdkWindow.ProcessUpdates(true);
 
-			this.logger.Debug("  Listo, agregado");
+				this.logger.Debug("  Listo, agregado");
+			});
 		}
 		
 		public void ContactoDesconectado(string nickClienteDesconectado)
 		{
-			this.logger.Debug("Notificación de contacto desconectado!");
-			
-//			Console.WriteLine("Mi cadena es '" + this.cadenaConexion + "', y mi nick es '" +
-//			                  this.nick);
-//			Console.WriteLine("La cadena del otro es '" + unCliente + "', y su nick es '" +
-//			                  unCliente);
-			
-			if (this.nick.Equals(nickClienteDesconectado)) {
-				this.logger.Debug("  Pero soy yo mismo. Paro aca nomas.");
-				return;
-			}
-			
-			if (!this.treeItersContactos.ContainsKey(nickClienteDesconectado)) {
-				this.logger.Debug("Se desconectó un cliente pero no lo tengo!");
-				return;
-			}
-			
-//			try {
-			TreeIter iter = this.treeItersContactos[nickClienteDesconectado];
-			this.contactos.Remove(ref iter);
-			this.treeItersContactos.Remove(nickClienteDesconectado);
-			
-			//this.mainWindow.GdkWindow.ProcessUpdates(true);
-			
-			this.logger.Debug("  Listo, quitado");
+			Application.Invoke(delegate {
+				this.logger.Debug("Notificación de contacto desconectado!");
+				
+	//			Console.WriteLine("Mi cadena es '" + this.cadenaConexion + "', y mi nick es '" +
+	//			                  this.nick);
+	//			Console.WriteLine("La cadena del otro es '" + unCliente + "', y su nick es '" +
+	//			                  unCliente);
+				
+				if (this.nick.Equals(nickClienteDesconectado)) {
+					this.logger.Debug("  Pero soy yo mismo. Paro aca nomas.");
+					return;
+				}
+				
+				if (!this.treeItersContactos.ContainsKey(nickClienteDesconectado)) {
+					this.logger.Debug("Se desconectó un cliente pero no lo tengo!");
+					return;
+				}
+				
+	//			try {
+				TreeIter iter = this.treeItersContactos[nickClienteDesconectado];
+				this.contactos.Remove(ref iter);
+				this.treeItersContactos.Remove(nickClienteDesconectado);
+				
+				//this.mainWindow.GdkWindow.ProcessUpdates(true);
+				
+				this.logger.Debug("  Listo, quitado");
+			});
 //			}
 //			catch (KeyNotFoundException) {
 //				Console.WriteLine("  ERROR: Contacto no presente en mi lista de contactos");
@@ -320,12 +324,14 @@ namespace MensajeroRemoting
 		
 		public void RecibirMensaje(string nickOrigen, string mensaje)
 		{
-			this.logger.Debug("Mostrando mensaje recibido...");
-			
-			if (this.ventanasChat.ContainsKey(nickOrigen))
-				this.ventanasChat[nickOrigen].MensajeRecibido(mensaje);
-			else
-				this.MostrarVentanaChat(nickOrigen, mensaje);
+			Application.Invoke(delegate {
+				this.logger.Debug("Mostrando mensaje recibido...");
+				
+				if (this.ventanasChat.ContainsKey(nickOrigen))
+					this.ventanasChat[nickOrigen].MensajeRecibido(mensaje);
+				else
+					this.MostrarVentanaChat(nickOrigen, mensaje);
+			});
 //			
 //			ventanaChat.MensajeRecibido(mensaje);
 		}

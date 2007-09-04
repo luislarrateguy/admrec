@@ -327,13 +327,10 @@ namespace MensajeroRemoting
 			Application.Invoke(delegate {
 				this.logger.Debug("Mostrando mensaje recibido...");
 				
-				if (this.ventanasChat.ContainsKey(nickOrigen))
-					this.ventanasChat[nickOrigen].MensajeRecibido(mensaje);
-				else
-					this.MostrarVentanaChat(nickOrigen, mensaje);
+				VentanaChat vc = this.MostrarVentanaChat(nickOrigen);
+				
+				vc.MensajeRecibido(mensaje);
 			});
-//			
-//			ventanaChat.MensajeRecibido(mensaje);
 		}
 		
 		public Gtk.Window GtkWindow
@@ -341,7 +338,7 @@ namespace MensajeroRemoting
 			get { return this.mainWindow; }
 		}
 		
-		private VentanaChat MostrarVentanaChat(string nickRemoto, string mensaje)
+		private VentanaChat MostrarVentanaChat(string nickRemoto)
 		{
 			this.logger.Debug("Metodo MostrarVentanaChat");
 			VentanaChat ventanaChat;
@@ -352,10 +349,8 @@ namespace MensajeroRemoting
 			}
 			else {
 				this.logger.Debug("Creando la ventana, porque no esta");
-				if (mensaje == null)
-					ventanaChat = new VentanaChat(this, nickRemoto);
-				else
-					ventanaChat = new VentanaChat(this, nickRemoto, mensaje);
+				ventanaChat = new VentanaChat(this, nickRemoto);
+
 				this.logger.Debug("Agregandola al diccionario");
 				this.ventanasChat.Add(nickRemoto, ventanaChat);
 			}
@@ -365,11 +360,6 @@ namespace MensajeroRemoting
 			
 			this.logger.Debug("Listo, retornando");
 			return ventanaChat;
-		}
-		
-		private VentanaChat MostrarVentanaChat(string nickRemoto)
-		{
-			return this.MostrarVentanaChat(nickRemoto, null);
 		}
 		
 		public static void Main(string[] args)

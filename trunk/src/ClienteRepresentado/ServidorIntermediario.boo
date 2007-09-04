@@ -28,16 +28,19 @@ import System.Runtime.Remoting.Channels
 import System.Runtime.Remoting.Channels.Tcp
 
 
-
-provider = BinaryServerFormatterSinkProvider()
-provider.TypeFilterLevel = System.Runtime.Serialization.Formatters.TypeFilterLevel.Full
-props as IDictionary = Hashtable()
-props['port'] = 8099
-props['name'] = 'tcp'
-props['ip'] = "127.0.0.1"
-clientesCreator = ClientesCreator()
-ChannelServices.RegisterChannel(TcpChannel(props, null, provider))
-RemotingServices.Marshal(clientesCreator, 'CC')
-Console.WriteLine('Listo... presiona una tecla y vuelo de aca')
-Console.ReadLine()
-
+try:
+	provider = BinaryServerFormatterSinkProvider()
+	provider.TypeFilterLevel = System.Runtime.Serialization.Formatters.TypeFilterLevel.Full
+	props as IDictionary = Hashtable()
+	props['port'] = 8086
+	props['name'] = 'tcp'
+	clientesCreator = ClienteRepresentadoFacade()
+	ChannelServices.RegisterChannel(TcpChannel(props, null, provider))
+	RemotingServices.Marshal(clientesCreator, 'ClienteCreator')
+	Console.WriteLine('Listo... presiona una tecla y vuelo de aca')
+	Console.ReadLine()
+except e as System.Runtime.Remoting.RemotingException:
+	Console.WriteLine("Salto en el servidor!")
+	Console.WriteLine(e.Message)
+	Console.WriteLine(e.StackTrace)
+	

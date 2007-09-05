@@ -35,6 +35,7 @@ namespace MensajeroRemoting
 		private string servidor;
 		private string nick;
 		private string ip;
+		private int puerto;
 		
 		[Widget]
 		private Gtk.Window mainWindow;
@@ -188,11 +189,12 @@ namespace MensajeroRemoting
 				
 				//Deberia hacer lo mismo con la IP
 				this.ip  = servidorInput.getIpEscogida();
+				this.puerto = servidorInput.getPuerto();
 				
 				servidorInput.Destroy();
 				
 				// Creo la instancia
-				this.controladorCliente = new ControladorCliente(this, this.ip, this.servidor, this.Nick);
+				this.controladorCliente = new ControladorCliente(this, this.ip, this.puerto, this.servidor, this.Nick);
 				try {
 				
 					string[] clientesConectados = controladorCliente.Conectar(this.nick);

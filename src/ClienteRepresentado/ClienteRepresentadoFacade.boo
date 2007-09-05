@@ -3,30 +3,58 @@
 //
 //
 
-
-
 namespace ProyectoServidorIntermediario
 
 import System
+import System.Collections
+import System.Collections.Generic
 
 
 
 public class ClienteRepresentadoFacade(MarshalByRefObject):
 
-	private cc as ClienteRepresentado
+	private crc as Dictionary[of string, ClienteRepresentado] 
 	
 	def constructor():
-		pass
+		self.crc  =  Dictionary[of string, ClienteRepresentado]()
 	
 	def createClienteRepresentado(id as string):
-		if self.cc is null:
-			self.cc = ClienteRepresentado()
+		if not self.crc.ContainsKey(id):
+			self.crc.Add(id,ClienteRepresentado(id+"(ws)"))
+			return true
+		else:
+			return false
 			
-	def conectar(id as string):
-		cc.conectar(id)
+	def destroyClienteRepresentado(id as string):
+		if self.crc.ContainsKey(id):
+			self.crc.Remove(id)
+			return true
+		else:
+			return false
+			
+	def conectar(id as string) as bool:
+		if self.crc.ContainsKey(id):
+			self.crc[id].conectar(id+"(ws)")
+			return true
+		else:
+			return false
 		
-	def enviarMensaje(id as string,nickDestino as string,mensaje as string):
-		cc.enviarMensaje(nickDestino,mensaje)
+	def enviarMensaje(id as string,nickDestino as string,mensaje as string) as bool:
+		if self.crc.ContainsKey(id):
+			self.crc[id].enviarMensaje(nickDestino,mensaje)
+			return true
+		else:
+			return false
 		
-	def desconectar(id as string):
-		cc.desconectar()
+	def desconectar(id as string) as bool:
+		if self.crc.ContainsKey(id):
+			self.crc[id].desconectar()
+			return true
+		else:
+			return false
+	
+	def getUltimosMensajesRecibidos(id as string):
+		return [k for k in self.crc[id].getUltimosMensajesRecibidos()]
+		
+	def getContactosConectados(id):
+		return [k for k in self.crc[id].ContactosConectados]

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1052.3622"
+   height="744.09448"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.45"
+   version="1.0"
+   sodipodi:docbase="/home/miltondp/facultad/adm_recursos/tps/trunk/presentaciones/mono"
+   sodipodi:docname="api_space.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:modified="true">
+  <defs
+     id="defs4">
+    <filter
+       inkscape:collect="always"
+       x="-0.096399536"
+       width="1.1927991"
+       y="-0.27574751"
+       height="1.551495"
+       id="filter6800">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="5.9887612"
+         id="feGaussianBlur6802" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="355.81237"
+     inkscape:cy="358.37559"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     width="1052.3622px"
+     height="744.09448px"
+     inkscape:window-width="1680"
+     inkscape:window-height="975"
+     inkscape:window-x="0"
+     inkscape:window-y="25" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#4290aa;fill-opacity:0.56284153;fill-rule:evenodd;stroke:#000000;stroke-width:3.591;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect2160"
+       width="1014.3215"
+       height="539.5498"
+       x="22.159212"
+       y="186.42613" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:3.591;stroke-opacity:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3133"
+       width="573.97095"
+       height="179.00133"
+       x="59.496834"
+       y="508.60138" />
+    <text
+       xml:space="preserve"
+       style="font-size:40.63901901px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="78.759888"
+       y="552.47754"
+       id="text4104"><tspan
+         sodipodi:role="line"
+         id="tspan4106"
+         x="78.759888"
+         y="552.47754">.NET 1.1</tspan></text>
+    <g
+       id="g8767"
+       transform="translate(0,57.49493)">
+      <rect
+         transform="matrix(1.6046512,0,0,1.6046512,-71.110046,-258.10608)"
+         y="487.01065"
+         x="110.6117"
+         height="43.436558"
+         width="124.24876"
+         id="rect8750"
+         style="opacity:1;fill:#2d3a4e;fill-opacity:0.50273222;stroke-width:25.79999924;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078;filter:url(#filter6800)" />
+      <text
+         id="text8752"
+         y="565.23572"
+         x="166.7274"
+         style="font-size:19.2558136px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="565.23572"
+           x="166.7274"
+           id="tspan8754"
+           sodipodi:role="line">ASP.NET</tspan></text>
+    </g>
+    <g
+       id="g8762"
+       transform="translate(0,58.50507)">
+      <rect
+         transform="matrix(1.6046512,0,0,1.6046512,197.89878,-259.11622)"
+         y="487.01065"
+         x="110.6117"
+         height="43.436558"
+         width="124.24876"
+         id="rect8756"
+         style="opacity:1;fill:#2d3a4e;fill-opacity:0.50273222;stroke-width:25.79999924;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078;filter:url(#filter6800)" />
+      <text
+         id="text8758"
+         y="564.3949"
+         x="399.88544"
+         style="font-size:19.2558136px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="564.3949"
+           x="399.88544"
+           id="tspan8760"
+           sodipodi:role="line">Windows.Forms</tspan></text>
+    </g>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:3.591;stroke-opacity:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect8792"
+       width="872.48114"
+       height="309.8262"
+       x="38.531109"
+       y="398.23715" />
+    <text
+       xml:space="preserve"
+       style="font-size:40.63901901px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="54.360859"
+       y="448.76523"
+       id="text8794"><tspan
+         sodipodi:role="line"
+         id="tspan8796"
+         x="54.360859"
+         y="448.76523">.NET 2.0</tspan></text>
+    <g
+       id="g8817"
+       transform="translate(1009.6735,74.96954)">
+      <rect
+         transform="matrix(1.6046512,0,0,1.6046512,-518.60762,-406.5985)"
+         y="487.01065"
+         x="110.6117"
+         height="43.436558"
+         width="124.24876"
+         id="rect8800"
+         style="fill:#2d3a4e;fill-opacity:0.50273222;stroke-width:25.79999924;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078;filter:url(#filter6800)" />
+      <text
+         id="text8802"
+         y="416.74338"
+         x="-274.513"
+         style="font-size:19.2558136px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="416.74338"
+           x="-274.513"
+           id="tspan8804"
+           sodipodi:role="line">C# 2.0</tspan></text>
+    </g>
+    <g
+       id="g8822"
+       transform="translate(1023.7636,51.736036)">
+      <rect
+         transform="matrix(1.6046512,0,0,1.6046512,-532.69778,-256.08578)"
+         y="487.01065"
+         x="110.6117"
+         height="43.436558"
+         width="124.24876"
+         id="rect8809"
+         style="fill:#2d3a4e;fill-opacity:0.50273222;stroke-width:25.79999924;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078;filter:url(#filter6800)" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text8811"
+         y="555.39044"
+         x="-255.11702"
+         style="font-size:19.2558136px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="555.39044"
+           x="-255.11702"
+           id="tspan8813"
+           sodipodi:role="line">Actualizaciones</tspan><tspan
+           id="tspan8815"
+           y="579.46021"
+           x="-255.11702"
+           sodipodi:role="line">del stack</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:40.63901901px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="43.733486"
+       y="250.78091"
+       id="text9809"><tspan
+         sodipodi:role="line"
+         id="tspan9811"
+         x="43.733486"
+         y="250.78091">.NET 3.0</tspan></text>
+    <g
+       id="g9854"
+       transform="translate(16,2.52538)">
+      <rect
+         transform="matrix(1.881074,0,0,1.6046512,-160.27448,-505.59344)"
+         y="487.01065"
+         x="110.6117"
+         height="43.436558"
+         width="124.24876"
+         id="rect9815"
+         style="fill:#2d3a4e;fill-opacity:0.50273222;stroke-width:25.79999924;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078;filter:url(#filter6800)" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text9817"
+         y="305.88278"
+         x="165.1626"
+         style="font-size:19.2558136px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="305.88278"
+           x="165.1626"
+           id="tspan9819"
+           sodipodi:role="line">Windows Presentation</tspan><tspan
+           id="tspan9824"
+           y="329.95255"
+           x="165.1626"
+           sodipodi:role="line">Foundation</tspan></text>
+    </g>
+    <g
+       id="g9848"
+       transform="translate(16,2.52538)">
+      <rect
+         transform="matrix(2.076196,0,0,1.6046512,98.996861,-505.59344)"
+         y="487.01065"
+         x="110.6117"
+         height="43.436558"
+         width="124.24876"
+         id="rect9826"
+         style="fill:#2d3a4e;fill-opacity:0.50273222;stroke-width:25.79999924;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078;filter:url(#filter6800)" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text9828"
+         y="305.88278"
+         x="458.13852"
+         style="font-size:19.2558136px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="305.88278"
+           x="458.13853"
+           id="tspan9830"
+           sodipodi:role="line">Windows Communication</tspan><tspan
+           id="tspan9832"
+           y="329.95255"
+           x="458.13852"
+           sodipodi:role="line">Foundation</tspan></text>
+    </g>
+    <g
+       id="g9842"
+       transform="translate(16,-2.52538)">
+      <rect
+         transform="matrix(1.677822,0,0,1.6046512,463.24833,-500.54268)"
+         y="487.01065"
+         x="110.6117"
+         height="43.436558"
+         width="124.24876"
+         id="rect9834"
+         style="fill:#2d3a4e;fill-opacity:0.50273222;stroke-width:25.79999924;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078;filter:url(#filter6800)" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text9836"
+         y="310.93353"
+         x="753.15802"
+         style="font-size:19.2558136px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="310.93353"
+           x="753.15802"
+           id="tspan9838"
+           sodipodi:role="line">Windows Workflow</tspan><tspan
+           id="tspan9840"
+           y="335.0033"
+           x="753.15802"
+           sodipodi:role="line">Foundation</tspan></text>
+    </g>
+  </g>
+</svg>

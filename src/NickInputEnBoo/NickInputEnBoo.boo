@@ -34,9 +34,17 @@ public class NickInputEnBoo(Dialog):
 		super('Escoja un nick', w, DialogFlags.Modal)
 
 		self.Resizable = false
+		
+		hbox as HBox = HBox()
+		
+		label as Label = Label('Nick:')
 		self.entryNick = Entry(15)
-		self.VBox.Add(self.entryNick)
-		self.entryNick.Show()
+		
+		hbox.Add(label)
+		hbox.Add(self.entryNick)
+		
+		self.VBox.Add(hbox)
+		hbox.ShowAll()
 		
 		self.btnCancelar = Button(Stock.Cancel)
 		self.ActionArea.Add(self.btnCancelar)

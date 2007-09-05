@@ -26,6 +26,7 @@ public abstract class ServidorInput extends NickInputEnBoo
 {
 	protected Entry entryServidor;
 	protected Entry entryPuerto;
+	protected Entry entryDireccionExterna;
 	protected ComboBox cmbIps;
 	
 	protected String servidorEscogido;
@@ -65,10 +66,18 @@ public abstract class ServidorInput extends NickInputEnBoo
 		hbox.ShowAll();
 		
 		hbox = new HBox();
+		label = new Label("Dirección externa:");
+		this.entryDireccionExterna = new Entry();
+		this.entryDireccionExterna.set_Text("");
+		hbox.Add(label);
+		hbox.Add(this.entryDireccionExterna);
+		this.get_VBox().Add(hbox);
+		hbox.ShowAll();
+		
+		hbox = new HBox();
 		label = new Label("Dirección servidor:");
 		this.entryServidor = new Entry();
 		this.entryServidor.set_Text("localhost");
-		this.entryServidor.Show();
 		
 		hbox.Add(label);
 		hbox.Add(this.entryServidor);
@@ -91,6 +100,11 @@ public abstract class ServidorInput extends NickInputEnBoo
 	public int getPuerto()
 	{
 		return Integer.parseInt(this.entryPuerto.get_Text().trim());
+	}
+	
+	public String getDireccionExterna()
+	{
+		return this.entryDireccionExterna.get_Text();
 	}
 	
 	public abstract void OnBtnAceptarClicked(java.lang.Object o, cli.System.EventArgs args);

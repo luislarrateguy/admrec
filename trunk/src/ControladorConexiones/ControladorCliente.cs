@@ -53,9 +53,10 @@ namespace MensajeroRemoting
 		}
 		
 		public ControladorCliente(ICliente objetoCliente, string ipPropia, string direccionServidor, string nick)
-			: this(objetoCliente, ipPropia, 0, direccionServidor, nick) {}
+			: this(objetoCliente, ipPropia, 0, "", direccionServidor, nick) {}
 		
-		public ControladorCliente(ICliente objetoCliente, string ipPropia, int puerto, string direccionServidor, string nick)
+		public ControladorCliente(ICliente objetoCliente, string ipPropia, int puerto, string direccionExterna,
+		                          string direccionServidor, string nick)
 		{
 			this.logger = log4net.LogManager.GetLogger(this.GetType());
 			
@@ -67,7 +68,9 @@ namespace MensajeroRemoting
 			props["port"] = puerto;
 			props["name"] = "tcp";
 			props["bindTo"] = ipPropia;
-			props["machineName"] = "201.213.34.63";
+			
+			if (!direccionExterna.Trim().Equals(""))
+				props["machineName"] = direccionExterna;
 			
 			this.canalBidireccional = new TcpChannel(props, null, provider);
 			try {

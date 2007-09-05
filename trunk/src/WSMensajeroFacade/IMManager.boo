@@ -21,6 +21,7 @@ namespace WSMensajeroFacade
 
 import System
 import System.Collections
+import System.Collections.Generic
 import System.Web
 import System.Web.Services
 import ProyectoServidorIntermediario
@@ -32,30 +33,44 @@ import System.Runtime.Remoting.Channels
 class IMManager():
 	
 	[WebMethod(Description:"Autentica y crea un objeto remoto que te represente")]
-	public def Conectar(nick as string) as string:
-		c as  ClienteRepresentadoFacade =   Activator.GetObject(typeof(ClienteRepresentadoFacade),
-									"tcp://127.0.0.1:8086/ClienteCreator")
-		c.createClienteRepresentado("nacho")
-		c.conectar("nacho")
-		return "true"
+	public def Conectar(nick as string) as bool:
+		c as  ClienteRepresentadoFacade =  Activator.GetObject(typeof(ClienteRepresentadoFacade),
+								"tcp://127.0.0.1:8086/ClienteCreator")
+		b1 = c.createClienteRepresentado(nick)
+		if b1:
+			b1 = c.conectar(nick)
+		return b1
 		
 	[WebMethod(Description:"Desconecta del respresentante")]
 	public def Desconectar(key as string) as bool:
-		c  as  ClienteRepresentadoFacade =   Activator.GetObject(typeof(ClienteRepresentadoFacade),
-									"tcp://127.0.0.1:8086/ClienteCreator") 
-		c.desconectar("nacho")
-		return true
+		c  as  ClienteRepresentadoFacade = Activator.GetObject(typeof(ClienteRepresentadoFacade),
+			"tcp://127.0.0.1:8086/ClienteCreator") 
+		b1 = c.desconectar(key)
+		if b1:
+			c.destroyClienteRepresentado(key)
+		return b1
 		
 	
 	[WebMethod(Description:"Devuelve la lista de contactos")]
-	public def getListaContactos() as List:
-		return List(["nacho","milton"])
+	public def getListaContactos(key as string):
+		c  as  ClienteRepresentadoFacade = Activator.GetObject(typeof(ClienteRepresentadoFacade),
+			"tcp://127.0.0.1:8086/ClienteCreator") 
+		contactos = c.getContactosConectados(key) 
+		return contactos
 		
 	[WebMethod (Description:"Envia un mensaje a fulano")]
 	public def enviarMensajeA(key as string, mensaje as string, nick as string) as bool:
 		c  as  ClienteRepresentadoFacade =   Activator.GetObject(typeof(ClienteRepresentadoFacade),
 									"tcp://127.0.0.1:8086/ClienteCreator")
-		c.enviarMensaje("nacho","milton","holaaaaa milton")
+		c.enviarMensaje(key,nick,mensaje)
 		return true
+		
+	[WebMethod(Description:"Devuelve la lista de contactos")]
+	public def getUltimosMensajesRecibidos(key as string):
+		c  as  ClienteRepresentadoFacade = \
+		Activator.GetObject(typeof(ClienteRepresentadoFacade),
+			"tcp://127.0.0.1:8086/ClienteCreator") 
+		msjs = c.getUltimosMensajesRecibidos(key)
+		return msjs
 
 		

@@ -31,6 +31,11 @@ namespace TestingThings
 	{
 		public static void Main(string[] args)
 		{
+			Dictionary<string,ClienteRepresentado> crc = new Dictionary<string,ClienteRepresentado>();
+			crc.ContainsKey(id)
+			crc.Add(id,new ClienteRepresentado())
+			
+			
 //			IDictionary props = new Hashtable();
 //			props["port"] = 0;
 //			props["name"] = "tcp";
@@ -55,6 +60,7 @@ namespace TestingThings
 //				Console.WriteLine(e.StackTrace);
 //				
 //			}
+			
 		}
 	}
 }

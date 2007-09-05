@@ -231,7 +231,31 @@
     \pgfimage[width=\textwidth]{api_space}
   \end{centering}
 
+  \vspace{2ex}
   C\# 3.0, Silverlight\ldots
+\end{frame}
+
+
+% % % % % % % %
+\subsection{Herramientas, librerías\ldots}
+% % % % % % % %
+
+\begin{frame}{mcs: compilador de C\#}
+  \begin{itemize}
+    \item C\# escrito en C\#.
+    \item Desde 2002 se compila a sí mismo (6 meses después de comenzar).
+    \item Actualmente soporta C\# 2.0. VERIFICAR ESTO
+    \item Posee algunas características de C\# 3.0 (que vendrá oficialmente con .NET 3.5)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+    \item Compiladores y herramientas para utilizar varios lenguajes: Boo,
+      Python, Ruby, Java, Visual Basic.NET, Prolog, PHP, JavaScript\ldots
+    \item Toolkits gráficos: Windows.Forms 1.1 (y parte del 2.0), Gtk\#, Cocoa\# (MacOs X)
+    \item COMPLETAR
+  \end{itemize}
 \end{frame}
 
 
@@ -239,10 +263,34 @@
 \subsection{¿Quién usa Mono?}
 % % % % % % % %
 
-\begin{frame}
+\begin{frame}{¿Quién usa Mono?}
   \begin{itemize}
-    \item algo
+    \item Novell.
+    \item Otee: Desarrollan Unity, herramienta para el modelado 3D de juegos, que
+      utiliza Mono en algunos componentes.
+    \item Interopix: Corren Mono en un servidor FreeBSD con alta carga.
+    \item Wikipedia: El indexado y búsqueda se lleva acabo por aplicaciones basadas en Mono.
+    \item Aplicaciones: Banshee, Tomboy, iFolder, MonoDevelop, Beagle\ldots
+    \item Muchos más ejemplos en la página oficial: \alert{www.mono-project.com}
   \end{itemize}
+\end{frame}
+
+\begin{frame}[plain]
+  \frametitle{MP3/Wifi player}
+  \framesubtitle{\ldots de Zing. Usan Mono para manejar el stack de aplicaciones.}
+
+  \begin{centering}
+    \pgfimage[width=\textwidth]{sansa}
+  \end{centering}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Zaspe\#}
+  \framesubtitle{No todo es teoría\ldots}
+
+  \begin{centering}
+    \pgfimage[width=\textwidth]{zaspe-sharp}
+  \end{centering}
 \end{frame}
 
 
@@ -251,8 +299,16 @@
 % % % % % % % %
 
 \begin{frame}
+  \frametitle{MonoDevelop: Un IDE para Mono}
+
   \begin{itemize}
-    \item algo
+    \item Es libre.
+    \item Basado en SharpDevelop (el creador ahora esta en el equipo de MonoDevelop).
+    \item Completado de código, sistema de plugins, refactoring, Gtk\# designer\ldots
+    \item Proyectos C\#, Visual Basic.NET, Boo, Nemerle, Java (IKVM), ASP.NET\ldots
+    \item Integración con Makefiles, Subversion, NUnit\ldots
+    \item Abre soluciones hechas con Visual Studio 2003 y 2005.
+    \item \alert{Todavía en fase de desarrollo. Última versión: 0.15}
   \end{itemize}
 \end{frame}
 
@@ -261,7 +317,7 @@
 \subsection{MoMa}
 % % % % % % % %
 
-\begin{frame}
+\begin{frame}{Migración desde Windows}
   \begin{itemize}
     \item algo
   \end{itemize}
@@ -284,7 +340,7 @@
 
   \bibitem{Icaza}
     Miguel De Icaza
-    \newblock {\em Mono Meeting} Octubre 2006
+    \newblock {\em Mono Meeting} Octubre 2006 (Slides)
   \end{thebibliography}
 \end{frame}
 

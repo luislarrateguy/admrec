@@ -1,0 +1,3 @@
+#!/bin/sh
+
+rm -f *.aux *.log *.nav *.out main.pdf *.snm *.snm *.snm *.toc *.toc *.toc

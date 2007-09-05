@@ -1,0 +1,143 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+  \setbeamercovered{transparent}
+}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+
+\title[Proyecto Mono]
+{Proyecto Mono: Implementación libre y multiplataforma de .NET}
+
+%\subtitle{}
+
+\date[TP Adm. de Recursos]
+{Trabajo práctico de investigación y desarrollo \\ Administración de Recursos}
+
+\subject{Trabajo práctico de investigación y desarrollo - Administración de Recursos - 2007}
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Contenido}
+  \tableofcontents
+\end{frame}
+
+
+\section{Introducción a .NET}
+
+\subsection{Características principales}
+
+\begin{frame}{Ventajas}
+  \begin{itemize}
+    \item Interoperabilidad (COM, P/Invoke).
+    \item Motor común de ejecución (CIL, JIT).
+    \item Independencia del lenguaje (CTS). COMPLETAR
+    \item Librería de clases base (BCL): Disponible para todos los lenguajes.
+    \item Despliegue simplificado (GAC).
+    \item Seguridad (diferentes niveles de seguridad).
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Desventajas}
+  \begin{itemize}
+    \item \alert{Sólo disponible para Windows.} Mono es multiplataforma.
+    \item \alert{Código cerrado.} Mono es libre.
+    \item \alert{Las sucesivas versiones van dejando de lado a los SOs viejos.}
+      Mono es libre y multiplataforma.
+  \end{itemize}
+\end{frame}
+
+
+% % % % % % % % % % % % % % % % % % % % % %
+\subsection{Conceptos básicos}
+
+\begin{frame}%{.NET Framework}
+  % - Eine Überschrift fasst einen Rahmen verständlich zusammen. Man
+  %   muss sie verstehen können, selbst wenn man nicht den Rest des
+  %   Rahmens versteht.
+
+  \begin{itemize}
+    \item CLI (Common Language Infrastructure)
+      \begin{itemize}
+        \item Componente más importante.
+        \item Especificación abierta.
+        \item Describe el código ejecutable y el entorno de ejecución.
+        \item Permite que la plataforma sea multilenguaje.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[plain]
+  \begin{centering}
+    \pgfimage[height=\paperheight]{cli}
+  \end{centering}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+    \item CLR (Common Language Runtime)
+      \begin{itemize}
+        \item Implementación de CLI de Microsoft.
+        \item CLS (Common Language Specification). Todos los lenguajes deben
+          cumplirla.
+      \end{itemize}
+
+    \item CIL: Como el bytecode de Java.
+    \item BCL (Base Class Library)
+    \item CLR + BCL = .NET Framework
+
+    \item Assemblies (ensamblados)
+      \begin{itemize}
+        \item Unidad de ejecución.
+        \item Albergan el código CIL.
+        \item Dos tipos: procesos (EXE) y librerías (DLL)
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+% % % % % % % % % % % % % % % % % % % % % %
+\subsection{Estandarización y licenciamiento}
+
+\begin{frame}{CLI y C\#}
+  \begin{itemize}
+    \item ECMA estandars en 2001.
+    \item ISO estandars en 2003.
+    \item Implica patentes disponibles sin regalías.
+    \item Sin embargo no se aplica a lo que no esté dentro del estandar,
+      como Windows Forms, ADO.NET y ASP.NET.
+  \end{itemize}
+\end{frame}
+
+
+% % % % % % % % % % % % % % % % % % % % % %
+\appendix
+\section<presentation>*{\appendixname}
+\subsection<presentation>*{Referencias}
+
+\begin{frame}[allowframebreaks]
+  \begin{thebibliography}{10}
+    
+  \beamertemplatearticlebibitems
+
+  \bibitem{Wikipedia}
+    Wikipedia
+    \newblock {\em .NET Framework}
+  \end{thebibliography}
+\end{frame}
+
+\end{document}
+
+

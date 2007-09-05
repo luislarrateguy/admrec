@@ -163,16 +163,5 @@ ElseIf comando.Equals("l") Then
 				Return (New MensajeRecibidoHandler(AddressOf Me.RecibirMensaje))
 			End Get
 		End Property
-'		Public Function get_MetodoContactoConectado() As ConexionClienteHandler
-'				Return (New ConexionClienteHandler(AddressOf Me.ContactoConectado))
-'		End Function
-'
-'		Public Function get_MetodoContactoDesconectado() As ConexionClienteHandler
-'				Return (New ConexionClienteHandler(AddressOf Me.ContactoDesconectado))
-'		End Function
-'
-'		Public Function get_MetodoMensajeRecibido() As MensajeRecibidoHandler
-'				Return (New MensajeRecibidoHandler(AddressOf Me.RecibirMensaje))
-'		End Function
 	End Class
 End Namespace

@@ -1,5 +1,7 @@
 #!/bin/bash
 
-pdflatex main.tex
-pdflatex main.tex
-pdflatex main.tex
+if ( pdflatex main.tex ); then
+	if ( pdflatex main.tex ); then
+		pdflatex main.tex
+	fi
+fi

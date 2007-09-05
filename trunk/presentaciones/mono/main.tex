@@ -34,9 +34,27 @@
 \end{frame}
 
 
-\section{Introducción a .NET}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\section{Nuestros objetivos}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
+\begin{frame}{Nuestros objetivos con el Trabajo Práctico}
+  \begin{itemize}
+    \item Brindar como profesionales soluciones basadas en Software Libre.
+    \item Investigar Mono como una plataforma de desarrollo para alcanzar lo anterior.
+    \item Mostrarles que con Software Libre se puede lograr un desarrollo serio.
+    \item REVEER ESTOS OBJETIVOS ENTRE TODOS.
+  \end{itemize}
+\end{frame}
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\section{Introducción a .NET}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+% % % % % % % %
 \subsection{Características principales}
+% % % % % % % %
 
 \begin{frame}{Ventajas}
   \begin{itemize}
@@ -60,8 +78,9 @@
 \end{frame}
 
 
-% % % % % % % % % % % % % % % % % % % % % %
+% % % % % % % %
 \subsection{Conceptos básicos}
+% % % % % % % %
 
 \begin{frame}%{.NET Framework}
   % - Eine Überschrift fasst einen Rahmen verständlich zusammen. Man
@@ -108,8 +127,20 @@
 \end{frame}
 
 
-% % % % % % % % % % % % % % % % % % % % % %
+% % % % % % % %
+\subsection{Código de ejemplo en C\#}
+% % % % % % % %
+
+\begin{frame}
+  \begin{itemize}
+    \item ejemplo de código c-sharp
+  \end{itemize}
+\end{frame}
+
+
+% % % % % % % %
 \subsection{Estandarización y licenciamiento}
+% % % % % % % %
 
 \begin{frame}{CLI y C\#}
   \begin{itemize}
@@ -118,6 +149,121 @@
     \item Implica patentes disponibles sin regalías.
     \item Sin embargo no se aplica a lo que no esté dentro del estandar,
       como Windows Forms, ADO.NET y ASP.NET.
+  \end{itemize}
+\end{frame}
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\section{Mono}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+% % % % % % % %
+\subsection{Cuestiones interesantes}
+% % % % % % % %
+
+\begin{frame}{Mono}
+  \begin{itemize}
+    \item Soportado por Novell.
+    \item Altamente portable:
+    \begin{itemize}
+      \item Familia Unix: GNU/Linux, Mac OS X, Solaris, BSDs\ldots
+      \item Familia Windows: NT, 2000, XP.
+      \item Sistemas embebidos (Maemo).
+    \end{itemize}
+
+    \item Arquitecturas de CPU:
+    \begin{itemize}
+      \item x86, PowerPC, AMD64, Sparc, s390, IA64, ARM
+      \item 64 bits no soportados en todos los sistemas operativos.
+    \end{itemize}
+
+    \item Activamente desarrollado (datos 2006).
+    \begin{itemize}
+      \item Más de 300 contribuidores.
+      \item Más de 20 desarrolladores full time.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[plain]
+  \begin{centering}
+    \pgfimage[width=\textwidth]{mono_virtual_plataform}
+  \end{centering}
+\end{frame}
+
+
+% % % % % % % %
+\subsection{Objetivos de Mono}
+% % % % % % % %
+
+\begin{frame}
+  \frametitle{Objetivos de Mono}
+  \framesubtitle{Palabras de Miguel De Icaza (fundador del proyecto)}
+
+  \begin{itemize}
+    \item Originalmente, mejorar nuestra plataforma de desarrollo en Linux.
+    \item En tanto la comunidad crecía, crecer para soportar las APIs de Microsoft.
+
+    \item En tanto Mono se volvía mas completo:
+      \begin{itemize}
+        \item Proveer de un runtime multiplataforma completo.
+        \item Permitir a los desarrolladores de Windows portar a Linux.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+% % % % % % % %
+\subsection{Estado actual del proyecto}
+% % % % % % % %
+
+\begin{frame}[plain]
+  \frametitle{Estado actual de Mono}
+  \framesubtitle{Stack de Mono}
+
+  \begin{centering}
+    \pgfimage[width=\textwidth]{mono_stacks}
+  \end{centering}
+\end{frame}
+
+\begin{frame}[plain]{Con respecto a MS .NET}
+  \begin{centering}
+    \pgfimage[width=\textwidth]{api_space}
+  \end{centering}
+
+  C\# 3.0, Silverlight\ldots
+\end{frame}
+
+
+% % % % % % % %
+\subsection{¿Quién usa Mono?}
+% % % % % % % %
+
+\begin{frame}
+  \begin{itemize}
+    \item algo
+  \end{itemize}
+\end{frame}
+
+
+% % % % % % % %
+\subsection{MonoDevelop}
+% % % % % % % %
+
+\begin{frame}
+  \begin{itemize}
+    \item algo
+  \end{itemize}
+\end{frame}
+
+
+% % % % % % % %
+\subsection{MoMa}
+% % % % % % % %
+
+\begin{frame}
+  \begin{itemize}
+    \item algo
   \end{itemize}
 \end{frame}
 
@@ -135,6 +281,10 @@
   \bibitem{Wikipedia}
     Wikipedia
     \newblock {\em .NET Framework}
+
+  \bibitem{Icaza}
+    Miguel De Icaza
+    \newblock {\em Mono Meeting} Octubre 2006
   \end{thebibliography}
 \end{frame}
 

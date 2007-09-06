@@ -1,0 +1,54 @@
+body,div,p {
+	margin:0px;
+	padding:0px;
+	font-family: "Deja Vu Sans",Sans, "Bitstream Vera Sans", Arial, Helvetica;
+	font-size:10pt;
+}
+#container-master{
+	color: #000099;
+	background-color: #ffffd0;
+	border: 1px solid black;
+	margin: 10px;
+}
+#container-conexion{
+	color: #000099;
+	background-color: #ffca89;
+	border-bottom: 1px solid black;
+	height: 40px;
+}
+#container-mensajero{
+	clear: both;
+}
+#container-pantalla{
+	color: #000099;
+	background-color: white;
+	padding: 10pt;
+	padding-left: 20pt;
+	border: 2px outset black;
+	height: 250px;
+	font-size:10pt;
+	overflow: scroll;
+	
+}
+#container-escritura{
+	color: #000099;
+	background-color: white;
+	padding: 5pt;
+	border: 2px outset black;
+	height: 80px;
+	font-size:12pt;	
+}
+#container-contactos{
+	color: #000099;
+	padding: 5pt;
+	width: 150px;
+	float: right;
+	clear: right;
+	font-size:8pt;	
+}
+#container-log{
+	font-weight: bold;
+	font-size: 8pt;
+	overflow: scroll;
+	height: 80px;
+}

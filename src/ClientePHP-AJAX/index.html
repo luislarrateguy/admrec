@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>Mensajero Instantaneao ajax/php/webservice-backed</title>
+<meta name="generator" content="Bluefish 1.0.7"/>
+<meta name="author" content="Luis I. Larrateguy"/>
+<meta name="date" content="2007-09-06T15:41:05-0300"/>
+<meta name="copyright" content=""/>
+<meta name="keywords" content=""/>
+<meta name="description" content=""/>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8"/>
+<meta http-equiv="content-style-type" content="text/css"/>
+<link rel="stylesheet" type="text/css" href="plantilla.css" />
+<!-- Dependency -->
+<script src="yui/build/yahoo/yahoo-min.js"></script>
+<!-- Used for Custom Events and event listener bindings -->
+<script src="yui/build/event/event-min.js"></script>
+<!-- Source file -->
+<script src="yui/build/connection/connection-min.js"></script>
+<style type="text/css">
+<!--
+-->
+</style> 
+<script>
+	var sURL = "http://nachosemantic.no-ip.biz/IMWSwrapper.php?method=";
+	var divLog ="";
+	var conectado = false;
+	var delayRefresh = 1000;
+	var timerContacts;
+	var timerMjes;
+   var timerContactsRunning = false;
+   var timerMjesRunning = false;
+   var key ="";
+	
+	var handleSuccessConectar = function(o){
+		if(o.responseText !== undefined){
+			conectado = o.responseText == "true";
+			timerContacts = self.setInterval("GetListaContactos()", delayRefresh);
+			timerMjes = self.setInterval("GetUltimosMensajesRecibidos()", delayRefresh);
+			timerContactsRunning = true;
+   		timerMjesRunning = true;
+
+			/*
+			divLog.innerHTML += "<li>HTTP status: " + o.status + "</li>";
+			divLog.innerHTML += "<li>Status code message: " + o.statusText + "</li>";
+			divLog.innerHTML += "<li>HTTP headers: <ul>" + o.getAllResponseHeaders + "</ul></li>";
+			divLog.innerHTML += "<li>Server response: " + o.responseText + "</li>";
+			divLog.innerHTML += "<li>Argument object: Object ( [foo] => " + o.argument.foo +
+							 " [bar] => " + o.argument.bar +" )</li>";
+			*/
+		}
+	}
+	var handleSuccessDesconectar = function(o){
+		if(o.responseText !== undefined && o.responseText != ""){
+			conectado = ! (o.responseText == "true");
+			clearInterval(timerContacts);
+			clearInterval(timerMjes);
+			timerContactsRunning = false;
+   		timerMjesRunning = false;
+		}
+	}
+	var handleSuccessEnviarMje = function(o){
+		if(o.responseText !== undefined){
+			
+		}
+	}
+	var handleSuccessContactos = function(o){
+		if(o.responseText !== undefined && o.responseText != ""){
+			var div= document.getElementById('container-contactos');
+			var resp = eval(o.responseText);
+			div.innerHTML = "";
+			for (var cont in resp)
+				div.innerHTML += resp[cont] + "<br/>";
+				
+			//divLog.innerHTML += "actualizo contacto <br/>"
+		}
+	}
+	var handleSuccessRecibirMjes = function(o){
+		if(o.responseText !== undefined && o.responseText != ""){
+			var div= document.getElementById('container-pantalla');
+			var resp = eval(o.responseText);
+			if (resp != "") {
+				div.innerHTML += resp+"<br/>"; 
+				div.scrollTop = div.scrollHeight;
+			}
+		}
+	}
+
+	var handleFailure = function(o){
+		if(o.responseText !== undefined){
+			divLog.innerHTML += "<li>Transaction id: " + o.tId + "</li>";
+			divLog.innerHTML += "<li>HTTP status: " + o.status + "</li>";
+			divLog.innerHTML += "<li>Status code message: " + o.statusText + "</li>";
+		}
+	}
+
+	var callbackConectar =
+	{
+	 	success:handleSuccessConectar,
+ 		failure: handleFailure
+	};
+	var callbackDesconectar =
+	{
+	 	success:handleSuccessDesconectar,
+ 		failure: handleFailure
+	};
+	var callbackEnviarMje =
+	{
+	 	success:handleSuccessEnviarMje,
+ 		failure: handleFailure
+	};
+	var callbackContactos =
+	{
+	 	success:handleSuccessContactos,
+ 		failure: handleFailure
+	};
+	var callbackRecibirMjes =
+	{
+	 	success:handleSuccessRecibirMjes,
+ 		failure: handleFailure
+	};
+	
+	
+	function Conectar(nick) {
+		key = nick;
+		divLog= document.getElementById('container-log');
+		var transaction = YAHOO.util.Connect.asyncRequest('GET', sURL + "Conectar&key="+key , callbackConectar, null);
+	}
+	function Desconectar(nick) {
+		divLog= document.getElementById('container-log');
+		clearTimeout(timerContacts);
+		clearTimeout(timerMjes);
+		timerContactsRunning = false;
+   	timerMjesRunning = false;
+		var transaction = YAHOO.util.Connect.asyncRequest('GET', sURL + "Desconectar&key="+key , callbackDesconectar, null);
+	}
+	function GetListaContactos() {
+		divLog= document.getElementById('container-log');
+		var transaction = YAHOO.util.Connect.asyncRequest('GET', sURL + "GetListaContactos&key="+key , callbackContactos, null);
+	}
+	function EnviarMensajeA(nick,mensaje) {
+		divLog= document.getElementById('container-log');
+		var transaction = YAHOO.util.Connect.asyncRequest('GET', sURL + "EnviarMensajeA&key="+key , callbackEnviarMje, null);
+	}
+	function GetUltimosMensajesRecibidos() {
+		divLog = document.getElementById('container-log');
+		var transaction = YAHOO.util.Connect.asyncRequest('GET', sURL + "GetUltimosMensajesRecibidos&key="+key , callbackRecibirMjes, null);
+	}
+</script>
+</head>
+<body >
+<div id="container-master">
+	<div id="container-conexion">
+		<form action="return false;">
+			<input type="text" id="conectar_text" name="conectar_text" value="SuNick">
+			<input type="button" id="conectar_btn" name="conectar_btn" value="Conectar" onclick="Conectar(document.getElementById('conectar_text').value);this.disabled=true;document.getElementById('conectar_text').disabled=true;document.getElementById('desconectar_btn').disabled=false;return true;">
+			<input disabled="true" type="button" id="desconectar_btn" name="desconectar_btn" value="Desconectar" onclick="Desconectar(document.getElementById('conectar_text').value);this.disabled=true;document.getElementById('conectar_text').disabled=false;document.getElementById('conectar_btn').disabled=false;return true;">
+		</form>
+	</div>
+	<div id="container-mensajero">
+		<div id="container-contactos">
+		</div>
+		<div id="container-pantalla">
+		</div>
+		<div id="container-escritura">
+			Aca se escribe (y se selecciona a quien)
+		</div>
+	</div>
+	<div id="container-log"> </div>	
+</div>
+</body>
+</html>

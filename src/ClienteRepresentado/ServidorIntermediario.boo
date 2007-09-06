@@ -40,7 +40,7 @@ try:
 	Console.WriteLine('Listo... presiona una tecla y vuelo de aca')
 	Console.ReadLine()
 except e as System.Runtime.Remoting.RemotingException:
-	Console.WriteLine("Salto en el servidor!")
+	Console.WriteLine("Salto en el servidor de clientes!")
 	Console.WriteLine(e.Message)
 	Console.WriteLine(e.StackTrace)
 	

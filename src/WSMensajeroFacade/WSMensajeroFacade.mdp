@@ -25,5 +25,5 @@
     <ProjectReference type="Gac" localcopy="True" refto="System.Runtime.Remoting, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <ProjectReference type="Project" localcopy="True" refto="ClienteRepresentado" />
   </References>
-  <XspParameters Port="8084" Address="192.168.0.2" SslMode="None" SslProtocol="Default" KeyType="None" PasswordOptions="None" Password="" Verbose="True" />
+  <XspParameters Port="8084" Address="192.168.0.2" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
 </Project>

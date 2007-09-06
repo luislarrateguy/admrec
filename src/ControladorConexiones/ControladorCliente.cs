@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
-
+using System.Threading;
 using log4net.Config;
 using log4net.Appender;
 
@@ -45,6 +45,9 @@ namespace MensajeroRemoting
 		private string nick;
 		private bool conectado = false;
 		
+		private static Mutex mut = new Mutex();
+		private static int secuencia = 10;
+		
 		private log4net.ILog logger;
 		
 		public ControladorCliente(string ipPropia, string direccionServidor, string nick)
@@ -58,7 +61,7 @@ namespace MensajeroRemoting
 		public ControladorCliente(ICliente objetoCliente, string ipPropia, int puerto, string direccionExterna,
 		                          string direccionServidor, string nick)
 		{
-			this.logger = log4net.LogManager.GetLogger(this.GetType());
+			this.configureLogger();
 			
 			this.objetoCliente = objetoCliente;
 			this.nick = nick;
@@ -68,27 +71,47 @@ namespace MensajeroRemoting
 			props["port"] = puerto;
 			props["name"] = "tcp";
 			props["bindTo"] = ipPropia;
+			mut.WaitOne();
+			secuencia = secuencia + 1;
+			props["name"] = ipPropia +":"+ puerto + ":" +secuencia.ToString();
+			mut.ReleaseMutex();
+			this.logger.Debug("usando  " + props["name"]);
 			
 			if (!direccionExterna.Trim().Equals(""))
 				props["machineName"] = direccionExterna;
 			
 			this.canalBidireccional = new TcpChannel(props, null, provider);
+			
+			ChannelDataStore cds = (ChannelDataStore)this.canalBidireccional.ChannelData;	
+
 			try {
 				ChannelServices.RegisterChannel(this.canalBidireccional);
 			}
 			catch (Exception e)
 			{
+				this.logger.Debug(e.Message);
+				this.logger.Debug(e.StackTrace);
+				throw new System.ApplicationException("Canal registrado previamente");
 			}
 			
-			ChannelDataStore cds = (ChannelDataStore)this.canalBidireccional.ChannelData;	
-			
-			this.cadenaConexion = cds.ChannelUris[0]  + "/" + NOMBRE_SERVICIO;
+			this.cadenaConexion = cds.ChannelUris[0]  + "/" + NOMBRE_SERVICIO + secuencia.ToString();
 			this.logger.Debug("Mi canal escucha: " + this.cadenaConexion);
-
+			
+			foreach (string s in cds.ChannelUris) 
+				this.logger.Debug("           "+s);
 			this.logger.Debug("Creando un nuevo ClienteRemoto");
 			this.clienteRemoto = new ClienteRemoto();
 			
-			RemotingServices.Marshal(clienteRemoto, NOMBRE_SERVICIO);
+			try {
+				RemotingServices.Marshal(clienteRemoto,   NOMBRE_SERVICIO + secuencia.ToString());
+			}
+			catch (Exception e)
+			{
+				this.logger.Debug(e.Message);
+				this.logger.Debug(e.StackTrace);
+				throw new System.ApplicationException("Esa URI se está usando!");
+			}
+			
 			
 			this.logger.Debug("Cachando el ControladorConexiones...");
 			ControladorCliente.direccionServidor = direccionServidor;
@@ -214,6 +237,15 @@ namespace MensajeroRemoting
 				}
 				return nicksCopiados;
 			}
+		}
+		
+		
+		private void configureLogger() {
+			this.logger = log4net.LogManager.GetLogger(this.GetType());
+			System.IO.FileInfo fi = new System.IO.FileInfo("log4net.config.xml");
+			this.logger.Debug(fi.Exists);
+			XmlConfigurator.Configure(fi);
+			this.logger = log4net.LogManager.GetLogger(this.GetType());
 		}
 	}
 }

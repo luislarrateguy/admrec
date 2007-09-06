@@ -36,6 +36,7 @@ namespace TestingThings
 			crc.Add(id,new ClienteRepresentado())
 			
 			
+			
 //			IDictionary props = new Hashtable();
 //			props["port"] = 0;
 //			props["name"] = "tcp";

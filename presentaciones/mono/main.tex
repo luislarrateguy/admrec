@@ -10,6 +10,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{times}
 \usepackage[T1]{fontenc}
+\usepackage{verbatim}
+\usepackage{lgrind}
 
 \title[Proyecto Mono]
 {Proyecto Mono: Implementación libre y multiplataforma de .NET}
@@ -128,17 +130,6 @@
 
 
 % % % % % % % %
-\subsection{Código de ejemplo en C\#}
-% % % % % % % %
-
-\begin{frame}
-  \begin{itemize}
-    \item ejemplo de código c-sharp
-  \end{itemize}
-\end{frame}
-
-
-% % % % % % % %
 \subsection{Estandarización y licenciamiento}
 % % % % % % % %
 
@@ -149,6 +140,85 @@
     \item Implica patentes disponibles sin regalías.
     \item Sin embargo no se aplica a lo que no esté dentro del estandar,
       como Windows Forms, ADO.NET y ASP.NET.
+  \end{itemize}
+\end{frame}
+
+
+% % % % % % % %
+\subsection{Características de C\#}
+% % % % % % % %
+
+\begin{frame}{C\#}
+  \begin{exampleblock}{Propiedades (getter y setter en Java)}
+    \verbatiminput{codigo/propiedades.cs}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \begin{exampleblock}{Indexadores}
+    \verbatiminput{codigo/indexers.cs}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \begin{exampleblock}{Atributos}
+    \verbatiminput{codigo/atributos.cs}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \begin{exampleblock}{Clases parciales}
+    \verbatiminput{codigo/clases_parciales.cs}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+    \item Delegados (como punteros a funciones).
+  \end{itemize}
+
+  \pause
+  \begin{exampleblock}{Eventos}
+    \begin{footnotesize}
+      \verbatiminput{codigo/eventos.cs}
+    \end{footnotesize}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \begin{exampleblock}{Sobrecarga de operadores}
+    \begin{scriptsize}
+      \verbatiminput{codigo/sobrecarga_operadores.cs}
+    \end{scriptsize}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \begin{exampleblock}{Tipos genéricos (Generics)}
+    \begin{scriptsize}
+      \verbatiminput{codigo/tipos_genericos.cs}
+    \end{scriptsize}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \begin{exampleblock}{Código inseguro (unsafe code)}
+    \begin{scriptsize}
+      \verbatiminput{codigo/codigo_inseguro.cs}
+    \end{scriptsize}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Futuro (C\# 3.0)}
+  \begin{itemize}
+    \item Variables locales de tipo implícito (keyword \emph{var}).
+    \item Métodos extensores.
+    \item Expresiones lambda.
+    \item Inicializadores de objetos.
+    \item Tipos anónimos.
+    \item Arrays de tipo implícito.
+    \item Expresiones de consulta.
+    \item Árboles de expresiones.
   \end{itemize}
 \end{frame}
 
@@ -252,9 +322,24 @@
 \begin{frame}
   \begin{itemize}
     \item Compiladores y herramientas para utilizar varios lenguajes: Boo,
-      Python, Ruby, Java, Visual Basic.NET, Prolog, PHP, JavaScript\ldots
-    \item Toolkits gráficos: Windows.Forms 1.1 (y parte del 2.0), Gtk\#, Cocoa\# (MacOs X)
+      Python, Ruby, Java (\alert{IKVM}), Visual Basic.NET, Prolog, PHP, JavaScript\ldots
+    \item Toolkits gráficos: Windows.Forms 1.1 (y parte del 2.0), Gtk\#, Qyoto (Qt), Cocoa\# (MacOs X)
+    \item OpenGL, Cairo, bases de datos, Gecko
     \item COMPLETAR
+  \end{itemize}
+\end{frame}
+
+
+% % % % % % % %
+\subsection{Licenciamiento}
+% % % % % % % %
+
+\begin{frame}{Licenciamiento}
+  \begin{itemize}
+    \item Compiladores: GPL
+    \item Librerías: MIT X11
+    \item Runtime: LGPL
+    \item Novell retiene el copyright: licencia dual posible.
   \end{itemize}
 \end{frame}
 
@@ -304,7 +389,7 @@
   \begin{itemize}
     \item Es libre.
     \item Basado en SharpDevelop (el creador ahora esta en el equipo de MonoDevelop).
-    \item Completado de código, sistema de plugins, refactoring, Gtk\# designer\ldots
+    \item Completado de código, sistema de plugins, refactoring, Gtk\# designer (Stetic)\ldots
     \item Proyectos C\#, Visual Basic.NET, Boo, Nemerle, Java (IKVM), ASP.NET\ldots
     \item Integración con Makefiles, Subversion, NUnit\ldots
     \item Abre soluciones hechas con Visual Studio 2003 y 2005.
@@ -320,6 +405,17 @@
 \begin{frame}{Migración desde Windows}
   \begin{itemize}
     \item algo
+  \end{itemize}
+\end{frame}
+
+
+% % % % % % % %
+\subsection{Enlaces}
+% % % % % % % %
+
+\begin{frame}
+  \begin{itemize}
+    \item los links
   \end{itemize}
 \end{frame}
 

@@ -52,21 +52,21 @@ class IMManager():
 		
 	
 	[WebMethod(Description:"Devuelve la lista de contactos")]
-	public def getListaContactos(key as string):
+	public def GetListaContactos(key as string):
 		c  as  ClienteRepresentadoFacade = Activator.GetObject(typeof(ClienteRepresentadoFacade),
 			"tcp://127.0.0.1:8086/ClienteCreator") 
 		contactos = c.getContactosConectados(key) 
 		return contactos
 		
 	[WebMethod (Description:"Envia un mensaje a fulano")]
-	public def enviarMensajeA(key as string, mensaje as string, nick as string) as bool:
+	public def EnviarMensajeA(key as string, mensaje as string, nick as string) as bool:
 		c  as  ClienteRepresentadoFacade =   Activator.GetObject(typeof(ClienteRepresentadoFacade),
 									"tcp://127.0.0.1:8086/ClienteCreator")
 		c.enviarMensaje(key,nick,mensaje)
 		return true
 		
 	[WebMethod(Description:"Devuelve la lista de contactos")]
-	public def getUltimosMensajesRecibidos(key as string):
+	public def GetUltimosMensajesRecibidos(key as string):
 		c  as  ClienteRepresentadoFacade = \
 		Activator.GetObject(typeof(ClienteRepresentadoFacade),
 			"tcp://127.0.0.1:8086/ClienteCreator") 

@@ -1,3 +1,6 @@
+% El contenido de ésta presentación está bajo la licencia Creative Commons
+% License Attribution-ShareAlike 2.5 Argentina.
+
 \documentclass{beamer}
 
 \mode<presentation>
@@ -32,7 +35,9 @@
 
 \begin{frame}
   \frametitle{Contenido}
+  \begin{scriptsize}
   \tableofcontents
+  \end{scriptsize}
 \end{frame}
 
 
@@ -57,6 +62,15 @@
 % % % % % % % %
 \subsection{Características principales}
 % % % % % % % %
+
+\begin{frame}{Características}
+  \begin{itemize}
+    \item Compilación Just-in-time (JIT).
+    \item Gestión de memoria (Garbage collector).
+    \item Gestión de errores (excepciones).
+    \item Multithreading.
+  \end{itemize}
+\end{frame}
 
 \begin{frame}{Ventajas}
   \begin{itemize}
@@ -102,7 +116,7 @@
 
 \begin{frame}[plain]
   \begin{centering}
-    \pgfimage[height=\paperheight]{cli}
+    \pgfimage[height=\paperheight]{imagenes/cli}
   \end{centering}
 \end{frame}
 
@@ -138,7 +152,7 @@
     \item ECMA estandars en 2001.
     \item ISO estandars en 2003.
     \item Implica patentes disponibles sin regalías.
-    \item Sin embargo no se aplica a lo que no esté dentro del estandar,
+    \item Sin embargo no se aplica a lo que no esté dentro del estándar,
       como Windows Forms, ADO.NET y ASP.NET.
   \end{itemize}
 \end{frame}
@@ -167,8 +181,18 @@
 \end{frame}
 
 \begin{frame}
+  \begin{exampleblock}{Iteradores}
+    \begin{scriptsize}
+      \verbatiminput{codigo/iteradores.cs}
+    \end{scriptsize}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
   \begin{exampleblock}{Clases parciales}
-    \verbatiminput{codigo/clases_parciales.cs}
+    \begin{scriptsize}
+      \verbatiminput{codigo/clases_parciales.cs}
+    \end{scriptsize}
   \end{exampleblock}
 \end{frame}
 
@@ -179,9 +203,17 @@
 
   \pause
   \begin{exampleblock}{Eventos}
-    \begin{footnotesize}
+    \begin{scriptsize}
       \verbatiminput{codigo/eventos.cs}
-    \end{footnotesize}
+    \end{scriptsize}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \begin{exampleblock}{Métodos anónimos}
+    \begin{scriptsize}
+      \verbatiminput{codigo/metodos_anonimos.cs}
+    \end{scriptsize}
   \end{exampleblock}
 \end{frame}
 
@@ -209,7 +241,10 @@
   \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Futuro (C\# 3.0)}
+\begin{frame}
+  \frametitle{Futuro (C\# 3.0)}
+  \framesubtitle{Algunas caracteristicas están soportadas por Mono}
+
   \begin{itemize}
     \item Variables locales de tipo implícito (keyword \emph{var}).
     \item Métodos extensores.
@@ -257,7 +292,7 @@
 
 \begin{frame}[plain]
   \begin{centering}
-    \pgfimage[width=\textwidth]{mono_virtual_plataform}
+    \pgfimage[width=\textwidth]{imagenes/mono_virtual_plataform}
   \end{centering}
 \end{frame}
 
@@ -292,13 +327,13 @@
   \framesubtitle{Stack de Mono}
 
   \begin{centering}
-    \pgfimage[width=\textwidth]{mono_stacks}
+    \pgfimage[width=\textwidth]{imagenes/mono_stacks}
   \end{centering}
 \end{frame}
 
 \begin{frame}[plain]{Con respecto a MS .NET}
   \begin{centering}
-    \pgfimage[width=\textwidth]{api_space}
+    \pgfimage[width=\textwidth]{imagenes/api_space}
   \end{centering}
 
   \vspace{2ex}
@@ -365,7 +400,7 @@
   \framesubtitle{\ldots de Zing. Usan Mono para manejar el stack de aplicaciones.}
 
   \begin{centering}
-    \pgfimage[width=\textwidth]{sansa}
+    \pgfimage[width=\textwidth]{imagenes/sansa}
   \end{centering}
 \end{frame}
 
@@ -374,7 +409,7 @@
   \framesubtitle{No todo es teoría\ldots}
 
   \begin{centering}
-    \pgfimage[width=\textwidth]{zaspe-sharp}
+    \pgfimage[width=\textwidth]{imagenes/zaspe-sharp}
   \end{centering}
 \end{frame}
 
@@ -387,13 +422,15 @@
   \frametitle{MonoDevelop: Un IDE para Mono}
 
   \begin{itemize}
-    \item Es libre.
-    \item Basado en SharpDevelop (el creador ahora esta en el equipo de MonoDevelop).
-    \item Completado de código, sistema de plugins, refactoring, Gtk\# designer (Stetic)\ldots
-    \item Proyectos C\#, Visual Basic.NET, Boo, Nemerle, Java (IKVM), ASP.NET\ldots
-    \item Integración con Makefiles, Subversion, NUnit\ldots
-    \item Abre soluciones hechas con Visual Studio 2003 y 2005.
-    \item \alert{Todavía en fase de desarrollo. Última versión: 0.15}
+    \begin{small}
+      \item Es libre.
+      \item Basado en SharpDevelop (el creador ahora esta en el equipo de MonoDevelop).
+      \item Completado de código, sistema de plugins, refactoring, Gtk\# designer (Stetic)\ldots
+      \item Proyectos C\#, Visual Basic.NET, Boo, Nemerle, Java (IKVM), ASP.NET\ldots
+      \item Integración con Makefiles, Subversion, NUnit\ldots
+      \item Abre soluciones hechas con Visual Studio 2003 y 2005.
+      \item \alert{Todavía en fase de desarrollo. Última versión: 0.15}
+    \end{small}
   \end{itemize}
 \end{frame}
 
@@ -415,15 +452,21 @@
 
 \begin{frame}
   \begin{itemize}
-    \item los links
+    \item Mono Project: http://www.mono-project.com
+    \item MonoDevelop: http://www.monodevelop.com
+    \item Código fuente del TP: http://code.google.com/p/admrec/
   \end{itemize}
 \end{frame}
 
 
-% % % % % % % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 \appendix
 \section<presentation>*{\appendixname}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+% % % % % % % %
 \subsection<presentation>*{Referencias}
+% % % % % % % %
 
 \begin{frame}[allowframebreaks]
   \begin{thebibliography}{10}
@@ -435,9 +478,53 @@
     \newblock {\em .NET Framework}
 
   \bibitem{Icaza}
+    Microsoft
+    \newblock {\em MSDN}
+
+  \bibitem{Icaza}
     Miguel De Icaza
     \newblock {\em Mono Meeting} Octubre 2006 (Slides)
+
   \end{thebibliography}
+\end{frame}
+
+
+% % % % % % % %
+\subsection<presentation>*{Licencia de la presentación}
+% % % % % % % %
+
+\begin{frame}{Licencia de esta presentación}
+  \begin{tiny}
+  \begin{itemize}
+    \item Licencia: Creative Commons Atribución-CompartirDerivadasIgual 2.5 Argentina
+
+    \item Usted es libre de:
+      \begin{itemize}
+      \begin{tiny}
+        \item Copiar, distribuir, exhibir, y ejecutar la obra.
+        \item Hacer obras derivadas.
+      \end{tiny}
+      \end{itemize}
+
+    \item Bajo las siguientes condiciones:
+      \begin{itemize}
+      \begin{tiny}
+        \item \textbf{Atribución}. Usted debe atribuir la obra en la forma
+          especificada por el autor o el licenciante.
+        \item \textbf{Compartir Obras Derivadas Igual}. Si usted altera,
+          transforma, o crea sobre esta obra, sólo podrá distribuir la
+          obra derivada resultante bajo una licencia idéntica a ésta.
+      \end{tiny}
+      \end{itemize}
+
+    \item Ante cualquier reutilización o distribución, usted debe dejar
+      claro a los otros los términos de la licencia de esta obra.
+    \item Cualquiera de estas condiciones puede dispensarse si usted
+      obtiene permiso del titular de los derechos de autor.
+    \item Nada en esta licencia menoscaba o restringe los derechos
+      morales del autor.
+  \end{itemize}
+  \end{tiny}
 \end{frame}
 
 \end{document}

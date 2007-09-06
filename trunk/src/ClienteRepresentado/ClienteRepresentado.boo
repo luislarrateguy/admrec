@@ -41,7 +41,7 @@ public class ClienteRepresentado(ICliente):
 		self.listaClientesConectados = List[of string]()
 		try:
 			self.nick = nick2
-			self.controladorCliente = ControladorCliente(self, "127.0.0.1", "localhost", self.nick)
+			self.controladorCliente = ControladorCliente(self, "127.0.0.1",0, "", "localhost", self.nick)
 			self.mensajesRecibidos = List[of string]()
 			self.listaClientesConectados = List[of string]()
 		except e as System.Runtime.Remoting.RemotingException:

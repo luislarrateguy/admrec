@@ -36,17 +36,7 @@ namespace MensajeroRemoting {
 			IDictionary props = new Hashtable();
 			props["port"] = 8085;
 			props["name"] = "tcp";
-			
-//			TcpChannel chanConnect = new TcpChannel(8085);
-//			ChannelServices.RegisterChannel(chanConnect);
-//			
-//			RemotingConfiguration.RegisterWellKnownServiceType(typeof(ControladorConexiones),
-//			                                                          "CC",
-//			                                                          WellKnownObjectMode.Singleton);
-//			
-//			controladorConexiones = (ControladorConexiones)Activator.GetObject(typeof(ControladorConexiones),
-//			                                                                   "tcp://localhost:8085/CC");
-			
+						
 			controladorConexiones = new ControladorConexiones();
 			ChannelServices.RegisterChannel(new TcpChannel(props, null, provider));
 			RemotingServices.Marshal(controladorConexiones, "CC");

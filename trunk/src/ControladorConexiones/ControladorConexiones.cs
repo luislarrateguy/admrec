@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting;
 using log4net;
 using log4net.Config;
 using log4net.Appender;
@@ -90,6 +91,8 @@ namespace MensajeroRemoting
 			
 			this.logger.Debug("Agrego el cliente a mi lista de clientes conectados");
 			this.clientesConectados.Add(nick, cadenaConexion);
+			//string clientAddress = 
+			//this.logger.Debug("Aunque yo veo esta: "+clientAddress);			
 			
 			this.logger.Debug("Listo!");
 			

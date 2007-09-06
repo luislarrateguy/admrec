@@ -89,8 +89,8 @@ namespace MensajeroRemoting
 			}
 			catch (Exception e)
 			{
-				this.logger.Debug(e.Message);
-				this.logger.Debug(e.StackTrace);
+				this.logger.Error(e.Message);
+				this.logger.Error(e.StackTrace);
 				throw new System.ApplicationException("Canal registrado previamente");
 			}
 			
@@ -127,7 +127,9 @@ namespace MensajeroRemoting
 		~ControladorCliente()
 		{
 			this.logger.Debug("Destruyendo objeto ControladorCliente");
-			
+			this.logger.Debug("Desregistrando el canal bidireccional... ");
+			ChannelServices.UnregisterChannel(this.canalBidireccional);
+			RemotingServices.Disconnect(this.clienteRemoto);
 			if (this.conectado) {
 				this.logger.Error("Se esta destruyendo el objeto ControladorCliente, pero todavia estoy conectado");
 				this.Desconectar();
@@ -193,14 +195,9 @@ namespace MensajeroRemoting
 			
 			this.conectado = false;
 			
-			this.logger.Debug("Desregistrando el canal bidireccional... ");
-			try {
-				ChannelServices.UnregisterChannel(this.canalBidireccional);
-			}
-			catch (Exception e)
-			{
-			}
-			RemotingServices.Disconnect(this.clienteRemoto);
+			//this.logger.Debug("Desregistrando el canal bidireccional... ");
+			//ChannelServices.UnregisterChannel(this.canalBidireccional);
+			//RemotingServices.Disconnect(this.clienteRemoto);
 			this.logger.Debug("Listo");
 		}
 		

@@ -8,7 +8,9 @@ body,div,p {
 	color: #000099;
 	background-color: #ffffd0;
 	border: 1px solid black;
-	margin: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 750px;
 }
 #container-conexion{
 	color: #000099;
@@ -32,6 +34,7 @@ body,div,p {
 }
 #container-escritura{
 	color: #000099;
+	background-color: #ffca89;
 	padding: 5pt;
 	border: 1px solid black;
 	height: 110px;
@@ -60,12 +63,24 @@ body,div,p {
 	margin-left: 10px;
 } 
 #enviarmje_text {
-	height: 64px;
+	height: 76px;
 	width: 500px;
 	float: left;
-	padding:5px;
-	border: 2px solid blue;
+
+	border: 2px solid #000066;
 } 
 #enviarmje_dest {
-	width: 250px;
+	width: 500px;
+	border: 2px solid #000066;
+}
+#contactos {
+	margin-top: 10pt;
+	border: 1px inset black;
+	height:230px;
+	overflow: auto;
+}
+h1 {
+	margin:0px;
+	padding: 0px;
+	font-size:10pt;
 }

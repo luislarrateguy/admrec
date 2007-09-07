@@ -18,7 +18,7 @@
     <File name="./ControladorCliente.cs" subtype="Code" buildaction="Compile" />
     <File name="./ClienteRemoto.cs" subtype="Code" buildaction="Compile" />
     <File name="./EventsHelper.cs" subtype="Code" buildaction="Compile" />
-    <File name="./ControladorConexiones.cs" subtype="Code" buildaction="Compile" />
+    <File name="./IControladorConexiones.cs" subtype="Code" buildaction="Compile" />
     <File name="./ICliente.cs" subtype="Code" buildaction="Compile" />
     <File name="./DummyClient.cs" subtype="Code" buildaction="Compile" />
   </Contents>

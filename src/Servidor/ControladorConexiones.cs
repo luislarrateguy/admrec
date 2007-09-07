@@ -26,22 +26,8 @@ using log4net.Appender;
 
 namespace MensajeroRemoting
 {
-	// Delegate. Quiza haya que sacar las instancias
-	public delegate void ConexionClienteHandler(string nick);
-
-	[Serializable()]
-	public class NickOcupadoException : System.ApplicationException
-	{
-	    public NickOcupadoException() {}
-	    public NickOcupadoException(string message) {}
-	    public NickOcupadoException(string message, System.Exception inner) {}
-	 
-	    // Constructor necesario para la serializacion (remoting) 
-	    protected NickOcupadoException(System.Runtime.Serialization.SerializationInfo info,
-	        System.Runtime.Serialization.StreamingContext context) {}
-	}
 	
-	public class ControladorConexiones : MarshalByRefObject
+	public class ControladorConexiones : MarshalByRefObject,IControladorConexiones
 	{
 		public event ConexionClienteHandler ClienteConectado;
 		public event ConexionClienteHandler ClienteDesconectado;

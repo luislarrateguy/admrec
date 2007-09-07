@@ -5,7 +5,7 @@
 <title>Mensajero Instantaneao ajax/php/webservice-backed</title>
 <meta name="generator" content="Bluefish 1.0.7"/>
 <meta name="author" content="Luis I. Larrateguy"/>
-<meta name="date" content="2007-09-06T15:41:05-0300"/>
+<meta name="date" content="2007-09-07T10:34:35-0300"/>
 <meta name="copyright" content=""/>
 <meta name="keywords" content=""/>
 <meta name="description" content=""/>
@@ -62,18 +62,34 @@
 		}
 	}
 	var handleSuccessEnviarMje = function(o){
-		if(o.responseText !== undefined){
-			
-		}
+		var box = document.getElementById('enviarmje_text');
+		var selElem= document.getElementById('enviarmje_dest');
+		var div= document.getElementById('container-pantalla');
+		box.value = "";
+		box.focus();
 	}
 	var handleSuccessContactos = function(o){
 		if(o.responseText !== undefined && o.responseText != ""){
 			var div= document.getElementById('container-contactos');
 			var resp = eval(o.responseText);
 			div.innerHTML = "";
-			for (var cont in resp)
+			for (var cont in resp) {
 				div.innerHTML += resp[cont] + "<br/>";
+			}
+			var selElem= document.getElementById('enviarmje_dest');
+			var selAct = "";
+			if (selElem.selectedIndex != -1)
+				selAct = selElem.options[selElem.selectedIndex].value;
 				
+			selElem.options.length = 0;
+			var i = 0;
+			for (var cont in resp) {
+				selElem.options[i++] = new Option(resp[cont],resp[cont]);
+				if (resp[cont] == selAct)
+					selElem.options[i-1].selected = true;
+			}
+			
+			
 			//divLog.innerHTML += "actualizo contacto <br/>"
 		}
 	}
@@ -140,9 +156,16 @@
 		divLog= document.getElementById('container-log');
 		var transaction = YAHOO.util.Connect.asyncRequest('GET', sURL + "GetListaContactos&key="+key , callbackContactos, null);
 	}
-	function EnviarMensajeA(nick,mensaje) {
+	function EnviarMensajeA() {
+		var mensaje = document.getElementById('enviarmje_text').value;
+		var selElem= document.getElementById('enviarmje_dest');
+		var div= document.getElementById('container-pantalla');
+		var nick = selElem.options[selElem.selectedIndex].value;
+		
+		div.innerHTML += key + " le dice a "+ nick +": " +mensaje+"<br/>"; 
+		
 		divLog= document.getElementById('container-log');
-		var transaction = YAHOO.util.Connect.asyncRequest('GET', sURL + "EnviarMensajeA&key="+key , callbackEnviarMje, null);
+		var transaction = YAHOO.util.Connect.asyncRequest('GET', sURL + "EnviarMensajeA&key="+key+"&nick="+nick+"&mensaje="+mensaje , callbackEnviarMje, null);
 	}
 	function GetUltimosMensajesRecibidos() {
 		divLog = document.getElementById('container-log');
@@ -165,7 +188,11 @@
 		<div id="container-pantalla">
 		</div>
 		<div id="container-escritura">
-			Aca se escribe (y se selecciona a quien)
+			<select name="enviarmje_dest" id="enviarmje_dest" size="1">
+			</select>
+			<div>
+				<textarea name="enviarmje_text" id="enviarmje_text"></textarea><input type="submit" name="enviarmje_btn" id="enviarmje_btn" value="Enviar" onclick="EnviarMensajeA()"/>
+			</div>
 		</div>
 	</div>
 	<div id="container-log"> </div>	

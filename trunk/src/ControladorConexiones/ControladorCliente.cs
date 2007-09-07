@@ -37,7 +37,7 @@ namespace MensajeroRemoting
 		private ICliente objetoCliente;
 		private EventsHelper eventsHelper;
 		private ClienteRemoto clienteRemoto;
-		private ControladorConexiones controladorConexiones;
+		private IControladorConexiones controladorConexiones;
 		private TcpChannel canalBidireccional;
 		
 		private static string direccionServidor;
@@ -213,10 +213,10 @@ namespace MensajeroRemoting
 				return clienteRemoto;
 			}
 		}
-		public static ControladorConexiones ObtenerControladorConexiones()
+		public static IControladorConexiones ObtenerControladorConexiones()
 		{
 			// Direccion servidor deberia ser seteable de otro lado
-			ControladorConexiones cc = (ControladorConexiones)Activator.GetObject(typeof(ControladorConexiones),
+			IControladorConexiones cc = (IControladorConexiones)Activator.GetObject(typeof(IControladorConexiones),
 					"tcp://" + ControladorCliente.direccionServidor + ":8085/CC");
 			return cc;
 		}

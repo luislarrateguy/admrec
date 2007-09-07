@@ -24,7 +24,7 @@ body,div,p {
 	background-color: white;
 	padding: 10pt;
 	padding-left: 20pt;
-	border: 2px outset black;
+	border: 2px solid black;
 	height: 250px;
 	font-size:10pt;
 	overflow: scroll;
@@ -32,11 +32,11 @@ body,div,p {
 }
 #container-escritura{
 	color: #000099;
-	background-color: white;
 	padding: 5pt;
-	border: 2px outset black;
-	height: 80px;
-	font-size:12pt;	
+	border: 1px solid black;
+	height: 110px;
+	font-size:12pt;
+	clear: both;	
 }
 #container-contactos{
 	color: #000099;
@@ -51,4 +51,21 @@ body,div,p {
 	font-size: 8pt;
 	overflow: scroll;
 	height: 80px;
+	clear: both;
+}
+
+#enviarmje_btn {
+	height: 80px;
+	width: 80px;
+	margin-left: 10px;
+} 
+#enviarmje_text {
+	height: 64px;
+	width: 500px;
+	float: left;
+	padding:5px;
+	border: 2px solid blue;
+} 
+#enviarmje_dest {
+	width: 250px;
 }

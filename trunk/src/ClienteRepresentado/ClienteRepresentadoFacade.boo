@@ -73,3 +73,6 @@ public class ClienteRepresentadoFacade(MarshalByRefObject):
 		
 	def getContactosConectados(id):
 		return [k for k in self.crc[id].ContactosConectados]
+		
+	override def InitializeLifetimeService() as object:
+		return null

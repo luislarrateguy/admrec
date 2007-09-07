@@ -71,7 +71,7 @@ namespace MensajeroRemoting
 		
 		public void RegistrarHandlers()
 		{
-			ControladorConexiones cc = ControladorCliente.ObtenerControladorConexiones();
+			IControladorConexiones cc = ControladorCliente.ObtenerControladorConexiones();
 			
 			this.logger.Debug(" ---- (ClienteRemoto) Registrando metodo clienteConectado");
 			cc.ClienteConectado += new ConexionClienteHandler(this.clienteConectado);
@@ -82,7 +82,7 @@ namespace MensajeroRemoting
 		
 		public void DesregistrarHandlers()
 		{
-			ControladorConexiones cc = ControladorCliente.ObtenerControladorConexiones();
+			IControladorConexiones cc = ControladorCliente.ObtenerControladorConexiones();
 			
 			this.logger.Debug(" ---- (ClienteRemoto) Desregistrando metodo clienteConectado");
 			cc.ClienteConectado -= new ConexionClienteHandler(this.clienteConectado);

@@ -5,7 +5,7 @@
 <title>Mensajero Instantaneao ajax/php/webservice-backed</title>
 <meta name="generator" content="Bluefish 1.0.7"/>
 <meta name="author" content="Luis I. Larrateguy"/>
-<meta name="date" content="2007-09-07T10:34:35-0300"/>
+<meta name="date" content="2007-09-07T13:47:25-0300"/>
 <meta name="copyright" content=""/>
 <meta name="keywords" content=""/>
 <meta name="description" content=""/>
@@ -64,13 +64,13 @@
 	var handleSuccessEnviarMje = function(o){
 		var box = document.getElementById('enviarmje_text');
 		var selElem= document.getElementById('enviarmje_dest');
-		var div= document.getElementById('container-pantalla');
+		var div= document.getElementById('pantalla');
 		box.value = "";
 		box.focus();
 	}
 	var handleSuccessContactos = function(o){
 		if(o.responseText !== undefined && o.responseText != ""){
-			var div= document.getElementById('container-contactos');
+			var div= document.getElementById('contactos');
 			var resp = eval(o.responseText);
 			div.innerHTML = "";
 			for (var cont in resp) {
@@ -95,7 +95,7 @@
 	}
 	var handleSuccessRecibirMjes = function(o){
 		if(o.responseText !== undefined && o.responseText != ""){
-			var div= document.getElementById('container-pantalla');
+			var div= document.getElementById('pantalla');
 			var resp = eval(o.responseText);
 			if (resp != "") {
 				div.innerHTML += resp+"<br/>"; 
@@ -159,7 +159,7 @@
 	function EnviarMensajeA() {
 		var mensaje = document.getElementById('enviarmje_text').value;
 		var selElem= document.getElementById('enviarmje_dest');
-		var div= document.getElementById('container-pantalla');
+		var div= document.getElementById('pantalla');
 		var nick = selElem.options[selElem.selectedIndex].value;
 		
 		div.innerHTML += key + " le dice a "+ nick +": " +mensaje+"<br/>"; 
@@ -176,6 +176,7 @@
 <body >
 <div id="container-master">
 	<div id="container-conexion">
+		Conexión
 		<form action="return false;">
 			<input type="text" id="conectar_text" name="conectar_text" value="SuNick">
 			<input type="button" id="conectar_btn" name="conectar_btn" value="Conectar" onclick="Conectar(document.getElementById('conectar_text').value);this.disabled=true;document.getElementById('conectar_text').disabled=true;document.getElementById('desconectar_btn').disabled=false;return true;">
@@ -184,15 +185,20 @@
 	</div>
 	<div id="container-mensajero">
 		<div id="container-contactos">
+			<h1>Lista de contactos</h1> 
+			<div id="contactos"></div>
 		</div>
 		<div id="container-pantalla">
+			<div id="pantalla"></div>
 		</div>
 		<div id="container-escritura">
-			<select name="enviarmje_dest" id="enviarmje_dest" size="1">
-			</select>
-			<div>
-				<textarea name="enviarmje_text" id="enviarmje_text"></textarea><input type="submit" name="enviarmje_btn" id="enviarmje_btn" value="Enviar" onclick="EnviarMensajeA()"/>
-			</div>
+			<form action="return false;">
+				<select name="enviarmje_dest" id="enviarmje_dest" size="1">
+				</select>
+				<div>
+					<textarea name="enviarmje_text" id="enviarmje_text"></textarea><input type="button" name="enviarmje_btn" id="enviarmje_btn" value="Enviar" onclick="EnviarMensajeA()"/>
+				</div>
+			</form>
 		</div>
 	</div>
 	<div id="container-log"> </div>	

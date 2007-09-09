@@ -21,7 +21,7 @@ body,div,p {
 #container-mensajero{
 	clear: both;
 }
-#container-pantalla{
+#pantalla{
 	color: #000099;
 	background-color: white;
 	padding: 10pt;
@@ -30,8 +30,8 @@ body,div,p {
 	height: 250px;
 	font-size:10pt;
 	overflow: scroll;
-	
 }
+
 #container-escritura{
 	color: #000099;
 	background-color: #ffca89;

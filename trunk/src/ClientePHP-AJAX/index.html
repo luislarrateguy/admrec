@@ -40,7 +40,7 @@
 			timerContacts = self.setInterval("GetListaContactos()", delayRefresh);
 			timerMjes = self.setInterval("GetUltimosMensajesRecibidos()", delayRefresh);
 			timerContactsRunning = true;
-   		timerMjesRunning = true;
+   			timerMjesRunning = true;
 
 			/*
 			divLog.innerHTML += "<li>HTTP status: " + o.status + "</li>";
@@ -57,8 +57,10 @@
 			conectado = ! (o.responseText == "true");
 			clearInterval(timerContacts);
 			clearInterval(timerMjes);
+			clearInterval(timerContacts);
+			clearInterval(timerMjes);
 			timerContactsRunning = false;
-   		timerMjesRunning = false;
+   			timerMjesRunning = false;
 		}
 	}
 	var handleSuccessEnviarMje = function(o){
@@ -98,7 +100,7 @@
 			var div= document.getElementById('pantalla');
 			var resp = eval(o.responseText);
 			if (resp != "") {
-				div.innerHTML += resp+"<br/>"; 
+				div.innerHTML += resp.replace(/\n/g,"<br/>")+"<br/>"; 
 				div.scrollTop = div.scrollHeight;
 			}
 		}
@@ -162,8 +164,8 @@
 		var div= document.getElementById('pantalla');
 		var nick = selElem.options[selElem.selectedIndex].value;
 		
-		div.innerHTML += key + " le dice a "+ nick +": " +mensaje+"<br/>"; 
-		
+		div.innerHTML += "<b>"+key + " le dice a "+ nick +":</b> " +mensaje.replace(/\n/g,"<br/>")+"<br/>";
+		div.scrollTop = div.scrollHeight
 		divLog= document.getElementById('container-log');
 		var transaction = YAHOO.util.Connect.asyncRequest('GET', sURL + "EnviarMensajeA&key="+key+"&nick="+nick+"&mensaje="+mensaje , callbackEnviarMje, null);
 	}
@@ -173,26 +175,22 @@
 	}
 </script>
 </head>
-<body >
+<body onunload="Desconectar(document.getElementById('conectar_text').value);" onclose ="Desconectar(document.getElementById('conectar_text').value);" onbeforeunload="Desconectar(document.getElementById('conectar_text').value);">
 <div id="container-master">
 	<div id="container-conexion">
 		Conexión
-		<form action="return false;">
 			<input type="text" id="conectar_text" name="conectar_text" value="SuNick">
 			<input type="button" id="conectar_btn" name="conectar_btn" value="Conectar" onclick="Conectar(document.getElementById('conectar_text').value);this.disabled=true;document.getElementById('conectar_text').disabled=true;document.getElementById('desconectar_btn').disabled=false;return true;">
 			<input disabled="true" type="button" id="desconectar_btn" name="desconectar_btn" value="Desconectar" onclick="Desconectar(document.getElementById('conectar_text').value);this.disabled=true;document.getElementById('conectar_text').disabled=false;document.getElementById('conectar_btn').disabled=false;return true;">
-		</form>
 	</div>
 	<div id="container-mensajero">
 		<div id="container-contactos">
 			<h1>Lista de contactos</h1> 
 			<div id="contactos"></div>
 		</div>
-		<div id="container-pantalla">
-			<div id="pantalla"></div>
-		</div>
+		<div id="pantalla"></div>
 		<div id="container-escritura">
-			<form action="return false;">
+			<form action="">
 				<select name="enviarmje_dest" id="enviarmje_dest" size="1">
 				</select>
 				<div>

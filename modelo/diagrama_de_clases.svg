@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Bouml (http://bouml.free.fr/) -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1196" height="752" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<g>
+	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="789" y1="356" x2="702" y2="229" />
+	<line stroke="black" stroke-opacity="1" x1="699" y1="225" x2="697" y2="233" />
+	<line stroke="black" stroke-opacity="1" x1="699" y1="225" x2="707" y2="226" />
+	<line stroke="black" stroke-opacity="1" x1="697" y1="233" x2="707" y2="226" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="444" y1="232" x2="435" y2="229" />
+	<line stroke="black" stroke-opacity="1" x1="444" y1="232" x2="441" y2="240" />
+	<line stroke="black" stroke-opacity="1" x1="157" y1="372" x2="444" y2="232" />
+</g>
+<g>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="838" y="32" width="68" height="22" />
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="838" y="54" width="172" height="73" />
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="924" y="66">GTK/GLADE/GDK/ATK/GLIB#</text>
+</g>
+<g>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="39" y="138" width="62" height="22" />
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="39" y="160" width="158" height="97" />
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="118" y="172">BigBrother</text>
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="118" y="194">&lt;&lt;C#&gt;&gt;</text>
+</g>
+<g>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="31" y="294" width="66" height="22" />
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="31" y="316" width="168" height="105" />
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="115" y="328">ClienteConsola</text>
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="115" y="350">&lt;&lt;C#&gt;&gt;</text>
+</g>
+<g>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="345" y="363" width="101" height="22" />
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="345" y="385" width="255" height="104" />
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="473" y="397">ClienteConsolaVB.NET</text>
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="473" y="419">&lt;&lt;VB.NET&gt;&gt;</text>
+</g>
+<g>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="32" y="498" width="163" height="22" />
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="32" y="520" width="409" height="220" />
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="237" y="532">ClienteRepresentado</text>
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="237" y="554">&lt;&lt;Boo&gt;&gt;</text>
+</g>
+<g>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="294" y="18" width="191" height="22" />
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="294" y="40" width="481" height="215" />
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="535" y="52">ControladorConexiones</text>
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="535" y="74">&lt;&lt;C#&gt;&gt;</text>
+</g>
+<g>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="694" y="522" width="127" height="22" />
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="694" y="544" width="321" height="184" />
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="855" y="556">GtkGUI</text>
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="855" y="578">&lt;&lt;C#&gt;&gt;</text>
+</g>
+<g>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="894" y="141" width="75" height="22" />
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="894" y="163" width="189" height="106" />
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="989" y="175">NickInputEnBoo</text>
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="989" y="197">&lt;&lt;Boo&gt;&gt;</text>
+</g>
+<g>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="497" y="567" width="56" height="22" />
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="497" y="589" width="142" height="125" />
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="568" y="601">WSMensajeroFacade</text>
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="568" y="623">&lt;&lt;Boo&gt;&gt;</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="415" y1="659" x2="420" y2="665" />
+	<line stroke="black" stroke-opacity="1" x1="415" y1="659" x2="421" y2="653" />
+	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="512" y1="666" x2="415" y2="659" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="467" y1="232" x2="458" y2="231" />
+	<line stroke="black" stroke-opacity="1" x1="467" y1="232" x2="466" y2="240" />
+	<line stroke="black" stroke-opacity="1" x1="133" y1="557" x2="467" y2="232" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="494" y1="232" x2="488" y2="238" />
+	<line stroke="black" stroke-opacity="1" x1="494" y1="232" x2="500" y2="237" />
+	<line stroke="black" stroke-opacity="1" x1="518" y1="438" x2="494" y2="232" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1053" y1="453" x2="995" y2="265" />
+	<line stroke="black" stroke-opacity="1" x1="994" y1="260" x2="990" y2="267" />
+	<line stroke="black" stroke-opacity="1" x1="994" y1="260" x2="1001" y2="263" />
+	<line stroke="black" stroke-opacity="1" x1="990" y1="267" x2="1001" y2="263" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="179" y1="600" x2="182" y2="607" />
+	<line stroke="black" stroke-opacity="1" x1="179" y1="600" x2="186" y2="596" />
+	<line stroke="black" stroke-opacity="1" x1="269" y1="632" x2="179" y2="600" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="907" y1="629" x2="901" y2="622" />
+	<line stroke="black" stroke-opacity="1" x1="907" y1="629" x2="900" y2="634" />
+	<line stroke="black" stroke-opacity="1" x1="810" y1="627" x2="907" y2="629" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="956" y1="610" x2="1037" y2="500" />
+	<line stroke="black" stroke-opacity="1" x1="1041" y1="496" x2="1032" y2="497" />
+	<line stroke="black" stroke-opacity="1" x1="1041" y1="496" x2="1042" y2="504" />
+	<line stroke="black" stroke-opacity="1" x1="1032" y1="497" x2="1042" y2="504" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="605" y1="124" x2="596" y2="122" />
+	<line stroke="black" stroke-opacity="1" x1="605" y1="124" x2="603" y2="132" />
+	<line stroke="black" stroke-opacity="1" x1="519" y1="189" x2="605" y2="124" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="431" y1="213" x2="424" y2="207" />
+	<line stroke="black" stroke-opacity="1" x1="431" y1="213" x2="425" y2="219" />
+	<line stroke="black" stroke-opacity="1" x1="145" y1="227" x2="431" y2="213" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="141" y="213" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="75" y="247" width="69" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="71" y="209" width="70" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="106" y="220">BigBrother</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="161" y="377" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="71" y="411" width="93" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="67" y="373" width="94" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="114" y="384">ClienteConsola</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="588" y="443" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="454" y="477" width="137" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="450" y="439" width="138" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="519" y="450">ClienteConsolaVB.NET</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="175" y="562" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="51" y="596" width="127" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="47" y="558" width="128" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="111" y="569">ClienteRepresentado</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="681" y="86" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="593" y="120" width="91" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="589" y="82" width="92" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="635" y="93">ClienteRemoto</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="970" y="615" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="912" y="649" width="61" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="908" y="611" width="62" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="939" y="622">DataInput</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1036" y="222" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="940" y="256" width="99" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="936" y="218" width="100" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="986" y="229">NickInputEnBoo</text>
+</g>
+<g>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="1001" y="383" width="72" height="22" />
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="1001" y="405" width="183" height="104" />
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="1093" y="417">ServidorInput</text>
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="1093" y="439">&lt;&lt;Java&gt;&gt;</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="611" y="642" width="3" height="61" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="517" y="700" width="97" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="513" y="638" width="98" height="62" />
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="562" y="649">&lt;&lt;webservice&gt;&gt;</text>
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="562" y="672">IMManager</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="436" y1="189" x2="405" y2="177" />
+	<line stroke="black" stroke-opacity="1" x1="400" y1="175" x2="403" y2="182" />
+	<line stroke="black" stroke-opacity="1" x1="400" y1="175" x2="407" y2="171" />
+	<line stroke="black" stroke-opacity="1" x1="403" y1="182" x2="407" y2="171" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="240" y1="671" x2="232" y2="666" />
+	<line stroke="black" stroke-opacity="1" x1="240" y1="671" x2="235" y2="678" />
+	<line stroke="black" stroke-opacity="1" x1="176" y1="685" x2="240" y2="671" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="794" y1="648" x2="823" y2="671" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="506" y1="232" x2="504" y2="240" />
+	<line stroke="black" stroke-opacity="1" x1="506" y1="232" x2="514" y2="233" />
+	<line stroke="black" stroke-opacity="1" x1="754" y1="605" x2="506" y2="232" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="508" y1="137" x2="500" y2="141" />
+	<line stroke="black" stroke-opacity="1" x1="508" y1="137" x2="512" y2="144" />
+	<line stroke="black" stroke-opacity="1" x1="496" y1="189" x2="508" y2="137" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="823" y1="671" x2="822" y2="662" />
+	<line stroke="black" stroke-opacity="1" x1="823" y1="671" x2="814" y2="671" />
+	<line stroke="black" stroke-opacity="1" x1="794" y1="648" x2="823" y2="671" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="1017" y1="496" x2="1008" y2="493" />
+	<line stroke="black" stroke-opacity="1" x1="1017" y1="496" x2="1014" y2="504" />
+	<line stroke="black" stroke-opacity="1" x1="807" y1="605" x2="1017" y2="496" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="506" y1="232" x2="504" y2="240" />
+	<line stroke="black" stroke-opacity="1" x1="506" y1="232" x2="514" y2="233" />
+	<line stroke="black" stroke-opacity="1" x1="754" y1="605" x2="506" y2="232" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="411" y="637" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="245" y="671" width="169" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="241" y="633" width="170" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="326" y="644">ClienteRepresentadoFacade</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="548" y="194" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="436" y="228" width="115" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="432" y="190" width="116" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="490" y="201">ControladorCliente</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="806" y="610" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="732" y="644" width="77" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="728" y="606" width="78" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="767" y="617">MainWindow</text>
+</g>
+<g>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="715" y="279" width="101" height="22" />
+	<rect fill="none" stroke="black" stroke-width="1" stroke-opacity="1" x="715" y="301" width="256" height="190" />
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="843" y="313">Servidor</text>
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="843" y="335">&lt;&lt;C#&gt;&gt;</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1101" y="458" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="1021" y="492" width="83" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="1017" y="454" width="84" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="1059" y="465">ServidorInput</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="835" y1="399" x2="836" y2="407" />
+	<line stroke="black" stroke-opacity="1" x1="835" y1="399" x2="843" y2="397" />
+	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="887" y1="434" x2="835" y2="399" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="172" y="684" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="44" y="718" width="131" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="40" y="680" width="132" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="106" y="691">ServidorIntermediario</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="747" y="163" width="3" height="61" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="605" y="221" width="145" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="601" y="159" width="146" height="62" />
+	<text font-family="Helvetica" font-size="9" fill="black" text-anchor="middle" x="674" y="170">&lt;&lt;interface&gt;&gt;</text>
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="674" y="193">IControladorConexiones</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="887" y="676" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="809" y="710" width="81" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="805" y="672" width="82" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="846" y="683">VentanaChat</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="874" y="361" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="734" y="395" width="143" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="730" y="357" width="144" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="802" y="368">ControladorConexiones</text>
+</g>
+<g>
+	<line stroke-dasharray="4,4" stroke="black" stroke-opacity="1" x1="355" y1="137" x2="355" y2="115" />
+	<line stroke="black" stroke-opacity="1" x1="356" y1="110" x2="349" y2="115" />
+	<line stroke="black" stroke-opacity="1" x1="356" y1="110" x2="361" y2="116" />
+	<line stroke="black" stroke-opacity="1" x1="349" y1="115" x2="361" y2="116" />
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="396" y="142" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="314" y="176" width="85" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="310" y="138" width="86" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="353" y="149">DummyClient</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="944" y="439" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="892" y="473" width="55" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="888" y="435" width="56" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="916" y="446">Servidor</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="556" y="99" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="474" y="133" width="85" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="470" y="95" width="86" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="513" y="106">EventsHelper</text>
+</g>
+<g>
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="381" y="72" width="3" height="37" />
+	<rect fill="#808080" stroke="none" stroke-opacity="1" x="335" y="106" width="49" height="3" />
+	<rect fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" x="331" y="68" width="50" height="38" />
+	<text font-family="Helvetica" font-size="9" fill="black" font-weight="bold" text-anchor="middle" x="356" y="79">ICliente</text>
+</g>
+<g>
+	<text font-family="Helvetica" font-size="9" fill="black" x="189" y="620">*</text>
+</g>
+</svg>

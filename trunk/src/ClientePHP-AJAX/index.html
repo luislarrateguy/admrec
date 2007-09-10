@@ -100,7 +100,7 @@
 			var div= document.getElementById('pantalla');
 			var resp = eval(o.responseText);
 			if (resp != "") {
-				div.innerHTML += resp.replace(/\n/g,"<br/>")+"<br/>"; 
+				div.innerHTML += resp+"<br/>"; 
 				div.scrollTop = div.scrollHeight;
 			}
 		}
@@ -159,12 +159,12 @@
 		var transaction = YAHOO.util.Connect.asyncRequest('GET', sURL + "GetListaContactos&key="+key , callbackContactos, null);
 	}
 	function EnviarMensajeA() {
-		var mensaje = document.getElementById('enviarmje_text').value;
+		var mensaje = document.getElementById('enviarmje_text').value.replace(/\n/g,"<br/>");
 		var selElem= document.getElementById('enviarmje_dest');
 		var div= document.getElementById('pantalla');
 		var nick = selElem.options[selElem.selectedIndex].value;
 		
-		div.innerHTML += "<b>"+key + " le dice a "+ nick +":</b> " +mensaje.replace(/\n/g,"<br/>")+"<br/>";
+		div.innerHTML += "<b>"+key + " le dice a "+ nick +":</b> " +mensaje+"<br/>";
 		div.scrollTop = div.scrollHeight
 		divLog= document.getElementById('container-log');
 		var transaction = YAHOO.util.Connect.asyncRequest('GET', sURL + "EnviarMensajeA&key="+key+"&nick="+nick+"&mensaje="+mensaje , callbackEnviarMje, null);

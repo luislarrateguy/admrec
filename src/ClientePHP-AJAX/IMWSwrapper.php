@@ -14,7 +14,7 @@
 	$proxyport = isset($_POST['proxyport']) ? $_POST['proxyport'] : '';
 	$proxyusername = isset($_POST['proxyusername']) ? $_POST['proxyusername'] : '';
 	$proxypassword = isset($_POST['proxypassword']) ? $_POST['proxypassword'] : '';
-	$client = new soap_client('http://192.168.0.2:8084/index.asmx?wsdl=0', true,
+	$client = new soap_client('http://localhost/wsfacade/index.asmx?wsdl=0', true,
 							$proxyhost, $proxyport, $proxyusername, $proxypassword);
 
 	switch ($_GET["method"]) {
@@ -53,7 +53,7 @@
 				}
 			break;
 		case "EnviarMensajeA":
-				$param = array('key' =>$_GET['key'],'mensaje'=>$_GET['mensaje'],'nick'=>$_GET['nick']);
+				$param = array('key' =>$_GET['key'],'mensaje'=>stripslashes($_GET['mensaje']),'nick'=>$_GET['nick']);
 				$result = $client->call('EnviarMensajeA', array('parameters' => $param), '', '', false, true);
 				if (is_string($result["EnviarMensajeAResult"])) {
 					$result= $result["EnviarMensajeAResult"] == "true";	

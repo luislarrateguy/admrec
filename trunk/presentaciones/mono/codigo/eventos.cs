@@ -5,7 +5,6 @@ public class Persona {
 }
 
 Persona unaPersona = new Persona();
-unaPersona.CambioNombre +=
-   new CambioNombreHandler(this.AlgunMetodo);
+unaPersona.CambioNombre += this.AlgunMetodo;
 
 public void AlgunMetodo(string nuevoNombre);

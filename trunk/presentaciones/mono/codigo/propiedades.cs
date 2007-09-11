@@ -1,7 +1,12 @@
-public string Nick
-{
-    get { return this.nick; }
-    set { this.nick = value; }
+public string Nick {
+    get {
+      return this.nick;
+    }
+
+    set {
+      // Código de validación
+      this.nick = value;
+    }
 }
 
 unObjeto.Nick = "Algún nick";

@@ -134,14 +134,6 @@ relationcanvas 128955 relation_ref 128827 // <dependency>
   from ref 131184 z 2009 stereotype "<<uses>>" xyz 391 132 3000 to ref 131696
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
-relationcanvas 129083 relation_ref 128571 // <dependency>
-  from ref 132080 z 2009 to ref 131568
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-relationcanvas 129211 relation_ref 128955 // <realization>
-  from ref 132080 z 2009 to ref 131696
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
 relationcanvas 129374 relation_ref 129392 // <unidirectional association>
   from ref 132080 z 2009 to ref 132208
   no_role_a no_role_b

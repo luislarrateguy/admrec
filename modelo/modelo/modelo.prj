@@ -1,7 +1,7 @@
 format 37
 "modelo"
-  revision 1
-  modified_by 94 "nacho"
+  revision 2
+  modified_by 59 "nacho"
 
 
   
@@ -57,6 +57,11 @@ format 37
       draw_all_relations default hide_attributes yes hide_operations yes show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
       size A4-Landscape
     end
+
+    classdiagram 128059 "Diagrama componentes Remoting"
+      draw_all_relations default hide_attributes yes hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+      size A4-Landscape
+    end
   end
 
   componentview 128112 "Component view3"
@@ -92,4 +97,6 @@ format 37
   package_ref 128880 // ServidorInput
 
   package_ref 129392 // WSMensajeroFacade
+
+  package_ref 128059 // .Net
 end

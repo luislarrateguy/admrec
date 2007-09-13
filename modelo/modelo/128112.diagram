@@ -1,5 +1,9 @@
 format 37
 
+classcanvas 128315 class_ref 129776 // DummyClient
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 290 137 3005
+  end
 packagecanvas 128752 
   package_ref 128112 // GTK/GLADE/GDK/ATK/GLIB#
     xyzwh 813 30 2000 169 95
@@ -54,17 +58,13 @@ classcanvas 131312 class_ref 128112 // IControladorConexiones
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
   xyz 581 153 2015
   end
-classcanvas 131440 class_ref 129776 // DummyClient
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 300 133 2020
-  end
 classcanvas 131568 class_ref 129904 // EventsHelper
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
   xyz 455 92 2025
   end
 classcanvas 131696 class_ref 130032 // ICliente
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 321 65 2030
+  xyz 307 54 2030
   end
 packagecanvas 131824 
   package_ref 129008 // GtkGUI
@@ -113,8 +113,24 @@ classcanvas 133488 class_ref 130544 // IMManager
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
   xyz 497 618 2005
   end
+relationcanvas 128059 relation_ref 128187 // <dependency>
+  from ref 131184 z 2009 to ref 131312
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
 relationcanvas 128094 relation_ref 128094 // <unidirectional association>
   from ref 130032 z 2004 to ref 131184
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 128187 relation_ref 128059 // <dependency>
+  from ref 132720 z 2004 to ref 131056
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 128443 relation_ref 130544 // <realization>
+  from ref 128315 z 1999 to ref 131696
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 128571 relation_ref 128699 // <dependency>
+  from ref 131184 z 1999 stereotype "<<uses>>" xyz 395 156 3000 to ref 128315
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 relationcanvas 129374 relation_ref 129392 // <unidirectional association>
@@ -131,10 +147,6 @@ relationcanvas 129630 relation_ref 130032 // <unidirectional association>
   no_multiplicity_a no_multiplicity_b
 relationcanvas 132848 relation_ref 128112 // <realization>
   from ref 132720 z 1999 to ref 131312
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-relationcanvas 133616 relation_ref 128240 // <generalisation>
-  from ref 131184 z 2009 to ref 131440
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 relationcanvas 133744 relation_ref 128368 // <dependency>
@@ -164,7 +176,7 @@ relationcanvas 135408 relation_ref 129008 // <generalisation>
 relationcanvas 135792 relation_ref 129136 // <unidirectional association>
   from ref 130672 z 2004 to ref 130544
   no_role_a no_role_b
-  multiplicity_a_pos 183 593 3000 no_multiplicity_b
+  multiplicity_a_pos 186 595 3000 no_multiplicity_b
 relationcanvas 135920 relation_ref 129264 // <unidirectional association>
   from ref 130800 z 2009 to ref 130672
   no_role_a no_role_b
@@ -191,10 +203,6 @@ relationcanvas 137584 relation_ref 130288 // <unidirectional association>
   no_multiplicity_a no_multiplicity_b
 relationcanvas 137712 relation_ref 130416 // <unidirectional association>
   from ref 131184 z 2004 to ref 131056
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-relationcanvas 137840 relation_ref 130544 // <realization>
-  from ref 131440 z 2019 to ref 131696
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end

@@ -115,6 +115,13 @@ format 37
 	    classrelation_ref 128571 // <dependency>
 	  b multiplicity "" parent class_ref 129904 // EventsHelper
       end
+
+      classrelation 128955 // <realization>
+	relation 128955 -_-|>
+	  a public
+	    classrelation_ref 128955 // <realization>
+	  b multiplicity "" parent class_ref 130032 // ICliente
+      end
     end
 
     class 130416 "VentanaChat"

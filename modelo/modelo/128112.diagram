@@ -64,7 +64,7 @@ classcanvas 131568 class_ref 129904 // EventsHelper
   end
 classcanvas 131696 class_ref 130032 // ICliente
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 307 54 2030
+  xyz 307 56 2030
   end
 packagecanvas 131824 
   package_ref 129008 // GtkGUI
@@ -122,15 +122,24 @@ relationcanvas 128094 relation_ref 128094 // <unidirectional association>
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 relationcanvas 128187 relation_ref 128059 // <dependency>
-  from ref 132720 z 2004 to ref 131056
+  from ref 132720 z 2004 to point 776 99
+  line 128699 z 2004 to ref 131056
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 relationcanvas 128443 relation_ref 130544 // <realization>
   from ref 128315 z 1999 to ref 131696
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
-relationcanvas 128571 relation_ref 128699 // <dependency>
-  from ref 131184 z 1999 stereotype "<<uses>>" xyz 395 156 3000 to ref 128315
+relationcanvas 128955 relation_ref 128827 // <dependency>
+  from ref 131184 z 2009 stereotype "<<uses>>" xyz 391 132 3000 to ref 131696
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 129083 relation_ref 128571 // <dependency>
+  from ref 132080 z 2009 to ref 131568
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 129211 relation_ref 128955 // <realization>
+  from ref 132080 z 2009 to ref 131696
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 relationcanvas 129374 relation_ref 129392 // <unidirectional association>
@@ -138,7 +147,8 @@ relationcanvas 129374 relation_ref 129392 // <unidirectional association>
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 relationcanvas 129502 relation_ref 129776 // <unidirectional association>
-  from ref 132080 z 2009 to ref 133232
+  from ref 132080 z 2009 to point 878 572
+  line 128827 z 2009 to ref 133232
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 relationcanvas 129630 relation_ref 130032 // <unidirectional association>

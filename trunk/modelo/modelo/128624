@@ -100,12 +100,12 @@ ${members}};
 	  b multiplicity "" parent class_ref 128112 // IControladorConexiones
       end
 
-      classrelation 128699 // <dependency>
-	relation 128699 -_->
+      classrelation 128827 // <dependency>
+	relation 128827 -_->
 	  stereotype "uses"
 	  a package
-	    classrelation_ref 128699 // <dependency>
-	  b multiplicity "" parent class_ref 129776 // DummyClient
+	    classrelation_ref 128827 // <dependency>
+	  b multiplicity "" parent class_ref 130032 // ICliente
       end
     end
 

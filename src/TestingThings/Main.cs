@@ -31,9 +31,9 @@ namespace TestingThings
 	{
 		public static void Main(string[] args)
 		{
-			Dictionary<string,ClienteRepresentado> crc = new Dictionary<string,ClienteRepresentado>();
-			crc.ContainsKey(id)
-			crc.Add(id,new ClienteRepresentado())
+//			Dictionary<string,ClienteRepresentado> crc = new Dictionary<string,ClienteRepresentado>();
+//			crc.ContainsKey(id);
+//			crc.Add(id,new ClienteRepresentado());
 			
 			
 			

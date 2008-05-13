@@ -1,14 +1,14 @@
-format 37
+format 48
 "GtkGUI" // GtkGUI
-  revision 1
-  modified_by 59 "nacho"
+  revision 2
+  modified_by 41 "nacho"
   // class settings
   //class diagram settings
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
   //use case diagram settings
   package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
   //sequence diagram settings
-  show_full_operations_definition default write_horizontally default drawing_language default draw_all_relations default shadow default
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default
   //collaboration diagram settings
   show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default
   //object diagram settings
@@ -29,13 +29,13 @@ format 37
   stereotype "C#"
   classview 129136 "Class view21"
     //class diagram settings
-    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
     //collaboration diagram settings
     show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default
     //object diagram settings
      write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
     //sequence diagram settings
-    show_full_operations_definition default write_horizontally default drawing_language default draw_all_relations default shadow default
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default
     //state diagram settings
     package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
     show_activities default region_horizontally default drawing_language default
@@ -43,11 +43,11 @@ format 37
     //activity diagram settings
     package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
     show_infonote default drawing_language default
-    
     class 130160 "DataInput"
       visibility package 
       cpp_decl ""
       java_decl ""
+      php_decl ""
       idl_decl ""
       explicit_switch_type ""
       
@@ -55,7 +55,7 @@ format 37
 	relation 129904 ---|>
 	  a public
 	    classrelation_ref 130032 // <generalisation>
-	  b multiplicity "" parent class_ref 128752 // ServidorInput
+	  b parent class_ref 128752 // ServidorInput
       end
     end
 
@@ -63,64 +63,71 @@ format 37
       visibility package 
       cpp_decl ""
       java_decl ""
+      php_decl ""
       idl_decl ""
       explicit_switch_type ""
       
       classrelation 129392 // <unidirectional association>
 	relation 129392 --->
-	  a role_name "" multiplicity "" protected
+	  a role_name "" protected
 	    classrelation_ref 129392 // <unidirectional association>
-	  b multiplicity "" parent class_ref 130416 // VentanaChat
+	  b parent class_ref 130416 // VentanaChat
       end
 
       classrelation 129520 // <association>
 	relation 129520 ----
-	  a role_name "" multiplicity "" protected
+	  a role_name "" protected
 	    classrelation_ref 129520 // <association>
-	  b role_name "" multiplicity "" protected
+	  b role_name "" protected
 	    classrelation_ref 129648 // <association>
       end
 
       classrelation 129776 // <unidirectional association>
 	relation 129648 --->
-	  a role_name "" multiplicity "" protected
+	  a role_name "" protected
 	    classrelation_ref 129776 // <unidirectional association>
-	  b multiplicity "" parent class_ref 130160 // DataInput
+	  b parent class_ref 130160 // DataInput
       end
 
       classrelation 129904 // <unidirectional association>
 	relation 129776 --->
-	  a role_name "" multiplicity "" protected
+	  a role_name "" protected
 	    classrelation_ref 129904 // <unidirectional association>
-	  b multiplicity "" parent class_ref 128752 // ServidorInput
+	  b parent class_ref 128752 // ServidorInput
       end
 
       classrelation 130160 // <unidirectional association>
 	relation 130032 --->
-	  a role_name "" multiplicity "" protected
+	  a role_name "" protected
 	    classrelation_ref 130160 // <unidirectional association>
-	  b multiplicity "" parent class_ref 129648 // ControladorCliente
+	  b parent class_ref 129648 // ControladorCliente
       end
 
       classrelation 130288 // <unidirectional association>
 	relation 130160 --->
-	  a role_name "" multiplicity "" protected
+	  a role_name "" protected
 	    classrelation_ref 130288 // <unidirectional association>
-	  b multiplicity "" parent class_ref 129648 // ControladorCliente
+	  b parent class_ref 129648 // ControladorCliente
       end
 
       classrelation 128571 // <dependency>
 	relation 128571 -_->
 	  a default
 	    classrelation_ref 128571 // <dependency>
-	  b multiplicity "" parent class_ref 129904 // EventsHelper
+	  b parent class_ref 129904 // EventsHelper
       end
 
       classrelation 128955 // <realization>
 	relation 128955 -_-|>
 	  a public
 	    classrelation_ref 128955 // <realization>
-	  b multiplicity "" parent class_ref 130032 // ICliente
+	  b parent class_ref 130032 // ICliente
+      end
+
+      simplerelation 129193
+	-_->
+	  on 
+	  package_ref 128112 // GTK/GLADE/GDK/ATK/GLIB#
       end
     end
 
@@ -128,6 +135,7 @@ format 37
       visibility package 
       cpp_decl ""
       java_decl ""
+      php_decl ""
       idl_decl ""
       explicit_switch_type ""
       

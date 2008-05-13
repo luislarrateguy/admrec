@@ -1,117 +1,117 @@
-format 37
+format 48
 
 classcanvas 128315 class_ref 129776 // DummyClient
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 290 137 3005
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 172 191 3005
   end
 packagecanvas 128752 
   package_ref 128112 // GTK/GLADE/GDK/ATK/GLIB#
-    xyzwh 813 30 2000 169 95
+    xyzwh 163 658 2000 169 95
 packagecanvas 129648 
   package_ref 129136 // BigBrother
-    xyzwh 38 133 2000 155 117
+    xyzwh 459 256 2000 155 117
 packagecanvas 129776 
   package_ref 128368 // ClienteConsola
-    xyzwh 30 285 2000 165 125
+    xyzwh 459 420 2000 165 125
 packagecanvas 129904 
   package_ref 128496 // ClienteConsolaVB.NET
-    xyzwh 334 353 2000 249 124
+    xyzwh 634 430 2000 170 123
 classcanvas 130032 class_ref 129136 // BigBrother
-  draw_all_relations default hide_attributes yes hide_operations yes show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 68 202 2005
+  draw_all_relations default hide_attributes yes hide_operations yes show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 497 322 2005
   end
 classcanvas 130160 class_ref 129264 // ClienteConsola
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 64 362 2005
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 493 497 2005
   end
 classcanvas 130288 class_ref 129392 // ClienteConsolaVB.NET
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 435 426 2005
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 641 501 2005
   end
 packagecanvas 130416 
   package_ref 129264 // ClienteRepresentado
-    xyzwh 30 484 2000 399 236
+    xyzwh 89 256 2000 332 233
 classcanvas 130544 class_ref 128496 // ClienteRepresentado
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 44 541 2005
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 270 317 2005
   end
 classcanvas 130672 class_ref 128880 // ClienteRepresentadoFacade
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 231 614 2010
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 103 367 2010
   end
 classcanvas 130800 class_ref 129008 // ServidorIntermediario
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 37 660 2015
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 214 436 2015
   end
 packagecanvas 130928 
   package_ref 128624 // ControladorConexiones
-    xyzwh 285 17 2000 468 232
+    xyzwh 144 18 2000 596 228
 classcanvas 131056 class_ref 129520 // ClienteRemoto
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 570 79 2005
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 628 67 2005
   end
 classcanvas 131184 class_ref 129648 // ControladorCliente
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 418 184 2010
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 365 163 2010
   end
 classcanvas 131312 class_ref 128112 // IControladorConexiones
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 581 153 2015
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 521 160 2015
   end
 classcanvas 131568 class_ref 129904 // EventsHelper
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 455 92 2025
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 332 73 2025
   end
-classcanvas 131696 class_ref 130032 // ICliente
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 307 56 2030
+classcanvas 131696 class_ref 130032 // Cliente
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 258 79 2030
   end
 packagecanvas 131824 
   package_ref 129008 // GtkGUI
-    xyzwh 673 507 2000 313 201
+    xyzwh 346 680 2000 261 181
 classcanvas 131952 class_ref 130160 // DataInput
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 881 593 2005
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 525 763 2005
   end
 classcanvas 132080 class_ref 130288 // MainWindow
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 706 588 2010
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 384 748 2010
   end
 classcanvas 132208 class_ref 130416 // VentanaChat
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 780 652 2015
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 384 812 2015
   end
 packagecanvas 132336 
   package_ref 128240 // NickInputEnBoo
-    xyzwh 867 137 2000 185 126
+    xyzwh 242 505 2000 155 135
 classcanvas 132464 class_ref 128368 // NickInputEnBoo
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 907 211 2005
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 269 581 2005
   end
 packagecanvas 132592 
   package_ref 128752 // Servidor
-    xyzwh 694 271 2010 250 207
+    xyzwh 623 257 2010 180 167
 classcanvas 132720 class_ref 128240 // ControladorConexiones
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 707 346 2015
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 632 322 2015
   end
 classcanvas 132976 class_ref 128624 // Servidor
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 861 422 2020
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 674 379 2020
   end
 packagecanvas 133104 
   package_ref 128880 // ServidorInput
-    xyzwh 971 372 2005 179 124
+    xyzwh 463 556 2005 179 124
 classcanvas 133232 class_ref 128752 // ServidorInput
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 986 440 2010
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 484 615 2010
   end
 packagecanvas 133360 
   package_ref 129392 // WSMensajeroFacade
-    xyzwh 482 550 2000 139 144
+    xyzwh 90 505 2000 139 144
 classcanvas 133488 class_ref 130544 // IMManager
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
-  xyz 497 618 2005
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 105 569 2005
   end
 relationcanvas 128059 relation_ref 128187 // <dependency>
   from ref 131184 z 2009 to ref 131312
@@ -122,8 +122,7 @@ relationcanvas 128094 relation_ref 128094 // <unidirectional association>
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 relationcanvas 128187 relation_ref 128059 // <dependency>
-  from ref 132720 z 2004 to point 776 99
-  line 128699 z 2004 to ref 131056
+  from ref 132720 z 2004 to ref 131056
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 relationcanvas 128443 relation_ref 130544 // <realization>
@@ -131,7 +130,9 @@ relationcanvas 128443 relation_ref 130544 // <realization>
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 relationcanvas 128955 relation_ref 128827 // <dependency>
-  from ref 131184 z 2009 stereotype "<<uses>>" xyz 391 132 3000 to ref 131696
+  geometry VHr
+  from ref 131184 z 2009 stereotype "<<uses>>" xyz 296 182 3000 to point 281 180
+  line 129577 z 2009 to ref 131696
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 relationcanvas 129374 relation_ref 129392 // <unidirectional association>
@@ -139,14 +140,16 @@ relationcanvas 129374 relation_ref 129392 // <unidirectional association>
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 relationcanvas 129502 relation_ref 129776 // <unidirectional association>
-  from ref 132080 z 2009 to point 878 572
-  line 128827 z 2009 to ref 133232
+  from ref 132080 z 2009 to point 509 743
+  line 131753 z 2009 to ref 133232
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 relationcanvas 129630 relation_ref 130032 // <unidirectional association>
   from ref 132080 z 2009 to ref 131184
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
+simplerelationcanvas 130089 simplerelation_ref 129193
+  from ref 132080 z 1999 to ref 128752
 relationcanvas 132848 relation_ref 128112 // <realization>
   from ref 132720 z 1999 to ref 131312
   no_role_a no_role_b
@@ -164,11 +167,14 @@ relationcanvas 134000 relation_ref 128624 // <unidirectional association>
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 relationcanvas 134128 relation_ref 128752 // <unidirectional association>
-  from ref 130288 z 2004 to ref 131184
+  from ref 130288 z 2004 to point 612 426
+  line 132265 z 2004 to point 453 382
+  line 132137 z 2004 to ref 131184
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 relationcanvas 134512 relation_ref 128880 // <unidirectional association>
-  from ref 130160 z 1999 to ref 131184
+  from ref 130160 z 1999 to point 448 475
+  line 131881 z 1999 to ref 131184
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 relationcanvas 135408 relation_ref 129008 // <generalisation>
@@ -178,7 +184,7 @@ relationcanvas 135408 relation_ref 129008 // <generalisation>
 relationcanvas 135792 relation_ref 129136 // <unidirectional association>
   from ref 130672 z 2004 to ref 130544
   no_role_a no_role_b
-  multiplicity_a_pos 186 595 3000 no_multiplicity_b
+  multiplicity_a_pos 255 364 3000 no_multiplicity_b
 relationcanvas 135920 relation_ref 129264 // <unidirectional association>
   from ref 130800 z 2009 to ref 130672
   no_role_a no_role_b

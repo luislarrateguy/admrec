@@ -1,14 +1,14 @@
-format 37
+format 48
 "ControladorConexiones" // ControladorConexiones
-  revision 1
-  modified_by 59 "nacho"
+  revision 2
+  modified_by 41 "nacho"
   // class settings
   //class diagram settings
-  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
   //use case diagram settings
   package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
   //sequence diagram settings
-  show_full_operations_definition default write_horizontally default drawing_language default draw_all_relations default shadow default
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default
   //collaboration diagram settings
   show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default
   //object diagram settings
@@ -29,13 +29,13 @@ format 37
   stereotype "C#"
   classview 128368 "Class view12"
     //class diagram settings
-    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
     //collaboration diagram settings
     show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default
     //object diagram settings
      write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
     //sequence diagram settings
-    show_full_operations_definition default write_horizontally default drawing_language default draw_all_relations default shadow default
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default
     //state diagram settings
     package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
     show_activities default region_horizontally default drawing_language default
@@ -43,13 +43,13 @@ format 37
     //activity diagram settings
     package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
     show_infonote default drawing_language default
-    
     class 128112 "IControladorConexiones"
       visibility package stereotype "interface"
       cpp_decl ""
       java_decl "${comment}${@}${public}interface ${name}${extends} {
 ${members}}
 "
+      php_decl ""
       idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
 ${members}};
 "
@@ -61,6 +61,7 @@ ${members}};
       visibility package 
       cpp_decl ""
       java_decl ""
+      php_decl ""
       idl_decl ""
       explicit_switch_type ""
       
@@ -68,7 +69,7 @@ ${members}};
 	relation 128443 ---|>
 	  a public
 	    classrelation_ref 128443 // <generalisation>
-	  b multiplicity "" parent class_ref 128059 // MarshalByRefObject
+	  b parent class_ref 128059 // MarshalByRefObject
       end
     end
 
@@ -76,28 +77,29 @@ ${members}};
       visibility package 
       cpp_decl ""
       java_decl ""
+      php_decl ""
       idl_decl ""
       explicit_switch_type ""
       
       classrelation 130416 // <unidirectional association>
 	relation 130288 --->
-	  a role_name "" multiplicity "" protected
+	  a role_name "" protected
 	    classrelation_ref 130416 // <unidirectional association>
-	  b multiplicity "" parent class_ref 129904 // EventsHelper
+	  b parent class_ref 129904 // EventsHelper
       end
 
       classrelation 130544 // <unidirectional association>
 	relation 130416 --->
-	  a role_name "" multiplicity "" protected
+	  a role_name "" protected
 	    classrelation_ref 130544 // <unidirectional association>
-	  b multiplicity "" parent class_ref 129520 // ClienteRemoto
+	  b parent class_ref 129520 // ClienteRemoto
       end
 
       classrelation 128187 // <dependency>
 	relation 128187 -_->
 	  a default
 	    classrelation_ref 128187 // <dependency>
-	  b multiplicity "" parent class_ref 128112 // IControladorConexiones
+	  b parent class_ref 128112 // IControladorConexiones
       end
 
       classrelation 128827 // <dependency>
@@ -105,7 +107,7 @@ ${members}};
 	  stereotype "uses"
 	  a package
 	    classrelation_ref 128827 // <dependency>
-	  b multiplicity "" parent class_ref 130032 // ICliente
+	  b parent class_ref 130032 // Cliente
       end
     end
 
@@ -113,6 +115,7 @@ ${members}};
       visibility package 
       cpp_decl ""
       java_decl ""
+      php_decl ""
       idl_decl ""
       explicit_switch_type ""
       
@@ -120,7 +123,7 @@ ${members}};
 	relation 130544 -_-|>
 	  a public
 	    classrelation_ref 130672 // <realization>
-	  b multiplicity "" parent class_ref 130032 // ICliente
+	  b parent class_ref 130032 // Cliente
       end
     end
 
@@ -128,15 +131,17 @@ ${members}};
       visibility package 
       cpp_decl ""
       java_decl ""
+      php_decl ""
       idl_decl ""
       explicit_switch_type ""
       
     end
 
-    class 130032 "ICliente"
+    class 130032 "Cliente"
       visibility package 
       cpp_decl ""
       java_decl ""
+      php_decl ""
       idl_decl ""
       explicit_switch_type ""
       

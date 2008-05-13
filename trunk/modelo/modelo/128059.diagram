@@ -1,0 +1,138 @@
+format 37
+
+classcanvas 128059 class_ref 128240 // ControladorConexiones
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color green
+  xyz 103 378 2000
+  end
+classcanvas 128187 class_ref 128112 // IControladorConexiones
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 102 211 2004
+  end
+classcanvas 128443 class_ref 129520 // ClienteRemoto
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color green
+  xyz 499 377 2000
+  end
+classcanvas 128571 class_ref 129904 // EventsHelper
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 660 223 2000
+  end
+classcanvas 128699 class_ref 130032 // ICliente
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 521 101 2000
+  end
+classcanvas 128827 class_ref 129648 // ControladorCliente
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 487 223 2004
+  end
+classcanvas 129851 class_ref 129776 // DummyClient
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 620 158 2005
+  end
+classcanvas 130235 class_ref 129264 // ClienteConsola
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color lightgray
+  xyz 716 468 2004
+  end
+classcanvas 130747 class_ref 128624 // Servidor
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 62 487 2004
+  end
+classcanvas 131131 class_ref 128059 // MarshalByRefObject
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color green
+  xyz 315 267 2009
+  end
+classcanvas 131515 class_ref 129392 // ClienteConsolaVB.NET
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color lightgray
+  xyz 735 335 2004
+  end
+classcanvas 131771 class_ref 130288 // MainWindow
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color lightgray
+  xyz 833 477 2004
+  end
+fragment 132539 "Servidor"
+  xyzwh 48 78 2000 265 527
+end
+fragment 132667 "Clientes"
+  xyzwh 445 75 2000 542 525
+end
+classcanvas 133435 class_ref 129136 // BigBrother
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color lightgray
+  xyz 626 453 2005
+  end
+relationcanvas 128315 relation_ref 128112 // <realization>
+  from ref 128059 z 1999 to ref 128187
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 128955 relation_ref 130288 // <unidirectional association>
+  from ref 128827 z 1999 to ref 128571
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 129083 relation_ref 130416 // <unidirectional association>
+  from ref 128827 z 1999 to ref 128443
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 129723 relation_ref 128059 // <dependency>
+  from ref 128059 z 1999 to ref 128443
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 129979 relation_ref 130544 // <realization>
+  from ref 129851 z 1999 to ref 128699
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 130363 relation_ref 128880 // <unidirectional association>
+  from ref 130235 z 1999 to ref 128827
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 130875 relation_ref 128368 // <dependency>
+  from ref 130747 z 1999 to ref 128059
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 131003 relation_ref 128187 // <dependency>
+  from ref 128827 z 2003 to ref 128187
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 131259 relation_ref 128315 // <generalisation>
+  from ref 128059 z 1999 to ref 131131
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 131387 relation_ref 128443 // <generalisation>
+  from ref 128443 z 1999 to ref 131131
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 131643 relation_ref 128752 // <unidirectional association>
+  from ref 131515 z 1999 to ref 128827
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 131899 relation_ref 130032 // <unidirectional association>
+  from ref 131771 z 1999 to ref 128827
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 132027 relation_ref 130160 // <unidirectional association>
+  from ref 131771 z 1999 to ref 128827
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 132283 relation_ref 128571 // <dependency>
+  from ref 131771 z 1999 to point 899 241
+  line 132411 z 1999 to ref 128571
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 133051 relation_ref 128827 // <dependency>
+  from ref 128827 z 1999 stereotype "<<uses>>" xyz 491 167 3000 to ref 128699
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 133179 relation_ref 128955 // <realization>
+  from ref 131771 z 1999 to point 956 119
+  line 133307 z 1999 to ref 128699
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 133563 relation_ref 128094 // <unidirectional association>
+  from ref 133435 z 2003 to ref 128827
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
